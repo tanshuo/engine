@@ -1,5 +1,5 @@
 //
-//  TC_Actor.m
+//  TC_DISPLAYOBJECT.m
 //  try
 //
 //  Created by tanshuo on 6/22/14.

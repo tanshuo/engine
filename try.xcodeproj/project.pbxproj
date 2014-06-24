@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */; };
 		F59750BB1958DAE800D235C2 /* TC_ScriptLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */; };
+		F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5988C65195A1B7800A8DA5E /* TC_Layer.m */; };
 		F59ECD911954C4AD00D7EB5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD901954C4AD00D7EB5D /* Foundation.framework */; };
 		F59ECD931954C4AD00D7EB5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD921954C4AD00D7EB5D /* CoreGraphics.framework */; };
 		F59ECD951954C4AD00D7EB5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD941954C4AD00D7EB5D /* UIKit.framework */; };
@@ -47,10 +48,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		F59750B61958DAC400D235C2 /* TC_ShaderLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_ShaderLoader.h; sourceTree = "<group>"; };
-		F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_ShaderLoader.m; sourceTree = "<group>"; };
-		F59750B91958DAE800D235C2 /* TC_ScriptLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_ScriptLoader.h; sourceTree = "<group>"; };
-		F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_ScriptLoader.m; sourceTree = "<group>"; };
+		F59750B61958DAC400D235C2 /* TC_ShaderLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_ShaderLoader.h; path = try/TC_ShaderLoader.h; sourceTree = "<group>"; };
+		F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_ShaderLoader.m; path = try/TC_ShaderLoader.m; sourceTree = "<group>"; };
+		F59750B91958DAE800D235C2 /* TC_ScriptLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_ScriptLoader.h; path = try/TC_ScriptLoader.h; sourceTree = "<group>"; };
+		F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_ScriptLoader.m; path = try/TC_ScriptLoader.m; sourceTree = "<group>"; };
+		F5988C64195A1B7800A8DA5E /* TC_Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Layer.h; path = try/TC_Layer.h; sourceTree = "<group>"; };
+		F5988C65195A1B7800A8DA5E /* TC_Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Layer.m; path = try/TC_Layer.m; sourceTree = "<group>"; };
 		F59ECD8D1954C4AD00D7EB5D /* try.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = try.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59ECD901954C4AD00D7EB5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F59ECD921954C4AD00D7EB5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -75,17 +78,17 @@
 		F59ECDC21954C4AD00D7EB5D /* tryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tryTests-Info.plist"; sourceTree = "<group>"; };
 		F59ECDC41954C4AD00D7EB5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F59ECDC61954C4AD00D7EB5D /* tryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tryTests.m; sourceTree = "<group>"; };
-		F59F95D81957ED66006876C9 /* TC_DisplayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_DisplayObject.h; sourceTree = "<group>"; };
-		F59F95D91957ED66006876C9 /* TC_DisplayObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_DisplayObject.m; sourceTree = "<group>"; };
-		F59F95DB1957F31B006876C9 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
-		F59F95DC1957F87D006876C9 /* tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tool.h; sourceTree = "<group>"; };
-		F59F95DD1957F89A006876C9 /* tool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tool.c; sourceTree = "<group>"; };
-		F59F95DF195802F2006876C9 /* TC_VirtualMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_VirtualMachine.h; sourceTree = "<group>"; };
-		F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_VirtualMachine.m; sourceTree = "<group>"; };
-		F5A18818195963320085672C /* TC_TextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_TextureLoader.h; sourceTree = "<group>"; };
-		F5A18819195963320085672C /* TC_TextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_TextureLoader.m; sourceTree = "<group>"; };
-		F5A1881B195977C30085672C /* TC_TextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_TextureInfo.h; sourceTree = "<group>"; };
-		F5A1881F195979950085672C /* TC_TextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_TextureInfo.m; sourceTree = "<group>"; };
+		F59F95D81957ED66006876C9 /* TC_DisplayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_DisplayObject.h; path = try/TC_DisplayObject.h; sourceTree = "<group>"; };
+		F59F95D91957ED66006876C9 /* TC_DisplayObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_DisplayObject.m; path = try/TC_DisplayObject.m; sourceTree = "<group>"; };
+		F59F95DB1957F31B006876C9 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = types.h; path = try/types.h; sourceTree = "<group>"; };
+		F59F95DC1957F87D006876C9 /* tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = tool.h; path = try/tool.h; sourceTree = "<group>"; };
+		F59F95DD1957F89A006876C9 /* tool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = tool.c; path = try/tool.c; sourceTree = "<group>"; };
+		F59F95DF195802F2006876C9 /* TC_VirtualMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_VirtualMachine.h; path = try/TC_VirtualMachine.h; sourceTree = "<group>"; };
+		F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_VirtualMachine.m; path = try/TC_VirtualMachine.m; sourceTree = "<group>"; };
+		F5A18818195963320085672C /* TC_TextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_TextureLoader.h; path = try/TC_TextureLoader.h; sourceTree = "<group>"; };
+		F5A18819195963320085672C /* TC_TextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureLoader.m; path = try/TC_TextureLoader.m; sourceTree = "<group>"; };
+		F5A1881B195977C30085672C /* TC_TextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_TextureInfo.h; path = try/TC_TextureInfo.h; sourceTree = "<group>"; };
+		F5A1881F195979950085672C /* TC_TextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureInfo.m; path = try/TC_TextureInfo.m; sourceTree = "<group>"; };
 		F5A18821195986860085672C /* test */ = {isa = PBXFileReference; lastKnownFileType = file; name = test; path = ../../../Downloads/test; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -115,9 +118,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F5988C62195A18C800A8DA5E /* gameobjects */ = {
+			isa = PBXGroup;
+			children = (
+				F59F95D81957ED66006876C9 /* TC_DisplayObject.h */,
+				F59F95D91957ED66006876C9 /* TC_DisplayObject.m */,
+				F5988C64195A1B7800A8DA5E /* TC_Layer.h */,
+				F5988C65195A1B7800A8DA5E /* TC_Layer.m */,
+			);
+			name = gameobjects;
+			sourceTree = "<group>";
+		};
+		F5988C63195A18FF00A8DA5E /* utility */ = {
+			isa = PBXGroup;
+			children = (
+				F59F95DB1957F31B006876C9 /* types.h */,
+				F59F95DC1957F87D006876C9 /* tool.h */,
+				F59F95DD1957F89A006876C9 /* tool.c */,
+				F5A1881F195979950085672C /* TC_TextureInfo.m */,
+				F5A1881B195977C30085672C /* TC_TextureInfo.h */,
+				F5A18818195963320085672C /* TC_TextureLoader.h */,
+				F5A18819195963320085672C /* TC_TextureLoader.m */,
+				F59750B61958DAC400D235C2 /* TC_ShaderLoader.h */,
+				F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */,
+				F59750B91958DAE800D235C2 /* TC_ScriptLoader.h */,
+				F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */,
+				F59F95DF195802F2006876C9 /* TC_VirtualMachine.h */,
+				F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */,
+			);
+			name = utility;
+			sourceTree = "<group>";
+		};
 		F59ECD841954C4AC00D7EB5D = {
 			isa = PBXGroup;
 			children = (
+				F5988C63195A18FF00A8DA5E /* utility */,
+				F5988C62195A18C800A8DA5E /* gameobjects */,
 				F59ECD9A1954C4AD00D7EB5D /* try */,
 				F59ECDC01954C4AD00D7EB5D /* tryTests */,
 				F59ECD8F1954C4AD00D7EB5D /* Frameworks */,
@@ -157,22 +193,7 @@
 				F59ECDA91954C4AD00D7EB5D /* Main_iPad.storyboard */,
 				F59ECDAC1954C4AD00D7EB5D /* Shader.fsh */,
 				F59ECDAE1954C4AD00D7EB5D /* Shader.vsh */,
-				F59F95DB1957F31B006876C9 /* types.h */,
-				F59F95DC1957F87D006876C9 /* tool.h */,
-				F59F95DD1957F89A006876C9 /* tool.c */,
-				F5A1881F195979950085672C /* TC_TextureInfo.m */,
-				F5A1881B195977C30085672C /* TC_TextureInfo.h */,
-				F5A18818195963320085672C /* TC_TextureLoader.h */,
-				F5A18819195963320085672C /* TC_TextureLoader.m */,
-				F59750B61958DAC400D235C2 /* TC_ShaderLoader.h */,
-				F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */,
-				F59750B91958DAE800D235C2 /* TC_ScriptLoader.h */,
-				F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */,
-				F59F95DF195802F2006876C9 /* TC_VirtualMachine.h */,
-				F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */,
 				F59ECDB01954C4AD00D7EB5D /* ViewController.h */,
-				F59F95D81957ED66006876C9 /* TC_DisplayObject.h */,
-				F59F95D91957ED66006876C9 /* TC_DisplayObject.m */,
 				F59ECDB11954C4AD00D7EB5D /* ViewController.m */,
 				F59ECDB31954C4AD00D7EB5D /* Images.xcassets */,
 				F59ECD9B1954C4AD00D7EB5D /* Supporting Files */,
@@ -316,6 +337,7 @@
 				F59ECDB21954C4AD00D7EB5D /* ViewController.m in Sources */,
 				F5A18820195979950085672C /* TC_TextureInfo.m in Sources */,
 				F59ECDA51954C4AD00D7EB5D /* AppDelegate.m in Sources */,
+				F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */,
 				F59ECDA11954C4AD00D7EB5D /* main.m in Sources */,
 				F59750BB1958DAE800D235C2 /* TC_ScriptLoader.m in Sources */,
 				F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */,
