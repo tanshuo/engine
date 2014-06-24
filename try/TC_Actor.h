@@ -50,8 +50,8 @@
 - (void) sendSignalTo: (int)_id WithData1:(float)data1 WithData2:(float)data2;
 - (int) waitToSignal: (TC_ID)what_to_do;//if no more, return 0;if no such signal, break out reading script.
 
-- (int) actWithScript;
-- (void) selfUpateWithAspect: (float)aspect;//only method in update, all stepss in one frame, 0 is break, 1 is go on.
+- (int) actWithScript;//0 is break, 1 is go on.
+- (void) selfUpateWithAspect: (float)aspect;//only method in update, all stepss in one frame,
 
 
 - (TC_Position) getPosition;

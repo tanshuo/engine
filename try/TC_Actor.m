@@ -12,16 +12,16 @@
 @implementation TC_Actor
 - (void)InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader:(NSString*)shader
 {
-    GLfloat gCubeVertexData[36] =
+    GLfloat gCubeVertexData[48] =
     {
         // Data layout for each line below is:
         // positionX, positionY, positionZ,     normalX, normalY, normalZ,
-        - width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-        - width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-        + width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-        + width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-        + width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f,
-        - width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f,
+        - width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+        - width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+        + width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+        + width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+        + width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+        - width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
     };
     self._name = [[NSString alloc] initWithString:name];
     _position.x = x;
@@ -41,9 +41,11 @@
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(gCubeVertexData), gCubeVertexData, GL_STATIC_DRAW);
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(0));
     glEnableVertexAttribArray(GLKVertexAttribNormal);
-    glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
+    glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(12));
+    glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
+    glVertexAttribPointer(GLKVertexAttribTexCoord0, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(24));
 };
 
 - (void) drawSelf;

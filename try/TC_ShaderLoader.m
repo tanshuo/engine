@@ -42,6 +42,7 @@
     // This needs to be done prior to linking.
     glBindAttribLocation(_program, GLKVertexAttribPosition, "position");
     glBindAttribLocation(_program, GLKVertexAttribNormal, "normal");
+    glBindAttribLocation(_program, GLKVertexAttribTexCoord0, "texture0");
   
     // Link program.
     if (![self linkProgram:_program]) {
