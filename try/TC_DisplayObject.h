@@ -18,7 +18,7 @@
 @interface TC_DisplayObject:NSObject
 {
     TC_ID _id;
-    
+    BOOL _show;
     GLint uniforms[NUM_UNIFORMS];
     GLuint _program;
     

@@ -54,6 +54,7 @@
 		F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_ScriptLoader.m; path = try/TC_ScriptLoader.m; sourceTree = "<group>"; };
 		F5988C64195A1B7800A8DA5E /* TC_Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Layer.h; path = try/TC_Layer.h; sourceTree = "<group>"; };
 		F5988C65195A1B7800A8DA5E /* TC_Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Layer.m; path = try/TC_Layer.m; sourceTree = "<group>"; };
+		F5988C67195A1CB300A8DA5E /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
 		F59ECD8D1954C4AD00D7EB5D /* try.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = try.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59ECD901954C4AD00D7EB5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F59ECD921954C4AD00D7EB5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -132,6 +133,7 @@
 		F5988C63195A18FF00A8DA5E /* utility */ = {
 			isa = PBXGroup;
 			children = (
+				F5988C67195A1CB300A8DA5E /* list.h */,
 				F59F95DB1957F31B006876C9 /* types.h */,
 				F59F95DC1957F87D006876C9 /* tool.h */,
 				F59F95DD1957F89A006876C9 /* tool.c */,

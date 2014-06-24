@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 tanshuo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "TC_DisplayObject.h"
 
-@interface TC_Layer : NSObject
-
+@interface TC_Layer : TC_DisplayObject{
+    TC_Layer* parent;
+    TC_Layer* child;
+}
 @end

@@ -38,6 +38,8 @@
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
     [self setupGL];
+    initList();
+    
     self.act = [TC_DisplayObject alloc];
     [self.act InitialWithName:@"try" WithX:-10 WithY:0 WithZ:-90 WithHeight:30.0f WithWidth:30.0f WithScript:@"no" WithShader:@"Shader" WithTexture:@"test"];
     [self.act start];

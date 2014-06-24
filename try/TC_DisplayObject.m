@@ -12,6 +12,11 @@
 @implementation TC_DisplayObject
 - (void)InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader:(NSString*)shader WithTexture: (NSString*)texture
 {
+    _id = genID();
+    self._name = [[NSString alloc] initWithString:name];
+    _show = YES;
+    
+    addEntry(_id, [name cStringUsingEncoding:NSASCIIStringEncoding]);
     GLfloat gCubeVertexData[48] =
     {
         // Data layout for each line below is:
@@ -23,7 +28,7 @@
         + width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,
         - width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
     };
-    self._name = [[NSString alloc] initWithString:name];
+    
     _position.x = x;
     _position.y = y;
     _position.z = z;
@@ -59,6 +64,10 @@
 
 - (void) drawSelf;
 {
+    if(!_show)
+    {
+        return;
+    }
     glUseProgram(_program);
     
     [self activeShader];
@@ -104,6 +113,7 @@
 
 - (void) die
 {
+    deleteEntryByID(_id);
     glDeleteBuffers(1, &_vertexBuffer);
     glDeleteVertexArraysOES(1, &_vertexArray);
     if(_textureinfo)
