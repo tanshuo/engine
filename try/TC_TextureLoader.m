@@ -73,6 +73,7 @@ NSData* ResizeTextureWith(CGImageRef im,GLuint* width,GLuint* height)
     result.width = width;
     result.height = height;
     result.name = tid;
+    result.counter = 1;
     return result;
 }
 

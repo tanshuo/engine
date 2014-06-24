@@ -9,7 +9,24 @@
 #import "TC_TextureInfo.h"
 
 @implementation TC_TextureInfo
-@synthesize name;
-@synthesize width;
-@synthesize height;
+@synthesize name = _name;
+@synthesize width = _width;
+@synthesize height = _height;
+@synthesize counter = _counter;
+- (void) die
+{
+    self.counter--;
+    if(counter <= 0)
+    {
+        [self clearTexBuffer];
+    }
+}
+- (void) clearTexBuffer
+{
+    glDeleteTextures(1,&_name);
+}
+- (void) dealloc
+{
+    [self die];
+}
 @end

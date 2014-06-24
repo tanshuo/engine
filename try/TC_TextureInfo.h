@@ -14,8 +14,13 @@
     GLuint name;
     GLuint width;
     GLuint height;
+    GLuint counter;
 };
 @property GLuint name;
 @property GLuint width;
 @property GLuint height;
+@property GLuint counter;
+- (void) die;
+- (void) clearTexBuffer;
+- (void) dealloc;
 @end
