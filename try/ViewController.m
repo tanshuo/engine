@@ -39,7 +39,7 @@
     
     [self setupGL];
     self.act = [TC_Actor alloc];
-    [self.act InitialWithName:@"try" WithX:0 WithY:0 WithZ:-90 WithHeight:5.5f WithWidth:7.5f WithScript:@"no" WithShader:@"Shader" WithTexture:@"test"];
+    [self.act InitialWithName:@"try" WithX:-10 WithY:0 WithZ:-90 WithHeight:30.0f WithWidth:30.0f WithScript:@"no" WithShader:@"Shader" WithTexture:@"test"];
     [self.act start];
 }
 
@@ -74,6 +74,8 @@
 {
     [EAGLContext setCurrentContext:self.context];
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 }
 
 - (void)tearDownGL
