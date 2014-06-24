@@ -15,7 +15,7 @@
 #import "TC_ShaderLoader.h"
 #import "TC_TextureLoader.h"
 
-@interface TC_Actor:NSObject
+@interface TC_DisplayObject:NSObject
 {
     TC_ID _id;
     

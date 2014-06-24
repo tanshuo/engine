@@ -6,10 +6,10 @@
 //  Copyright (c) 2014 tanshuo. All rights reserved.
 //
 
-#import "TC_Actor.h"
+#import "TC_DisplayObject.h"
 
 
-@implementation TC_Actor
+@implementation TC_DisplayObject
 - (void)InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader:(NSString*)shader WithTexture: (NSString*)texture
 {
     GLfloat gCubeVertexData[48] =

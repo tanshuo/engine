@@ -28,7 +28,7 @@
 		F59ECDBD1954C4AD00D7EB5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD941954C4AD00D7EB5D /* UIKit.framework */; };
 		F59ECDC51954C4AD00D7EB5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F59ECDC31954C4AD00D7EB5D /* InfoPlist.strings */; };
 		F59ECDC71954C4AD00D7EB5D /* tryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F59ECDC61954C4AD00D7EB5D /* tryTests.m */; };
-		F59F95DA1957ED67006876C9 /* TC_Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = F59F95D91957ED66006876C9 /* TC_Actor.m */; };
+		F59F95DA1957ED67006876C9 /* TC_DisplayObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F59F95D91957ED66006876C9 /* TC_DisplayObject.m */; };
 		F59F95DE1957F89A006876C9 /* tool.c in Sources */ = {isa = PBXBuildFile; fileRef = F59F95DD1957F89A006876C9 /* tool.c */; };
 		F59F95E1195802F2006876C9 /* TC_VirtualMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */; };
 		F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A18819195963320085672C /* TC_TextureLoader.m */; };
@@ -75,8 +75,8 @@
 		F59ECDC21954C4AD00D7EB5D /* tryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tryTests-Info.plist"; sourceTree = "<group>"; };
 		F59ECDC41954C4AD00D7EB5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F59ECDC61954C4AD00D7EB5D /* tryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tryTests.m; sourceTree = "<group>"; };
-		F59F95D81957ED66006876C9 /* TC_Actor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_Actor.h; sourceTree = "<group>"; };
-		F59F95D91957ED66006876C9 /* TC_Actor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_Actor.m; sourceTree = "<group>"; };
+		F59F95D81957ED66006876C9 /* TC_DisplayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_DisplayObject.h; sourceTree = "<group>"; };
+		F59F95D91957ED66006876C9 /* TC_DisplayObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_DisplayObject.m; sourceTree = "<group>"; };
 		F59F95DB1957F31B006876C9 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = types.h; sourceTree = "<group>"; };
 		F59F95DC1957F87D006876C9 /* tool.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = tool.h; sourceTree = "<group>"; };
 		F59F95DD1957F89A006876C9 /* tool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tool.c; sourceTree = "<group>"; };
@@ -171,8 +171,8 @@
 				F59F95DF195802F2006876C9 /* TC_VirtualMachine.h */,
 				F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */,
 				F59ECDB01954C4AD00D7EB5D /* ViewController.h */,
-				F59F95D81957ED66006876C9 /* TC_Actor.h */,
-				F59F95D91957ED66006876C9 /* TC_Actor.m */,
+				F59F95D81957ED66006876C9 /* TC_DisplayObject.h */,
+				F59F95D91957ED66006876C9 /* TC_DisplayObject.m */,
 				F59ECDB11954C4AD00D7EB5D /* ViewController.m */,
 				F59ECDB31954C4AD00D7EB5D /* Images.xcassets */,
 				F59ECD9B1954C4AD00D7EB5D /* Supporting Files */,
@@ -312,7 +312,7 @@
 			files = (
 				F59F95E1195802F2006876C9 /* TC_VirtualMachine.m in Sources */,
 				F59F95DE1957F89A006876C9 /* tool.c in Sources */,
-				F59F95DA1957ED67006876C9 /* TC_Actor.m in Sources */,
+				F59F95DA1957ED67006876C9 /* TC_DisplayObject.m in Sources */,
 				F59ECDB21954C4AD00D7EB5D /* ViewController.m in Sources */,
 				F5A18820195979950085672C /* TC_TextureInfo.m in Sources */,
 				F59ECDA51954C4AD00D7EB5D /* AppDelegate.m in Sources */,

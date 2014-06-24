@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
-#import "TC_Actor.h"
+#import "TC_DisplayObject.h"
 
 @interface ViewController : GLKViewController
 
