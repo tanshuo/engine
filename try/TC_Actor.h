@@ -13,6 +13,7 @@
 #import "TC_VirtualMachine.h"
 #import "TC_ScriptLoader.h"
 #import "TC_ShaderLoader.h"
+#import "TC_TextureLoader.h"
 
 @interface TC_Actor:NSObject
 {
@@ -20,6 +21,9 @@
     
     GLint uniforms[NUM_UNIFORMS];
     GLuint _program;
+    
+    TC_TextureInfo* _textureinfo;
+    
     GLKMatrix4 _modelViewProjectionMatrix;
     GLKMatrix3 _normalMatrix;
     
@@ -40,7 +44,7 @@
     TC_Signal _eventlist[50];
 }
 @property (strong,nonatomic) NSString* _name;
-- (void) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader;
+- (void) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture;
 
 - (void) start;
 
@@ -61,7 +65,7 @@
 - (GLuint) getShader;
 
 
-- (void) SetUniformWithProjection: (GLint)pro WithNormal: (GLint)normal;
+- (void) SetUniformWithProjection: (GLint)pro WithNormal: (GLint)normal WithSampler:(GLint)sampler;
 
 - (void) die;
 - (void) dealloc;

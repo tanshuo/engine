@@ -10,17 +10,17 @@
 
 
 @implementation TC_Actor
-- (void)InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader:(NSString*)shader
+- (void)InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader:(NSString*)shader WithTexture: (NSString*)texture
 {
     GLfloat gCubeVertexData[48] =
     {
         // Data layout for each line below is:
         // positionX, positionY, positionZ,     normalX, normalY, normalZ,
         - width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-        - width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-        + width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-        + width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
-        + width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
+        - width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f,
+        + width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+        + width / 2.0f, + height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 1.0f,
+        + width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, 0.0f,
         - width / 2.0f, - height / 2.0f, 0.0f, 0.0f, 0.0f, 1.0f, 0.0f, 0.0f,
     };
     self._name = [[NSString alloc] initWithString:name];
@@ -34,6 +34,15 @@
     
     _virtual = [TC_ScriptLoader loadScriptWith:script];
     _program = [TC_ShaderLoader loadShaderWithVertexShader:shader WithFragmentShader:shader];
+    _textureinfo = [TC_TextureLoader loadTexture:texture];
+    
+    if(_textureinfo == nil || _program == 0)
+    {
+        if(_program)
+        {
+            glDeleteProgram(_program);
+        }
+    }
     
     glGenVertexArraysOES(1, &_vertexArray);
     glBindVertexArrayOES(_vertexArray);
@@ -51,6 +60,7 @@
 - (void) drawSelf;
 {
     glUseProgram(_program);
+    
     [self activeShader];
    
     glBindVertexArrayOES(_vertexArray);
@@ -58,13 +68,13 @@
     
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
     glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
-    
+    glUniform1i(uniforms[UNIFORM_SAMPLE], 0);
     glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 - (void)activeShader
 {
-    [self SetUniformWithProjection:glGetUniformLocation(_program, "modelViewProjectionMatrix") WithNormal:glGetUniformLocation(_program, "normalMatrix")];
+    [self SetUniformWithProjection:glGetUniformLocation(_program, "modelViewProjectionMatrix") WithNormal:glGetUniformLocation(_program, "normalMatrix") WithSampler:glGetUniformLocation(_program, "sampler")];
     
 };
 
@@ -135,10 +145,11 @@
 
 
 
-- (void) SetUniformWithProjection: (GLint)pro WithNormal: (GLint)normal
+- (void) SetUniformWithProjection: (GLint)pro WithNormal: (GLint)normal WithSampler:(GLint)sampler
 {
     uniforms[0] = pro;
     uniforms[1] = normal;
+    uniforms[2] = sampler;
 }
 
 - (void) dealloc

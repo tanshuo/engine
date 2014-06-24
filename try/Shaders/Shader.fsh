@@ -7,8 +7,11 @@
 //
 
 varying lowp vec4 colorVarying;
+varying lowp vec2 coordVarying;
+uniform sampler2D sampler;
 
 void main()
 {
-    gl_FragColor = colorVarying;
+    //gl_FragColor = colorVarying;
+    gl_FragColor = texture2D(sampler,coordVarying.xy);
 }

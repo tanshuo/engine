@@ -11,9 +11,11 @@ attribute vec3 normal;
 attribute vec2 texture0;
 
 varying lowp vec4 colorVarying;
+varying lowp vec2 coordVarying;
 
 uniform mat4 modelViewProjectionMatrix;
 uniform mat3 normalMatrix;
+
 
 void main()
 {
@@ -26,4 +28,5 @@ void main()
     colorVarying = diffuseColor * nDotVP;
     
     gl_Position = modelViewProjectionMatrix * position;
+    coordVarying = texture0;
 }

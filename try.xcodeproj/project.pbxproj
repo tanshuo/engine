@@ -31,6 +31,9 @@
 		F59F95DA1957ED67006876C9 /* TC_Actor.m in Sources */ = {isa = PBXBuildFile; fileRef = F59F95D91957ED66006876C9 /* TC_Actor.m */; };
 		F59F95DE1957F89A006876C9 /* tool.c in Sources */ = {isa = PBXBuildFile; fileRef = F59F95DD1957F89A006876C9 /* tool.c */; };
 		F59F95E1195802F2006876C9 /* TC_VirtualMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */; };
+		F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A18819195963320085672C /* TC_TextureLoader.m */; };
+		F5A18820195979950085672C /* TC_TextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A1881F195979950085672C /* TC_TextureInfo.m */; };
+		F5A18822195986860085672C /* test in Resources */ = {isa = PBXBuildFile; fileRef = F5A18821195986860085672C /* test */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -79,6 +82,11 @@
 		F59F95DD1957F89A006876C9 /* tool.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = tool.c; sourceTree = "<group>"; };
 		F59F95DF195802F2006876C9 /* TC_VirtualMachine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_VirtualMachine.h; sourceTree = "<group>"; };
 		F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_VirtualMachine.m; sourceTree = "<group>"; };
+		F5A18818195963320085672C /* TC_TextureLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_TextureLoader.h; sourceTree = "<group>"; };
+		F5A18819195963320085672C /* TC_TextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_TextureLoader.m; sourceTree = "<group>"; };
+		F5A1881B195977C30085672C /* TC_TextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_TextureInfo.h; sourceTree = "<group>"; };
+		F5A1881F195979950085672C /* TC_TextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_TextureInfo.m; sourceTree = "<group>"; };
+		F5A18821195986860085672C /* test */ = {isa = PBXFileReference; lastKnownFileType = file; name = test; path = ../../../Downloads/test; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -142,6 +150,7 @@
 		F59ECD9A1954C4AD00D7EB5D /* try */ = {
 			isa = PBXGroup;
 			children = (
+				F5A18821195986860085672C /* test */,
 				F59ECDA31954C4AD00D7EB5D /* AppDelegate.h */,
 				F59ECDA41954C4AD00D7EB5D /* AppDelegate.m */,
 				F59ECDA61954C4AD00D7EB5D /* Main_iPhone.storyboard */,
@@ -151,6 +160,10 @@
 				F59F95DB1957F31B006876C9 /* types.h */,
 				F59F95DC1957F87D006876C9 /* tool.h */,
 				F59F95DD1957F89A006876C9 /* tool.c */,
+				F5A1881F195979950085672C /* TC_TextureInfo.m */,
+				F5A1881B195977C30085672C /* TC_TextureInfo.h */,
+				F5A18818195963320085672C /* TC_TextureLoader.h */,
+				F5A18819195963320085672C /* TC_TextureLoader.m */,
 				F59750B61958DAC400D235C2 /* TC_ShaderLoader.h */,
 				F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */,
 				F59750B91958DAE800D235C2 /* TC_ScriptLoader.h */,
@@ -272,6 +285,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5A18822195986860085672C /* test in Resources */,
 				F59ECDAD1954C4AD00D7EB5D /* Shader.fsh in Resources */,
 				F59ECDAB1954C4AD00D7EB5D /* Main_iPad.storyboard in Resources */,
 				F59ECDA81954C4AD00D7EB5D /* Main_iPhone.storyboard in Resources */,
@@ -300,9 +314,11 @@
 				F59F95DE1957F89A006876C9 /* tool.c in Sources */,
 				F59F95DA1957ED67006876C9 /* TC_Actor.m in Sources */,
 				F59ECDB21954C4AD00D7EB5D /* ViewController.m in Sources */,
+				F5A18820195979950085672C /* TC_TextureInfo.m in Sources */,
 				F59ECDA51954C4AD00D7EB5D /* AppDelegate.m in Sources */,
 				F59ECDA11954C4AD00D7EB5D /* main.m in Sources */,
 				F59750BB1958DAE800D235C2 /* TC_ScriptLoader.m in Sources */,
+				F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */,
 				F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
