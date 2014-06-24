@@ -106,8 +106,11 @@
 {
     glDeleteBuffers(1, &_vertexBuffer);
     glDeleteVertexArraysOES(1, &_vertexArray);
-    [_textureinfo die];
-    if (_program) {
+    if(_textureinfo)
+    {
+        [_textureinfo die];
+    }
+   if (_program) {
         glDeleteProgram(_program);
         _program = 0;
     }
