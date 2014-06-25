@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 tanshuo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "TC_Layer.h"
 
-@interface TC_Camera : NSObject
-
+@interface TC_Camera : TC_Layer
+- (void) InitCamera;
+- (void) die;
 @end

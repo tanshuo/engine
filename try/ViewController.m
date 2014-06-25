@@ -14,7 +14,10 @@
 @interface ViewController ()
 
 @property (strong, nonatomic) EAGLContext *context;
-@property (strong, nonatomic) TC_DisplayObject *act;
+@property (strong, nonatomic) TC_Layer *act;
+@property (strong, nonatomic) TC_Layer *act1;
+@property (strong, nonatomic) TC_Layer *act2;
+@property (strong, nonatomic) TC_Camera * camera;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -37,14 +40,28 @@
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
-    gameObjectList = [NSMutableArray alloc];
+    gameObjectList = [NSMutableArray arrayWithCapacity:10];
     
     [self setupGL];
     initList();
     
-    self.act = [TC_DisplayObject alloc];
-    [self.act InitialWithName:@"try" WithX:-10 WithY:0 WithZ:-90 WithHeight:30.0f WithWidth:30.0f WithScript:@"no" WithShader:@"Shader" WithTexture:@"test"];
+    self.act = [TC_Layer alloc];
+    [self.act InitialWithName:@"try" WithX:0 WithY:0 WithZ:-90 WithHeight:30.0f WithWidth:30.0f WithScript:@"no" WithShader:@"Shader" WithTexture:@"test"];
     [self.act start];
+    self.act1 = [TC_Layer alloc];
+    [self.act1 InitialWithName:@"try" WithX:0 WithY:0 WithZ:-90 WithHeight:30.0f WithWidth:30.0f WithScript:@"no" WithShader:@"Shader" WithTexture:@"test"];
+    [self.act1 start];
+    self.act2 = [TC_Layer alloc];
+    [self.act2 InitialWithName:@"try" WithX:0 WithY:0 WithZ:-90 WithHeight:30.0f WithWidth:30.0f WithScript:@"no" WithShader:@"Shader" WithTexture:@"test"];
+    [self.act2 start];
+    
+    
+    self.camera = [TC_Camera alloc];
+    [self.camera InitCamera];
+    [self.camera addChild:self.act AtX:50 AtY:0];
+    [self.camera addChild:self.act1 AtX:50 AtY:50];
+    [self.camera addChild:self.act2 AtX:-50 AtY:0];
+
 }
 
 - (void)dealloc
@@ -93,6 +110,8 @@
 {
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     [self.act selfUpateWithAspect:aspect];
+    [self.act1 selfUpateWithAspect:aspect];
+    [self.act2 selfUpateWithAspect:aspect];
     
 }
 
@@ -101,6 +120,8 @@
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     [self.act drawSelf];
+    [self.act1 drawSelf];
+    [self.act2 drawSelf];
 }
 
 

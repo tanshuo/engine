@@ -26,6 +26,8 @@
 - (void) removeChildByID: (TC_ID)obj_id;
 - (void) removeLastChild;
 - (void) removeAllChild;
+- (void) enable;
+- (void) hide;
 - (void) setDepth: (float)z;
 - (void) setX: (float)x;
 - (void) setY: (float)y;

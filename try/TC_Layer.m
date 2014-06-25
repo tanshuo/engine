@@ -18,8 +18,9 @@
     _relativePosition.y = 0;
     _relativePosition.z = 0;
     _child_num = 0;
-    _child = [NSMutableArray alloc];
+    _child = [NSMutableArray arrayWithCapacity:10];
     _parent = nil;
+    _show = NO;
     [gameObjectList addObject:self];
 }
 - (void) selfUpateWithAspect: (float)aspect
@@ -63,6 +64,8 @@
     [child setRelativePositionWithX:x WithY:y];
     [child setDepth:1];
     [child setRelativeRotation:0];
+    [child setParent:self];
+    [child enable];
     [_child addObject:child];
     _child_num ++;
 }
@@ -100,7 +103,14 @@
     while(_child_num > 0)
         [self removeLastChild];
 }
-
+- (void) enable
+{
+    _show = YES;
+}
+- (void) hide
+{
+    _show = NO;
+}
 - (void) setDepth: (float)z
 {
     _relativePosition.z = z;

@@ -19,6 +19,7 @@
 @interface TC_DisplayObject:NSObject
 {
     TC_ID _id;
+    NSString* _name;
     BOOL _show;
     GLint uniforms[NUM_UNIFORMS];
     GLuint _program;
@@ -44,7 +45,7 @@
     
     TC_Signal _eventlist[50];
 }
-@property (strong,nonatomic) NSString* _name;
+
 - (void) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture;
 
 - (void) start;

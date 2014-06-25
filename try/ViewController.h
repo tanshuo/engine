@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
-#import "TC_DisplayObject.h"
+#import "TC_Camera.h"
 
 @interface ViewController : GLKViewController
 

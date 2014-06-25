@@ -13,7 +13,7 @@
 - (void)InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader:(NSString*)shader WithTexture: (NSString*)texture
 {
     _id = genID();
-    self._name = [[NSString alloc] initWithString:name];
+    _name = [[NSString alloc] initWithString:name];
     _show = YES;
     
     GLfloat gCubeVertexData[48] =
@@ -101,9 +101,8 @@
     GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(_position.x,_position.y,_position.z);
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(_rotation), 0.0f, 0.0f, 1.0f);
     modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
-    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
-    _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(_baseModelViewMatrix), NULL);
-    _modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, _baseModelViewMatrix);
+    _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
+    _modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
 };
 
 - (void) start
