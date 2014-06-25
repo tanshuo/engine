@@ -36,10 +36,7 @@
     GLuint _vertexBuffer;
     float _rotation;
     TC_Position _position;
-    
-    TC_ID _currentFrame;
-    TC_ID _totalFrame;
-    
+  
     TC_ID _currentline;
     TC_VirtualMachine* _virtual;
     
@@ -64,9 +61,7 @@
 - (NSString*) getName;
 - (TC_Position) getPosition;
 - (float) getRotation;
-- (GLKMatrix4) getProjectionMatrix;
-- (GLKMatrix3) getNormalMatrix;
-- (GLuint) getShader;
+
 
 - (void) SetUniformWithProjection: (GLint)pro WithNormal: (GLint)normal WithSampler:(GLint)sampler;
 

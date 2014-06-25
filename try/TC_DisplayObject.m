@@ -144,18 +144,7 @@
 {
     return _rotation;
 }
-- (GLKMatrix4) getProjectionMatrix
-{
-    return _projectionMatrix;
-}
-- (GLKMatrix3) getNormalMatrix
-{
-    return _normalMatrix;
-}
-- (GLuint) getShader
-{
-    return _program;
-}
+
 - (TC_ID) getID
 {
     return _id;
