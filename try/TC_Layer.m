@@ -9,9 +9,14 @@
 #import "TC_Layer.h"
 
 @implementation TC_Layer
-- (void) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture WithGroup: (TC_ID)group;
+- (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture WithGroup: (TC_ID)group;
 {
-    [super InitialWithName:name WithX:x WithY:y WithZ:z WithHeight:height WithWidth:width WithScript:script WithShader:shader WithTexture:texture];
+    TC_ID result = 0;
+    result = [super InitialWithName:name WithX:x WithY:y WithZ:z WithHeight:height WithWidth:width WithScript:script WithShader:shader WithTexture:texture];
+    if(!result)
+    {
+        return 0;
+    }
     _child_num = 0;
     _relativeRotation = 0;
     _relativePosition.x = x;
@@ -24,6 +29,7 @@
     _group = group;
     _alive = YES;
     [gameObjectList addObject:self];
+    return result;
 }
 - (void) selfUpateWithAspect: (float)aspect
 {
@@ -77,7 +83,6 @@
     [child setParent:self];
     [child enable];
     [_child addObject:child];
-    _child_num ++;
 }
 - (TC_Layer*) getChildByName: (NSString*)name
 {
@@ -92,6 +97,7 @@
                return temp;
             }
     }
+    _child_num ++;
     return temp;
 }
 - (TC_Layer*) getChildByIndex: (TC_ID)index
@@ -116,6 +122,8 @@
 }
 - (void) removeChildByID: (TC_ID)obj_id
 {
+    if(obj_id < 1)
+        return;
     TC_Layer* temp;
     int i;
     for(i = 0; i < _child_num; i++)
@@ -191,6 +199,10 @@
 {
     [super die];
     [TC_Layer removeLayer:self];
+    if(_parent)
+    {
+        [_parent removeChildByID:_id];
+    }
     [gameObjectList removeObject:self];
 }
 @end

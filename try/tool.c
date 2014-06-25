@@ -53,6 +53,7 @@ void addEntry(TC_ID obj_id, const char* name)
     TC_ObjList iter;
     TC_ObjList temp;
     TC_ObjList new_entry;
+    TC_ObjList end;
     
     if(obj_num == 0)
     {
@@ -68,17 +69,22 @@ void addEntry(TC_ID obj_id, const char* name)
     strcpy(new_entry->name, name);
     for(iter = objlist; iter != NULL; iter = iter->next)
     {
-        if(iter->obj_id < obj_id)
+        end = iter;
+        if(iter->obj_id > obj_id)
         {
-            temp = iter->next;
-            new_entry->pre = iter;
-            new_entry->next = temp;
-            iter->next = new_entry;
+            temp = iter->pre;
+            new_entry->next = iter;
+            new_entry->pre = temp;
+            iter->pre = new_entry;
             if(temp)
-                temp->pre = new_entry;
-            break;
+                temp->next = new_entry;
+            obj_num++;
+            return;
         }
     }
+    end->next = new_entry;
+    new_entry->pre = end;
+    new_entry->next = NULL;
     obj_num++;
 }
 
@@ -100,8 +106,10 @@ void deleteEntryByID(TC_ID obj_id)
             left = iter->pre;
             right = iter->next;
             free(iter);
-            left->next = right;
-            right->pre = left;
+            if(left)
+                left->next = right;
+            if(right)
+                right->pre = left;
             break;
         }
     }

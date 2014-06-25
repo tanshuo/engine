@@ -58,7 +58,7 @@ NSData* ResizeTextureWith(CGImageRef im,GLuint* width,GLuint* height)
     TC_TextureInfo* result;
     NSString* path;
     path = [[NSBundle mainBundle] pathForResource:t ofType:@"tct"];
-    CGImageRef im = [[UIImage imageNamed:path] CGImage];
+    CGImageRef im = [[UIImage imageNamed:t] CGImage];
     if(im == nil)
     {
         return nil;

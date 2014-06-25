@@ -38,7 +38,7 @@
 		F59F95E1195802F2006876C9 /* TC_VirtualMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */; };
 		F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A18819195963320085672C /* TC_TextureLoader.m */; };
 		F5A18820195979950085672C /* TC_TextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A1881F195979950085672C /* TC_TextureInfo.m */; };
-		F5A18822195986860085672C /* test.tct in Resources */ = {isa = PBXBuildFile; fileRef = F5A18821195986860085672C /* test.tct */; };
+		F5A18822195986860085672C /* test in Resources */ = {isa = PBXBuildFile; fileRef = F5A18821195986860085672C /* test */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -102,7 +102,7 @@
 		F5A18819195963320085672C /* TC_TextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureLoader.m; path = try/TC_TextureLoader.m; sourceTree = "<group>"; };
 		F5A1881B195977C30085672C /* TC_TextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_TextureInfo.h; path = try/TC_TextureInfo.h; sourceTree = "<group>"; };
 		F5A1881F195979950085672C /* TC_TextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureInfo.m; path = try/TC_TextureInfo.m; sourceTree = "<group>"; };
-		F5A18821195986860085672C /* test.tct */ = {isa = PBXFileReference; lastKnownFileType = file; name = test.tct; path = ../../Downloads/test.tct; sourceTree = "<group>"; };
+		F5A18821195986860085672C /* test */ = {isa = PBXFileReference; lastKnownFileType = file; name = test; path = ../../Downloads/test; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,7 +189,7 @@
 		F5988CB9195A842000A8DA5E /* texture */ = {
 			isa = PBXGroup;
 			children = (
-				F5A18821195986860085672C /* test.tct */,
+				F5A18821195986860085672C /* test */,
 			);
 			name = texture;
 			sourceTree = "<group>";
@@ -352,7 +352,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F5A18822195986860085672C /* test.tct in Resources */,
+				F5A18822195986860085672C /* test in Resources */,
 				F59ECDAD1954C4AD00D7EB5D /* Shader.fsh in Resources */,
 				F59ECDAB1954C4AD00D7EB5D /* Main_iPad.storyboard in Resources */,
 				F59ECDA81954C4AD00D7EB5D /* Main_iPhone.storyboard in Resources */,

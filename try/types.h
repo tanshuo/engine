@@ -46,5 +46,7 @@ typedef struct insturction{
     void* p1;
     void* p2;
     void* p3;
+    int line;
+    int file;
 } TC_Instruction;
 #endif

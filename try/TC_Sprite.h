@@ -12,5 +12,5 @@
     TC_ID _currentFrame;
     TC_ID _totalFrame;
 }
-
+- (TC_ID)born;
 @end

@@ -9,5 +9,8 @@
 #import "TC_Sprite.h"
 
 @implementation TC_Sprite
-
+- (TC_ID) born
+{
+    return 0;
+};
 @end
