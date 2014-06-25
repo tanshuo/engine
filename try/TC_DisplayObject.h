@@ -61,6 +61,7 @@
 
 
 - (TC_ID) getID;
+- (NSString*) getName;
 - (TC_Position) getPosition;
 - (float) getRotation;
 - (GLKMatrix4) getProjectionMatrix;

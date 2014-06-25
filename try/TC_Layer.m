@@ -79,6 +79,37 @@
     [_child addObject:child];
     _child_num ++;
 }
+- (TC_Layer*) getChildByName: (NSString*)name
+{
+    int i;
+    TC_Layer* temp = nil;
+    for(i = 0; i < _child_num; i++)
+    {
+        temp = [_child objectAtIndex:i];
+        if(temp)
+            if([ [temp getName] isEqual:name])
+            {
+               return temp;
+            }
+    }
+    return temp;
+}
+- (TC_Layer*) getChildByIndex: (TC_ID)index
+{
+    return [_child objectAtIndex:index];
+}
+- (TC_Layer*) getfirstChild: (TC_ID)index
+{
+    return [_child firstObject];
+}
+- (TC_Layer*) getlastChild: (TC_ID)index
+{
+    return [_child lastObject];
+}
+- (int) countOfChildren
+{
+    return _child_num;
+}
 - (void) setParent: (TC_Layer*) parent
 {
     _parent = parent;

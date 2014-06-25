@@ -160,6 +160,10 @@
 {
     return _id;
 }
+- (NSString*) getName
+{
+    return _name;
+}
 
 
 
