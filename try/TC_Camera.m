@@ -27,6 +27,6 @@
 };
 - (void) die
 {
-    
+    [TC_Camera removeLayer:self];
 }
 @end
