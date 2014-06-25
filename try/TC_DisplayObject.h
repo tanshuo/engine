@@ -14,6 +14,7 @@
 #import "TC_ScriptLoader.h"
 #import "TC_ShaderLoader.h"
 #import "TC_TextureLoader.h"
+#import "TC_GameObjectList.h"
 
 @interface TC_DisplayObject:NSObject
 {
@@ -58,12 +59,12 @@
 - (void) selfUpateWithAspect: (float)aspect;//only method in update, all stepss in one frame,
 
 
+- (TC_ID) getID;
 - (TC_Position) getPosition;
 - (float) getRotation;
 - (GLKMatrix4) getProjectionMatrix;
 - (GLKMatrix3) getNormalMatrix;
 - (GLuint) getShader;
-
 
 - (void) SetUniformWithProjection: (GLint)pro WithNormal: (GLint)normal WithSampler:(GLint)sampler;
 

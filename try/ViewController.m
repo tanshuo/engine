@@ -37,6 +37,8 @@
     view.context = self.context;
     view.drawableDepthFormat = GLKViewDrawableDepthFormat24;
     
+    gameObjectList = [NSMutableArray alloc];
+    
     [self setupGL];
     initList();
     

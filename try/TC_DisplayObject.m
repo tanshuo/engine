@@ -16,7 +16,6 @@
     self._name = [[NSString alloc] initWithString:name];
     _show = YES;
     
-    addEntry(_id, [name cStringUsingEncoding:NSASCIIStringEncoding]);
     GLfloat gCubeVertexData[48] =
     {
         // Data layout for each line below is:
@@ -60,6 +59,7 @@
     glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(12));
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(24));
+    addEntry(_id, [name cStringUsingEncoding:NSASCIIStringEncoding]);
 };
 
 - (void) drawSelf;
@@ -114,6 +114,7 @@
 - (void) die
 {
     deleteEntryByID(_id);
+   
     glDeleteBuffers(1, &_vertexBuffer);
     glDeleteVertexArraysOES(1, &_vertexArray);
     if(_textureinfo)
@@ -155,6 +156,10 @@
 - (GLuint) getShader
 {
     return _program;
+}
+- (TC_ID) getID
+{
+    return _id;
 }
 
 

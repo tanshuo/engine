@@ -10,6 +10,7 @@
 		F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */; };
 		F59750BB1958DAE800D235C2 /* TC_ScriptLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */; };
 		F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5988C65195A1B7800A8DA5E /* TC_Layer.m */; };
+		F5988C6C195A3FBA00A8DA5E /* TC_Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = F5988C6B195A3FBA00A8DA5E /* TC_Camera.m */; };
 		F59ECD911954C4AD00D7EB5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD901954C4AD00D7EB5D /* Foundation.framework */; };
 		F59ECD931954C4AD00D7EB5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD921954C4AD00D7EB5D /* CoreGraphics.framework */; };
 		F59ECD951954C4AD00D7EB5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD941954C4AD00D7EB5D /* UIKit.framework */; };
@@ -55,6 +56,9 @@
 		F5988C64195A1B7800A8DA5E /* TC_Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Layer.h; path = try/TC_Layer.h; sourceTree = "<group>"; };
 		F5988C65195A1B7800A8DA5E /* TC_Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Layer.m; path = try/TC_Layer.m; sourceTree = "<group>"; };
 		F5988C67195A1CB300A8DA5E /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
+		F5988C6A195A3FBA00A8DA5E /* TC_Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_Camera.h; sourceTree = "<group>"; };
+		F5988C6B195A3FBA00A8DA5E /* TC_Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_Camera.m; sourceTree = "<group>"; };
+		F5988C6D195A4F6100A8DA5E /* TC_GameObjectList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TC_GameObjectList.h; sourceTree = "<group>"; };
 		F59ECD8D1954C4AD00D7EB5D /* try.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = try.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59ECD901954C4AD00D7EB5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F59ECD921954C4AD00D7EB5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -126,6 +130,8 @@
 				F59F95D91957ED66006876C9 /* TC_DisplayObject.m */,
 				F5988C64195A1B7800A8DA5E /* TC_Layer.h */,
 				F5988C65195A1B7800A8DA5E /* TC_Layer.m */,
+				F5988C6A195A3FBA00A8DA5E /* TC_Camera.h */,
+				F5988C6B195A3FBA00A8DA5E /* TC_Camera.m */,
 			);
 			name = gameobjects;
 			sourceTree = "<group>";
@@ -137,6 +143,7 @@
 				F59F95DB1957F31B006876C9 /* types.h */,
 				F59F95DC1957F87D006876C9 /* tool.h */,
 				F59F95DD1957F89A006876C9 /* tool.c */,
+				F5988C6D195A4F6100A8DA5E /* TC_GameObjectList.h */,
 				F5A1881F195979950085672C /* TC_TextureInfo.m */,
 				F5A1881B195977C30085672C /* TC_TextureInfo.h */,
 				F5A18818195963320085672C /* TC_TextureLoader.h */,
@@ -338,6 +345,7 @@
 				F59F95DA1957ED67006876C9 /* TC_DisplayObject.m in Sources */,
 				F59ECDB21954C4AD00D7EB5D /* ViewController.m in Sources */,
 				F5A18820195979950085672C /* TC_TextureInfo.m in Sources */,
+				F5988C6C195A3FBA00A8DA5E /* TC_Camera.m in Sources */,
 				F59ECDA51954C4AD00D7EB5D /* AppDelegate.m in Sources */,
 				F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */,
 				F59ECDA11954C4AD00D7EB5D /* main.m in Sources */,
