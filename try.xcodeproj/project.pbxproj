@@ -10,7 +10,7 @@
 		F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */; };
 		F59750BB1958DAE800D235C2 /* TC_ScriptLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */; };
 		F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5988C65195A1B7800A8DA5E /* TC_Layer.m */; };
-		F5988C6C195A3FBA00A8DA5E /* TC_Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = F5988C6B195A3FBA00A8DA5E /* TC_Camera.m */; };
+		F5988CB7195A83B000A8DA5E /* TC_Camera.m in Sources */ = {isa = PBXBuildFile; fileRef = F5988CB6195A83B000A8DA5E /* TC_Camera.m */; };
 		F59ECD911954C4AD00D7EB5D /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD901954C4AD00D7EB5D /* Foundation.framework */; };
 		F59ECD931954C4AD00D7EB5D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD921954C4AD00D7EB5D /* CoreGraphics.framework */; };
 		F59ECD951954C4AD00D7EB5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD941954C4AD00D7EB5D /* UIKit.framework */; };
@@ -55,10 +55,10 @@
 		F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_ScriptLoader.m; path = try/TC_ScriptLoader.m; sourceTree = "<group>"; };
 		F5988C64195A1B7800A8DA5E /* TC_Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Layer.h; path = try/TC_Layer.h; sourceTree = "<group>"; };
 		F5988C65195A1B7800A8DA5E /* TC_Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Layer.m; path = try/TC_Layer.m; sourceTree = "<group>"; };
-		F5988C67195A1CB300A8DA5E /* list.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = list.h; sourceTree = "<group>"; };
-		F5988C6A195A3FBA00A8DA5E /* TC_Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_Camera.h; sourceTree = "<group>"; };
-		F5988C6B195A3FBA00A8DA5E /* TC_Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_Camera.m; sourceTree = "<group>"; };
-		F5988C6D195A4F6100A8DA5E /* TC_GameObjectList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TC_GameObjectList.h; sourceTree = "<group>"; };
+		F5988CB4195A83B000A8DA5E /* list.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = list.h; path = try/list.h; sourceTree = "<group>"; };
+		F5988CB5195A83B000A8DA5E /* TC_Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Camera.h; path = try/TC_Camera.h; sourceTree = "<group>"; };
+		F5988CB6195A83B000A8DA5E /* TC_Camera.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Camera.m; path = try/TC_Camera.m; sourceTree = "<group>"; };
+		F5988CBA195A84EC00A8DA5E /* TC_GameObjectList.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = TC_GameObjectList.h; path = try/TC_GameObjectList.h; sourceTree = "<group>"; };
 		F59ECD8D1954C4AD00D7EB5D /* try.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = try.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F59ECD901954C4AD00D7EB5D /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		F59ECD921954C4AD00D7EB5D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -73,8 +73,8 @@
 		F59ECDA41954C4AD00D7EB5D /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		F59ECDA71954C4AD00D7EB5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPhone.storyboard; sourceTree = "<group>"; };
 		F59ECDAA1954C4AD00D7EB5D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main_iPad.storyboard; sourceTree = "<group>"; };
-		F59ECDAC1954C4AD00D7EB5D /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
-		F59ECDAE1954C4AD00D7EB5D /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
+		F59ECDAC1954C4AD00D7EB5D /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = try/Shaders/Shader.fsh; sourceTree = "<group>"; };
+		F59ECDAE1954C4AD00D7EB5D /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = try/Shaders/Shader.vsh; sourceTree = "<group>"; };
 		F59ECDB01954C4AD00D7EB5D /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		F59ECDB11954C4AD00D7EB5D /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		F59ECDB31954C4AD00D7EB5D /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -94,7 +94,7 @@
 		F5A18819195963320085672C /* TC_TextureLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureLoader.m; path = try/TC_TextureLoader.m; sourceTree = "<group>"; };
 		F5A1881B195977C30085672C /* TC_TextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_TextureInfo.h; path = try/TC_TextureInfo.h; sourceTree = "<group>"; };
 		F5A1881F195979950085672C /* TC_TextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureInfo.m; path = try/TC_TextureInfo.m; sourceTree = "<group>"; };
-		F5A18821195986860085672C /* test */ = {isa = PBXFileReference; lastKnownFileType = file; name = test; path = ../../../Downloads/test; sourceTree = "<group>"; };
+		F5A18821195986860085672C /* test */ = {isa = PBXFileReference; lastKnownFileType = file; name = test; path = ../../Downloads/test; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,8 +130,8 @@
 				F59F95D91957ED66006876C9 /* TC_DisplayObject.m */,
 				F5988C64195A1B7800A8DA5E /* TC_Layer.h */,
 				F5988C65195A1B7800A8DA5E /* TC_Layer.m */,
-				F5988C6A195A3FBA00A8DA5E /* TC_Camera.h */,
-				F5988C6B195A3FBA00A8DA5E /* TC_Camera.m */,
+				F5988CB5195A83B000A8DA5E /* TC_Camera.h */,
+				F5988CB6195A83B000A8DA5E /* TC_Camera.m */,
 			);
 			name = gameobjects;
 			sourceTree = "<group>";
@@ -139,11 +139,11 @@
 		F5988C63195A18FF00A8DA5E /* utility */ = {
 			isa = PBXGroup;
 			children = (
-				F5988C67195A1CB300A8DA5E /* list.h */,
 				F59F95DB1957F31B006876C9 /* types.h */,
+				F5988CBA195A84EC00A8DA5E /* TC_GameObjectList.h */,
+				F5988CB4195A83B000A8DA5E /* list.h */,
 				F59F95DC1957F87D006876C9 /* tool.h */,
 				F59F95DD1957F89A006876C9 /* tool.c */,
-				F5988C6D195A4F6100A8DA5E /* TC_GameObjectList.h */,
 				F5A1881F195979950085672C /* TC_TextureInfo.m */,
 				F5A1881B195977C30085672C /* TC_TextureInfo.h */,
 				F5A18818195963320085672C /* TC_TextureLoader.h */,
@@ -158,9 +158,28 @@
 			name = utility;
 			sourceTree = "<group>";
 		};
+		F5988CB8195A83EF00A8DA5E /* shader */ = {
+			isa = PBXGroup;
+			children = (
+				F59ECDAE1954C4AD00D7EB5D /* Shader.vsh */,
+				F59ECDAC1954C4AD00D7EB5D /* Shader.fsh */,
+			);
+			name = shader;
+			sourceTree = "<group>";
+		};
+		F5988CB9195A842000A8DA5E /* texture */ = {
+			isa = PBXGroup;
+			children = (
+				F5A18821195986860085672C /* test */,
+			);
+			name = texture;
+			sourceTree = "<group>";
+		};
 		F59ECD841954C4AC00D7EB5D = {
 			isa = PBXGroup;
 			children = (
+				F5988CB9195A842000A8DA5E /* texture */,
+				F5988CB8195A83EF00A8DA5E /* shader */,
 				F5988C63195A18FF00A8DA5E /* utility */,
 				F5988C62195A18C800A8DA5E /* gameobjects */,
 				F59ECD9A1954C4AD00D7EB5D /* try */,
@@ -195,13 +214,10 @@
 		F59ECD9A1954C4AD00D7EB5D /* try */ = {
 			isa = PBXGroup;
 			children = (
-				F5A18821195986860085672C /* test */,
 				F59ECDA31954C4AD00D7EB5D /* AppDelegate.h */,
 				F59ECDA41954C4AD00D7EB5D /* AppDelegate.m */,
 				F59ECDA61954C4AD00D7EB5D /* Main_iPhone.storyboard */,
 				F59ECDA91954C4AD00D7EB5D /* Main_iPad.storyboard */,
-				F59ECDAC1954C4AD00D7EB5D /* Shader.fsh */,
-				F59ECDAE1954C4AD00D7EB5D /* Shader.vsh */,
 				F59ECDB01954C4AD00D7EB5D /* ViewController.h */,
 				F59ECDB11954C4AD00D7EB5D /* ViewController.m */,
 				F59ECDB31954C4AD00D7EB5D /* Images.xcassets */,
@@ -345,7 +361,7 @@
 				F59F95DA1957ED67006876C9 /* TC_DisplayObject.m in Sources */,
 				F59ECDB21954C4AD00D7EB5D /* ViewController.m in Sources */,
 				F5A18820195979950085672C /* TC_TextureInfo.m in Sources */,
-				F5988C6C195A3FBA00A8DA5E /* TC_Camera.m in Sources */,
+				F5988CB7195A83B000A8DA5E /* TC_Camera.m in Sources */,
 				F59ECDA51954C4AD00D7EB5D /* AppDelegate.m in Sources */,
 				F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */,
 				F59ECDA11954C4AD00D7EB5D /* main.m in Sources */,
