@@ -14,22 +14,28 @@
     TC_Position _relativePosition;
     float _relativeRotation;
     int _child_num;
+    TC_ID _group;
+    BOOL _alive;
 }
-- (void) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture;
+- (void) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture WithGroup: (TC_ID)group;
 - (void) selfUpateWithAspect: (float)aspect;
 - (TC_Position)getRelativePosition;
 - (float)getRelativeRotation;
 - (void) setRelativePositionWithX: (float)x WithY: (float)y;
 - (void) setRelativeRotation: (float) deg;
 - (void) setParent: (TC_Layer*) parent;
+- (TC_ID) getGroup;
 - (void) addChild: (TC_Layer*) child AtX: (float)x AtY: (float)y;
 - (void) removeChildByID: (TC_ID)obj_id;
-- (void) removeLastChild;
+- (TC_Layer*) removeLastChild;
 - (void) removeAllChild;
++ (void) removeLayer: (TC_Layer*)layer;
 - (void) enable;
 - (void) hide;
 - (void) setDepth: (float)z;
 - (void) setX: (float)x;
 - (void) setY: (float)y;
+- (BOOL) lonely;
+- (void) kill; //the only method to elimate an object
 - (void) die;
 @end

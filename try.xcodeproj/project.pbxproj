@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F59382E7195A879900CB2A80 /* TC_Game.m in Sources */ = {isa = PBXBuildFile; fileRef = F59382E6195A879900CB2A80 /* TC_Game.m */; };
 		F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */; };
 		F59750BB1958DAE800D235C2 /* TC_ScriptLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */; };
 		F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5988C65195A1B7800A8DA5E /* TC_Layer.m */; };
@@ -49,6 +50,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F59382E5195A879900CB2A80 /* TC_Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Game.h; path = try/TC_Game.h; sourceTree = "<group>"; };
+		F59382E6195A879900CB2A80 /* TC_Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Game.m; path = try/TC_Game.m; sourceTree = "<group>"; };
 		F59750B61958DAC400D235C2 /* TC_ShaderLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_ShaderLoader.h; path = try/TC_ShaderLoader.h; sourceTree = "<group>"; };
 		F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_ShaderLoader.m; path = try/TC_ShaderLoader.m; sourceTree = "<group>"; };
 		F59750B91958DAE800D235C2 /* TC_ScriptLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_ScriptLoader.h; path = try/TC_ScriptLoader.h; sourceTree = "<group>"; };
@@ -123,6 +126,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F59382E4195A874400CB2A80 /* interface */ = {
+			isa = PBXGroup;
+			children = (
+				F59382E5195A879900CB2A80 /* TC_Game.h */,
+				F59382E6195A879900CB2A80 /* TC_Game.m */,
+			);
+			name = interface;
+			sourceTree = "<group>";
+		};
 		F5988C62195A18C800A8DA5E /* gameobjects */ = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +190,7 @@
 		F59ECD841954C4AC00D7EB5D = {
 			isa = PBXGroup;
 			children = (
+				F59382E4195A874400CB2A80 /* interface */,
 				F5988CB9195A842000A8DA5E /* texture */,
 				F5988CB8195A83EF00A8DA5E /* shader */,
 				F5988C63195A18FF00A8DA5E /* utility */,
@@ -363,6 +376,7 @@
 				F5A18820195979950085672C /* TC_TextureInfo.m in Sources */,
 				F5988CB7195A83B000A8DA5E /* TC_Camera.m in Sources */,
 				F59ECDA51954C4AD00D7EB5D /* AppDelegate.m in Sources */,
+				F59382E7195A879900CB2A80 /* TC_Game.m in Sources */,
 				F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */,
 				F59ECDA11954C4AD00D7EB5D /* main.m in Sources */,
 				F59750BB1958DAE800D235C2 /* TC_ScriptLoader.m in Sources */,

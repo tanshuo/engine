@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
-#import "TC_Camera.h"
+#import "TC_Game.h"
 
 @interface ViewController : GLKViewController
 

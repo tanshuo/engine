@@ -9,22 +9,28 @@
 #import "TC_Layer.h"
 
 @implementation TC_Layer
-- (void) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture
+- (void) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture WithGroup: (TC_ID)group;
 {
     [super InitialWithName:name WithX:x WithY:y WithZ:z WithHeight:height WithWidth:width WithScript:script WithShader:shader WithTexture:texture];
     _child_num = 0;
     _relativeRotation = 0;
-    _relativePosition.x = 0;
-    _relativePosition.y = 0;
-    _relativePosition.z = 0;
+    _relativePosition.x = x;
+    _relativePosition.y = y;
+    _relativePosition.z = z;
     _child_num = 0;
     _child = [NSMutableArray arrayWithCapacity:10];
     _parent = nil;
     _show = NO;
+    _group = group;
+    _alive = YES;
     [gameObjectList addObject:self];
 }
 - (void) selfUpateWithAspect: (float)aspect
 {
+    if(!_alive)
+    {
+        [self die];
+    }
     if(_parent == nil)
     {
         _show = NO;
@@ -40,6 +46,10 @@
     _position.z = finalPosition.z;
     _rotation = _relativeRotation + [_parent getRelativeRotation];
     [super selfUpateWithAspect:aspect];
+}
+- (TC_ID) getGroup
+{
+    return _group;
 }
 - (TC_Position)getRelativePosition
 {
@@ -89,19 +99,30 @@
             }
     }
 }
-- (void) removeLastChild
+- (TC_Layer*) removeLastChild
 {
+    TC_Layer* result = nil;
     if(_child_num > 0)
     {
         _child_num --;
+        result = [_child lastObject];
         [[_child lastObject] setParent:nil];
         [_child removeLastObject];
     }
+    return result;
 }
 - (void) removeAllChild
 {
     while(_child_num > 0)
         [self removeLastChild];
+}
++ (void) removeLayer: (TC_Layer*)layer
+{
+    TC_Layer* temp;
+    while((temp = [layer removeLastChild]))
+    {
+        [self removeLayer:temp];
+    }
 }
 - (void) enable
 {
@@ -123,9 +144,22 @@
 {
     _relativePosition.y = y;
 }
+
+- (BOOL) lonely
+{
+    if(_parent == nil)
+        return true;
+    else
+        return NO;
+}
+- (void) kill
+{
+    _alive = NO;
+}
 - (void) die
 {
     [super die];
+    [TC_Layer removeLayer:self];
     [gameObjectList removeObject:self];
 }
 @end
