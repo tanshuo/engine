@@ -11,11 +11,7 @@
 #import "types.h"
 
 @interface TC_TextureInfo : NSObject{
-    GLuint name;
-    GLuint width;
-    GLuint height;
-    GLuint counter;
-    NSString* text;
+ 
 };
 @property GLuint name;
 @property GLuint width;

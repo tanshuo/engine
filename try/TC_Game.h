@@ -18,6 +18,7 @@
 #import "TC_DisplayObject.h"
 #import "TC_Layer.h"
 #import "TC_Camera.h"
+#import "TC_Sprite.h"
 #define CAMERA_NUM 1
 
 TC_Camera* camera[CAMERA_NUM];

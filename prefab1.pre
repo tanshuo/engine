@@ -1,0 +1,20 @@
+
+#name: 
+    <sample>
+
+
+#script 
+    <>
+
+
+#shader:
+    <Shader>
+
+
+#frame:
+    <test> %first
+    <test> %second
+
+
+#group:
+    <0>

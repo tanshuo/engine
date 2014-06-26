@@ -17,7 +17,7 @@
 - (void) die
 {
     self.counter--;
-    if(counter <= 0)
+    if(_counter <= 0)
     {
         [self clearTexBuffer];
     }

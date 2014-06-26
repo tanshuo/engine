@@ -39,6 +39,9 @@
 		F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A18819195963320085672C /* TC_TextureLoader.m */; };
 		F5A18820195979950085672C /* TC_TextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A1881F195979950085672C /* TC_TextureInfo.m */; };
 		F5A18822195986860085672C /* test in Resources */ = {isa = PBXBuildFile; fileRef = F5A18821195986860085672C /* test */; };
+		F5FE4BE0195BC45100D1C593 /* prefab1.pre in Resources */ = {isa = PBXBuildFile; fileRef = F5FE4BDF195BC45100D1C593 /* prefab1.pre */; };
+		F5FE4BE4195BC4A500D1C593 /* TC_PrefabLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FE4BE3195BC4A500D1C593 /* TC_PrefabLoader.m */; };
+		F5FE4BE7195BC4E000D1C593 /* TC_PrefabInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5FE4BE6195BC4E000D1C593 /* TC_PrefabInfo.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +106,11 @@
 		F5A1881B195977C30085672C /* TC_TextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_TextureInfo.h; path = try/TC_TextureInfo.h; sourceTree = "<group>"; };
 		F5A1881F195979950085672C /* TC_TextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureInfo.m; path = try/TC_TextureInfo.m; sourceTree = "<group>"; };
 		F5A18821195986860085672C /* test */ = {isa = PBXFileReference; lastKnownFileType = file; name = test; path = ../../Downloads/test; sourceTree = "<group>"; };
+		F5FE4BDF195BC45100D1C593 /* prefab1.pre */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = prefab1.pre; sourceTree = "<group>"; };
+		F5FE4BE2195BC4A500D1C593 /* TC_PrefabLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_PrefabLoader.h; sourceTree = "<group>"; };
+		F5FE4BE3195BC4A500D1C593 /* TC_PrefabLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_PrefabLoader.m; sourceTree = "<group>"; };
+		F5FE4BE5195BC4E000D1C593 /* TC_PrefabInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_PrefabInfo.h; sourceTree = "<group>"; };
+		F5FE4BE6195BC4E000D1C593 /* TC_PrefabInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_PrefabInfo.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,16 +171,20 @@
 				F5988CB4195A83B000A8DA5E /* list.h */,
 				F59F95DC1957F87D006876C9 /* tool.h */,
 				F59F95DD1957F89A006876C9 /* tool.c */,
-				F5A1881F195979950085672C /* TC_TextureInfo.m */,
 				F5A1881B195977C30085672C /* TC_TextureInfo.h */,
+				F5A1881F195979950085672C /* TC_TextureInfo.m */,
 				F5A18818195963320085672C /* TC_TextureLoader.h */,
 				F5A18819195963320085672C /* TC_TextureLoader.m */,
+				F5FE4BE2195BC4A500D1C593 /* TC_PrefabLoader.h */,
+				F5FE4BE3195BC4A500D1C593 /* TC_PrefabLoader.m */,
 				F59750B61958DAC400D235C2 /* TC_ShaderLoader.h */,
 				F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */,
 				F59750B91958DAE800D235C2 /* TC_ScriptLoader.h */,
 				F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */,
 				F59F95DF195802F2006876C9 /* TC_VirtualMachine.h */,
 				F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */,
+				F5FE4BE5195BC4E000D1C593 /* TC_PrefabInfo.h */,
+				F5FE4BE6195BC4E000D1C593 /* TC_PrefabInfo.m */,
 			);
 			name = utility;
 			sourceTree = "<group>";
@@ -198,6 +210,8 @@
 			isa = PBXGroup;
 			children = (
 				F596DD43195B42F600672BAB /* readme */,
+				F5FE4BE1195BC45E00D1C593 /* prefabs */,
+				F5FE4BDF195BC45100D1C593 /* prefab1.pre */,
 				F59382E4195A874400CB2A80 /* interface */,
 				F5988CB9195A842000A8DA5E /* texture */,
 				F5988CB8195A83EF00A8DA5E /* shader */,
@@ -274,6 +288,13 @@
 				F59ECDC31954C4AD00D7EB5D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F5FE4BE1195BC45E00D1C593 /* prefabs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = prefabs;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -354,6 +375,7 @@
 			files = (
 				F5A18822195986860085672C /* test in Resources */,
 				F59ECDAD1954C4AD00D7EB5D /* Shader.fsh in Resources */,
+				F5FE4BE0195BC45100D1C593 /* prefab1.pre in Resources */,
 				F59ECDAB1954C4AD00D7EB5D /* Main_iPad.storyboard in Resources */,
 				F59ECDA81954C4AD00D7EB5D /* Main_iPhone.storyboard in Resources */,
 				F596DD44195B42F600672BAB /* readme in Resources */,
@@ -380,6 +402,7 @@
 			files = (
 				F59F95E1195802F2006876C9 /* TC_VirtualMachine.m in Sources */,
 				F59F95DE1957F89A006876C9 /* tool.c in Sources */,
+				F5FE4BE4195BC4A500D1C593 /* TC_PrefabLoader.m in Sources */,
 				F59F95DA1957ED67006876C9 /* TC_DisplayObject.m in Sources */,
 				F59ECDB21954C4AD00D7EB5D /* ViewController.m in Sources */,
 				F5A18820195979950085672C /* TC_TextureInfo.m in Sources */,
@@ -389,6 +412,7 @@
 				F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */,
 				F596DD42195B3DBC00672BAB /* TC_Sprite.m in Sources */,
 				F59ECDA11954C4AD00D7EB5D /* main.m in Sources */,
+				F5FE4BE7195BC4E000D1C593 /* TC_PrefabInfo.m in Sources */,
 				F59750BB1958DAE800D235C2 /* TC_ScriptLoader.m in Sources */,
 				F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */,
 				F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */,
