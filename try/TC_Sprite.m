@@ -12,6 +12,11 @@
 - (void) born: (NSString*)prefab atGroup:(TC_ID)g
 {
     TC_PrefabInfo* info = [TC_PrefabLoader loadPrefab:prefab WithName:@"test"];
+    if(info == nil)
+    {
+        printf("cannot open prefab\n");
+        return;
+    }
     [self InitialWithName:info.name WithX:0 WithY:0 WithZ:-90 WithHeight:10 WithWidth:10 WithScript:info.script WithShader:info.shader WithFrame:info.frame_txt WithGroup:0];
     
 };

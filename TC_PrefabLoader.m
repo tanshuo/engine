@@ -47,6 +47,8 @@ int prefab_cmd(FILE* input)
         c = 0;
         while(true)
         {
+            
+            c = getc(input);
             if(c!=' '&&c!='\n'&&c!=EOF)
             {
                 s[index] = c;
@@ -59,25 +61,21 @@ int prefab_cmd(FILE* input)
             else
             {
                 s[index] = 0;
-                if(!strcmp("name", s))
+                if(!strcmp("name:", s))
                 {
                     return NAME;
                 }
-                if(!strcmp("shader", s))
+                if(!strcmp("shader:", s))
                 {
                     return SHADER;
                 }
-                if(!strcmp("script", s))
+                if(!strcmp("script:", s))
                 {
                     return SCRIPT;
                 }
-                if(!strcmp("frame", s))
+                if(!strcmp("frame:", s))
                 {
                     return FRAME;
-                }
-                if(!strcmp("group", s))
-                {
-                    return GROUP;
                 }
                 return 0;
             }
@@ -120,14 +118,17 @@ int readData(char* buff,FILE* input)
     int flag = 0;
     int cmp = 0;
     char buffer[50];
-    input = fopen([prefab cStringUsingEncoding:NSASCIIStringEncoding], "r");
+    NSString* path;
+    path = [[NSBundle mainBundle] pathForResource:prefab ofType:@"pre"];
+   
+    input = fopen([path cStringUsingEncoding:NSASCIIStringEncoding], "r");
     if(input == NULL)
     {
         return nil;
     }
     result = [TC_PrefabInfo alloc];
     result.name = nil;
-   
+    
     result.shader = nil;
     result.script = nil;
     result.frame_txt = [NSMutableArray arrayWithCapacity:10];
@@ -139,6 +140,7 @@ int readData(char* buff,FILE* input)
             switch(state)
             {
                 case EOF:
+                    fclose(input);
                     return nil;
                 case NAME:
                     readData(buffer,input);
@@ -160,10 +162,11 @@ int readData(char* buff,FILE* input)
                     [result.frame_txt addObject: [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding]];
                     flag = 0;
                     break;
+                case IGNORE:
+                    break;
             }
             
-    }
-        
+        }
         cmp = prefab_cmd(input);
         if(cmp == NAME)
         {
@@ -195,7 +198,12 @@ int readData(char* buff,FILE* input)
         }
         else if(cmp == EOF)
         {
+            fclose(input);
             return result;
+        }
+        else
+        {
+            continue;
         }
     }
     return result;
