@@ -24,7 +24,7 @@
 }
 - (void) clearTexBuffer
 {
-    glDeleteTextures(1,&_name);
+    glDeleteTextures(1,&_name); 
 }
 - (void) dealloc
 {
