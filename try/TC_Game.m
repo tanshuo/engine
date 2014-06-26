@@ -38,7 +38,7 @@
     [[gameObjectList objectAtIndex:0] addChild:[gameObjectList objectAtIndex:1] AtX:0 AtY:0];
     [[gameObjectList objectAtIndex:0] kill];
 }
-+ (void) updateWithAspect: (float)aspect;
++ (void) updateWithAspect: (float)aspect;//has problem
 {
     int i;
     for(i = 0; i < [gameObjectList count]; i ++)

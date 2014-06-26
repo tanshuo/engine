@@ -25,7 +25,7 @@
 - (void) setRelativeRotation: (float) deg;
 - (void) setParent: (TC_Layer*) parent;
 - (TC_ID) getGroup;
-- (void) addChild: (TC_Layer*) child AtX: (float)x AtY: (float)y;
+- (BOOL) addChild: (TC_Layer*) child AtX: (float)x AtY: (float)y;
 
 - (TC_Layer*) getChildByName: (NSString*)name;
 - (TC_Layer*) getChildByIndex: (TC_ID)index;

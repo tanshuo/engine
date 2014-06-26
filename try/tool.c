@@ -66,6 +66,7 @@ void addEntry(TC_ID obj_id, const char* name)
         return;
     }
     new_entry->obj_id = obj_id;
+    end = objlist;
     strcpy(new_entry->name, name);
     for(iter = objlist; iter != NULL; iter = iter->next)
     {

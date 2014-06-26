@@ -15,6 +15,7 @@
     _id = genID();
     _name = [[NSString alloc] initWithString:name];
     _show = YES;
+    _active = YES;
     
     GLfloat gCubeVertexData[48] =
     {
@@ -93,8 +94,14 @@
     return 0;
 };
 
+
+
 - (void) selfUpateWithAspect: (float)aspect
 {
+    if(!_active)
+    {
+        return;
+    }
     _projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90), aspect, 0.1f, 10000.0f);
   
     [self actWithScript];

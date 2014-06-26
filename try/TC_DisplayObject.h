@@ -21,6 +21,8 @@
     TC_ID _id;
     NSString* _name;
     BOOL _show;
+    BOOL _active;
+   
     GLint uniforms[NUM_UNIFORMS];
     GLuint _program;
     

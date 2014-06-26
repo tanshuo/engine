@@ -74,15 +74,20 @@
 {
     return _relativeRotation;
 }
-- (void) addChild: (TC_Layer*) child AtX: (float)x AtY: (float)y
+- (BOOL) addChild: (TC_Layer*) child AtX: (float)x AtY: (float)y
 {
-    _child_num ++;
-    [child setRelativePositionWithX:x WithY:y];
-    [child setDepth:1];
-    [child setRelativeRotation:0];
-    [child setParent:self];
-    [child enable];
-    [_child addObject:child];
+    if([child lonely])
+    {
+        _child_num ++;
+        [child setRelativePositionWithX:x WithY:y];
+        [child setDepth:1];
+        [child setRelativeRotation:0];
+        [child setParent:self];
+        [child enable];
+        [_child addObject:child];
+        return YES;
+    }
+    return NO;
 }
 - (TC_Layer*) getChildByName: (NSString*)name
 {
