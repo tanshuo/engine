@@ -56,7 +56,15 @@ NSData* ResizeTextureWith(CGImageRef im,GLuint* width,GLuint* height)
 + (TC_TextureInfo*)loadTexture: (NSString*)t
 {
     TC_TextureInfo* result;
+    if((result = [TC_TextureLoader lookTxt:t]))
+    {
+        result.counter ++;
+        return result;
+    }
+        
+    
     NSString* path;
+    
     path = [[NSBundle mainBundle] pathForResource:t ofType:@"tct"];
     CGImageRef im = [[UIImage imageNamed:t] CGImage];
     if(im == nil)
@@ -76,7 +84,21 @@ NSData* ResizeTextureWith(CGImageRef im,GLuint* width,GLuint* height)
     result.height = height;
     result.name = tid;
     result.counter = 1;
+    [txtlist addObject:result];
     return result;
+}
+
++ (TC_TextureInfo*) lookTxt: (NSString*) name;
+{
+    int i;
+    for(i = 0; i < [txtlist count]; i ++)
+    {
+        if([[[txtlist objectAtIndex:i] getTxt] isEqualToString: name])
+        {
+            return [txtlist objectAtIndex:i];
+        }
+    }
+    return nil;
 }
 
 @end

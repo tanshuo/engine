@@ -13,6 +13,7 @@
 @synthesize width = _width;
 @synthesize height = _height;
 @synthesize counter = _counter;
+@synthesize text = _text;
 - (void) die
 {
     self.counter--;
@@ -28,5 +29,13 @@
 - (void) dealloc
 {
     [self die];
+}
+- (NSString*) getTxt
+{
+    return _text;
+}
+- (GLuint) getTID
+{
+    return _name;
 }
 @end

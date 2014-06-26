@@ -97,7 +97,7 @@
     {
         temp = [_child objectAtIndex:i];
         if(temp)
-            if([ [temp getName] isEqual:name])
+            if([ [temp getName] isEqualToString:name])
             {
                return temp;
             }

@@ -25,6 +25,6 @@ TC_Camera* camera[CAMERA_NUM];
 @interface TC_Game : NSObject
 + (void) gameStart;
 + (void) updateWithAspect: (float)aspect;
-+ (void) diplay;
++ (void) display;
 + (void) sceneInit;
 @end

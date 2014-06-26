@@ -15,12 +15,17 @@
     GLuint width;
     GLuint height;
     GLuint counter;
+    NSString* text;
 };
 @property GLuint name;
 @property GLuint width;
 @property GLuint height;
 @property GLuint counter;
+@property (strong,nonatomic) NSString* text;
 - (void) die;
 - (void) clearTexBuffer;
 - (void) dealloc;
+- (NSString*) getTxt;
+- (GLuint) getTID;
 @end
+

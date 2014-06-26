@@ -12,6 +12,7 @@
 + (void) gameStart
 {
     int i;
+    txtlist = [NSMutableArray arrayWithCapacity:10];
     gameObjectList = [NSMutableArray arrayWithCapacity:10];
     initList();
     for(i = 0; i < CAMERA_NUM; i ++)
@@ -36,9 +37,9 @@
     [[TC_Layer alloc] InitialWithName:@"act2" WithX:20 WithY:0 WithZ:-90 WithHeight:30.0f WithWidth:30.0f WithScript:@"no" WithShader:@"Shader" WithTexture:@"test" WithGroup: 0];
     [[TC_Layer alloc] InitialWithName:@"act3" WithX:30 WithY:0 WithZ:-90 WithHeight:30.0f WithWidth:30.0f WithScript:@"no" WithShader:@"Shader" WithTexture:@"test" WithGroup: 0];
     [[gameObjectList objectAtIndex:0] addChild:[gameObjectList objectAtIndex:1] AtX:0 AtY:0];
-    [[gameObjectList objectAtIndex:0] kill];
+    //[[gameObjectList objectAtIndex:0] kill];
 }
-+ (void) updateWithAspect: (float)aspect;//has problem
++ (void) updateWithAspect: (float)aspect;
 {
     int i;
     for(i = 0; i < [gameObjectList count]; i ++)
@@ -53,7 +54,7 @@
         }
     }
 }
-+ (void) diplay
++ (void) display
 {
     int i;
     for(i = 0; i < [gameObjectList count]; i ++)
