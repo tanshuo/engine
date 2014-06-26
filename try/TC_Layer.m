@@ -43,16 +43,30 @@
         return;
     }
     TC_Position finalPosition;
-    finalPosition = [_parent getRelativePosition];
-    finalPosition.x = finalPosition.x + _relativePosition.x;
-    finalPosition.y = finalPosition.y + _relativePosition.y;
-    finalPosition.z = finalPosition.z + _relativePosition.z;
+    finalPosition.x = 0;
+    finalPosition.y = 0;
+    finalPosition.z = 0;
+    TC_Layer* iter = self;
+    while(iter!=nil)
+    {
+        finalPosition.x += [iter getRelativePosition].x;
+        finalPosition.y += [iter getRelativePosition].y;
+        finalPosition.z += [iter getRelativePosition].z;
+        iter = [iter getParent];
+    }
+   
     _position.x = finalPosition.x;
     _position.y = finalPosition.y;
     _position.z = finalPosition.z;
     _rotation = _relativeRotation + [_parent getRelativeRotation];
     [super selfUpateWithAspect:aspect];
 }
+
+- (TC_Layer*) getParent
+{
+    return _parent;
+}
+
 - (TC_ID) getGroup
 {
     return _group;
@@ -74,12 +88,16 @@
 {
     return _relativeRotation;
 }
-- (BOOL) addChild: (TC_Layer*) child AtX: (float)x AtY: (float)y
+- (BOOL) addChild: (TC_Layer*) child
 {
+    if(!child)
+    {
+        return NO;
+    }
     if([child lonely])
     {
         _child_num ++;
-        [child setRelativePositionWithX:x WithY:y];
+        
         [child setDepth:1];
         [child setRelativeRotation:0];
         [child setParent:self];
