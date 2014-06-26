@@ -84,6 +84,7 @@ NSData* ResizeTextureWith(CGImageRef im,GLuint* width,GLuint* height)
     result.height = height;
     result.name = tid;
     result.counter = 1;
+    result.text = [[NSString alloc] initWithString:t];
     [txtlist addObject:result];
     return result;
 }
