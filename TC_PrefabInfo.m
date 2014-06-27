@@ -13,5 +13,6 @@
 @synthesize script = _script;
 @synthesize shader = _shader;
 @synthesize frame_txt = _frame_txt;
-
+@synthesize h = _h;
+@synthesize w = _w;
 @end

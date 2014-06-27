@@ -77,6 +77,10 @@ int prefab_cmd(FILE* input)
                 {
                     return FRAME;
                 }
+                if(!strcmp("size:", s))
+                {
+                    return SIZE;
+                }
                 return 0;
             }
         }
@@ -122,6 +126,7 @@ int readData(char* buff,FILE* input)
     int state = 0;
     int flag = 0;
     int cmp = 0;
+    int a = 0;
     char buffer[50];
     NSString* path;
     path = [[NSBundle mainBundle] pathForResource:prefab ofType:@"pre"];
@@ -164,6 +169,21 @@ int readData(char* buff,FILE* input)
                     result.script = [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding];
                     flag = 0;
                     break;
+                case SIZE:
+                    readData(buffer,input);
+                    if(a == 0)
+                    {
+                        result.h = [[NSString stringWithCString:buffer encoding:NSASCIIStringEncoding] floatValue];
+                        flag = 0;
+                        a = (a + 1) % 2;
+                    }
+                    else
+                    {
+                        result.w = [[NSString stringWithCString:buffer encoding:NSASCIIStringEncoding] floatValue];
+                        flag = 0;
+                        a = (a + 1) % 2;
+                    }
+                    break;
                 case FRAME:
                     readData(buffer,input);
                     temp_info = [TC_TextureLoader loadTexture:[NSString stringWithCString:buffer encoding:NSASCIIStringEncoding]];
@@ -189,6 +209,11 @@ int readData(char* buff,FILE* input)
         else if(cmp == FRAME)
         {
             state = FRAME;
+            flag = 0;
+        }
+        else if(cmp == SIZE)
+        {
+            state = SIZE;
             flag = 0;
         }
         else if(cmp == SCRIPT)

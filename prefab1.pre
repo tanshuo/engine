@@ -9,11 +9,12 @@
 
 #shader:
     <Shader>
-
-
+#size:
+    <20.0>
+    <10>
 #frame:
     <test> %first
-    <test> %second
+    <test1> %second
     --------------------------------|
     <test>
     <test>

@@ -12,7 +12,9 @@
 
 
 @interface ViewController ()
+
 @property (strong, nonatomic) EAGLContext *context;
+@property  GLuint _viewRenderbuffer;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -72,6 +74,8 @@
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    glGenRenderbuffers(1, &__viewRenderbuffer);
+    
 }
 
 - (void)tearDownGL
@@ -92,6 +96,21 @@
     glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     [TC_Game display];
+    [self swapbuffer];
+}
+
+- (void) swapbuffer
+{
+    EAGLContext* oldcontext = [EAGLContext currentContext];
+    GLuint oldrender;
+    if(oldcontext!= self.context)
+        [EAGLContext setCurrentContext:_context];
+    glGetIntegerv(GL_RENDERBUFFER_BINDING_OES, (GLint*)&oldrender);
+    glBindRenderbuffer(GL_RENDERBUFFER_OES, __viewRenderbuffer);
+    if(oldcontext!= self.context)
+    {
+        [EAGLContext setCurrentContext: oldcontext];
+    }
 }
 
 

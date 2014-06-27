@@ -18,7 +18,7 @@
         printf("cannot open prefab\n");
         return;
     }
-    [self InitialWithName:info.name WithX:0 WithY:0 WithZ:-90 WithHeight:10 WithWidth:10 WithScript:info.script WithShader:info.shader WithFrame:info.frame_txt WithGroup:0];
+    [self InitialWithName:info.name WithX:0 WithY:0 WithZ:-90 WithHeight:info.h WithWidth:info.w WithScript:info.script WithShader:info.shader WithFrame:info.frame_txt WithGroup:0];
     _currentFrame = 0;
     _currentSequence = 0;
     _totalFrame = [NSMutableArray arrayWithCapacity:10];
@@ -32,7 +32,7 @@
 
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script  WithShader:(NSString*)shader WithFrame: (NSMutableArray*)frames WithGroup: (TC_ID)group
 {
-    TC_ID mid = [self InitialWithName:name WithX:x WithY:y WithZ:z WithHeight:100 WithWidth:100 WithScript:script WithShader:shader WithTexture:nil WithGroup:group];
+    TC_ID mid = [self InitialWithName:name WithX:x WithY:y WithZ:z WithHeight:height WithWidth:width WithScript:script WithShader:shader WithTexture:nil WithGroup:group];
     _anims = frames;
     return mid;
 }

@@ -15,5 +15,7 @@
 @property (strong,atomic) NSString* script;
 @property (strong,atomic) NSString* shader;
 @property (strong,atomic) NSMutableArray* frame_txt;
+@property float h;
+@property float w;
 
 @end

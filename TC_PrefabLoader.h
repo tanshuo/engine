@@ -20,6 +20,7 @@ typedef enum{
     GROUP,
     SUB_BEGIN,
     SUB_END,
+    SIZE,
     COMMENT,
     UNKNOWN
 } PRE_CMD;
