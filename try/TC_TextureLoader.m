@@ -100,6 +100,7 @@ NSData* ResizeTextureWith(CGImageRef im,GLuint* width,GLuint* height)
             return [txtlist objectAtIndex:i];
         }
     }
+    
     return nil;
 }
 
