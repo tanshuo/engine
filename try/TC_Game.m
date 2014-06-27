@@ -33,6 +33,7 @@
 }
 + (void) sceneInit
 {
+    [[TC_Layer alloc] InitialWithName:@"hello" WithX:0 WithY:0 WithZ:0 WithHeight:0 WithWidth:0 WithScript:nil WithShader:@"Shader" WithTexture:@"test" WithGroup:0];
     [[TC_Sprite alloc] born:@"prefab1" atGroup:0];
 }
 + (void) updateWithAspect: (float)aspect;
