@@ -41,7 +41,7 @@
     _program = [TC_ShaderLoader loadShaderWithVertexShader:shader WithFragmentShader:shader];
     _textureinfo = [TC_TextureLoader loadTexture:texture];
     
-    if(_textureinfo == nil || _program == 0)
+    if(_program == 0)
     {
         if(_program)
         {

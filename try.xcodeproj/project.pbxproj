@@ -175,6 +175,8 @@
 				F59F95DD1957F89A006876C9 /* tool.c */,
 				F5A1881B195977C30085672C /* TC_TextureInfo.h */,
 				F5A1881F195979950085672C /* TC_TextureInfo.m */,
+				F5FE4BE5195BC4E000D1C593 /* TC_PrefabInfo.h */,
+				F5FE4BE6195BC4E000D1C593 /* TC_PrefabInfo.m */,
 				F5A18818195963320085672C /* TC_TextureLoader.h */,
 				F5A18819195963320085672C /* TC_TextureLoader.m */,
 				F5FE4BE2195BC4A500D1C593 /* TC_PrefabLoader.h */,
@@ -185,8 +187,6 @@
 				F59750BA1958DAE800D235C2 /* TC_ScriptLoader.m */,
 				F59F95DF195802F2006876C9 /* TC_VirtualMachine.h */,
 				F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */,
-				F5FE4BE5195BC4E000D1C593 /* TC_PrefabInfo.h */,
-				F5FE4BE6195BC4E000D1C593 /* TC_PrefabInfo.m */,
 			);
 			name = utility;
 			sourceTree = "<group>";

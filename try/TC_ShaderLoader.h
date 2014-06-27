@@ -11,6 +11,7 @@
 #import "types.h"
 
 
+NSMutableArray* shaderlist;
 
 @interface TC_ShaderLoader : NSObject
 + (GLuint)loadShaderWithVertexShader: (NSString*)vertex WithFragmentShader: (NSString*)frag;

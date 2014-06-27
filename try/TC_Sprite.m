@@ -44,12 +44,10 @@
     }
     NSNumber* temp = [[_anims objectAtIndex:_currentSequence] objectAtIndex: _currentFrame];
     glUseProgram(_program);
-    
-    [self activeShader];
-    
     glBindVertexArrayOES(_vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBindTexture(GL_TEXTURE_2D, temp.intValue);
+    [self activeShader];
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
     glUniformMatrix3fv(uniforms[UNIFORM_NORMAL_MATRIX], 1, 0, _normalMatrix.m);
     glUniform1i(uniforms[UNIFORM_SAMPLE], 0);
