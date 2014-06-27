@@ -86,6 +86,7 @@ NSData* ResizeTextureWith(CGImageRef im,GLuint* width,GLuint* height)
     result.counter = 1;
     result.text = [[NSString alloc] initWithString:t];
     [txtlist addObject:result];
+    glBindTexture(GL_TEXTURE_2D, 0);
     return result;
 }
 

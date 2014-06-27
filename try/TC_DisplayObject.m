@@ -66,6 +66,7 @@
 
 - (void) drawSelf;
 {
+    glBindTexture(GL_TEXTURE_2D, _textureinfo.name);
     if(!_show)
     {
         return;

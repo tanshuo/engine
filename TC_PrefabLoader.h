@@ -9,12 +9,14 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 #import "TC_PrefabInfo.h"
+#import "TC_TextureLoader.h"
 typedef enum{
     IGNORE,
     NAME,
     SHADER,
     SCRIPT,
     FRAME,
+    NEXT_FRAME,
     GROUP,
     SUB_BEGIN,
     SUB_END,

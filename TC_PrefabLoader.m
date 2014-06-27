@@ -81,6 +81,10 @@ int prefab_cmd(FILE* input)
             }
         }
     }
+    else if(c == '|')
+    {
+        return  NEXT_FRAME;
+    }
     else if(c == EOF)
     {
         return EOF;
@@ -113,6 +117,7 @@ int readData(char* buff,FILE* input)
 + (TC_PrefabInfo*)loadPrefab: (NSString*)prefab WithName:(NSString*) name
 {
     TC_PrefabInfo* result = nil;
+    TC_TextureInfo* temp_info = nil;
     FILE* input = nil;
     int state = 0;
     int flag = 0;
@@ -132,6 +137,8 @@ int readData(char* buff,FILE* input)
     result.shader = nil;
     result.script = nil;
     result.frame_txt = [NSMutableArray arrayWithCapacity:10];
+    NSMutableArray* frame_seq = [NSMutableArray arrayWithCapacity:10];
+    [result.frame_txt addObject: frame_seq];
     
     while(true)
     {
@@ -159,7 +166,8 @@ int readData(char* buff,FILE* input)
                     break;
                 case FRAME:
                     readData(buffer,input);
-                    [result.frame_txt addObject: [NSString stringWithCString:buffer encoding:NSASCIIStringEncoding]];
+                    temp_info = [TC_TextureLoader loadTexture:[NSString stringWithCString:buffer encoding:NSASCIIStringEncoding]];
+                    [[result.frame_txt lastObject] addObject: [NSNumber numberWithInt:temp_info.name]];
                     flag = 0;
                     break;
                 case IGNORE:
@@ -195,6 +203,15 @@ int readData(char* buff,FILE* input)
         else if(cmp == SUB_END)
         {
             flag = 0;
+        }
+        else if(cmp == NEXT_FRAME)
+        {
+            if([[result.frame_txt lastObject] count] > 0)
+            {
+                NSMutableArray* frame_seq = [NSMutableArray arrayWithCapacity:10];
+            
+                [result.frame_txt addObject: frame_seq];
+            }
         }
         else if(cmp == EOF)
         {

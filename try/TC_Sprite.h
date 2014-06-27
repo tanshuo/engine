@@ -12,10 +12,13 @@
 
 @interface TC_Sprite : TC_Layer{
     TC_ID _currentFrame;
-    TC_ID _totalFrame;
-    NSMutableArray* frame_texs;
+    TC_ID _currentSequence;
+    TC_ID _totalSequence;
+    TC_ID _frameSpeed;
+    NSMutableArray* _anims;
+    NSMutableArray* _totalFrame;
 }
 - (void) born: (NSString*)prefab atGroup: (TC_ID)g;
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script  WithShader:(NSString*)shader WithFrame: (NSMutableArray*)frames WithGroup: (TC_ID)group;
-
+- (void) drawSelf;
 @end

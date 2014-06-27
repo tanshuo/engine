@@ -14,7 +14,9 @@
 #frame:
     <test> %first
     <test> %second
+    --------------------------------|
+    <test>
+    <test>
 
 
-#group:
-    <0>
+
