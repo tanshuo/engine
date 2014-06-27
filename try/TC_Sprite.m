@@ -43,7 +43,7 @@
         return;
     }
     NSNumber* temp = [[_anims objectAtIndex:_currentSequence] objectAtIndex: _currentFrame];
-    glUseProgram(_program);
+    glUseProgram(_program.sid);
     glBindVertexArrayOES(_vertexArray);
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBindTexture(GL_TEXTURE_2D, temp.intValue);

@@ -24,7 +24,7 @@
     BOOL _active;
    
     GLint uniforms[NUM_UNIFORMS];
-    GLuint _program;
+    TC_Shaderinfo* _program;
     
     TC_TextureInfo* _textureinfo;
     

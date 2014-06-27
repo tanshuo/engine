@@ -10,11 +10,16 @@
 
 
 @implementation TC_ShaderLoader
-+ (GLuint)loadShaderWithVertexShader: (NSString*)vertex WithFragmentShader: (NSString*)frag;
++ (TC_Shaderinfo*)loadShaderWithVertexShader: (NSString*)vertex WithFragmentShader: (NSString*)frag;
 {
     GLuint vertShader, fragShader, _program;
     NSString *vertShaderPathname, *fragShaderPathname;
-    
+    TC_Shaderinfo* result = nil;
+    if((result = [TC_ShaderLoader lookShd:vertex]))
+    {
+        result.counter ++;
+        return result;
+    }
     // Create shader program.
     _program = glCreateProgram();
     
@@ -22,14 +27,14 @@
     vertShaderPathname = [[NSBundle mainBundle] pathForResource:vertex ofType:@"vsh"];
     if (![self compileShader:&vertShader type:GL_VERTEX_SHADER file:vertShaderPathname]) {
         NSLog(@"Failed to compile vertex shader");
-        return 0;
+        return result;
     }
     
     // Create and compile fragment shader.
     fragShaderPathname = [[NSBundle mainBundle] pathForResource:frag ofType:@"fsh"];
     if (![self compileShader:&fragShader type:GL_FRAGMENT_SHADER file:fragShaderPathname]) {
         NSLog(@"Failed to compile fragment shader");
-        return 0;
+        return result;
     }
     
     // Attach vertex shader to program.
@@ -70,8 +75,15 @@
         }
         return 0;
     }
-   
-    return _program;
+    if(_program)
+    {
+        result = [TC_Shaderinfo alloc];
+        result.sid = _program;
+        result.counter = 1;
+        result.shader = vertex;
+        [shaderlist addObject: result];
+    }
+    return result;
 };
 
 + (BOOL)compileShader:(GLuint *)shader type:(GLenum)type file:(NSString *)file
@@ -134,6 +146,17 @@
     return YES;
 }
 
-
++ (TC_Shaderinfo*) lookShd: (NSString*) name
+{
+    int i;
+    for(i = 0; i < [shaderlist count]; i ++)
+    {
+        if([[[shaderlist objectAtIndex:i] getShd] isEqualToString: name])
+        {
+            return [shaderlist objectAtIndex:i];
+        }
+    }
+    return nil;
+}
 
 @end

@@ -9,10 +9,13 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 #import "types.h"
+#include "TC_Shaderinfo.h"
 
 
 NSMutableArray* shaderlist;
 
 @interface TC_ShaderLoader : NSObject
-+ (GLuint)loadShaderWithVertexShader: (NSString*)vertex WithFragmentShader: (NSString*)frag;
++ (TC_Shaderinfo*)loadShaderWithVertexShader: (NSString*)vertex WithFragmentShader: (NSString*)frag;
++ (TC_Shaderinfo*) lookShd: (NSString*) name;
+
 @end

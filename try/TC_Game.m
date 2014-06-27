@@ -13,6 +13,7 @@
 {
     int i;
     txtlist = [NSMutableArray arrayWithCapacity:10];
+    shaderlist = [NSMutableArray arrayWithCapacity:10];
     gameObjectList = [NSMutableArray arrayWithCapacity:10];
     
     initList();
@@ -35,9 +36,9 @@
 + (void) sceneInit
 {
     //[[TC_Layer alloc] InitialWithName:@"hello" WithX:10 WithY:10 WithZ:0 WithHeight:10 WithWidth:10 WithScript:nil WithShader:@"Shader" WithTexture:@"test" WithGroup:0];
-    //TC_Layer* l = [TC_Layer alloc];
-    //[l InitialWithName:@"hello" WithX:0 WithY:0 WithZ:0 WithHeight:0 WithWidth:0 WithScript:nil WithShader:@"Shader" WithTexture:@"test" WithGroup:0];
-    //[l setRelativePositionWithX:20 WithY:20];
+    TC_Sprite* s = [TC_Sprite alloc];
+    [s born:@"prefab1" atGroup:0];
+    [s setRelativePositionWithX:20 WithY:20];
     [[TC_Sprite alloc] born:@"prefab1" atGroup:0];
    // [[TC_Sprite alloc] born:@"prefab1" atGroup:0];
 }

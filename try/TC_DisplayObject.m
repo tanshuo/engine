@@ -41,11 +41,11 @@
     _program = [TC_ShaderLoader loadShaderWithVertexShader:shader WithFragmentShader:shader];
     _textureinfo = [TC_TextureLoader loadTexture:texture];
     
-    if(_program == 0)
+    if(_program.sid == 0)
     {
         if(_program)
         {
-            glDeleteProgram(_program);
+            [_program die];
         }
     }
     
@@ -71,7 +71,7 @@
     {
         return;
     }
-    glUseProgram(_program);
+    glUseProgram(_program.sid);
     
     [self activeShader];
    
@@ -86,7 +86,7 @@
 
 - (void)activeShader
 {
-    [self SetUniformWithProjection:glGetUniformLocation(_program, "modelViewProjectionMatrix") WithNormal:glGetUniformLocation(_program, "normalMatrix") WithSampler:glGetUniformLocation(_program, "sampler")];
+    [self SetUniformWithProjection:glGetUniformLocation(_program.sid, "modelViewProjectionMatrix") WithNormal:glGetUniformLocation(_program.sid, "normalMatrix") WithSampler:glGetUniformLocation(_program.sid, "sampler")];
     
 };
 
@@ -130,8 +130,8 @@
         [_textureinfo die];
     }
    if (_program) {
-        glDeleteProgram(_program);
-        _program = 0;
+        [_program die];
+        _program = nil;
     }
 };
 
