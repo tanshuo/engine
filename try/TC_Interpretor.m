@@ -72,6 +72,14 @@
             TC_Define* token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
             if(token)
                 [_defines addObject:token];
+            else
+            {
+                token = [TC_Define alloc];
+                token.word = [NSString stringWithUTF8String:wordbuff];
+                token.explain = TC_UNKNOWN;
+                token.left_match = 0;
+                token.right_match = 0;
+            }
             
         }
         else if(!(c == EOF || c == ' ' || c == '\n' || c == '\t'))
