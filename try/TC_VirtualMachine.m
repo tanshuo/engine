@@ -12,6 +12,10 @@
     int instruction_data_devider;
     int total_instructions;
     int total_datas;
+    
+    int eax; //answer
+    int ecx; //loop return
+    
 }
 @end
 

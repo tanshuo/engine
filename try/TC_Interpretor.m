@@ -12,6 +12,7 @@
 @synthesize currentLine = _currentLine;
 @synthesize line = _line;
 @synthesize tree = _tree;
+
 - (int) readLine
 {
     return 0;
@@ -20,5 +21,8 @@
 {
     return 0;
 }
+- (void)start
+{
 
+}
 @end

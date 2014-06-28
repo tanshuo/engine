@@ -6,8 +6,10 @@
 //  Copyright (c) 2014 tanshuo. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+#import "TC_Instruction.h"
 
 @interface TC_CommandTree : NSObject
-
+@property (strong,nonatomic) NSMutableArray* trees;
+@property TC_ID tree_count;
+@property NSMutableArray* globols;
 @end

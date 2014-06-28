@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F593536C195E64CD0097B712 /* TC_Dictionary.m in Sources */ = {isa = PBXBuildFile; fileRef = F593536B195E64CD0097B712 /* TC_Dictionary.m */; };
 		F59382E7195A879900CB2A80 /* TC_Game.m in Sources */ = {isa = PBXBuildFile; fileRef = F59382E6195A879900CB2A80 /* TC_Game.m */; };
 		F596DD42195B3DBC00672BAB /* TC_Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = F596DD41195B3DBC00672BAB /* TC_Sprite.m */; };
 		F596DD44195B42F600672BAB /* readme in Resources */ = {isa = PBXBuildFile; fileRef = F596DD43195B42F600672BAB /* readme */; };
@@ -60,6 +61,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F593536A195E64CD0097B712 /* TC_Dictionary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TC_Dictionary.h; sourceTree = "<group>"; };
+		F593536B195E64CD0097B712 /* TC_Dictionary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_Dictionary.m; sourceTree = "<group>"; };
 		F59382E5195A879900CB2A80 /* TC_Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Game.h; path = try/TC_Game.h; sourceTree = "<group>"; };
 		F59382E6195A879900CB2A80 /* TC_Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Game.m; path = try/TC_Game.m; sourceTree = "<group>"; };
 		F596DD40195B3DBC00672BAB /* TC_Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Sprite.h; path = try/TC_Sprite.h; sourceTree = "<group>"; };
@@ -232,6 +235,8 @@
 				F59CB518195E47FE00A89176 /* TC_CommandTree.m */,
 				F59CB51A195E49E700A89176 /* TC_Instruction.h */,
 				F59CB51B195E49E700A89176 /* TC_Instruction.m */,
+				F593536A195E64CD0097B712 /* TC_Dictionary.h */,
+				F593536B195E64CD0097B712 /* TC_Dictionary.m */,
 			);
 			name = interprator;
 			sourceTree = "<group>";
@@ -448,6 +453,7 @@
 				F596DD42195B3DBC00672BAB /* TC_Sprite.m in Sources */,
 				F59ECDA11954C4AD00D7EB5D /* main.m in Sources */,
 				F5FE4BE7195BC4E000D1C593 /* TC_PrefabInfo.m in Sources */,
+				F593536C195E64CD0097B712 /* TC_Dictionary.m in Sources */,
 				F59750BB1958DAE800D235C2 /* TC_ScriptLoader.m in Sources */,
 				F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */,
 				F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */,

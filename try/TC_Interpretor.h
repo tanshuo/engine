@@ -15,7 +15,13 @@
 @property TC_ID currentLine;
 @property NSString* line;
 @property TC_CommandTree* tree;
-- (int) readLine;
-- (int) genTree;
+@property FILE* input;
 
+- (void) start;// create
+- (int) readLine; // read a line into a buffer
+- (int) genTree; // create commandTree
+- (int) loadFile: (NSString*) file;
+- (void) attachTree: (TC_CommandTree*)bigtree;
+- (void) die;
+- (void) read_a_tokens;
 @end
