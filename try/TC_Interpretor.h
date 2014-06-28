@@ -8,20 +8,27 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
+#import "TC_VirtualMachine.h"
+#import "TC_Define.h"
 #import "types.h"
-#import "TC_CommandTree.h"
+
 
 @interface TC_Interpretor : NSObject
 @property TC_ID currentLine;
-@property NSString* line;
-@property TC_CommandTree* tree;
+@property (strong,nonatomic) NSString* line;
+@property (strong,nonatomic) TC_VirtualMachine* vm;
+@property (strong,nonatomic) NSMutableArray* defines;
+@property (strong,nonatomic) NSMutableArray* dictionary;
 @property FILE* input;
 
 - (void) start;// create
 - (int) readLine; // read a line into a buffer
 - (int) genTree; // create commandTree
+- (int) read_a_tokens;
 - (int) loadFile: (NSString*) file;
-- (void) attachTree: (TC_CommandTree*)bigtree;
+- (void) attachTree: (TC_VirtualMachine*)vm;
 - (void) die;
-- (void) read_a_tokens;
+- (void) initDictionary;
+- (void) dealloc;
+- (TC_Define*) searchDictionary: (NSString*) word;
 @end

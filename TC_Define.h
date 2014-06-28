@@ -17,9 +17,14 @@ typedef enum{
     TC_VECTOR3,
     TC_INT,
     TC_GLOBOL,
-    TC_KEYWORD, // if while when calculate done
+    TC_KEYWORD, // calculate,done
+    TC_OF, //of
+    TC_MY, //my
+    TC_UNKNOWN,
+    TC_BULILDIN_WORD,
+    TC_BULILDIN_FUN,
 } TC_Explain;
-@interface TC_Dictionary : NSObject
+@interface TC_Define : NSObject
 @property (strong,nonatomic)NSString* word;
 @property TC_Explain explain;
 @property TC_ID left_match;
