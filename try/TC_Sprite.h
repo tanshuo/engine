@@ -21,4 +21,5 @@
 - (void) born: (NSString*)prefab atGroup: (TC_ID)g;
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script  WithShader:(NSString*)shader WithFrame: (NSMutableArray*)frames WithGroup: (TC_ID)group;
 - (void) drawSelf;
+- (void) adjust: (TC_ID)seq;
 @end

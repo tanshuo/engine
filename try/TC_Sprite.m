@@ -54,4 +54,14 @@
     glDrawArrays(GL_TRIANGLES, 0, 6);
     _currentFrame = (_currentFrame + _frameSpeed) %  [[_totalFrame objectAtIndex: _currentSequence] intValue];
 }
+
+- (void) adjust: (TC_ID)seq
+{
+    if(seq >= _totalSequence)
+    {
+        printf("no seq\n");
+        return;
+    }
+    _currentSequence = seq;
+}
 @end

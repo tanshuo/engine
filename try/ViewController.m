@@ -15,6 +15,7 @@
 
 @property (strong, nonatomic) EAGLContext *context;
 @property  GLuint _viewRenderbuffer;
+@property float ftime;
 
 - (void)setupGL;
 - (void)tearDownGL;
@@ -93,10 +94,16 @@
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect //huitu
 {
-    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-    [TC_Game display];
-    [self swapbuffer];
+    if(self.ftime > 1.0f/FPS)
+    {
+        glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        [TC_Game display];
+        [self swapbuffer];
+        self.ftime = 0;
+    }
+    else
+        self.ftime += self.timeSinceLastUpdate;
 }
 
 - (void) swapbuffer
