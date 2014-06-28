@@ -24,11 +24,12 @@
 - (void) start;// create
 - (int) readLine; // read a line into a buffer if 1 continue,-1 end,0 error
 - (int) genTree; // create commandTree
-- (int) read_a_tokens;
+- (int) read_a_tokens;// 0 can not find 1 success -1 error
 - (int) loadFile: (NSString*) file;
 - (void) attachTree: (TC_VirtualMachine*)vm;
 - (void) die;
 - (void) initDictionary;
 - (void) dealloc;
+
 - (TC_Define*) searchDictionary: (NSString*) word;
 @end

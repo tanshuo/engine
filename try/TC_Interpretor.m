@@ -6,6 +6,8 @@
 //  Copyright (c) 2014 tanshuo. All rights reserved.
 //
 
+// merge 'of'->merge function->fork->keyword control
+
 #import "TC_Interpretor.h"
 
 @implementation TC_Interpretor
@@ -19,7 +21,8 @@
 {
     char c;
     int index = 0;
-    char linecache[100];
+    char linecache[100];//error
+    _currentLine++;
     while(true)
     {
         c = getc(_input);
@@ -65,20 +68,28 @@
     
     while(true)
     {
+        if(i > [_defines count])
+        {
+            return 0;
+        }
         c = [_line characterAtIndex:i];
         if(flag && (c == EOF || c == ' ' || c == '\n' || c == '\t'))
         {
             wordbuff[j] = 0;
             TC_Define* token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
             if(token)
+            {
                 [_defines addObject:token];
+                return 1;
+            }
             else
             {
-                token = [TC_Define alloc];
-                token.word = [NSString stringWithUTF8String:wordbuff];
-                token.explain = TC_UNKNOWN;
-                token.left_match = 0;
-                token.right_match = 0;
+                flag = YES;
+                wordbuff[j] = c;
+                if(j < 18)
+                    j ++;
+                else
+                    return -1;
             }
             
         }
@@ -89,7 +100,7 @@
             if(j < 18)
                 j ++;
             else
-                return 0;
+                return -1;
         }
         i ++;
     }
