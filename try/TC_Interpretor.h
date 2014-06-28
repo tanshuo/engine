@@ -22,7 +22,7 @@
 @property FILE* input;
 
 - (void) start;// create
-- (int) readLine; // read a line into a buffer
+- (int) readLine; // read a line into a buffer if 1 continue,-1 end,0 error
 - (int) genTree; // create commandTree
 - (int) read_a_tokens;
 - (int) loadFile: (NSString*) file;

@@ -17,7 +17,32 @@
 
 - (int) readLine
 {
-    return 0;
+    char c;
+    int index = 0;
+    char linecache[100];
+    while(true)
+    {
+        c = getc(_input);
+        if(c != EOF && c != ';')
+        {
+            linecache[index] = c;
+            if(index < 99)
+                index ++;
+            else
+                return 0;
+        }
+        else  if(c == EOF)
+        {
+            _line = [NSString stringWithUTF8String:linecache];
+            return -1;
+        }
+        else
+        {
+            _line = [NSString stringWithUTF8String:linecache];
+            return 1;
+        }
+        
+    }
 }
 - (int) genTree
 {
@@ -47,7 +72,7 @@
             TC_Define* token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
             if(token)
                 [_defines addObject:token];
-           
+            
         }
         else if(!(c == EOF || c == ' ' || c == '\n' || c == '\t'))
         {
@@ -55,10 +80,12 @@
             wordbuff[j] = c;
             if(j < 18)
                 j ++;
+            else
+                return 0;
         }
         i ++;
     }
-    return 0;
+    return 1;
 }
 
 - (TC_Define*) searchDictionary: (NSString*) word
