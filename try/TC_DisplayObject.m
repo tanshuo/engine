@@ -33,6 +33,8 @@
     _position.y = y;
     _position.z = z;
     _rotation = 0.0f;
+    _w = 1;
+    _h = 1;
     
     _baseModelViewMatrix = GLKMatrix4MakeTranslation(x, y, z);
     _baseModelViewMatrix = GLKMatrix4Rotate(_baseModelViewMatrix, GLKMathDegreesToRadians(_rotation), 0.0f, 0.0f, 1.0f);
@@ -109,6 +111,7 @@
     
     GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(_position.x,_position.y,_position.z);
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(_rotation), 0.0f, 0.0f, 1.0f);
+    modelViewMatrix = GLKMatrix4Scale(modelViewMatrix, _w, _h, 1);
     modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
     _normalMatrix = GLKMatrix3InvertAndTranspose(GLKMatrix4GetMatrix3(modelViewMatrix), NULL);
     _modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);

@@ -45,6 +45,7 @@
 - (void) setDepth: (float)z;
 - (void) setX: (float)x;
 - (void) setY: (float)y;
+- (void) setScaleWithHeight:(float)h WithWidth: (float)w;
 - (BOOL) lonely;
 - (void) kill; //the only method to elimate an object
 - (void) die;

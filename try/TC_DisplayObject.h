@@ -37,6 +37,8 @@
     GLuint _vertexArray;
     GLuint _vertexBuffer;
     float _rotation;
+    float _w;
+    float _h;
     TC_Position _position;
   
     TC_ID _currentline;

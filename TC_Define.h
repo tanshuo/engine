@@ -17,7 +17,7 @@ typedef enum{
     TC_VECTOR3,
     TC_INT,
     TC_GLOBOL,
-    TC_KEYWORD, // calculate,done
+    TC_KEYWORD, // calculate,done,if,else,then
     TC_OF, //of
     TC_MY, //my
     TC_UNKNOWN,

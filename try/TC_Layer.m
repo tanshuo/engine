@@ -75,6 +75,12 @@
 {
     return _relativePosition;
 }
+
+- (void) setScaleWithHeight:(float)h WithWidth: (float)w
+{
+    _w = w;
+    _h = h;
+}
 - (void) setRelativePositionWithX: (float)x WithY: (float)y
 {
     _relativePosition.x = x;
