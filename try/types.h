@@ -41,12 +41,5 @@ typedef struct signal{
     float data2;
 } TC_Signal;
 
-typedef struct insturction{
-    TC_ID instruction_type;
-    void* p1;
-    void* p2;
-    void* p3;
-    int line;
-    int file;
-} TC_Instruction;
+
 #endif
