@@ -315,8 +315,24 @@
         }
         
         // popstack and get tree
-        ...
+        old = [TC_Logical_Layer alloc];
+        old.straight = nil;
+        old.right = [stack objectAtIndex:[stack count] - 1];
+        old.left = nil;
+        old.type = TC_OR;
+        [stack removeLastObject];
+        while([stack count] > 0)
+        {
+            TC_Logical_Layer* newroot = [TC_Logical_Layer alloc];
+            newroot.right = old;
+            newroot.left = [stack lastObject];
+            newroot.type = TC_OR;
+            newroot.straight = nil;
+            old = newroot;
+            [stack removeLastObject];
+        }
+        
     }
-    return nil;
+    return old;
 }
 @end
