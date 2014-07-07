@@ -9,12 +9,12 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 #import "TC_Define.h"
-#import "TC_WORD_LAYER.h"
+#import "TC_Function_Layer.h"
 #import "types.h"
 
 @interface TC_Logical_Layer : NSObject
-@property(strong,nonatomic) id left;
-@property(strong,nonatomic) id right;
-@property(strong,nonatomic) id straight;
+@property(strong,nonatomic) TC_Logical_Layer* left;
+@property(strong,nonatomic) TC_Logical_Layer* right;
+@property(strong,nonatomic) TC_Function_Layer* straight;
 @property int type;//0 is no logical, tcand tcor
 @end

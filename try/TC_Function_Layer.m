@@ -9,6 +9,6 @@
 #import "TC_Function_Layer.h"
 
 @implementation TC_Function_Layer
-@synthesize inputs = _inputs;
+@synthesize target = _target;
 @synthesize params = _params;
 @end

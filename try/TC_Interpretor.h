@@ -27,6 +27,8 @@
 - (int) readLine; // read a line into a buffer if 1 continue,-1 end,0 error
 - (int) genTree; // create commandTree
 - (TC_Logical_Layer*) genLogical:(NSMutableArray*) sentence;
+- (TC_WORD_LAYER*) genWord: (NSMutableArray*) sentence;
+- (TC_Function_Layer*) genFun: (NSMutableArray*) sentence;
 - (int) read_a_tokens;// 0 can not find 1 success -1 error
 - (int) loadFile: (NSString*) file;
 

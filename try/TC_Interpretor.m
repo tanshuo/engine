@@ -275,14 +275,14 @@
     {
         TC_Logical_Layer* newlayer = [TC_Logical_Layer alloc];
         newlayer.type = 0;
-        newlayer.straight = function_express;
+        newlayer.straight = [self genFun: function_express];
         newlayer.left = nil;
         newlayer.right = nil;
         return newlayer;
     }
     
     TC_Logical_Layer* old = [TC_Logical_Layer alloc];
-    old.straight = [fc_array objectAtIndex:0];
+    old.straight = [self genFun:[fc_array objectAtIndex:0]];
     old.left = nil;
     old.right = nil;
     old.type = 0;
@@ -294,7 +294,7 @@
         {
             TC_Logical_Layer* newleaf = [TC_Logical_Layer alloc];
             TC_Logical_Layer* newroot = [TC_Logical_Layer alloc];
-            newleaf.straight = [fc_array objectAtIndex:i + 1];
+            newleaf.straight = [self genFun:[fc_array objectAtIndex:i + 1]];
             newleaf.type = 0;
             newleaf.left = nil;
             newleaf.right  = nil;
@@ -308,7 +308,7 @@
         {
             [stack addObject:old];
             old = [TC_Logical_Layer alloc];
-            old.straight = [fc_array objectAtIndex:i + 1];
+            old.straight = [self genFun:[fc_array objectAtIndex:i + 1]];
             old.left = nil;
             old.right = nil;
             old.type = 0;
@@ -334,5 +334,24 @@
         
     }
     return old;
+}
+
+- (TC_WORD_LAYER*) genWord: (NSMutableArray*) sentence
+{
+    return nil;
+}
+
+- (TC_Function_Layer*) genFun: (NSMutableArray*) sentence
+{
+    int i,j;
+    for(i = 0; i < [sentence count]; i ++)
+    {
+        int state = [[sentence objectAtIndex:i] explain];
+        int match = [[sentence objectAtIndex:i] right_match];
+        if(state == TC_FUNCTION)
+        {
+            
+        }
+    }
 }
 @end
