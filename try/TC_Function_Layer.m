@@ -12,4 +12,5 @@
 @synthesize target = _target;
 @synthesize params = _params;
 @synthesize name = _name;
+@synthesize right_match = _right_match;
 @end

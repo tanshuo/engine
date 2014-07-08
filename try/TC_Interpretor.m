@@ -341,6 +341,7 @@
     int i = 0;
     int state;
     BOOL stick = NO;
+    BOOL has_one = NO;
     TC_WORD_LAYER* newlayer;
     TC_WORD_LAYER* rootlayer;
     NSMutableArray* result = [NSMutableArray arrayWithCapacity:10];
@@ -365,19 +366,46 @@
         }
         else if(state == TC_OF)
         {
+            if(i == 0 || i >= [sentence count] - 1)
+            {
+                return nil; //gramma error of is not the first or the last
+            }
             if(stick == NO) // if it is the first of genarate root
             {
-                if(i == 0 || i >= [sentence count] - 1)
-                {
-                    return nil; //gramma error of is not the first or the last
-                }
                 rootlayer = [TC_WORD_LAYER alloc];
                 rootlayer.word = [[sentence objectAtIndex:i + 1] word];
                 newlayer = [TC_WORD_LAYER alloc];
                 newlayer.word = [[sentence objectAtIndex:i - 1] word];
                 newlayer.next_layer = nil;
                 rootlayer.next_layer = newlayer;
-                stick = YES;... // how to reset it?
+                stick = YES;
+            }
+            else if(stick == YES)
+            {
+                newlayer = rootlayer;
+                rootlayer = [TC_WORD_LAYER alloc];
+                rootlayer.word = [[sentence objectAtIndex:i + 1] word];
+                rootlayer.next_layer = newlayer;
+            }
+        }
+        else
+        {
+            if(stick == YES)
+            {
+                if(has_one == NO)
+                {
+                    has_one = YES;
+                }
+                else if(has_one == YES)
+                {
+                    has_one = NO;
+                    stick = NO;
+                    [result addObject:rootlayer];
+                }
+            }
+            else
+            {
+                return nil;
             }
         }
         
@@ -387,12 +415,13 @@
             break;
         }
     }
-    return nil;
+    return result;
 }
 
 - (TC_Function_Layer*) genFun: (NSMutableArray*) sentence
 {
     int i,j;
+    NSMutableArray* temp;
     TC_Function_Layer* result = [TC_Function_Layer alloc];
     for(i = 0; i < [sentence count]; i ++)
     {
@@ -401,10 +430,26 @@
         if(state == TC_FUNCTION)
         {
             result.name = [[sentence objectAtIndex:i] word];
-            result.params =
-            result.target =
+            result.right_match = match;
             break;
         }
     }
+    temp = [NSMutableArray arrayWithCapacity:10];
+    for(j = 0; j <= i - 1; j ++)
+    {
+        [temp addObject:[sentence objectAtIndex:j]];
+    }
+    result.params = [self genWords: temp];
+   
+    temp = [NSMutableArray arrayWithCapacity:10];
+    for(j = i + 1; j <= [sentence count] - 1; j ++)
+    {
+        [temp addObject:[sentence objectAtIndex:j]];
+    }
+    result.target = [[self genWords: temp] objectAtIndex:0];
+    if(result.target != nil && result.params != nil)
+        return result;
+    else
+        return nil;
 }
 @end
