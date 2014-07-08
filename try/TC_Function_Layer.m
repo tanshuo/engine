@@ -11,4 +11,5 @@
 @implementation TC_Function_Layer
 @synthesize target = _target;
 @synthesize params = _params;
+@synthesize name = _name;
 @end

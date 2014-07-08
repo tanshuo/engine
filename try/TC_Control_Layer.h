@@ -10,8 +10,7 @@
 #import <GLKit/GLKit.h>
 #import "TC_Define.h"
 #import "types.h"
-#import "TC_WORD_LAYER.h"
-#import "TC_Function_Layer.h"
+#import "TC_Logical_Layer.h"
 
 @interface TC_Conrol_Layer : NSObject
 @property int type;

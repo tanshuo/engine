@@ -336,21 +336,74 @@
     return old;
 }
 
-- (TC_WORD_LAYER*) genWord: (NSMutableArray*) sentence
+- (NSMutableArray*) genWords: (NSMutableArray*) sentence
 {
+    int i = 0;
+    int state;
+    BOOL stick = NO;
+    TC_WORD_LAYER* newlayer;
+    TC_WORD_LAYER* rootlayer;
+    NSMutableArray* result = [NSMutableArray arrayWithCapacity:10];
+    
+    while(true)
+    {
+        state = [[sentence objectAtIndex:i] explain];
+        if(state == TC_MY)
+        {
+            if(i >= [sentence count] - 1)
+            {
+                return nil; //gramma error my is not the last
+            }
+            rootlayer = [TC_WORD_LAYER alloc];
+            rootlayer.word = [[sentence objectAtIndex:i] word];
+            newlayer = [TC_WORD_LAYER alloc];
+            newlayer.word = [[sentence objectAtIndex:i + 1] word];
+            newlayer.next_layer = nil;
+            rootlayer.next_layer = newlayer;
+            [result addObject:rootlayer];
+            i ++;
+        }
+        else if(state == TC_OF)
+        {
+            if(stick == NO) // if it is the first of genarate root
+            {
+                if(i == 0 || i >= [sentence count] - 1)
+                {
+                    return nil; //gramma error of is not the first or the last
+                }
+                rootlayer = [TC_WORD_LAYER alloc];
+                rootlayer.word = [[sentence objectAtIndex:i + 1] word];
+                newlayer = [TC_WORD_LAYER alloc];
+                newlayer.word = [[sentence objectAtIndex:i - 1] word];
+                newlayer.next_layer = nil;
+                rootlayer.next_layer = newlayer;
+                stick = YES;... // how to reset it?
+            }
+        }
+        
+        i++;
+        if(i >= [sentence count])
+        {
+            break;
+        }
+    }
     return nil;
 }
 
 - (TC_Function_Layer*) genFun: (NSMutableArray*) sentence
 {
     int i,j;
+    TC_Function_Layer* result = [TC_Function_Layer alloc];
     for(i = 0; i < [sentence count]; i ++)
     {
         int state = [[sentence objectAtIndex:i] explain];
         int match = [[sentence objectAtIndex:i] right_match];
         if(state == TC_FUNCTION)
         {
-            
+            result.name = [[sentence objectAtIndex:i] word];
+            result.params =
+            result.target =
+            break;
         }
     }
 }

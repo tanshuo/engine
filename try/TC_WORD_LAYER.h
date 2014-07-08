@@ -13,5 +13,5 @@
 
 @interface TC_WORD_LAYER : NSObject
 @property (strong,nonatomic) NSString* word;
-@property (strong,nonatomic) NSString* next_word;
+@property (strong,nonatomic) TC_WORD_LAYER* next_layer;
 @end
