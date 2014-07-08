@@ -80,7 +80,12 @@
                     [newlayer.logical addObject:[_defines objectAtIndex:i]];
                 }
             }
-        
+            newlayer.logical = [self genFun:newlayer.logical];
+            if(newlayer.logical == nil)
+            {
+                _root = nil;//gramma error
+                return -1;
+            }
             [_root addObject:newlayer];
         }
     }
@@ -95,35 +100,14 @@
         {
             [newlayer.logical addObject:[_defines objectAtIndex:i]];
         }
+        newlayer.logical = [self genFun:newlayer.logical];
+        if(newlayer.logical == nil)
+        {
+            _root = nil;//gramma error
+            return -1;
+        }
         [_root addObject:newlayer];
     }
-    //////
-    //missing logical layer
-   /* int index;
-    for(i = 0; i < [_root count]; i ++) //create function layer
-    {
-        TC_Function_Layer* temp = [TC_Function_Layer alloc];
-        for(j = 0; j < [[_root objectAtIndex:i] count]; j ++)
-        {
-            int e = [[[_root objectAtIndex:i] objectAtIndex:j] explain];
-            if(e == TC_FUNCTION)
-            {
-                for(index = 0; index < j; index ++)
-                {
-                    [[temp inputs] addObject:[[_root objectAtIndex:i] objectAtIndex:j]];
-                }
-                for(index = j + 1; index < [[_root objectAtIndex:i] count]; index ++)
-                {
-                    if([[[_root objectAtIndex:i] objectAtIndex:j] explain] != TC_IGNORE)
-                        [[temp params] addObject:[[_root objectAtIndex:i] objectAtIndex:j]];
-                }
-                [_root setObject:temp atIndexedSubscript:i];
-                break;
-            }
-        }
-    }
-    */
-    
     return 0;
 }
 - (void)start
