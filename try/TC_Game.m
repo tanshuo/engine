@@ -11,6 +11,46 @@
 @implementation TC_Game
 + (void) gameStart
 {
+    TC_Interpretor* _test = [TC_Interpretor alloc];
+    [_test start];
+    TC_Define* temp = [TC_Define alloc];
+    temp.word = @"if";
+    temp.explain = TC_IF;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"is";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    temp = [TC_Define alloc];
+    [_test.dictionary addObject: temp];
+    
+    temp.word = @"A";
+    temp.explain = TC_INT;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
+    temp.word = @"B";
+    temp.explain = TC_INT;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
+    temp.word = @";";
+    temp.explain = TC_END;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
+    temp.word = @",";
+    temp.explain = TC_THEN;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
+    temp.word = @",";
+    temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    ///////////
     int i;
     txtlist = [NSMutableArray arrayWithCapacity:10];
     shaderlist = [NSMutableArray arrayWithCapacity:10];

@@ -424,7 +424,10 @@
         [temp addObject:[sentence objectAtIndex:j]];
     }
     result.params = [self genWords: temp];
-   
+    if(result.right_match != [result.params count])
+    {
+        return nil;//arg don't match
+    }
     temp = [NSMutableArray arrayWithCapacity:10];
     for(j = i + 1; j <= [sentence count] - 1; j ++)
     {
