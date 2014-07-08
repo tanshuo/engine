@@ -10,7 +10,7 @@
 #define try_types_h
 
 typedef enum{
-    TC_INSTANCE,
+    TC_INSTANCE,//<4 5 6>
     TC_GAMEOBJ,
     TC_FUNCTION,
     TC_FLOAT,
@@ -23,7 +23,7 @@ typedef enum{
     TC_IGNORE,//let should would on to
     TC_THEN, // keyword ,
     TC_CAL, //calculate
-    TC_END, // ;
+    TC_END, // ; only
     TC_OF, //of
     TC_MY, //my
     TC_DOT,//.

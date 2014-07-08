@@ -17,6 +17,18 @@
 @synthesize defines = _defines;
 @synthesize input = _input;
 
+- (int) loadFile:(NSString *)file
+{
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"script"];
+    
+    _input = fopen([path cStringUsingEncoding:NSASCIIStringEncoding], "r");
+    if(_input < 0)
+    {
+        return -1; // no file
+    }
+    else
+        return 0;
+}
 - (int) readLine
 {
     char c;
@@ -44,6 +56,9 @@
         }
         else
         {
+            buff[0] = c;
+            buff[1] = 0;
+            [linecache appendString: [NSMutableString stringWithCString:buff encoding:NSASCIIStringEncoding]];
             _line = linecache;
             return 1;
         }
@@ -119,55 +134,127 @@
 
 - (int) read_a_tokens
 {
-    char wordbuff[80];
+    char* wordbuff;
+    wordbuff = (char*) malloc(MAX_LINE_SIZE);
+    if(wordbuff == nil)
+    {
+        return -1;
+    }
     char c;
     int i = 0;
     int j = 0;
     BOOL flag = NO;
     BOOL stick = NO;
+    BOOL last_word_is_data = NO;
     [_defines removeAllObjects];
+    int length = [_line lengthOfBytesUsingEncoding:NSASCIIStringEncoding];
     
     while(true)
     {
-        if(i >= [_defines count])
+        if(i >= length)
         {
-            return 0;
+            
+            wordbuff[j] = 0;
+            TC_Define* token;
+            token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
+            if(!token)
+            {
+                free(wordbuff);
+                return 0;// no such ,
+            }
+            [_defines addObject:token];
+            free(wordbuff);
+            return 1;
         }
         
         c = [_line characterAtIndex:i];
         if(stick == NO && (c == ',' || c == ';'||c == '.'))
         {
+           
             wordbuff[j] = 0;
             TC_Define* token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
-            if(token)
+            if(j == 0)
+            {
+                wordbuff[0] = c;
+                wordbuff[1] = 0;
+                TC_Define* token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
+                if(!token)
+                {
+                    free(wordbuff);
+                    return 0;// no such ,
+                }
+                [_defines addObject:token];
+                j = 0;
+                flag = NO;
+            }
+            else if(last_word_is_data == YES)
+            {
+                TC_Define* newdef;
+                newdef = [TC_Define alloc];
+                newdef.explain = TC_INSTANCE;
+                newdef.word = [NSString stringWithUTF8String:wordbuff];
+                newdef.right_match = 0;
+                [_defines addObject:newdef];
+                last_word_is_data = NO;
+                wordbuff[0] = c;
+                wordbuff[1] = 0;
+                token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
+                if(!token)
+                {
+                    free(wordbuff);
+                    return 0;// no such ,
+                }
+                [_defines addObject:token];
+                j = 0;
+                flag = NO;
+            }
+            else if(token)
             {
                 [_defines addObject:token];
                 wordbuff[0] = c;
                 wordbuff[1] = 0;
                 token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
+                if(!token)
+                {
+                    free(wordbuff);
+                    return 0;// no such ,
+                }
                 [_defines addObject:token];
-                return 2;
+                j = 0;
+                flag = NO;
+                //return 2;
             }
             else
+            {
+                free(wordbuff);
                 return 0;
+            } // no such word
         }
         else if(c == '<')
         {
             if(stick == NO)
             {
                 stick = YES;
+                last_word_is_data = YES;
             }
             else
+            {
+                free(wordbuff);
                 return 0;
+            }
         }
         else if(c == '>')
         {
             if(stick == YES)
             {
                 stick = NO;
+                //wordbuff[j] = 0;
             }
             else
+            {
+                free(wordbuff);
                 return 0;
+            }
         }
         else if(flag && (c == ' ' || c == '\n' || c == '\t'))
         {
@@ -179,20 +266,26 @@
                 continue;
             }
             wordbuff[j] = 0;
+            
             TC_Define* token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
             if(token)
             {
                 [_defines addObject:token];
-                return 1;
+                j = 0;
+                flag = NO;
+                //return 1;
             }
             else
             {
                 flag = YES;
                 wordbuff[j] = c;
-                if(j < 79)
+                if(j < MAX_LINE_SIZE - 1)
                     j ++;
                 else
-                    return -1;
+                {
+                    free(wordbuff);
+                    return -1;// overflow
+                }
             }
             
         }
@@ -200,14 +293,18 @@
         {
             flag = YES;
             wordbuff[j] = c;
-            if(j < 79)
+            
+            if(j < MAX_LINE_SIZE - 1)
                 j ++;
             else
+            {
+                free(wordbuff);
                 return -1;
+            }
         }
         i ++;
     }
-    return 1;
+    return -1;
 }
 
 - (TC_Define*) searchDictionary: (NSString*) word

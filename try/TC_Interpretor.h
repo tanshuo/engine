@@ -12,6 +12,7 @@
 #import "TC_Define.h"
 #import "TC_Control_Layer.h"
 #import "types.h"
+#define MAX_LINE_SIZE 16 * 1024
 
 
 @interface TC_Interpretor : NSObject

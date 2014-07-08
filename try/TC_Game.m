@@ -23,33 +23,43 @@
     temp.word = @"is";
     temp.explain = TC_FUNCTION;
     temp.right_match = 1;
-    temp = [TC_Define alloc];
     [_test.dictionary addObject: temp];
     
+    temp = [TC_Define alloc];
     temp.word = @"A";
     temp.explain = TC_INT;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
     
+    temp = [TC_Define alloc];
     temp.word = @"B";
     temp.explain = TC_INT;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
     
+    temp = [TC_Define alloc];
     temp.word = @";";
     temp.explain = TC_END;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
     
+    temp = [TC_Define alloc];
     temp.word = @",";
     temp.explain = TC_THEN;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
     
-    temp.word = @",";
+    temp = [TC_Define alloc];
+    temp.word = @"on";
     temp.explain = TC_IGNORE;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
+    
+    [_test loadFile:@"test"];
+    [_test readLine];
+    [_test read_a_tokens];
+    
+    
     ///////////
     int i;
     txtlist = [NSMutableArray arrayWithCapacity:10];
