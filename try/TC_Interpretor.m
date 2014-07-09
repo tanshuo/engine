@@ -538,8 +538,13 @@
            else
            {
                int state;
-               if(i - 1 < [sentence count])
+               if(i < [sentence count] - 1)
                {
+                   if(i == 0)
+                   {
+                       i ++;
+                       continue;
+                   }
                    state = [[sentence objectAtIndex:i+1] explain];
                    if(state == TC_OF)
                    {
@@ -548,7 +553,7 @@
                        return nil;// gramma error
                    }
                }
-               if(i > 1)
+               if(i > 0)
                {
                    state = [[sentence objectAtIndex:i-1] explain];
                    if(state == TC_MY)
