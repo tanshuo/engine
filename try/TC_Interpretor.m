@@ -373,11 +373,22 @@
         if([[sentence objectAtIndex:i] explain] == TC_AND
            || [[sentence objectAtIndex:i] explain] == TC_OR)
         {
+            if([function_express count] == 0)
+            {
+                 _message = [NSMutableString stringWithString:@"logical format error"];
+                return nil;
+            }
             [fc_array addObject: function_express];
             function_express = [NSMutableArray arrayWithCapacity:10];
             [operator addObject:[sentence objectAtIndex:i]];
         }
-        [function_express addObject: [sentence objectAtIndex:i]];
+        else
+            [function_express addObject: [sentence objectAtIndex:i]];
+    }
+    if([function_express count] == 0)
+    {
+         _message = [NSMutableString stringWithString:@"logical format error"];
+        return nil;
     }
     [fc_array addObject: function_express];
     
