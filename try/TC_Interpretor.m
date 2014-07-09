@@ -369,7 +369,7 @@
     int i;
     for(i = 0; i < [sentence count]; i++)
     {
-        [function_express addObject: [sentence objectAtIndex:i]];
+        
         if([[sentence objectAtIndex:i] explain] == TC_AND
            || [[sentence objectAtIndex:i] explain] == TC_OR)
         {
@@ -377,11 +377,13 @@
             function_express = [NSMutableArray arrayWithCapacity:10];
             [operator addObject:[sentence objectAtIndex:i]];
         }
+        [function_express addObject: [sentence objectAtIndex:i]];
     }
     [fc_array addObject: function_express];
     
     if([fc_array count] - 1 != [operator count])
     {
+        _message = [NSMutableString stringWithString:@"logical format error"];
         return nil; //grammer error
     }
     
@@ -439,25 +441,42 @@
             old.right = nil;
             old.type = 0;
         }
-        
-        // popstack and get tree
-        old = [TC_Logical_Layer alloc];
-        old.straight = nil;
-        old.right = [stack objectAtIndex:[stack count] - 1];
-        old.left = nil;
-        old.type = TC_OR;
+    }
+    
+    [stack addObject:old];
+    
+    //reorder stack
+    NSMutableArray* temp = [NSMutableArray arrayWithCapacity:10];
+    while([stack count] > 0)
+    {
+        [temp addObject:[stack lastObject]];
         [stack removeLastObject];
-        while([stack count] > 0)
-        {
-            TC_Logical_Layer* newroot = [TC_Logical_Layer alloc];
-            newroot.right = old;
-            newroot.left = [stack lastObject];
-            newroot.type = TC_OR;
-            newroot.straight = nil;
-            old = newroot;
-            [stack removeLastObject];
-        }
-        
+    }
+    stack = temp;
+    
+    //if no or only and
+    if([stack count] == 1)
+    {
+        old = [stack objectAtIndex:0];
+        return old;
+    }
+    // popstack and get tree
+    old = [TC_Logical_Layer alloc];
+    old.straight = nil;
+    old.right = [stack objectAtIndex:[stack count] - 1];
+    old.left = [stack objectAtIndex:[stack count] - 2];
+    old.type = TC_OR;
+    [stack removeLastObject];
+    [stack removeLastObject];
+    while([stack count] > 0)
+    {
+        TC_Logical_Layer* newroot = [TC_Logical_Layer alloc];
+        newroot.right = old;
+        newroot.left = [stack lastObject];
+        newroot.type = TC_OR;
+        newroot.straight = nil;
+        old = newroot;
+        [stack removeLastObject];
     }
     return old;
 }

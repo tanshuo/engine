@@ -68,6 +68,12 @@
     [_test.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
+    temp.word = @"and";
+    temp.explain = TC_AND;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
     temp.word = @"of";
     temp.explain = TC_OF;
     temp.right_match = 0;
