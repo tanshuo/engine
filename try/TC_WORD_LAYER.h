@@ -12,6 +12,7 @@
 #import "types.h"
 
 @interface TC_WORD_LAYER : NSObject
+@property int type;// TC_VAR TC_INSTANCE
 @property (strong,nonatomic) NSString* word;
 @property (strong,nonatomic) TC_WORD_LAYER* next_layer;
 @end

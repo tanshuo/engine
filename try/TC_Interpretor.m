@@ -16,6 +16,7 @@
 @synthesize vm = _vm;
 @synthesize defines = _defines;
 @synthesize input = _input;
+@synthesize message = _message;
 
 - (int) loadFile:(NSString *)file
 {
@@ -24,6 +25,7 @@
     _input = fopen([path cStringUsingEncoding:NSASCIIStringEncoding], "r");
     if(_input < 0)
     {
+        _message = [NSMutableString stringWithString:@"no such file"];
         return -1; // no file
     }
     else
@@ -32,7 +34,6 @@
 - (int) readLine
 {
     char c;
-    int index = 0;
     NSMutableString* linecache = [NSMutableString stringWithCapacity:10];//error
     char buff[2];
     _currentLine++;
@@ -44,12 +45,9 @@
             buff[0] = c;
             buff[1] = 0;
             [linecache appendString: [NSMutableString stringWithCString:buff encoding:NSASCIIStringEncoding]];
-            if(index < 99)
-                index ++;
-            else
-                return 0;
+            //index ++;
         }
-        else  if(c == EOF)
+        else if(c == EOF)
         {
             _line = linecache;
             return -1;
@@ -84,24 +82,32 @@
             for(j = i + 1; j < [_defines count]; j ++)
             {
                 int type;
-                type = [[_defines objectAtIndex:i] explain];
+                type = [[_defines objectAtIndex:j] explain];
                 if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END)
                 {
-                    i = j;
+                    i = j - 1;
                     break;
                 }
                 else
                 {
-                    [newlayer.logical addObject:[_defines objectAtIndex:i]];
+                    [newlayer.logical addObject:[_defines objectAtIndex:j]];
                 }
             }
-            newlayer.logical = [self genFun:newlayer.logical];
-            if(newlayer.logical == nil)
+            if([newlayer.logical count] == 0)
             {
-                _root = nil;//gramma error
-                return -1;
+                newlayer.logical = nil;
+                [_root addObject:newlayer];
             }
-            [_root addObject:newlayer];
+            else
+            {
+                newlayer.logical = [self genLogical:newlayer.logical];
+                if(newlayer.logical == nil)
+                {
+                    _root = nil;//gramma error
+                    return -1;
+                }
+                [_root addObject:newlayer];
+            }
         }
     }
     if([_root count] == 0) // -1 if no control statement
@@ -115,7 +121,7 @@
         {
             [newlayer.logical addObject:[_defines objectAtIndex:i]];
         }
-        newlayer.logical = [self genFun:newlayer.logical];
+        newlayer.logical = [self genLogical:newlayer.logical];
         if(newlayer.logical == nil)
         {
             _root = nil;//gramma error
@@ -130,6 +136,7 @@
     _defines = [NSMutableArray arrayWithCapacity:10];
     _dictionary = [NSMutableArray arrayWithCapacity:10];
     _root = [NSMutableArray arrayWithCapacity:10];
+    _message = [NSMutableString stringWithString:@""];
 }
 
 - (int) read_a_tokens
@@ -138,6 +145,7 @@
     wordbuff = (char*) malloc(MAX_LINE_SIZE);
     if(wordbuff == nil)
     {
+        _message = [NSMutableString stringWithString:@"no enough mem"];
         return -1;
     }
     char c;
@@ -155,10 +163,15 @@
         {
             
             wordbuff[j] = 0;
+            if(j == 0)
+            {
+                return 1;
+            }
             TC_Define* token;
             token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
             if(!token)
             {
+                _message = [NSMutableString stringWithString:@"no such period"];
                 free(wordbuff);
                 return 0;// no such ,
             }
@@ -180,6 +193,7 @@
                 TC_Define* token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
                 if(!token)
                 {
+                    _message = [NSMutableString stringWithString:@"no such period"];
                     free(wordbuff);
                     return 0;// no such ,
                 }
@@ -201,6 +215,7 @@
                 token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
                 if(!token)
                 {
+                    _message = [NSMutableString stringWithString:@"no such period"];
                     free(wordbuff);
                     return 0;// no such ,
                 }
@@ -216,6 +231,7 @@
                 token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
                 if(!token)
                 {
+                    _message = [NSMutableString stringWithString:@"no such period"];
                     free(wordbuff);
                     return 0;// no such ,
                 }
@@ -226,6 +242,8 @@
             }
             else
             {
+                _message = [NSMutableString stringWithString:@"can not find the word: "];
+                [_message appendString:[NSString stringWithUTF8String:wordbuff]];
                 free(wordbuff);
                 return 0;
             } // no such word
@@ -239,6 +257,7 @@
             }
             else
             {
+                _message = [NSMutableString stringWithString:@"double <"];
                 free(wordbuff);
                 return 0;
             }
@@ -252,6 +271,7 @@
             }
             else
             {
+                _message = [NSMutableString stringWithString:@"double >"];
                 free(wordbuff);
                 return 0;
             }
@@ -268,7 +288,19 @@
             wordbuff[j] = 0;
             
             TC_Define* token = [self searchDictionary:[NSString stringWithUTF8String:wordbuff]];
-            if(token)
+            if(last_word_is_data == YES)
+            {
+                TC_Define* newdef;
+                newdef = [TC_Define alloc];
+                newdef.explain = TC_INSTANCE;
+                newdef.word = [NSString stringWithUTF8String:wordbuff];
+                newdef.right_match = 0;
+                [_defines addObject:newdef];
+                last_word_is_data = NO;
+                j = 0;
+                flag = 0;
+            }
+            else if(token)
             {
                 [_defines addObject:token];
                 j = 0;
@@ -277,15 +309,10 @@
             }
             else
             {
-                flag = YES;
-                wordbuff[j] = c;
-                if(j < MAX_LINE_SIZE - 1)
-                    j ++;
-                else
-                {
-                    free(wordbuff);
-                    return -1;// overflow
-                }
+                _message = [NSMutableString stringWithString:@"can not find the word: "];
+                [_message appendString:[NSString stringWithUTF8String:wordbuff]];
+                free(wordbuff);
+                return 0;// no such word
             }
             
         }
@@ -298,13 +325,14 @@
                 j ++;
             else
             {
+                _message = [NSMutableString stringWithString:@"over flow"];
                 free(wordbuff);
                 return -1;
             }
         }
         i ++;
     }
-    return -1;
+    return 1;
 }
 
 - (TC_Define*) searchDictionary: (NSString*) word
@@ -323,6 +351,11 @@
 //sentence is array of defines
 - (TC_Logical_Layer*) genLogical:(NSMutableArray*) sentence
 {
+    if([sentence count] == 0)
+    {
+        return nil;
+    }
+    
     NSMutableArray* stack;
     NSMutableArray* operator;
     NSMutableArray* function_express;
@@ -357,6 +390,10 @@
         TC_Logical_Layer* newlayer = [TC_Logical_Layer alloc];
         newlayer.type = 0;
         newlayer.straight = [self genFun: function_express];
+        if(newlayer.straight == nil)
+        {
+            return nil;
+        }
         newlayer.left = nil;
         newlayer.right = nil;
         return newlayer;
@@ -364,6 +401,10 @@
     
     TC_Logical_Layer* old = [TC_Logical_Layer alloc];
     old.straight = [self genFun:[fc_array objectAtIndex:0]];
+    if(old.straight == nil)
+    {
+        return nil;
+    }
     old.left = nil;
     old.right = nil;
     old.type = 0;
@@ -390,6 +431,10 @@
             [stack addObject:old];
             old = [TC_Logical_Layer alloc];
             old.straight = [self genFun:[fc_array objectAtIndex:i + 1]];
+            if(old.straight == nil)
+            {
+                return nil;
+            }
             old.left = nil;
             old.right = nil;
             old.type = 0;
@@ -419,6 +464,10 @@
 
 - (NSMutableArray*) genWords: (NSMutableArray*) sentence
 {
+    if([sentence count] == 0)
+    {
+        return nil;
+    }
     int i = 0;
     int state;
     BOOL stick = NO;
@@ -434,6 +483,7 @@
         {
             if(i >= [sentence count] - 1)
             {
+                _message = [NSMutableString stringWithString:@"owner can not apear an the end"];
                 return nil; //gramma error my is not the last
             }
             rootlayer = [TC_WORD_LAYER alloc];
@@ -449,6 +499,7 @@
         {
             if(i == 0 || i >= [sentence count] - 1)
             {
+                _message = [NSMutableString stringWithString:@"of can not be at end or bigin"];
                 return nil; //gramma error of is not the first or the last
             }
             if(stick == NO) // if it is the first of genarate root
@@ -484,10 +535,34 @@
                     [result addObject:rootlayer];
                 }
             }
-            else
-            {
-                return nil;
-            }
+           else
+           {
+               int state;
+               if(i - 1 < [sentence count])
+               {
+                   state = [[sentence objectAtIndex:i+1] explain];
+                   if(state == TC_OF)
+                   {
+                       _message = [NSMutableString stringWithString: @"possession discrimination is false around"];
+                       [_message appendString: [[sentence objectAtIndex:i] word]];
+                       return nil;// gramma error
+                   }
+               }
+               if(i > 1)
+               {
+                   state = [[sentence objectAtIndex:i-1] explain];
+                   if(state == TC_MY)
+                   {
+                       _message = [NSMutableString stringWithString: @"possession discrimination is false around"];
+                       [_message appendString: [[sentence objectAtIndex:i] word]];
+                       return nil;// gramma error
+                   }
+               }
+               rootlayer = [TC_WORD_LAYER alloc];
+               rootlayer.word = [[sentence objectAtIndex:i] word];
+               rootlayer.next_layer = nil;
+               [result addObject:rootlayer];
+           }
         }
         
         i++;
@@ -501,6 +576,10 @@
 
 - (TC_Function_Layer*) genFun: (NSMutableArray*) sentence
 {
+    if([sentence count] == 0)
+    {
+        return nil;
+    }
     int i,j;
     NSMutableArray* temp;
     TC_Function_Layer* result = [TC_Function_Layer alloc];
@@ -520,20 +599,21 @@
     {
         [temp addObject:[sentence objectAtIndex:j]];
     }
-    result.params = [self genWords: temp];
-    if(result.right_match != [result.params count])
-    {
-        return nil;//arg don't match
-    }
+    result.target = [[self genWords: temp] objectAtIndex:0];
+    
     temp = [NSMutableArray arrayWithCapacity:10];
     for(j = i + 1; j <= [sentence count] - 1; j ++)
     {
         [temp addObject:[sentence objectAtIndex:j]];
     }
-    result.target = [[self genWords: temp] objectAtIndex:0];
-    if(result.target != nil && result.params != nil)
+    result.params = [self genWords: temp];
+    
+    if(result.right_match == [result.params count])
         return result;
     else
+    {
+        _message = [NSMutableString stringWithString: @"parameters do not match"];
         return nil;
+    }
 }
 @end

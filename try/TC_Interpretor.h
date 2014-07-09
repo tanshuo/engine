@@ -22,6 +22,7 @@
 @property (strong,nonatomic) NSMutableArray* defines;
 @property (strong,nonatomic) NSMutableArray* dictionary;
 @property (strong,nonatomic) NSMutableArray* root;
+@property (strong,nonatomic) NSMutableString* message;
 @property FILE* input;
 
 - (void) start;// create

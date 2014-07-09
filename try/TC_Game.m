@@ -27,13 +27,13 @@
     
     temp = [TC_Define alloc];
     temp.word = @"A";
-    temp.explain = TC_INT;
+    temp.explain = TC_VAR;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
     temp.word = @"B";
-    temp.explain = TC_INT;
+    temp.explain = TC_VAR;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
     
@@ -55,9 +55,28 @@
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
     
+    temp = [TC_Define alloc];
+    temp.word = @"my";
+    temp.explain = TC_MY;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"or";
+    temp.explain = TC_OR;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"of";
+    temp.explain = TC_OF;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
     [_test loadFile:@"test"];
     [_test readLine];
     [_test read_a_tokens];
+    [_test genTree];
     
     
     ///////////

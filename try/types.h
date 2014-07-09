@@ -11,11 +11,8 @@
 
 typedef enum{
     TC_INSTANCE,//<4 5 6>
-    TC_GAMEOBJ,
     TC_FUNCTION,
-    TC_FLOAT,
-    TC_VECTOR2,
-    TC_VECTOR3,
+    TC_VAR,
     TC_INT,
     TC_GLOBOL,
     TC_WHILE, //
@@ -30,7 +27,6 @@ typedef enum{
     TC_AND, //and
     TC_OR, // or
     TC_AFTER, //after as soon as
-    TC_AT, //at with on to by , using for function
 } TC_Explain;
 
 typedef unsigned int TC_ID;
