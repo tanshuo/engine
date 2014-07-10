@@ -38,7 +38,7 @@
     [_test.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
-    temp.word = @";";
+    temp.word = @"end";
     temp.explain = TC_END;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];

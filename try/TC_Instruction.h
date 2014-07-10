@@ -8,17 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
+#import "TC_Control_Layer.h"
 #import "types.h"
 
 @interface TC_Instruction : NSObject
-@property TC_ID instruction_id;
-@property TC_ID para_count;
-@property id para1;
-@property id para2;
-@property id para3;
-@property id para4;
-@property id para5;
-@property id para6;
-@property (strong,nonatomic) NSMutableArray* branchs;
-
+@property (strong,nonatomic) NSString* instruct;
+@property (strong,nonatomic) id src;
+@property (strong,nonatomic) id des;
+@property (strong,nonatomic) NSMutableArray* params;
 @end

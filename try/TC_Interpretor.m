@@ -54,9 +54,6 @@
         }
         else
         {
-            buff[0] = c;
-            buff[1] = 0;
-            [linecache appendString: [NSMutableString stringWithCString:buff encoding:NSASCIIStringEncoding]];
             _line = linecache;
             return 1;
         }
@@ -133,6 +130,8 @@
 }
 - (void)start
 {
+    _current_ins_count = 0;
+    _currentLine = 0;
     _defines = [NSMutableArray arrayWithCapacity:10];
     _dictionary = [NSMutableArray arrayWithCapacity:10];
     _root = [NSMutableArray arrayWithCapacity:10];
@@ -651,4 +650,167 @@
         return nil;
     }
 }
+
+- (int) genInstruction
+{
+    int count = 0;
+    int head = _current_ins_count + 1;
+    int control_end = 0;
+    int logic_end = 0; // unknown
+    
+    
+    
+    
+    _current_ins_count += count;
+    return 0;
+}
+
+//line is the offset of the first instruction
+-(void) genLogicalInstructionsWith:(TC_Logical_Layer* )l At:(int)line To:(NSMutableArray*) table
+{
+    if(l.right.straight != nil && l.left.straight != nil)
+    {
+        if(l.type == TC_OR)
+        {
+            TC_Instruction* A;
+            A = [TC_Instruction alloc];
+            A.instruct = @"call";
+            A.params = l.right.straight.params;
+            A.src = l.right.straight.name;
+            A.des = nil;
+            TC_Instruction* B;
+            B = [TC_Instruction alloc];
+            B.instruct = @"call";
+            B.params = l.right.straight.params;
+            B.src = l.right.straight.name;
+            B.des = nil;
+            [table addObject:A];
+            [table addObject:B];
+            _current_ins_count += 2;
+        }
+        else if(l.type == TC_AND)
+        {
+            TC_Instruction* A;
+            A = [TC_Instruction alloc];
+            A.instruct = @"call";
+            A.params = l.right.straight.params;
+            A.src = l.right.straight.name;
+            A.des = nil;
+            
+            TC_Instruction* B;
+            B = [TC_Instruction alloc];
+            B.instruct = @"call";
+            B.params = l.left.straight.params;
+            B.src = l.left.straight.name;
+            B.des = nil;
+            
+            TC_Instruction* C;
+            C = [TC_Instruction alloc];
+            C.instruct = @"jmp_flase";
+            TC_INS_OFFSET* offset;
+            offset = [TC_INS_OFFSET alloc];
+            offset.offset = _current_ins_count + 3;
+            offset.solved = YES;
+            offset.mark = MARK_LOGICAL_SOLVED;
+            C.src = offset;
+            C.params = nil;
+            C.des = nil;
+            
+            [table addObject:A];
+            [table addObject:C];
+            [table addObject:B];
+            _current_ins_count += 3;
+        }
+        return;
+    }
+    
+    else if(l.right.straight != nil)
+    {
+        [self genLogicalInstructionsWith:l.left At:_current_ins_count To:table];
+        if(l.type == TC_AND)
+        {
+            TC_Instruction* C;
+            C = [TC_Instruction alloc];
+            C.instruct = @"jmp_flase";
+            TC_INS_OFFSET* offset;
+            offset = [TC_INS_OFFSET alloc];
+            offset.offset = line + 2;
+            offset.solved = YES;
+            offset.mark = MARK_LOGICAL_SOLVED;
+            C.src = offset;
+            C.params = nil;
+            C.des = nil;
+            
+            TC_Instruction* A;
+            A = [TC_Instruction alloc];
+            A.instruct = @"call";
+            A.params = l.right.straight.params;
+            A.src = l.right.straight.name;
+            A.des = nil;
+            
+            [table addObject:C];
+            [table addObject:A];
+            _current_ins_count += 2;
+            return;
+        }
+        else if(l.type == TC_OR)
+        {
+            TC_Instruction* A;
+            A = [TC_Instruction alloc];
+            A.instruct = @"call";
+            A.params = l.right.straight.params;
+            A.src = l.right.straight.name;
+            A.des = nil;
+            
+            [table addObject:A];
+            _current_ins_count += 1;
+            return;
+        }
+    }
+    
+    else if(l.left.straight != nil)
+    {
+        [self genLogicalInstructionsWith:l.right At:_current_ins_count To:table];
+        if(l.type == TC_AND)
+        {
+            TC_Instruction* C;
+            C = [TC_Instruction alloc];
+            C.instruct = @"jmp_flase";
+            TC_INS_OFFSET* offset;
+            offset = [TC_INS_OFFSET alloc];
+            offset.offset = line + 2;
+            offset.solved = YES;
+            offset.mark = MARK_LOGICAL_SOLVED;
+            C.src = offset;
+            C.params = nil;
+            C.des = nil;
+            
+            TC_Instruction* B;
+            B = [TC_Instruction alloc];
+            B.instruct = @"call";
+            B.params = l.left.straight.params;
+            B.src = l.left.straight.name;
+            B.des = nil;
+            
+            [table addObject:C];
+            [table addObject:B];
+            _current_ins_count += 2;
+            return;
+        }
+        else if(l.type == TC_OR)
+        {
+            TC_Instruction* B;
+            B = [TC_Instruction alloc];
+            B.instruct = @"call";
+            B.params = l.left.straight.params;
+            B.src = l.left.straight.name;
+            B.des = nil;
+            
+            [table addObject:B];
+            _current_ins_count += 1;
+            return;
+        }
+    }
+}
+
 @end

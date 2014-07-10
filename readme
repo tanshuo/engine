@@ -1,0 +1,5 @@
+var
+0 cmp , my->a , my->b, nil;
+1 jump_not_equal , 3 ,nil , nil;
+2 call, is, my->a,  <1> <2>
+3 ret

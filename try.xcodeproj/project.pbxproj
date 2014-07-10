@@ -10,6 +10,9 @@
 		F593536C195E64CD0097B712 /* TC_Define.m in Sources */ = {isa = PBXBuildFile; fileRef = F593536B195E64CD0097B712 /* TC_Define.m */; };
 		F59382E7195A879900CB2A80 /* TC_Game.m in Sources */ = {isa = PBXBuildFile; fileRef = F59382E6195A879900CB2A80 /* TC_Game.m */; };
 		F596B491196C6FA000D60B63 /* test.script in Resources */ = {isa = PBXBuildFile; fileRef = F596B490196C6FA000D60B63 /* test.script */; };
+		F596B494196E1A7E00D60B63 /* TC_INS_OFFSET.m in Sources */ = {isa = PBXBuildFile; fileRef = F596B493196E1A7E00D60B63 /* TC_INS_OFFSET.m */; };
+		F596B497196E1C9E00D60B63 /* TC_INS_VARIABLE.m in Sources */ = {isa = PBXBuildFile; fileRef = F596B496196E1C9E00D60B63 /* TC_INS_VARIABLE.m */; };
+		F596B49A196E1F6500D60B63 /* TC_INS_FUNCTION.m in Sources */ = {isa = PBXBuildFile; fileRef = F596B499196E1F6500D60B63 /* TC_INS_FUNCTION.m */; };
 		F596DD42195B3DBC00672BAB /* TC_Sprite.m in Sources */ = {isa = PBXBuildFile; fileRef = F596DD41195B3DBC00672BAB /* TC_Sprite.m */; };
 		F596DD44195B42F600672BAB /* readme in Resources */ = {isa = PBXBuildFile; fileRef = F596DD43195B42F600672BAB /* readme */; };
 		F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F59750B71958DAC400D235C2 /* TC_ShaderLoader.m */; };
@@ -70,6 +73,12 @@
 		F59382E5195A879900CB2A80 /* TC_Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Game.h; path = try/TC_Game.h; sourceTree = "<group>"; };
 		F59382E6195A879900CB2A80 /* TC_Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Game.m; path = try/TC_Game.m; sourceTree = "<group>"; };
 		F596B490196C6FA000D60B63 /* test.script */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.script; sourceTree = "<group>"; };
+		F596B492196E1A7E00D60B63 /* TC_INS_OFFSET.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_INS_OFFSET.h; path = try/TC_INS_OFFSET.h; sourceTree = "<group>"; };
+		F596B493196E1A7E00D60B63 /* TC_INS_OFFSET.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_INS_OFFSET.m; path = try/TC_INS_OFFSET.m; sourceTree = "<group>"; };
+		F596B495196E1C9E00D60B63 /* TC_INS_VARIABLE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_INS_VARIABLE.h; path = try/TC_INS_VARIABLE.h; sourceTree = "<group>"; };
+		F596B496196E1C9E00D60B63 /* TC_INS_VARIABLE.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_INS_VARIABLE.m; path = try/TC_INS_VARIABLE.m; sourceTree = "<group>"; };
+		F596B498196E1F6500D60B63 /* TC_INS_FUNCTION.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_INS_FUNCTION.h; path = try/TC_INS_FUNCTION.h; sourceTree = "<group>"; };
+		F596B499196E1F6500D60B63 /* TC_INS_FUNCTION.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_INS_FUNCTION.m; path = try/TC_INS_FUNCTION.m; sourceTree = "<group>"; };
 		F596DD40195B3DBC00672BAB /* TC_Sprite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Sprite.h; path = try/TC_Sprite.h; sourceTree = "<group>"; };
 		F596DD41195B3DBC00672BAB /* TC_Sprite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Sprite.m; path = try/TC_Sprite.m; sourceTree = "<group>"; };
 		F596DD43195B42F600672BAB /* readme */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme; sourceTree = "<group>"; };
@@ -262,6 +271,12 @@
 				F59A87F8195F2D76008A390F /* TC_Function_Layer.m */,
 				F5C83AA01968C9F100BEF65C /* TC_Logical_Layer.h */,
 				F5C83AA11968C9F100BEF65C /* TC_Logical_Layer.m */,
+				F596B492196E1A7E00D60B63 /* TC_INS_OFFSET.h */,
+				F596B493196E1A7E00D60B63 /* TC_INS_OFFSET.m */,
+				F596B495196E1C9E00D60B63 /* TC_INS_VARIABLE.h */,
+				F596B496196E1C9E00D60B63 /* TC_INS_VARIABLE.m */,
+				F596B498196E1F6500D60B63 /* TC_INS_FUNCTION.h */,
+				F596B499196E1F6500D60B63 /* TC_INS_FUNCTION.m */,
 			);
 			name = interprator;
 			sourceTree = "<group>";
@@ -470,12 +485,14 @@
 				F59F95DA1957ED67006876C9 /* TC_DisplayObject.m in Sources */,
 				F59A87F6195F2C26008A390F /* TC_WORD_LAYER.m in Sources */,
 				F59A87F3195F27A5008A390F /* TC_Control_Layer.m in Sources */,
+				F596B494196E1A7E00D60B63 /* TC_INS_OFFSET.m in Sources */,
 				F59ECDB21954C4AD00D7EB5D /* ViewController.m in Sources */,
 				F5A18820195979950085672C /* TC_TextureInfo.m in Sources */,
 				F5988CB7195A83B000A8DA5E /* TC_Camera.m in Sources */,
 				F59CB516195E464600A89176 /* TC_Interpretor.m in Sources */,
 				F5C83AA21968C9F100BEF65C /* TC_Logical_Layer.m in Sources */,
 				F59ECDA51954C4AD00D7EB5D /* AppDelegate.m in Sources */,
+				F596B497196E1C9E00D60B63 /* TC_INS_VARIABLE.m in Sources */,
 				F597F91D195E0334004DEE23 /* TC_Shaderinfo.m in Sources */,
 				F59382E7195A879900CB2A80 /* TC_Game.m in Sources */,
 				F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */,
@@ -487,6 +504,7 @@
 				F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */,
 				F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */,
 				F59CB51C195E49E700A89176 /* TC_Instruction.m in Sources */,
+				F596B49A196E1F6500D60B63 /* TC_INS_FUNCTION.m in Sources */,
 				F59A87F9195F2D76008A390F /* TC_Function_Layer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

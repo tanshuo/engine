@@ -12,11 +12,16 @@
 #import "TC_Define.h"
 #import "TC_Control_Layer.h"
 #import "types.h"
+#import "TC_INS_OFFSET.h"
+#import "TC_INS_FUNCTION.h"
+#import "TC_INS_VARIABLE.h"
+#import "TC_Instruction.h"
 #define MAX_LINE_SIZE 16 * 1024
 
 
 @interface TC_Interpretor : NSObject
 @property TC_ID currentLine;
+@property TC_ID current_ins_count;
 @property (strong,nonatomic) NSMutableString* line;
 @property (strong,nonatomic) TC_VirtualMachine* vm;
 @property (strong,nonatomic) NSMutableArray* defines;
@@ -33,6 +38,7 @@
 - (TC_Function_Layer*) genFun: (NSMutableArray*) sentence;
 - (int) read_a_tokens;// 0 can not find 1 success -1 error
 - (int) loadFile: (NSString*) file;
+- (int) genInstruction;
 
 - (void) attachTree: (TC_VirtualMachine*)vm;
 - (void) die;
