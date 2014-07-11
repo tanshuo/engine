@@ -30,6 +30,7 @@
 @property (strong,nonatomic) NSMutableArray* instruction_table;
 @property (strong,nonatomic) NSMutableArray* func_table;
 @property (strong,nonatomic) NSMutableArray* var_table;
+@property (strong,nonatomic) NSMutableArray* var_stack;//arg stack
 @property (strong,nonatomic) NSMutableArray* globol;
 
 @property FILE* input;

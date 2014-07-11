@@ -19,7 +19,9 @@
 @synthesize input = _input;
 @synthesize message = _message;
 @synthesize instruction_table = _instruction_table;
+@synthesize var_stack = _var_stack;
 @synthesize globol = _global;
+
 
 
 - (int) loadFile:(NSString *)file
@@ -75,6 +77,8 @@
 - (int) genTree
 {
     [_root removeAllObjects];
+    int i;
+    int j;
     
     //define statement
     int head = [[_defines objectAtIndex:0] explain];
@@ -107,6 +111,44 @@
             result.solved = YES;
             result.location = FUN_DEFINE;
             result.offset = _current_ins_count;
+            
+            TC_INS_VARIABLE* arg;
+            TC_INS_VARIABLE* src;
+            src = [self searchVariable:temp.target];
+            if(src == nil)
+            {
+                arg = [TC_INS_VARIABLE alloc];
+                arg.solved = NO;
+                arg.location = VAR_STACK;
+                arg.addr = nil;
+                arg.argoffset = 0;
+                arg.var = temp.target;
+            }
+            else
+            {
+                arg = [TC_INS_VARIABLE alloc];
+                arg.solved = src.solved;
+                arg.location = VAR_STACK;
+                arg.addr = src.addr;
+                arg.argoffset = 0;
+                arg.var = src.var;
+            }
+            [_var_stack addObject:arg];
+            for(i = 0; i < result.right_match; i++)
+            {
+                TC_INS_VARIABLE* arg;
+                arg = [self searchVariable:[temp.params objectAtIndex:i]];
+                if(arg == nil)
+                {
+                    arg = [TC_INS_VARIABLE alloc];
+                    arg.solved = src.solved;
+                    arg.location = VAR_STACK;
+                    arg.addr = src.addr;
+                    arg.argoffset = i + 1;
+                    arg.var = src.var;
+                }
+                [_var_stack addObject:arg];
+            }
         }
         return 0;
     }
@@ -117,11 +159,11 @@
             _message = [NSMutableString stringWithString:@"enddef statement format error"];
             return -1;
         }
+        [_var_stack removeAllObjects];
         return 0;
     }
     //control
-    int i;
-    int j;
+
     int type;
     for(i = 0;i < [_defines count];i ++)//gen logical layer
     {
@@ -197,7 +239,7 @@
     _func_table = [NSMutableArray arrayWithCapacity:10];
     _var_table = [NSMutableArray arrayWithCapacity:10];
     _global = [NSMutableArray arrayWithCapacity:10];
-    
+    _var_stack = [NSMutableArray arrayWithCapacity:10];
     [self initDictionary];
 }
 
@@ -883,7 +925,7 @@
         A.instruct = ins_call;
         A.params = l.straight.params;
         A.src = l.straight.name;
-        A.des = nil;
+        A.des = [self searchFunction:l.straight];
         [table addObject:A];
         _current_ins_count ++;
         return;
@@ -897,13 +939,13 @@
             A.instruct = ins_call;
             A.params = l.right.straight.params;
             A.src = l.right.straight.name;
-            A.des = nil;
+            A.des = [self searchFunction:l.right.straight];;
             TC_Instruction* B;
             B = [TC_Instruction alloc];
             B.instruct = ins_call;
             B.params = l.right.straight.params;
             B.src = l.right.straight.name;
-            B.des = nil;
+            B.des = [self searchFunction:l.right.straight];
             [table addObject:A];
             [table addObject:B];
             _current_ins_count += 2;
@@ -915,14 +957,14 @@
             A.instruct = ins_call;
             A.params = l.right.straight.params;
             A.src = l.right.straight.name;
-            A.des = nil;
+            A.des = [self searchFunction:l.right.straight];
             
             TC_Instruction* B;
             B = [TC_Instruction alloc];
             B.instruct = ins_call;
             B.params = l.left.straight.params;
             B.src = l.left.straight.name;
-            B.des = nil;
+            B.des = [self searchFunction:l.left.straight];
             
             TC_Instruction* C;
             C = [TC_Instruction alloc];
@@ -998,7 +1040,7 @@
             A.instruct = ins_call;
             A.params = l.right.straight.params;
             A.src = l.right.straight.name;
-            A.des = nil;
+            A.des = [self searchFunction:l.right.straight];
             
             [table addObject:C];
             [table addObject:A];
@@ -1012,7 +1054,7 @@
             A.instruct = ins_call;
             A.params = l.right.straight.params;
             A.src = l.right.straight.name;
-            A.des = nil;
+            A.des = [self searchFunction:l.right.straight];;
             
             [table addObject:A];
             _current_ins_count += 1;
@@ -1042,7 +1084,7 @@
             B.instruct = ins_call;
             B.params = l.left.straight.params;
             B.src = l.left.straight.name;
-            B.des = nil;
+            B.des = [self searchFunction:l.left.straight];;
             
             [table addObject:C];
             [table addObject:B];
@@ -1056,7 +1098,7 @@
             B.instruct = ins_call;
             B.params = l.left.straight.params;
             B.src = l.left.straight.name;
-            B.des = nil;
+            B.des = [self searchFunction:l.left.straight];
             
             [table addObject:B];
             _current_ins_count += 1;
@@ -1328,6 +1370,7 @@
 
 - (TC_INS_VARIABLE*) searchVariable: (TC_WORD_LAYER*) var
 {
+    int i;
     return nil;
 }
 
@@ -1337,7 +1380,8 @@
     [_root removeAllObjects];
     _instruction_table = [NSMutableArray arrayWithCapacity:10];
     [_func_table removeAllObjects];
-    [_var_table removeAllObjects];    
+    [_var_table removeAllObjects];
+    [_var_stack removeAllObjects];
 }
 
 @end

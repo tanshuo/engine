@@ -25,6 +25,7 @@ typedef enum{
 
 @interface TC_INS_VARIABLE : NSObject
 @property BOOL solved;
+@property int argoffset;
 @property TC_INS_VAR_LOCATION location;
 @property TC_INS_VAR_TYPE type;
 @property (strong,nonatomic) TC_WORD_LAYER* var;

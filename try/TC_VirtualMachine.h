@@ -23,7 +23,7 @@
 @property BOOL true_false; // logical result
 @property (strong,nonatomic) TC_INS_VARIABLE* result; //calculated value
 @property (strong,nonatomic) TC_Instruction* current_instruction;//the instruction need to process
-
+//@property (strong,nonatomic) TC_INS_VARIABLE* target;
 @property (strong,nonatomic) NSMutableArray* var_stack; //function arg stackc and local, pop back to bp and pop out return.
 @property (strong,nonatomic) NSMutableArray* local_var_table;// local variable table
 @property (strong,nonatomic) NSMutableArray* func_list;
