@@ -41,6 +41,8 @@
 - (int) loadFile: (NSString*) file;
 - (int) genInstruction;
 
+- (int) readScript: (NSString*) file;
+
 - (void) attachTree: (TC_VirtualMachine*)vm;
 - (void) die;
 - (void) initDictionary;

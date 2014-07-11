@@ -13,42 +13,8 @@
 {
     TC_Interpretor* _test = [TC_Interpretor alloc];
     [_test start];
-    TC_Define* temp = [TC_Define alloc];
-    temp.word = @"if";
-    temp.explain = TC_IF;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
     
-    temp = [TC_Define alloc];
-    temp.word = @"is";
-    temp.explain = TC_FUNCTION;
-    temp.right_match = 1;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"is1";
-    temp.explain = TC_FUNCTION;
-    temp.right_match = 1;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"is2";
-    temp.explain = TC_FUNCTION;
-    temp.right_match = 1;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"is3";
-    temp.explain = TC_FUNCTION;
-    temp.right_match = 1;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"is4";
-    temp.explain = TC_FUNCTION;
-    temp.right_match = 1;
-    [_test.dictionary addObject: temp];
-    
+    TC_Define* temp;
     temp = [TC_Define alloc];
     temp.word = @"A";
     temp.explain = TC_VAR;
@@ -60,61 +26,7 @@
     temp.explain = TC_VAR;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
-    
-    
-    temp = [TC_Define alloc];
-    temp.word = @"end";
-    temp.explain = TC_END;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"while";
-    temp.explain = TC_WHILE;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @",";
-    temp.explain = TC_THEN;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"on";
-    temp.explain = TC_IGNORE;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"my";
-    temp.explain = TC_MY;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"or";
-    temp.explain = TC_OR;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"and";
-    temp.explain = TC_AND;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"of";
-    temp.explain = TC_OF;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
-    
-    [_test loadFile:@"test"];
-    [_test readLine];
-    [_test read_a_tokens];
-    [_test genTree];
-    [_test genInstruction];
+    [_test readScript: @"test"];
     NSString* mss = [_test debug];
     
     ///////////

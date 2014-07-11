@@ -37,7 +37,7 @@
     char c;
     NSMutableString* linecache = [NSMutableString stringWithCapacity:10];//error
     char buff[2];
-    _currentLine++;
+    
     while(true)
     {
         c = getc(_input);
@@ -45,6 +45,10 @@
         {
             if(c == '\n' || c == '\t')
             {
+                if(c == '\n')
+                {
+                    _currentLine++;
+                }
                 c = ' ';
             }
             buff[0] = c;
@@ -142,6 +146,7 @@
     _root = [NSMutableArray arrayWithCapacity:10];
     _message = [NSMutableString stringWithString:@""];
     _instruction_table = [NSMutableArray arrayWithCapacity:10];
+    [self initDictionary];
 }
 
 - (int) read_a_tokens
@@ -1049,5 +1054,160 @@
         [result appendString:@"\n"];
     }
     return result;
+}
+
+- (int) readScript: (NSString*) file
+{
+    int result;
+    [self loadFile:file];
+    while([self readLine] > 0)
+    {
+        result = [self read_a_tokens];
+        if(result == 0)
+        {
+            return -1;
+        }
+        result = [self genTree];
+        if(result < 0)
+        {
+            return -1;
+        }
+        [self genInstruction];
+        if([_message lengthOfBytesUsingEncoding:NSASCIIStringEncoding] > 0)
+        {
+            return -1;
+        }
+    }
+    return 0;
+}
+
+- (void) initDictionary
+{
+    TC_Define* temp = [TC_Define alloc];
+    temp.word = @"if";
+    temp.explain = TC_IF;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"is";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"equal";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"greater";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"smaller";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"set";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"my";
+    temp.explain = TC_MY;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    
+    temp = [TC_Define alloc];
+    temp.word = @"end";
+    temp.explain = TC_END;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"while";
+    temp.explain = TC_WHILE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @",";
+    temp.explain = TC_THEN;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"then";
+    temp.explain = TC_THEN;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"on";
+    temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"with";
+    temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"at";
+    temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"in";
+    temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"on";
+    temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"than";
+    temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"by";
+    temp.explain = TC_MY;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"or";
+    temp.explain = TC_OR;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"and";
+    temp.explain = TC_AND;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"of";
+    temp.explain = TC_OF;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
 }
 @end

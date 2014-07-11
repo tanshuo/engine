@@ -1,5 +1,6 @@
-while my B is <5,6,7>, 
-    if my B is <5,6,7> and  my B is1 <5,6,7> or B is2 <5,6,7> and B is3 <5,6,7>, 
-    my A is4  A of B of B ,
+while my B equal <5,6,7>,
+    if my A equal <5,6,7> and  my B is <5,6,7> or B greater than <5,6,7> and B is <5,6,7>,
+    my A is  A of B of B ,
     end,
 end;
+if my B is <5,6,7>, my B is <5,6,7> then end;
