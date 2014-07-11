@@ -17,6 +17,7 @@
 @synthesize defines = _defines;
 @synthesize input = _input;
 @synthesize message = _message;
+@synthesize instruction_table = _instruction_table;
 
 - (int) loadFile:(NSString *)file
 {
@@ -136,6 +137,7 @@
     _dictionary = [NSMutableArray arrayWithCapacity:10];
     _root = [NSMutableArray arrayWithCapacity:10];
     _message = [NSMutableString stringWithString:@""];
+    _instruction_table = [NSMutableArray arrayWithCapacity:10];
 }
 
 - (int) read_a_tokens
@@ -653,15 +655,129 @@
 
 - (int) genInstruction
 {
-    int count = 0;
-    int head = _current_ins_count + 1;
-    int control_end = 0;
-    int logic_end = 0; // unknown
+    //store the end offset
+    NSMutableArray* stack = [NSMutableArray arrayWithCapacity:10];
+   
+    //check gramma. if first must be if while, last must be end, if while must be eual to end
+    int i;
+    int end_count = 0;
+    int while_count = 0;
+    
+    for(i = 0; i < [_root count]; i ++)
+    {
+        int type = ((TC_Conrol_Layer*)[_root objectAtIndex:i]).type;
+        if(type == TC_END)
+        {
+            end_count++;
+        }
+        else if(type == TC_WHILE || type == TC_IF)
+        {
+            while_count++;
+        }
+        if(i == 0)
+        {
+            if([_root count] > 1 && type == 0)
+            {
+                _message = [NSMutableString stringWithString: @"false branch control statement, more than one straight function"];
+                return -1;
+            }
+            else if([_root count] == 1 && type != 0)
+            {
+                _message = [NSMutableString stringWithString: @"false branch control statement, no end state ment"];
+                return -1;
+            }
+        }
+        else if(i == 0)
+        {
+            if(type != TC_WHILE||type != TC_IF||type != 0)
+            {
+                _message = [NSMutableString stringWithString: @"false branch control statement, first word must be if or while"];
+                return -1;
+            }
+        }
+        else if([_root count] > 1 && i == [_root count] - 1)
+        {
+             if(type != TC_END)
+             {
+                 _message = [NSMutableString stringWithString: @"false branch control statement: last word must be end"];
+                 return -1;
+             }
+        }
+    }
+    if(while_count != end_count)
+    {
+        _message = [NSMutableString stringWithString: @"false branch control statement: end mismatches"];
+        return -1;
+    }
+    
+    //read the _root and gen instructions
+    if([_root count] == 1) //exactly one function
+    {
+        if([[_root objectAtIndex:0] logical] != nil)
+            [self genLogicalInstructionsWith: [[_root objectAtIndex:0] logical] At: _current_ins_count To: _instruction_table];
+    }
+    //begin iterator
+    for(i = 0; i < [_root count]; i ++)
+    {
+        int type = ((TC_Conrol_Layer*)[_root objectAtIndex:i]).type;
+        if(type == TC_IF)
+        {
+            // calculate true or false
+            [self genLogicalInstructionsWith: [[_root objectAtIndex:i] logical] At: _current_ins_count To: _instruction_table];
+            
+            // jump to the end if false
+            TC_Instruction* A;
+            TC_INS_OFFSET* offset;
+            offset = [TC_INS_OFFSET alloc];
+            offset.offset = 0;
+            offset.solved = NO;
+            offset.mark = MARK_IF_END;
+            offset.extra = 0;
+            
+            A = [TC_Instruction alloc];
+            A.instruct = @"jmp_false";
+            A.params = nil;
+            A.src = offset;
+            A.des = nil;
+            [_instruction_table addObject:A];
+            [stack addObject:offset];
+        }
+        else if(type == TC_WHILE)
+        {
+            int head = _current_ins_count;
+            // calculate true or false
+            [self genLogicalInstructionsWith: [[_root objectAtIndex:i] logical] At: _current_ins_count To: _instruction_table];
+            
+            // jump to the end if false
+            TC_Instruction* A;
+            TC_INS_OFFSET* offset;
+            offset = [TC_INS_OFFSET alloc];
+            offset.offset = 0;
+            offset.solved = NO;
+            offset.mark = MARK_WHILE_END;
+            offset.extra = head;
+            
+            A = [TC_Instruction alloc];
+            A.instruct = @"jmp_false";
+            A.params = nil;
+            A.src = offset;
+            A.des = nil;
+            [_instruction_table addObject:A];
+            [stack addObject:offset];
+        }
+        else if(type == TC_END)
+        {
+            TC_INS_OFFSET* last_match = [stack lastObject];
+            [stack removeLastObject];
+            ...
+        }
+        else if(type == TC_THEN)
+        {
+        
+        }
+    }
     
     
-    
-    
-    _current_ins_count += count;
     return 0;
 }
 

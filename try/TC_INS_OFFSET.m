@@ -12,4 +12,5 @@
 @synthesize offset = _offset;
 @synthesize solved = _solved;
 @synthesize mark = _mark;
+@synthesize extra = _extra;
 @end
