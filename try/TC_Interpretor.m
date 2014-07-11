@@ -1193,6 +1193,12 @@
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
+    temp.word = @"to";
+    temp.explain = TC_MY;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
     temp.word = @"or";
     temp.explain = TC_OR;
     temp.right_match = 0;
