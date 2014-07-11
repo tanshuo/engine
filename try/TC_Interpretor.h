@@ -48,5 +48,5 @@
 
 - (TC_Define*) searchDictionary: (NSString*) word;
 
-- (char*) debug;
+- (NSMutableString*) debug;
 @end

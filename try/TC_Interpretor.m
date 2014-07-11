@@ -952,9 +952,56 @@
     }
 }
 
-- (char*) debug
+- (NSMutableString*) debug
 {
+    int i;
+    int offset;
+    NSString* temp;
+    NSMutableString* result;
+    result = [NSMutableString stringWithString:@""];
     
-    return nil;
+    for(i = 0; i < [_instruction_table count]; i++)
+    {
+        temp = [NSString stringWithFormat:@"%d",i];
+        [result appendString:temp];
+        
+        switch([[_instruction_table objectAtIndex:i] instruct])
+        {
+            case ins_call:
+                [result appendString:@" call"];
+                [result appendString:@" "];
+                [result appendString: [[_instruction_table objectAtIndex:i] src]];
+                break;
+            case ins_jmp:
+                [result appendString:@" jmp"];
+                [result appendString:@" "];
+                offset = [[[_instruction_table objectAtIndex:i] src]offset];
+                temp = [NSString stringWithFormat:@"%d",offset];
+                [result appendString:temp];
+                break;
+            case ins_jmp_false:
+                [result appendString:@" jmp_false"];
+                [result appendString:@" "];
+                offset = [[[_instruction_table objectAtIndex:i] src]offset];
+                temp = [NSString stringWithFormat:@"%d",offset];
+                [result appendString:temp];
+                break;
+            case ins_jmp_true:
+                [result appendString:@" jmp_true"];
+                [result appendString:@" "];
+                offset = [[[_instruction_table objectAtIndex:i] src]offset];
+                temp = [NSString stringWithFormat:@"%d",offset];
+                [result appendString:temp];
+                break;
+        }
+        
+        [result appendString:@"\n"];
+    }
+    
+    NSString* path = [[NSBundle mainBundle] pathForResource:@"debug" ofType:@"log"];
+    FILE* output = fopen([path cStringUsingEncoding:NSASCIIStringEncoding], "wr");
+    fwrite([result cStringUsingEncoding:NSASCIIStringEncoding], [result length], 1, output);
+    fclose(output);
+    return result;
 }
 @end
