@@ -43,6 +43,10 @@
         c = getc(_input);
         if(c != EOF && c != ';')
         {
+            if(c == '\n')
+            {
+                c = ' ';
+            }
             buff[0] = c;
             buff[1] = 0;
             [linecache appendString: [NSMutableString stringWithCString:buff encoding:NSASCIIStringEncoding]];
