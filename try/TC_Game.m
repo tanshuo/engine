@@ -115,7 +115,7 @@
     [_test read_a_tokens];
     [_test genTree];
     [_test genInstruction];
-    //NSString* mss = [_test debug];
+    NSString* mss = [_test debug];
     
     ///////////
     int i;

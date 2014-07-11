@@ -1044,11 +1044,6 @@
         
         [result appendString:@"\n"];
     }
-    
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"debug" ofType:@"log"];
-    FILE* output = fopen([path cStringUsingEncoding:NSASCIIStringEncoding], "wr");
-    fwrite([result cStringUsingEncoding:NSASCIIStringEncoding], [result length], 1, output);
-    fclose(output);
     return result;
 }
 @end
