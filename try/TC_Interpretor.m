@@ -735,7 +735,7 @@
             offset.extra = 0;
             
             A = [TC_Instruction alloc];
-            A.instruct = @"jmp_false";
+            A.instruct = ins_jmp_false;
             A.params = nil;
             A.src = offset;
             A.des = nil;
@@ -758,7 +758,7 @@
             offset.extra = head;
             
             A = [TC_Instruction alloc];
-            A.instruct = @"jmp_false";
+            A.instruct = ins_jmp_false;
             A.params = nil;
             A.src = offset;
             A.des = nil;
@@ -769,15 +769,38 @@
         {
             TC_INS_OFFSET* last_match = [stack lastObject];
             [stack removeLastObject];
-            ...
+            if(last_match.mark == MARK_IF_END)
+            {
+                last_match.mark = MARK_LOGICAL_SOLVED;
+                last_match.offset = _current_ins_count;
+                last_match.solved = YES;
+            }
+            else if(last_match.mark == MARK_WHILE_END)
+            {
+                TC_INS_OFFSET* offset;
+                offset = [TC_INS_OFFSET alloc];
+                offset.offset = last_match.extra;
+                offset.solved = YES;
+                offset.mark = MARK_LOGICAL_SOLVED;
+                offset.extra = 0;
+                
+                TC_Instruction* A = [TC_Instruction alloc];
+                A.instruct = ins_jmp;
+                A.params = nil;
+                A.src = offset;
+                A.des = nil;
+                [_instruction_table addObject:A];
+                
+                last_match.mark = MARK_LOGICAL_SOLVED;
+                last_match.offset = _current_ins_count;
+                last_match.solved = YES;
+            }
         }
         else if(type == TC_THEN)
         {
-        
+            [self genLogicalInstructionsWith: [[_root objectAtIndex:i] logical] At: _current_ins_count To: _instruction_table];
         }
     }
-    
-    
     return 0;
 }
 
@@ -790,13 +813,13 @@
         {
             TC_Instruction* A;
             A = [TC_Instruction alloc];
-            A.instruct = @"call";
+            A.instruct = ins_call;
             A.params = l.right.straight.params;
             A.src = l.right.straight.name;
             A.des = nil;
             TC_Instruction* B;
             B = [TC_Instruction alloc];
-            B.instruct = @"call";
+            B.instruct = ins_call;
             B.params = l.right.straight.params;
             B.src = l.right.straight.name;
             B.des = nil;
@@ -808,21 +831,21 @@
         {
             TC_Instruction* A;
             A = [TC_Instruction alloc];
-            A.instruct = @"call";
+            A.instruct = ins_call;
             A.params = l.right.straight.params;
             A.src = l.right.straight.name;
             A.des = nil;
             
             TC_Instruction* B;
             B = [TC_Instruction alloc];
-            B.instruct = @"call";
+            B.instruct = ins_call;
             B.params = l.left.straight.params;
             B.src = l.left.straight.name;
             B.des = nil;
             
             TC_Instruction* C;
             C = [TC_Instruction alloc];
-            C.instruct = @"jmp_flase";
+            C.instruct = ins_jmp_false;
             TC_INS_OFFSET* offset;
             offset = [TC_INS_OFFSET alloc];
             offset.offset = _current_ins_count + 3;
@@ -847,7 +870,7 @@
         {
             TC_Instruction* C;
             C = [TC_Instruction alloc];
-            C.instruct = @"jmp_flase";
+            C.instruct = ins_jmp_false;
             TC_INS_OFFSET* offset;
             offset = [TC_INS_OFFSET alloc];
             offset.offset = line + 2;
@@ -859,7 +882,7 @@
             
             TC_Instruction* A;
             A = [TC_Instruction alloc];
-            A.instruct = @"call";
+            A.instruct = ins_call;
             A.params = l.right.straight.params;
             A.src = l.right.straight.name;
             A.des = nil;
@@ -873,7 +896,7 @@
         {
             TC_Instruction* A;
             A = [TC_Instruction alloc];
-            A.instruct = @"call";
+            A.instruct = ins_call;
             A.params = l.right.straight.params;
             A.src = l.right.straight.name;
             A.des = nil;
@@ -891,7 +914,7 @@
         {
             TC_Instruction* C;
             C = [TC_Instruction alloc];
-            C.instruct = @"jmp_flase";
+            C.instruct = ins_jmp_false;
             TC_INS_OFFSET* offset;
             offset = [TC_INS_OFFSET alloc];
             offset.offset = line + 2;
@@ -903,7 +926,7 @@
             
             TC_Instruction* B;
             B = [TC_Instruction alloc];
-            B.instruct = @"call";
+            B.instruct = ins_call;
             B.params = l.left.straight.params;
             B.src = l.left.straight.name;
             B.des = nil;
@@ -917,7 +940,7 @@
         {
             TC_Instruction* B;
             B = [TC_Instruction alloc];
-            B.instruct = @"call";
+            B.instruct = ins_call;
             B.params = l.left.straight.params;
             B.src = l.left.straight.name;
             B.des = nil;
@@ -929,4 +952,9 @@
     }
 }
 
+- (char*) debug
+{
+    
+    return nil;
+}
 @end

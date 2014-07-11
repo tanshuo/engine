@@ -12,7 +12,7 @@
 #import "types.h"
 
 @interface TC_Instruction : NSObject
-@property (strong,nonatomic) NSString* instruct;
+@property TC_INS instruct;
 @property (strong,nonatomic) id src;
 @property (strong,nonatomic) id des;
 @property (strong,nonatomic) NSMutableArray* params;

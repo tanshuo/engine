@@ -83,7 +83,7 @@
     [_test readLine];
     [_test read_a_tokens];
     [_test genTree];
-    
+    [_test genInstruction];
     
     ///////////
     int i;

@@ -10,6 +10,14 @@
 #define try_types_h
 
 typedef enum{
+    ins_jmp,
+    ins_jmp_true,
+    ins_jmp_false,
+    ins_call,
+    
+} TC_INS;
+
+typedef enum{
     TC_INSTANCE,//<4 5 6>
     TC_FUNCTION,
     TC_VAR,

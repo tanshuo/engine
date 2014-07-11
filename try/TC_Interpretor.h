@@ -47,4 +47,6 @@
 - (void) dealloc;
 
 - (TC_Define*) searchDictionary: (NSString*) word;
+
+- (char*) debug;
 @end
