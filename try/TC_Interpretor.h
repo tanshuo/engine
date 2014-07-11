@@ -23,12 +23,15 @@
 @property TC_ID currentLine;
 @property TC_ID current_ins_count;
 @property (strong,nonatomic) NSMutableString* line;
-@property (strong,nonatomic) TC_VirtualMachine* vm;
 @property (strong,nonatomic) NSMutableArray* defines;
 @property (strong,nonatomic) NSMutableArray* dictionary;
 @property (strong,nonatomic) NSMutableArray* root;
 @property (strong,nonatomic) NSMutableString* message;
 @property (strong,nonatomic) NSMutableArray* instruction_table;
+@property (strong,nonatomic) NSMutableArray* func_table;
+@property (strong,nonatomic) NSMutableArray* var_table;
+@property (strong,nonatomic) NSMutableArray* globol;
+
 @property FILE* input;
 
 - (void) start;// create
@@ -41,14 +44,17 @@
 - (int) loadFile: (NSString*) file;
 - (int) genInstruction;
 
-- (int) readScript: (NSString*) file;
+- (NSMutableArray*) readScript: (NSString*) file;
 
-- (void) attachTree: (TC_VirtualMachine*)vm;
+
 - (void) die;
 - (void) initDictionary;
 - (void) dealloc;
 
 - (TC_Define*) searchDictionary: (NSString*) word;
+- (TC_INS_FUNCTION*) searchFunction: (TC_Function_Layer*) fun;
+- (TC_INS_VARIABLE*) searchVariable: (TC_WORD_LAYER*) var;
 
+- (void) clear_current;
 - (NSMutableString*) debug;
 @end

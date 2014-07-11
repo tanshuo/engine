@@ -13,11 +13,14 @@
 @implementation TC_Interpretor
 @synthesize currentLine = _currentLine;
 @synthesize line = _line;
-@synthesize vm = _vm;
+@synthesize var_table = _var_table;
+@synthesize func_table = _func_table;
 @synthesize defines = _defines;
 @synthesize input = _input;
 @synthesize message = _message;
 @synthesize instruction_table = _instruction_table;
+@synthesize globol = _global;
+
 
 - (int) loadFile:(NSString *)file
 {
@@ -35,7 +38,7 @@
 - (int) readLine
 {
     char c;
-    NSMutableString* linecache = [NSMutableString stringWithCapacity:10];//error
+    NSMutableString* linecache = [NSMutableString stringWithCapacity:10];
     char buff[2];
     
     while(true)
@@ -72,6 +75,51 @@
 - (int) genTree
 {
     [_root removeAllObjects];
+    
+    //define statement
+    int head = [[_defines objectAtIndex:0] explain];
+    if(head == TC_DEFINE)
+    {
+        if([_defines count] != 3)
+        {
+            _message = [NSMutableString stringWithString:@"define statement format error"];
+            return -1;
+        }
+        
+        TC_Function_Layer* temp = [TC_Function_Layer alloc];
+        temp.right_match = -1;
+        temp.name = [[_defines objectAtIndex:1] word];
+        temp.right_match = [[[_defines objectAtIndex:2] word] integerValue];
+        TC_INS_FUNCTION* result;
+        result = [self searchFunction:temp];
+        if(result == nil)
+        {
+            _message = [NSMutableString stringWithString:@"function has not been declared"];
+            return -1;
+        }
+        else if(result.solved == YES)
+        {
+            _message = [NSMutableString stringWithString:@"function has been defined"];
+            return -1;
+        }
+        else
+        {
+            result.solved = YES;
+            result.location = FUN_DEFINE;
+            result.offset = _current_ins_count;
+        }
+        return 0;
+    }
+    else if(head == TC_END_DEF)
+    {
+        if([_defines count] != 1)
+        {
+            _message = [NSMutableString stringWithString:@"enddef statement format error"];
+            return -1;
+        }
+        return 0;
+    }
+    //control
     int i;
     int j;
     int type;
@@ -146,6 +194,10 @@
     _root = [NSMutableArray arrayWithCapacity:10];
     _message = [NSMutableString stringWithString:@""];
     _instruction_table = [NSMutableArray arrayWithCapacity:10];
+    _func_table = [NSMutableArray arrayWithCapacity:10];
+    _var_table = [NSMutableArray arrayWithCapacity:10];
+    _global = [NSMutableArray arrayWithCapacity:10];
+    
     [self initDictionary];
 }
 
@@ -355,7 +407,12 @@
             return [_dictionary objectAtIndex: i];
         }
     }
-    return nil;
+    TC_Define* temp;
+    temp = [TC_Define alloc];
+    temp.explain = TC_VAR;
+    temp.right_match = 0;
+    temp.word = word;
+    return temp;
 }
 
 //sentence is array of defines
@@ -1056,29 +1113,47 @@
     return result;
 }
 
-- (int) readScript: (NSString*) file
+- (NSMutableArray*) readScript: (NSString*) file
 {
     int result;
+    int i;
     [self loadFile:file];
     while([self readLine] > 0)
     {
         result = [self read_a_tokens];
         if(result == 0)
         {
-            return -1;
+            [self clear_current];
+            return nil;
+        }
+        for(i = [_defines count] - 1; i >= 0; i --)
+        {
+            int state = [[_defines objectAtIndex:i] explain];
+            if(i != 0 && (state == TC_END_DEF || state == TC_DEFINE))
+            {
+                _message = [NSMutableString stringWithString: @"define or enddef is inside the statement"];
+                [self clear_current];
+                return nil;
+            }
         }
         result = [self genTree];
         if(result < 0)
         {
-            return -1;
+            [self clear_current];
+            return nil;
+        }
+        if([_root count] == 0)
+        {
+            continue;
         }
         [self genInstruction];
         if([_message lengthOfBytesUsingEncoding:NSASCIIStringEncoding] > 0)
         {
-            return -1;
+            [self clear_current];
+            return nil;
         }
     }
-    return 0;
+    return _instruction_table;
 }
 
 - (void) initDictionary
@@ -1099,6 +1174,18 @@
     temp.word = @"equal";
     temp.explain = TC_FUNCTION;
     temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"define";
+    temp.explain = TC_DEFINE;
+    temp.right_match = 2;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"enddef";
+    temp.explain = TC_END_DEF;
+    temp.right_match = 0;
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
@@ -1215,5 +1302,42 @@
     temp.explain = TC_OF;
     temp.right_match = 0;
     [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"return";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
 }
+
+- (TC_INS_FUNCTION*) searchFunction: (TC_Function_Layer*) fun
+{
+    int i;
+    for(i = 0; i < [_func_table count]; i ++)
+    {
+        if(
+           [[(TC_INS_FUNCTION*)[_func_table objectAtIndex:i] name] isEqualToString:[fun name]] &&
+           [(TC_INS_FUNCTION*)[_func_table objectAtIndex:i] right_match] == [fun right_match]
+           )
+        {
+            return [_func_table objectAtIndex:i];
+        }
+    }
+    return nil;
+}
+
+- (TC_INS_VARIABLE*) searchVariable: (TC_WORD_LAYER*) var
+{
+    return nil;
+}
+
+- (void)clear_current
+{
+    [_defines removeAllObjects];
+    [_root removeAllObjects];
+    _instruction_table = [NSMutableArray arrayWithCapacity:10];
+    [_func_table removeAllObjects];
+    [_var_table removeAllObjects];    
+}
+
 @end

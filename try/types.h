@@ -35,6 +35,8 @@ typedef enum{
     TC_AND, //and
     TC_OR, // or
     TC_AFTER, //after as soon as
+    TC_DEFINE,
+    TC_END_DEF,
 } TC_Explain;
 
 typedef unsigned int TC_ID;

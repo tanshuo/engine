@@ -45,6 +45,7 @@
 		F59ECDBD1954C4AD00D7EB5D /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F59ECD941954C4AD00D7EB5D /* UIKit.framework */; };
 		F59ECDC51954C4AD00D7EB5D /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = F59ECDC31954C4AD00D7EB5D /* InfoPlist.strings */; };
 		F59ECDC71954C4AD00D7EB5D /* tryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = F59ECDC61954C4AD00D7EB5D /* tryTests.m */; };
+		F59F93D61970692D009C9A92 /* TC_ScriptListInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F59F93D51970692D009C9A92 /* TC_ScriptListInfo.m */; };
 		F59F95DA1957ED67006876C9 /* TC_DisplayObject.m in Sources */ = {isa = PBXBuildFile; fileRef = F59F95D91957ED66006876C9 /* TC_DisplayObject.m */; };
 		F59F95DE1957F89A006876C9 /* tool.c in Sources */ = {isa = PBXBuildFile; fileRef = F59F95DD1957F89A006876C9 /* tool.c */; };
 		F59F95E1195802F2006876C9 /* TC_VirtualMachine.m in Sources */ = {isa = PBXBuildFile; fileRef = F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */; };
@@ -130,6 +131,8 @@
 		F59ECDC21954C4AD00D7EB5D /* tryTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "tryTests-Info.plist"; sourceTree = "<group>"; };
 		F59ECDC41954C4AD00D7EB5D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		F59ECDC61954C4AD00D7EB5D /* tryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = tryTests.m; sourceTree = "<group>"; };
+		F59F93D41970692D009C9A92 /* TC_ScriptListInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_ScriptListInfo.h; path = try/TC_ScriptListInfo.h; sourceTree = "<group>"; };
+		F59F93D51970692D009C9A92 /* TC_ScriptListInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_ScriptListInfo.m; path = try/TC_ScriptListInfo.m; sourceTree = "<group>"; };
 		F59F95D81957ED66006876C9 /* TC_DisplayObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_DisplayObject.h; path = try/TC_DisplayObject.h; sourceTree = "<group>"; };
 		F59F95D91957ED66006876C9 /* TC_DisplayObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_DisplayObject.m; path = try/TC_DisplayObject.m; sourceTree = "<group>"; };
 		F59F95DB1957F31B006876C9 /* types.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = types.h; path = try/types.h; sourceTree = "<group>"; };
@@ -221,6 +224,8 @@
 		F5988C63195A18FF00A8DA5E /* utility */ = {
 			isa = PBXGroup;
 			children = (
+				F59F93D41970692D009C9A92 /* TC_ScriptListInfo.h */,
+				F59F93D51970692D009C9A92 /* TC_ScriptListInfo.m */,
 				F59F95DB1957F31B006876C9 /* types.h */,
 				F5988CBA195A84EC00A8DA5E /* TC_GameObjectList.h */,
 				F5988CB4195A83B000A8DA5E /* list.h */,
@@ -508,6 +513,7 @@
 				F597F91D195E0334004DEE23 /* TC_Shaderinfo.m in Sources */,
 				F59382E7195A879900CB2A80 /* TC_Game.m in Sources */,
 				F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */,
+				F59F93D61970692D009C9A92 /* TC_ScriptListInfo.m in Sources */,
 				F596DD42195B3DBC00672BAB /* TC_Sprite.m in Sources */,
 				F59ECDA11954C4AD00D7EB5D /* main.m in Sources */,
 				F5FE4BE7195BC4E000D1C593 /* TC_PrefabInfo.m in Sources */,

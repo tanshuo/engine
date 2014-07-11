@@ -7,18 +7,6 @@
 //
 
 #import "TC_VirtualMachine.h"
-@interface TC_VirtualMachine(){
-    TC_ID script;
-    int instruction_data_devider;
-    int total_instructions;
-    int total_datas;
-    
-    int eax; //answer
-    int ecx; //loop return
-    
-}
-@end
-
 @implementation TC_VirtualMachine
 
 @end
