@@ -740,6 +740,7 @@
             A.src = offset;
             A.des = nil;
             [_instruction_table addObject:A];
+            _current_ins_count ++;
             [stack addObject:offset];
         }
         else if(type == TC_WHILE)
@@ -763,6 +764,7 @@
             A.src = offset;
             A.des = nil;
             [_instruction_table addObject:A];
+            _current_ins_count ++;
             [stack addObject:offset];
         }
         else if(type == TC_END)
@@ -790,6 +792,7 @@
                 A.src = offset;
                 A.des = nil;
                 [_instruction_table addObject:A];
+                _current_ins_count ++;
                 
                 last_match.mark = MARK_LOGICAL_SOLVED;
                 last_match.offset = _current_ins_count;
@@ -807,7 +810,19 @@
 //line is the offset of the first instruction
 -(void) genLogicalInstructionsWith:(TC_Logical_Layer* )l At:(int)line To:(NSMutableArray*) table
 {
-    if(l.right.straight != nil && l.left.straight != nil)
+    if(l.straight != nil)
+    {
+        TC_Instruction* A;
+        A = [TC_Instruction alloc];
+        A.instruct = ins_call;
+        A.params = l.straight.params;
+        A.src = l.straight.name;
+        A.des = nil;
+        [table addObject:A];
+        _current_ins_count ++;
+        return;
+    }
+    else if(l.right.straight != nil && l.left.straight != nil)
     {
         if(l.type == TC_OR)
         {
@@ -862,7 +877,39 @@
         }
         return;
     }
-    
+    else if(l.right && l.left && l.right.straight == nil && l.left.straight == nil)
+    {
+        [self genLogicalInstructionsWith:l.right At:_current_ins_count To:table];
+        if(l.type == TC_AND)
+        {
+            TC_Instruction* C;
+            C = [TC_Instruction alloc];
+            C.instruct = ins_jmp_false;
+            TC_INS_OFFSET* offset;
+            offset = [TC_INS_OFFSET alloc];
+            offset.offset = 0;
+            offset.solved = NO;
+            offset.mark = MARK_LOGICAL_END;
+            offset.extra = 0;
+            C.src = offset;
+            C.params = nil;
+            C.des = nil;
+            
+            [table addObject:C];
+            _current_ins_count ++;
+            [self genLogicalInstructionsWith:l.left At:_current_ins_count To:table];
+            offset.offset = _current_ins_count;
+            offset.solved = YES;
+            offset.mark = MARK_LOGICAL_SOLVED;
+            offset.extra = 0;
+        }
+        else if(l.type == TC_OR)
+        {
+            [self genLogicalInstructionsWith:l.left At:_current_ins_count To:
+             table];
+        }
+        return;
+    }
     else if(l.right.straight != nil)
     {
         [self genLogicalInstructionsWith:l.left At:_current_ins_count To:table];

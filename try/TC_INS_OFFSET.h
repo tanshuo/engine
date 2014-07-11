@@ -13,6 +13,7 @@ typedef enum{
     MARK_LOGICAL_SOLVED,
     MARK_IF_END,
     MARK_WHILE_END,
+    MARK_LOGICAL_END,
 } TC_INS_MARK;
 
 @interface TC_INS_OFFSET : NSObject

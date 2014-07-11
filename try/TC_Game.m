@@ -26,6 +26,30 @@
     [_test.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
+    temp.word = @"is1";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [_test.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"is2";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [_test.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"is3";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [_test.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"is4";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [_test.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
     temp.word = @"A";
     temp.explain = TC_VAR;
     temp.right_match = 0;
@@ -37,9 +61,16 @@
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
     
+    
     temp = [TC_Define alloc];
     temp.word = @"end";
     temp.explain = TC_END;
+    temp.right_match = 0;
+    [_test.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"while";
+    temp.explain = TC_WHILE;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
     
@@ -84,7 +115,7 @@
     [_test read_a_tokens];
     [_test genTree];
     [_test genInstruction];
-    NSString* mss = [_test debug];
+    //NSString* mss = [_test debug];
     
     ///////////
     int i;
