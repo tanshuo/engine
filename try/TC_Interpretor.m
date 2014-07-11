@@ -43,7 +43,7 @@
         c = getc(_input);
         if(c != EOF && c != ';')
         {
-            if(c == '\n')
+            if(c == '\n' || c == '\t')
             {
                 c = ' ';
             }
