@@ -161,7 +161,7 @@
                 arg.location = VAR_STACK;
                 arg.addr = nil;
                 arg.type = -1;
-                arg.argoffset = i + 1;;
+                arg.argoffset = i;;
                 arg.var = [params objectAtIndex:i];
                 [_var_stack addObject:arg];
             }
@@ -801,12 +801,12 @@
         }
         if(i == 0)
         {
-            if([_root count] > 1 && type == 0)
+            if([_root count] > 1 && type == -1)
             {
                 _message = [NSMutableString stringWithString: @"false branch control statement, more than one straight function"];
                 return -1;
             }
-            else if([_root count] == 1 && type != 0)
+            else if([_root count] == 1 && type != -1)
             {
                 _message = [NSMutableString stringWithString: @"false branch control statement, no end state ment"];
                 return -1;
@@ -814,7 +814,7 @@
         }
         else if(i == 0)
         {
-            if(type != TC_WHILE||type != TC_IF||type != 0)
+            if(type != TC_WHILE||type != TC_IF||type != -1)
             {
                 _message = [NSMutableString stringWithString: @"false branch control statement, first word must be if or while"];
                 return -1;
@@ -1371,7 +1371,7 @@
     temp = [TC_Define alloc];
     temp.word = @"fun1";
     temp.explain = TC_FUNCTION;
-    temp.right_match = 0;
+    temp.right_match = 1;
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
