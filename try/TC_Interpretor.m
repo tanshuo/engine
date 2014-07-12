@@ -178,13 +178,32 @@
         [_var_stack removeAllObjects];
         return 0;
     }
+    else if(head == TC_RETURN)
+    {
+        if([_defines count] != 1)
+        {
+            _message = [NSMutableString stringWithString:@"return statement error"];
+            return -1;
+        }
+        else
+        {
+            TC_Instruction* A;
+            A = [TC_Instruction alloc];
+            A.instruct = ins_rtn;
+            A.params = nil;
+            A.src = nil;
+            A.des = nil;
+            [_instruction_table addObject:A];
+            _current_ins_count ++;
+        }
+    }
     //control
 
     int type;
     for(i = 0;i < [_defines count];i ++)//gen logical layer
     {
         type = [[_defines objectAtIndex:i] explain];
-        if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END || type == TC_BREAK)
+        if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END || type == TC_BREAK || type == TC_RETURN)
         {
             TC_Conrol_Layer* newlayer;
             newlayer = [TC_Conrol_Layer alloc];
@@ -195,7 +214,7 @@
             {
                 int type;
                 type = [[_defines objectAtIndex:j] explain];
-                if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END ||type == TC_BREAK)
+                if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END ||type == TC_BREAK||type == TC_RETURN)
                 {
                     i = j - 1;
                     break;
@@ -869,6 +888,17 @@
             _current_ins_count ++;
             [stack addObject:offset];
         }
+        else if(type == TC_RETURN)
+        {
+            TC_Instruction* A;
+            A = [TC_Instruction alloc];
+            A.instruct = ins_rtn;
+            A.params = nil;
+            A.src = nil;
+            A.des = nil;
+            [_instruction_table addObject:A];
+            _current_ins_count ++;
+        }
         else if(type == TC_BREAK)
         {
             if([stack count] == 0)
@@ -1314,6 +1344,12 @@
     temp = [TC_Define alloc];
     temp.word = @"while";
     temp.explain = TC_WHILE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"return";
+    temp.explain = TC_RETURN;
     temp.right_match = 0;
     [self.dictionary addObject: temp];
     

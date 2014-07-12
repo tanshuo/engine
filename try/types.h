@@ -14,6 +14,7 @@ typedef enum{
     ins_jmp_true,
     ins_jmp_false,
     ins_call,
+    ins_rtn,
     
 } TC_INS;
 
@@ -38,6 +39,7 @@ typedef enum{
     TC_AFTER, //after as soon as
     TC_DEFINE,
     TC_END_DEF,
+    TC_RETURN,
 } TC_Explain;
 
 typedef unsigned int TC_ID;

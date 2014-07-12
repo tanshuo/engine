@@ -2,8 +2,9 @@ define  A fun1  B;
     while fun2,
         if  A equal <5,6,7> and   B is <5,6,7> or B greater than <5,6,7> and B is <5,6,7>,
              A is  A of B of B ,
-             break,
+             break,return,
         end,
+
     end;
     if  CC is <5,6,7>,  B is <5,6,7> then end;
 enddef;
