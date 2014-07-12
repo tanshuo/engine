@@ -154,23 +154,15 @@
             result.offset = _current_ins_count;
             
             TC_INS_VARIABLE* arg;
-            arg = [TC_INS_VARIABLE alloc];
-            arg.solved = YES;
-            arg.location = VAR_STACK;
-            arg.addr = nil;
-            arg.argoffset = 0;
-            arg.var = temp.target;
-            [_var_stack addObject:arg];
-            
-            for(i = 0; i < result.right_match; i++)
+            for(i = 0; i < [params count]; i++)
             {
-                arg = [TC_INS_VARIABLE alloc];
                 arg = [TC_INS_VARIABLE alloc];
                 arg.solved = YES;
                 arg.location = VAR_STACK;
                 arg.addr = nil;
+                arg.type = -1;
                 arg.argoffset = i + 1;;
-                arg.var = [temp.params objectAtIndex:i];
+                arg.var = [params objectAtIndex:i];
                 [_var_stack addObject:arg];
             }
         }
@@ -1491,7 +1483,7 @@
     TC_INS_FUNCTION* fun;
     
     fun = [TC_INS_FUNCTION alloc];
-    fun.solved = YES;
+    fun.solved = NO;
     fun.name = @"is";
     fun.func = nil;
     fun.offset = 0;
@@ -1500,7 +1492,7 @@
     [_func_table addObject:fun];
     
     fun = [TC_INS_FUNCTION alloc];
-    fun.solved = YES;
+    fun.solved = NO;
     fun.name = @"are";
     fun.func = nil;
     fun.offset = 0;
@@ -1509,7 +1501,7 @@
     [_func_table addObject:fun];
     
     fun = [TC_INS_FUNCTION alloc];
-    fun.solved = YES;
+    fun.solved = NO;
     fun.name = @"greater";
     fun.func = nil;
     fun.offset = 0;
@@ -1519,7 +1511,7 @@
     
     
     fun = [TC_INS_FUNCTION alloc];
-    fun.solved = YES;
+    fun.solved = NO;
     fun.name = @"smaller";
     fun.func = nil;
     fun.offset = 0;
@@ -1528,7 +1520,7 @@
     [_func_table addObject:fun];
     
     fun = [TC_INS_FUNCTION alloc];
-    fun.solved = YES;
+    fun.solved = NO;
     fun.name = @"equal";
     fun.func = nil;
     fun.offset = 0;
@@ -1537,7 +1529,7 @@
     [_func_table addObject:fun];
     
     fun = [TC_INS_FUNCTION alloc];
-    fun.solved = YES;
+    fun.solved = NO;
     fun.name = @"set";
     fun.func = nil;
     fun.offset = 0;
