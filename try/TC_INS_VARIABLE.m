@@ -10,4 +10,8 @@
 
 @implementation TC_INS_VARIABLE
 
+- (void)dealloc
+{
+    free(_addr);
+}
 @end

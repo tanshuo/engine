@@ -160,7 +160,7 @@
                 arg.solved = YES;
                 arg.location = VAR_STACK;
                 arg.addr = nil;
-                arg.type = -1;
+                arg.type = VAR_UNKNOWN;
                 arg.argoffset = i;;
                 arg.var = [params objectAtIndex:i];
                 [_var_stack addObject:arg];
@@ -1598,7 +1598,7 @@
             temp = [TC_INS_VARIABLE alloc];
             temp.solved = NO;
             temp.argoffset = 0;
-            temp.type = -1;
+            temp.type = VAR_UNKNOWN;
             temp.location = -1;
             temp.var = [params objectAtIndex:i];
             [result addObject:temp];

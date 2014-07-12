@@ -22,6 +22,7 @@ typedef enum{
     VAR_VECTOR2,
     VAR_VECTOR3,
     VAR_INT,
+    VAR_OFF_SET,
 } TC_INS_VAR_TYPE;
 
 @interface TC_INS_VARIABLE : NSObject
@@ -31,4 +32,6 @@ typedef enum{
 @property TC_INS_VAR_TYPE type;
 @property (strong,nonatomic) TC_WORD_LAYER* var;
 @property void* addr;
+
+- (void)dealloc;
 @end

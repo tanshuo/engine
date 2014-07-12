@@ -16,8 +16,8 @@ typedef enum{
     ins_call,
     ins_push,
     ins_rtn,
-    
 } TC_INS;
+
 
 typedef enum{
     TC_INSTANCE,//<4 5 6>
@@ -65,6 +65,11 @@ typedef struct position{
     float y;
     float z;
 } TC_Position;
+
+typedef struct position2d{
+    float x;
+    float y;
+} TC_Position2d;
 
 typedef struct signal{
     TC_ID signal_id;

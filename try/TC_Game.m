@@ -26,7 +26,6 @@
     temp.explain = TC_VAR;
     temp.right_match = 0;
     [_test.dictionary addObject: temp];
-   
     [_test readScript: @"test"];
     NSString* mss = [_test debug];
     

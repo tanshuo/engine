@@ -34,18 +34,22 @@
 @property (strong,nonatomic) NSMutableArray* local_var_list;// local variable list
 @property (strong,nonatomic) NSMutableArray* func_list;//get from the interprator
 @property (strong,nonatomic) NSMutableArray* ins_list;//instructionlist
+@property (strong,nonatomic) NSMutableArray* bind_list;
 
 + (TC_VirtualMachine*) initVM: (NSString*) script;
 
-- (int) run_next_ins;
-- (int) call_fun:(TC_Instruction*) t;
-- (int) return_fun:(TC_Instruction*) t;
+- (int) run_next_ins;// -1 0
+- (int) call_fun:(TC_Instruction*) t;// -1 0
+- (int) return_fun:(TC_Instruction*) t;// -1 0
 
-//search variable deal with the first layer: if no solved: seach stack from top to bot, if no, search local list, search globol list. then process of statement. If it is an instance, gen a TC_INS_VARIABLE.
-- (TC_INS_VARIABLE*) solve_var:(TC_WORD_LAYER*) w;
+//search variable deal with the first layer: if no solved: seach stack from top to bot, if no, search local list, search globol list. then process of statement. If it is an instance, gen a TC_INS_VARIABLE. if the word layer of seach target is nil, jump over;
+- (int) solve_var:(TC_INS_VARIABLE*) w; // -1 0
+
+
+
 
 //look for unsolved function and bind them with address
-- (void) bind_function:(NSString*)func_name To:(void*)addr;
-
+- (void) bind_function:(TC_INS_FUNCTION*)func To:(void*)addr;
+- (void*) seach_bind: (TC_INS_FUNCTION*)func;
 
 @end
