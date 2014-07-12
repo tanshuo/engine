@@ -14,6 +14,7 @@ typedef enum{
     ins_jmp_true,
     ins_jmp_false,
     ins_call,
+    ins_push,
     ins_rtn,
     
 } TC_INS;
@@ -22,8 +23,6 @@ typedef enum{
     TC_INSTANCE,//<4 5 6>
     TC_FUNCTION,
     TC_VAR,
-    TC_INT,
-    TC_GLOBOL,
     TC_WHILE, //
     TC_IF,
     TC_BREAK,
@@ -39,6 +38,7 @@ typedef enum{
     TC_AFTER, //after as soon as
     TC_DEFINE,
     TC_END_DEF,
+    TC_PUSH,
     TC_RETURN,
 } TC_Explain;
 

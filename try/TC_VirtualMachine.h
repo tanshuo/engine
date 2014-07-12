@@ -39,6 +39,7 @@
 
 - (int) run_next_ins;
 - (int) call_fun:(TC_Instruction*) t;
+- (int) return_fun:(TC_Instruction*) t;
 
 //search variable deal with the first layer: if no solved: seach stack from top to bot, if no, search local list, search globol list. then process of statement. If it is an instance, gen a TC_INS_VARIABLE.
 - (TC_INS_VARIABLE*) solve_var:(TC_WORD_LAYER*) w;

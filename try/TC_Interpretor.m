@@ -175,8 +175,49 @@
             _message = [NSMutableString stringWithString:@"enddef statement format error"];
             return -1;
         }
+        
+        TC_Instruction* A;
+        A = [TC_Instruction alloc];
+        A.instruct = ins_rtn;
+        A.params = nil;
+        A.src = nil;
+        A.des = nil;
+        [_instruction_table addObject:A];
+        _current_ins_count ++;
+        
         [_var_stack removeAllObjects];
         return 0;
+    }
+    else if(head == TC_PUSH)
+    {
+        if([_defines count] != 2)
+        {
+            _message = [NSMutableString stringWithString:@"push statement error, should be push VAR"];
+            return -1;
+        }
+        else
+        {
+            TC_WORD_LAYER* l;
+            l = [TC_WORD_LAYER alloc];
+            l.word = [[_defines objectAtIndex:1] word];
+            l.type = 0;
+            TC_INS_VARIABLE* var;
+            var = [TC_INS_VARIABLE alloc];
+            var.solved = NO;
+            var.location = VAR_STACK;
+            var.argoffset = 0;
+            var.type = VAR_UNKNOWN;
+            var.var = l;
+            TC_Instruction* A;
+            A = [TC_Instruction alloc];
+            A.instruct = ins_push;
+            A.params = nil;
+            A.src = var;
+            A.des = nil;
+            [_instruction_table addObject:A];
+            _current_ins_count ++;
+            return 0;
+        }
     }
     else if(head == TC_RETURN)
     {
@@ -195,6 +236,7 @@
             A.des = nil;
             [_instruction_table addObject:A];
             _current_ins_count ++;
+            return 0;
         }
     }
     //control
@@ -1193,6 +1235,7 @@
     int offset;
     NSString* temp;
     NSMutableString* result;
+    NSString* tw;
     result = [NSMutableString stringWithString:@""];
     
     for(i = 0; i < [_instruction_table count]; i++)
@@ -1228,6 +1271,16 @@
                 temp = [NSString stringWithFormat:@"%d",offset];
                 [result appendString:temp];
                 break;
+            case ins_push:
+                [result appendString:@" push"];
+                [result appendString:@" "];
+                
+                tw = [[[_instruction_table objectAtIndex:i] src]word];
+                [result appendString:tw];
+                break;
+            case ins_rtn:
+                [result appendString:@" rtn"];
+                break;
         }
         
         [result appendString:@"\n"];
@@ -1251,9 +1304,9 @@
         for(i = [_defines count] - 1; i >= 0; i --)
         {
             int state = [[_defines objectAtIndex:i] explain];
-            if(i != 0 && (state == TC_END_DEF || state == TC_DEFINE))
+            if(i != 0 && (state == TC_END_DEF || state == TC_DEFINE ||state == TC_PUSH))
             {
-                _message = [NSMutableString stringWithString: @"define or enddef is inside the statement"];
+                _message = [NSMutableString stringWithString: @"define or enddef,push is inside the statement"];
                 [self clear_current];
                 return nil;
             }
@@ -1404,6 +1457,12 @@
     temp = [TC_Define alloc];
     temp.word = @"than";
     temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"gen";
+    temp.explain = TC_PUSH;
     temp.right_match = 0;
     [self.dictionary addObject: temp];
     
@@ -1620,6 +1679,7 @@
     fun.location = FUN_DEFINE;
     fun.right_match = 1;
     [_func_table addObject:fun];
+    
     
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;

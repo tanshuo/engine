@@ -1302,11 +1302,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "431"
-            endingLineNumber = "431"
+            startingLineNumber = "473"
+            endingLineNumber = "473"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1318,11 +1318,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "406"
-            endingLineNumber = "406"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1334,11 +1334,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "390"
-            endingLineNumber = "390"
+            startingLineNumber = "432"
+            endingLineNumber = "432"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1366,11 +1366,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "409"
-            endingLineNumber = "409"
+            startingLineNumber = "451"
+            endingLineNumber = "451"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1382,11 +1382,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "408"
-            endingLineNumber = "408"
+            startingLineNumber = "450"
+            endingLineNumber = "450"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1398,11 +1398,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "392"
-            endingLineNumber = "392"
+            startingLineNumber = "434"
+            endingLineNumber = "434"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1414,11 +1414,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "309"
-            endingLineNumber = "309"
+            startingLineNumber = "351"
+            endingLineNumber = "351"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1430,11 +1430,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "310"
-            endingLineNumber = "310"
+            startingLineNumber = "352"
+            endingLineNumber = "352"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1446,11 +1446,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "305"
-            endingLineNumber = "305"
+            startingLineNumber = "347"
+            endingLineNumber = "347"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1462,11 +1462,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "383"
-            endingLineNumber = "383"
+            startingLineNumber = "425"
+            endingLineNumber = "425"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1478,11 +1478,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "377"
-            endingLineNumber = "377"
+            startingLineNumber = "419"
+            endingLineNumber = "419"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1494,11 +1494,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "301"
-            endingLineNumber = "301"
+            startingLineNumber = "343"
+            endingLineNumber = "343"
             landmarkName = "-read_a_tokens"
             landmarkType = "5">
          </BreakpointContent>
@@ -1510,11 +1510,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "228"
-            endingLineNumber = "228"
+            startingLineNumber = "270"
+            endingLineNumber = "270"
             landmarkName = "-genTree"
             landmarkType = "5">
          </BreakpointContent>
@@ -1542,11 +1542,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "784"
-            endingLineNumber = "784"
+            startingLineNumber = "826"
+            endingLineNumber = "826"
             landmarkName = "-genFun:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1558,11 +1558,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "783"
-            endingLineNumber = "783"
+            startingLineNumber = "825"
+            endingLineNumber = "825"
             landmarkName = "-genFun:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1574,11 +1574,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "643"
-            endingLineNumber = "643"
+            startingLineNumber = "685"
+            endingLineNumber = "685"
             landmarkName = "-genWords:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1590,11 +1590,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "781"
-            endingLineNumber = "781"
+            startingLineNumber = "823"
+            endingLineNumber = "823"
             landmarkName = "-genFun:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1606,11 +1606,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "234"
-            endingLineNumber = "234"
+            startingLineNumber = "276"
+            endingLineNumber = "276"
             landmarkName = "-genTree"
             landmarkType = "5">
          </BreakpointContent>
@@ -1622,11 +1622,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
+            startingLineNumber = "593"
+            endingLineNumber = "593"
             landmarkName = "-genLogical:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1634,15 +1634,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "796"
-            endingLineNumber = "796"
+            startingLineNumber = "838"
+            endingLineNumber = "838"
             landmarkName = "-genFun:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1654,11 +1654,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "714"
-            endingLineNumber = "714"
+            startingLineNumber = "756"
+            endingLineNumber = "756"
             landmarkName = "-genWords:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1670,11 +1670,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "716"
-            endingLineNumber = "716"
+            startingLineNumber = "758"
+            endingLineNumber = "758"
             landmarkName = "-genWords:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1686,11 +1686,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "498"
-            endingLineNumber = "498"
+            startingLineNumber = "540"
+            endingLineNumber = "540"
             landmarkName = "-genLogical:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1702,11 +1702,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "621"
-            endingLineNumber = "621"
+            startingLineNumber = "663"
+            endingLineNumber = "663"
             landmarkName = "-genLogical:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1718,11 +1718,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "519"
-            endingLineNumber = "519"
+            startingLineNumber = "561"
+            endingLineNumber = "561"
             landmarkName = "-genLogical:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1734,11 +1734,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426851155.939845"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1556"
-            endingLineNumber = "1556"
+            startingLineNumber = "1615"
+            endingLineNumber = "1615"
             landmarkName = "-initFunction"
             landmarkType = "5">
          </BreakpointContent>
@@ -1750,11 +1750,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426851155.939845"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1103"
-            endingLineNumber = "1103"
+            startingLineNumber = "1145"
+            endingLineNumber = "1145"
             landmarkName = "-genLogicalInstructionsWith:At:To:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1766,11 +1766,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426851155.939845"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1002"
-            endingLineNumber = "1002"
+            startingLineNumber = "1044"
+            endingLineNumber = "1044"
             landmarkName = "-genLogicalInstructionsWith:At:To:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1782,11 +1782,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "811"
-            endingLineNumber = "811"
+            startingLineNumber = "853"
+            endingLineNumber = "853"
             landmarkName = "-genInstruction"
             landmarkType = "5">
          </BreakpointContent>
@@ -1798,11 +1798,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "868"
-            endingLineNumber = "868"
+            startingLineNumber = "910"
+            endingLineNumber = "910"
             landmarkName = "-genInstruction"
             landmarkType = "5">
          </BreakpointContent>
@@ -1810,7 +1810,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Game.m"
@@ -1910,11 +1910,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426851155.939845"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1522"
-            endingLineNumber = "1522"
+            startingLineNumber = "1581"
+            endingLineNumber = "1581"
             landmarkName = "-replace_word_layer:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1926,11 +1926,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426851155.939845"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1536"
-            endingLineNumber = "1536"
+            startingLineNumber = "1595"
+            endingLineNumber = "1595"
             landmarkName = "-replace_word_layer:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1942,11 +1942,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426851155.939845"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1633"
-            endingLineNumber = "1633"
+            startingLineNumber = "1693"
+            endingLineNumber = "1693"
             landmarkName = "@implementation TC_Interpretor"
             landmarkType = "3">
          </BreakpointContent>
@@ -1974,11 +1974,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "792"
-            endingLineNumber = "792"
+            startingLineNumber = "834"
+            endingLineNumber = "834"
             landmarkName = "-genFun:"
             landmarkType = "5">
          </BreakpointContent>
@@ -1990,11 +1990,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_Interpretor.m"
-            timestampString = "426850648.202866"
+            timestampString = "426855489.811249"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "831"
-            endingLineNumber = "831"
+            startingLineNumber = "873"
+            endingLineNumber = "873"
+            landmarkName = "-genInstruction"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_Interpretor.m"
+            timestampString = "426855489.811249"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1324"
+            endingLineNumber = "1324"
+            landmarkName = "-readScript:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_Interpretor.m"
+            timestampString = "426855489.811249"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "904"
+            endingLineNumber = "904"
             landmarkName = "-genInstruction"
             landmarkType = "5">
          </BreakpointContent>
