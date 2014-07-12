@@ -86,6 +86,10 @@
                     return -1;
                 }
             }
+            else if(new.solved == YES && new.location == VAR_STACK)
+            {
+                new = [_var_stack objectAtIndex: (_bp + [new argoffset])];
+            }
             var = [TC_INS_VARIABLE alloc];
             var.solved = YES;
             var.type = new.type;
@@ -115,6 +119,9 @@
                 case VAR_OFF_SET:
                     var.addr = nil;
                     break;
+                case VAR_OBJECT:
+                    var.addr = new.addr;// reference only
+                    break;
             }
             var.argoffset = i;
             [_var_stack addObject:var];
@@ -143,6 +150,45 @@
     return 0;
 }
 
+- (int) return_fun:(TC_Instruction*) t// -1 0
+{
+    TC_INS_VARIABLE* var;
+    var = [_var_stack lastObject];
+    while(var.type != VAR_OFF_SET)
+    {
+        if([_var_stack count] > 0)
+        {
+            [_var_stack removeLastObject];
+            _sp --;
+            var = [_var_stack lastObject];
+        }
+        else
+        {
+            return -1;
+        }
+        
+    }
+    int rtn_bp = var.argoffset;
+    [_var_stack removeLastObject];
+    _sp --;
+    if([_var_stack count] > 0)
+        var = [_var_stack lastObject];
+    else
+        return -1;
+    int rtn_ip = var.argoffset;
+    
+    [_var_stack removeLastObject];
+    _sp --;
+    
+    while(_sp >= _bp)
+    {
+        [_var_stack removeLastObject];
+        _sp --;
+    }
+    _bp = rtn_bp;
+    _ip = rtn_ip;
+    return 0;
+}
 + (TC_VirtualMachine*) initVM: (NSString*) script
 {
     return nil;
