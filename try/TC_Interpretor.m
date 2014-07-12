@@ -375,6 +375,8 @@
             {
                 stick = YES;
                 last_word_is_data = YES;
+                wordbuff[j] = '#';
+                j++;
             }
             else
             {
