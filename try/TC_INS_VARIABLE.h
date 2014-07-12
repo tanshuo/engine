@@ -11,6 +11,7 @@
 #import "TC_WORD_LAYER.h"
 
 typedef enum{
+    VAR_TEMP,
     VAR_GLOBOL,
     VAR_STACK,
     VAR_BIND,

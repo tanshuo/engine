@@ -20,7 +20,7 @@
 @synthesize message = _message;
 @synthesize instruction_table = _instruction_table;
 @synthesize var_stack = _var_stack;
-@synthesize globol = _global;
+
 
 
 
@@ -184,7 +184,7 @@
     for(i = 0;i < [_defines count];i ++)//gen logical layer
     {
         type = [[_defines objectAtIndex:i] explain];
-        if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END)
+        if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END || type == TC_BREAK)
         {
             TC_Conrol_Layer* newlayer;
             newlayer = [TC_Conrol_Layer alloc];
@@ -195,7 +195,7 @@
             {
                 int type;
                 type = [[_defines objectAtIndex:j] explain];
-                if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END)
+                if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END ||type == TC_BREAK)
                 {
                     i = j - 1;
                     break;
@@ -254,7 +254,6 @@
     _instruction_table = [NSMutableArray arrayWithCapacity:10];
     _func_table = [NSMutableArray arrayWithCapacity:10];
     _var_table = [NSMutableArray arrayWithCapacity:10];
-    _global = [NSMutableArray arrayWithCapacity:10];
     _var_stack = [NSMutableArray arrayWithCapacity:10];
     [self initDictionary];
     [self initFunction];
@@ -870,6 +869,38 @@
             _current_ins_count ++;
             [stack addObject:offset];
         }
+        else if(type == TC_BREAK)
+        {
+            if([stack count] == 0)
+            {
+                _message = [NSMutableString stringWithString: @"break is not in loop or if statement"];
+                return -1;
+            }
+            else
+            {
+                int index;
+                TC_Instruction* A;
+                A = [TC_Instruction alloc];
+                A.instruct = ins_jmp;
+                A.params = nil;
+                A.src = nil;
+                for(index = [stack count] - 1;index >= 0; index--)
+                {
+                    if([[stack objectAtIndex:index]mark] == MARK_WHILE_END)
+                    {
+                        A.src = [stack objectAtIndex:index];
+                    }
+                }
+                if(A.src == nil)
+                {
+                    _message = [NSMutableString stringWithString: @"break is not in loop or if statement"];
+                    return -1;
+                }
+                A.des = nil;
+                [_instruction_table addObject:A];
+                _current_ins_count ++;
+            }
+        }
         else if(type == TC_WHILE)
         {
             int head = _current_ins_count;
@@ -1299,6 +1330,12 @@
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
+    temp.word = @"break";
+    temp.explain = TC_BREAK;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
     temp.word = @"on";
     temp.explain = TC_IGNORE;
     temp.right_match = 0;
@@ -1438,12 +1475,12 @@
 
 - (void)clear_current
 {
-    [_defines removeAllObjects];
-    [_root removeAllObjects];
+    _defines = [NSMutableArray arrayWithCapacity:10];
+    _root = [NSMutableArray arrayWithCapacity:10];;
     _instruction_table = [NSMutableArray arrayWithCapacity:10];
-    [_func_table removeAllObjects];
-    [_var_table removeAllObjects];
-    [_var_stack removeAllObjects];
+    _func_table = [NSMutableArray arrayWithCapacity:10];
+    _var_table = [NSMutableArray arrayWithCapacity:10];
+    _var_stack = [NSMutableArray arrayWithCapacity:10];
 }
 
 - (NSMutableArray*) replace_word_layer: (TC_Function_Layer*)f

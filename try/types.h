@@ -25,6 +25,7 @@ typedef enum{
     TC_GLOBOL,
     TC_WHILE, //
     TC_IF,
+    TC_BREAK,
     TC_IGNORE,//let should would on to
     TC_THEN, // keyword ,
     TC_CAL, //calculate
