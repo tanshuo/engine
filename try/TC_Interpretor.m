@@ -84,26 +84,67 @@
     int head = [[_defines objectAtIndex:0] explain];
     if(head == TC_DEFINE)
     {
-        if([_defines count] != 3)
+        if([_defines count] < 2)
         {
             _message = [NSMutableString stringWithString:@"define statement format error"];
             return -1;
         }
+        //find name
+        NSString* name = nil;
+        int rm = 0;//right match
+        NSMutableArray* params = [NSMutableArray arrayWithCapacity:10];
+        for(j = 1; j < [_defines count]; j++)
+        {
+            if([[_defines objectAtIndex:j] explain] == TC_FUNCTION)
+            {
+                name = [[_defines objectAtIndex:j] word];
+                rm = [[_defines objectAtIndex:j] right_match];
+            }
+            else if([[_defines objectAtIndex:j] explain]  == TC_VAR)
+            {
+                TC_WORD_LAYER* temp = [TC_WORD_LAYER alloc];
+                temp.word = [[_defines objectAtIndex:j] word];
+                temp.next_layer = nil;
+                [params addObject: temp];
+            }
+            else if([[_defines objectAtIndex:j] explain] == TC_IGNORE)
+            {
+                
+            }
+            else
+            {
+                _message = [NSMutableString stringWithString:@"define statement format error"];
+                return -1;
+            }
+        }
+        if(name == nil)
+        {
+            _message = [NSMutableString stringWithString:@"can not locate the function name"];
+            return -1;
+        }
         
         TC_Function_Layer* temp = [TC_Function_Layer alloc];
-        temp.right_match = -1;
-        temp.name = [[_defines objectAtIndex:1] word];
-        temp.right_match = [[[_defines objectAtIndex:2] word] integerValue];
+        temp.right_match = rm;
+        temp.name = name;
+        
         TC_INS_FUNCTION* result;
         result = [self searchFunction:temp];
         if(result == nil)
         {
-            _message = [NSMutableString stringWithString:@"function has not been declared"];
+            _message = [NSMutableString stringWithString:@"function has not been declared: "];
+            [_message appendString:temp.name];
+            return -1;
+        }
+        else if(result.location == FUN_BIND)
+        {
+            _message = [NSMutableString stringWithString:@"function has been binded: "];
+            [_message appendString:temp.name];
             return -1;
         }
         else if(result.solved == YES)
         {
-            _message = [NSMutableString stringWithString:@"function has been defined"];
+            _message = [NSMutableString stringWithString:@"function has been defined: "];
+            [_message appendString:temp.name];
             return -1;
         }
         else
@@ -113,40 +154,23 @@
             result.offset = _current_ins_count;
             
             TC_INS_VARIABLE* arg;
-            TC_INS_VARIABLE* src;
-            src = [self searchVariable:temp.target];
-            if(src == nil)
-            {
-                arg = [TC_INS_VARIABLE alloc];
-                arg.solved = NO;
-                arg.location = VAR_STACK;
-                arg.addr = nil;
-                arg.argoffset = 0;
-                arg.var = temp.target;
-            }
-            else
-            {
-                arg = [TC_INS_VARIABLE alloc];
-                arg.solved = src.solved;
-                arg.location = VAR_STACK;
-                arg.addr = src.addr;
-                arg.argoffset = 0;
-                arg.var = src.var;
-            }
+            arg = [TC_INS_VARIABLE alloc];
+            arg.solved = YES;
+            arg.location = VAR_STACK;
+            arg.addr = nil;
+            arg.argoffset = 0;
+            arg.var = temp.target;
             [_var_stack addObject:arg];
+            
             for(i = 0; i < result.right_match; i++)
             {
-                TC_INS_VARIABLE* arg;
-                arg = [self searchVariable:[temp.params objectAtIndex:i]];
-                if(arg == nil)
-                {
-                    arg = [TC_INS_VARIABLE alloc];
-                    arg.solved = src.solved;
-                    arg.location = VAR_STACK;
-                    arg.addr = src.addr;
-                    arg.argoffset = i + 1;
-                    arg.var = src.var;
-                }
+                arg = [TC_INS_VARIABLE alloc];
+                arg = [TC_INS_VARIABLE alloc];
+                arg.solved = YES;
+                arg.location = VAR_STACK;
+                arg.addr = nil;
+                arg.argoffset = i + 1;;
+                arg.var = [temp.params objectAtIndex:i];
                 [_var_stack addObject:arg];
             }
         }
@@ -241,6 +265,7 @@
     _global = [NSMutableArray arrayWithCapacity:10];
     _var_stack = [NSMutableArray arrayWithCapacity:10];
     [self initDictionary];
+    [self initFunction];
 }
 
 - (int) read_a_tokens
@@ -923,7 +948,7 @@
         TC_Instruction* A;
         A = [TC_Instruction alloc];
         A.instruct = ins_call;
-        A.params = l.straight.params;
+        A.params = [self replace_word_layer: l.straight];
         A.src = l.straight.name;
         A.des = [self searchFunction:l.straight];
         [table addObject:A];
@@ -937,13 +962,13 @@
             TC_Instruction* A;
             A = [TC_Instruction alloc];
             A.instruct = ins_call;
-            A.params = l.right.straight.params;
+            A.params = [self replace_word_layer: l.right.straight];
             A.src = l.right.straight.name;
-            A.des = [self searchFunction:l.right.straight];;
+            A.des = [self searchFunction:l.right.straight];
             TC_Instruction* B;
             B = [TC_Instruction alloc];
             B.instruct = ins_call;
-            B.params = l.right.straight.params;
+            B.params = [self replace_word_layer: l.right.straight];
             B.src = l.right.straight.name;
             B.des = [self searchFunction:l.right.straight];
             [table addObject:A];
@@ -955,14 +980,14 @@
             TC_Instruction* A;
             A = [TC_Instruction alloc];
             A.instruct = ins_call;
-            A.params = l.right.straight.params;
+            A.params = [self replace_word_layer: l.right.straight];
             A.src = l.right.straight.name;
             A.des = [self searchFunction:l.right.straight];
             
             TC_Instruction* B;
             B = [TC_Instruction alloc];
             B.instruct = ins_call;
-            B.params = l.left.straight.params;
+            B.params = [self replace_word_layer: l.left.straight];
             B.src = l.left.straight.name;
             B.des = [self searchFunction:l.left.straight];
             
@@ -1038,7 +1063,7 @@
             TC_Instruction* A;
             A = [TC_Instruction alloc];
             A.instruct = ins_call;
-            A.params = l.right.straight.params;
+            A.params = [self replace_word_layer: l.right.straight];
             A.src = l.right.straight.name;
             A.des = [self searchFunction:l.right.straight];
             
@@ -1052,9 +1077,9 @@
             TC_Instruction* A;
             A = [TC_Instruction alloc];
             A.instruct = ins_call;
-            A.params = l.right.straight.params;
+            A.params = [self replace_word_layer: l.right.straight];
             A.src = l.right.straight.name;
-            A.des = [self searchFunction:l.right.straight];;
+            A.des = [self searchFunction:l.right.straight];
             
             [table addObject:A];
             _current_ins_count += 1;
@@ -1082,7 +1107,7 @@
             TC_Instruction* B;
             B = [TC_Instruction alloc];
             B.instruct = ins_call;
-            B.params = l.left.straight.params;
+            B.params = [self replace_word_layer: l.left.straight];
             B.src = l.left.straight.name;
             B.des = [self searchFunction:l.left.straight];;
             
@@ -1096,7 +1121,7 @@
             TC_Instruction* B;
             B = [TC_Instruction alloc];
             B.instruct = ins_call;
-            B.params = l.left.straight.params;
+            B.params = [self replace_word_layer: l.left.straight];
             B.src = l.left.straight.name;
             B.des = [self searchFunction:l.left.straight];
             
@@ -1350,6 +1375,18 @@
     temp.explain = TC_FUNCTION;
     temp.right_match = 0;
     [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"fun1";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"fun2";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
 }
 
 - (TC_INS_FUNCTION*) searchFunction: (TC_Function_Layer*) fun
@@ -1358,20 +1395,51 @@
     for(i = 0; i < [_func_table count]; i ++)
     {
         if(
-           [[(TC_INS_FUNCTION*)[_func_table objectAtIndex:i] name] isEqualToString:[fun name]] &&
-           [(TC_INS_FUNCTION*)[_func_table objectAtIndex:i] right_match] == [fun right_match]
+           [[(TC_INS_FUNCTION*)[_func_table objectAtIndex:i] name] isEqualToString:[fun name]]
            )
         {
             return [_func_table objectAtIndex:i];
         }
     }
+    _message = [NSMutableString stringWithString: @"can not find the symbol: "];
+    [_message appendString:fun.name];
     return nil;
 }
 
 - (TC_INS_VARIABLE*) searchVariable: (TC_WORD_LAYER*) var
 {
     int i;
+    for(i = 0; i < [_var_stack count]; i++)
+    {
+        if([self cmp_word_layer: [[_var_stack objectAtIndex:i] var] With:var])
+        {
+            return [_var_stack objectAtIndex:i];
+        }
+    }
     return nil;
+}
+
+- (BOOL) cmp_word_layer: (TC_WORD_LAYER*)a With: (TC_WORD_LAYER*)b;
+{
+    TC_WORD_LAYER* itera = a;
+    TC_WORD_LAYER* iterb = b;
+    while(itera!=nil&&iterb!=nil)
+    {
+        if([itera.word isEqualToString:iterb.word])
+        {
+            itera = itera.next_layer;
+            iterb = iterb.next_layer;
+        }
+        else
+        {
+            return NO;
+        }
+    }
+    if(itera!=nil || iterb!=nil)
+    {
+        return NO;
+    }
+    return YES;
 }
 
 - (void)clear_current
@@ -1384,4 +1452,115 @@
     [_var_stack removeAllObjects];
 }
 
+- (NSMutableArray*) replace_word_layer: (TC_Function_Layer*)f
+{
+    int i;
+    NSMutableArray* result = [NSMutableArray arrayWithCapacity:10];
+    NSMutableArray* params = [NSMutableArray arrayWithCapacity:10];
+    if(f.target != nil)
+        [params addObject: f.target];
+    for(i = 0;i < [f.params count];i ++)
+    {
+        [params addObject: [f.params objectAtIndex:i]];
+    }
+    TC_INS_VARIABLE* temp;
+    for(i = 0;i < [params count];i ++)
+    {
+        temp = [self searchVariable: [params objectAtIndex:i]];
+        if(temp == nil)
+        {
+            temp = [TC_INS_VARIABLE alloc];
+            temp.solved = NO;
+            temp.argoffset = 0;
+            temp.type = -1;
+            temp.location = -1;
+            temp.var = [params objectAtIndex:i];
+            [result addObject:temp];
+        }
+        else
+        {
+            [result addObject:temp];
+        }
+    }
+    return result;
+}
+
+- (void) initFunction
+{
+   
+    TC_INS_FUNCTION* fun;
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = YES;
+    fun.name = @"is";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = YES;
+    fun.name = @"are";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = YES;
+    fun.name = @"greater";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = YES;
+    fun.name = @"smaller";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = YES;
+    fun.name = @"equal";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = YES;
+    fun.name = @"set";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"fun1";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_DEFINE;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"fun2";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_DEFINE;
+    fun.right_match = 0;
+    [_func_table addObject:fun];
+}
 @end

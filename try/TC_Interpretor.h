@@ -49,12 +49,17 @@
 
 
 - (void) die;
-- (void) initDictionary;
 - (void) dealloc;
+
+- (void) initDictionary;
+- (void) initFunction;
 
 - (TC_Define*) searchDictionary: (NSString*) word;
 - (TC_INS_FUNCTION*) searchFunction: (TC_Function_Layer*) fun;
 - (TC_INS_VARIABLE*) searchVariable: (TC_WORD_LAYER*) var;
+
+- (BOOL) cmp_word_layer: (TC_WORD_LAYER*)a With: (TC_WORD_LAYER*)b;
+- (NSMutableArray*) replace_word_layer: (TC_Function_Layer*)f;
 
 - (void) clear_current;
 - (NSMutableString*) debug;

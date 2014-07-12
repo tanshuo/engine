@@ -1,8 +1,11 @@
-define fun1 2;
-    while my B equal <5,6,7>,
+define A fun1 B;
+    while fun2,
         if my A equal <5,6,7> and  my B is <5,6,7> or B greater than <5,6,7> and B is <5,6,7>,
             my A is  A of B of B ,
         end,
     end;
     if my CC is <5,6,7>, my B is <5,6,7> then end;
+enddef;
+
+define  fun2 ;
 enddef;
