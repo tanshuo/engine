@@ -72,7 +72,8 @@
     TC_INS_FUNCTION* current = (TC_INS_FUNCTION*)[t des];
     if([current solved] == NO && [current location] == FUN_BIND)
     {
-        SEL sel = [self seach_bind:current];
+        SEL sel;
+        sel = [self seach_bind:current];..//zhijie..
         for(i = 0; i < [t.params count]; i++)
         {
             int re;
@@ -83,13 +84,13 @@
                 return -1;
             }
         }
-        if(sel == 0)
+        if(sel <= 0)
         {
             _message = [NSMutableString stringWithString:@"unsolved function symbol"];
             return -1;
         }
         else
-            [_target performSelector:sel withObject:[t params]];
+            _result = [_target performSelector:sel withObject:[t params]];
         _ip++;
         //how to call it?
         //..
