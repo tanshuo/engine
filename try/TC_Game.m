@@ -14,18 +14,7 @@
     TC_Interpretor* _test = [TC_Interpretor alloc];
     [_test start];
     
-    TC_Define* temp;
-    temp = [TC_Define alloc];
-    temp.word = @"A";
-    temp.explain = TC_VAR;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
     
-    temp = [TC_Define alloc];
-    temp.word = @"B";
-    temp.explain = TC_VAR;
-    temp.right_match = 0;
-    [_test.dictionary addObject: temp];
     [_test readScript: @"test"];
     NSString* mss = [_test debug];
     
