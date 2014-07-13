@@ -24,10 +24,15 @@
 {
     TC_Instruction* current = [_ins_list objectAtIndex:_ip];
     int ins = [current instruct];
+    int re;
     switch(ins)
     {
         case ins_call:
-            [self call_fun: [_ins_list objectAtIndex:_ip]];
+            re = [self call_fun: [_ins_list objectAtIndex:_ip]];
+            if(re == -1)
+            {
+                return -1;
+            }
             break;
         case ins_jmp:
             _ip = [[current src] offset];
@@ -51,7 +56,11 @@
             _ip ++;
             break;
         case ins_rtn:
-            [self return_fun:current];
+            re = [self return_fun:current];
+            if(re == -1)
+            {
+                return -1;
+            }
             break;
     }
     return 0;
@@ -70,6 +79,7 @@
             re = [self solve_var: [t.params objectAtIndex:i]];
             if(re == -1)
             {
+                _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
                 return -1;
             }
         }
@@ -95,6 +105,7 @@
                 int re = [self solve_var:new];
                 if(re == -1)
                 {
+                    _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
                     return -1;
                 }
             }
@@ -176,6 +187,7 @@
         }
         else
         {
+            _message = [NSMutableString stringWithString:@"stack cracked"];
             return -1;
         }
         
@@ -186,7 +198,10 @@
     if([_var_stack count] > 0)
         var = [_var_stack lastObject];
     else
+    {
+        _message = [NSMutableString stringWithString:@"stack cracked"];
         return -1;
+    }
     int rtn_ip = var.argoffset;
     
     [_var_stack removeLastObject];

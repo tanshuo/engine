@@ -37,6 +37,7 @@
 @property (strong,nonatomic) NSMutableArray* ins_list;//instructionlist
 @property (strong,nonatomic) NSMutableArray* bind_list;
 @property (strong,nonatomic) TC_DisplayObject* target;
+@property (strong,nonatomic) NSMutableString* message;
 
 + (TC_VirtualMachine*) initVM: (NSString*) script;
 
