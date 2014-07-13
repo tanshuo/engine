@@ -14,6 +14,7 @@ typedef enum{
     VAR_GLOBOL,
     VAR_STACK,
     VAR_BIND,
+    VAR_SELF,
 } TC_INS_VAR_LOCATION;
 
 typedef enum{

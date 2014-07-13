@@ -732,6 +732,11 @@
             }
             else if(stick == YES)
             {
+                if([[sentence objectAtIndex:i - 1] explain] == TC_OF)
+                {
+                    _message = [NSMutableString stringWithString:@"of can not be put together"];
+                    return nil;
+                }
                 newlayer = rootlayer;
                 rootlayer = [TC_WORD_LAYER alloc];
                 rootlayer.word = [[sentence objectAtIndex:i + 1] word];
@@ -745,30 +750,42 @@
                 if(has_one == NO)
                 {
                     has_one = YES;
+                    [result addObject:rootlayer];
+                    i++;
+                    if(i >= [sentence count])
+                    {
+                        break;
+                    }
+                    continue;
                 }
                 else if(has_one == YES)
                 {
                     has_one = NO;
                     stick = NO;
                     [result addObject:rootlayer];
+                    i++;
+                    if(i >= [sentence count])
+                    {
+                        break;
+                    }
+                    continue;
+                    
                 }
             }
-           else
+           else if(stick == NO)
            {
                int state;
                if(i < [sentence count] - 1)
                {
-                   if(i == 0)
-                   {
-                       i ++;
-                       continue;
-                   }
                    state = [[sentence objectAtIndex:i+1] explain];
                    if(state == TC_OF)
                    {
-                       _message = [NSMutableString stringWithString: @"possession discrimination is false around"];
-                       [_message appendString: [[sentence objectAtIndex:i] word]];
-                       return nil;// gramma error
+                       i ++;
+                       if(i >= [sentence count])
+                       {
+                           break;
+                       }
+                       continue;
                    }
                }
                if(i > 0)
@@ -776,9 +793,12 @@
                    state = [[sentence objectAtIndex:i-1] explain];
                    if(state == TC_MY)
                    {
-                       _message = [NSMutableString stringWithString: @"possession discrimination is false around"];
-                       [_message appendString: [[sentence objectAtIndex:i] word]];
-                       return nil;// gramma error
+                       i ++;
+                       if(i >= [sentence count])
+                       {
+                           break;
+                       }
+                       continue;
                    }
                }
                rootlayer = [TC_WORD_LAYER alloc];
@@ -822,13 +842,23 @@
     {
         [temp addObject:[sentence objectAtIndex:j]];
     }
+    if([temp count] == 0)
+    {
+        TC_Define* e;
+        e = [TC_Define alloc];
+        e.word = @"I";
+        e.explain = TC_VAR;
+        e.right_match = 0;
+        [temp addObject:e];
+    }
     result.target = [[self genWords: temp] objectAtIndex:0];
+    [temp removeAllObjects];
     
-    temp = [NSMutableArray arrayWithCapacity:10];
-    for(j = i + 1; j <= [sentence count] - 1; j ++)
+    for(j = i + 1; j < [sentence count]; j ++)
     {
         [temp addObject:[sentence objectAtIndex:j]];
     }
+    
     result.params = [self genWords: temp];
     
     if(result.right_match == [result.params count])
@@ -1652,21 +1682,46 @@
     NSMutableArray* params = [NSMutableArray arrayWithCapacity:10];
     if(f.target != nil)
         [params addObject: f.target];
+    else
+    {
+        TC_WORD_LAYER* me;
+        me = [TC_WORD_LAYER alloc];
+        me.word = @"I";
+        me.type = 0;
+        me.next_layer = nil;
+        [params addObject: me];
+    }
+    
     for(i = 0;i < [f.params count];i ++)
     {
         [params addObject: [f.params objectAtIndex:i]];
     }
+    
     TC_INS_VARIABLE* temp;
+    
     for(i = 0;i < [params count];i ++)
     {
+        if([[[params objectAtIndex:i] word] isEqualToString:@"I"])
+        {
+            temp = [TC_INS_VARIABLE alloc];
+            temp.solved = YES;
+            temp.argoffset = 0;
+            temp.type = VAR_UNKNOWN;
+            temp.location = VAR_SELF;
+            temp.var = [params objectAtIndex:i];
+            [result addObject:temp];
+            continue;
+        }
+        
         temp = [self searchVariable: [params objectAtIndex:i]];
+        
         if(temp == nil)
         {
             temp = [TC_INS_VARIABLE alloc];
             temp.solved = NO;
             temp.argoffset = 0;
             temp.type = VAR_UNKNOWN;
-            temp.location = -1;
+            temp.location = VAR_STACK;
             temp.var = [params objectAtIndex:i];
             [result addObject:temp];
         }

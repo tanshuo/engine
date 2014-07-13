@@ -116,6 +116,10 @@
                     return -1;
                 }
             }
+            else if(new.solved == YES && new.location == VAR_SELF)
+            {
+                new.addr = (__bridge void*)_target;
+            }
             else if(new.solved == YES && new.location == VAR_STACK)
             {
                 new = [_var_stack objectAtIndex: (_bp + [new argoffset])];

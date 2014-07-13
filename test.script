@@ -1,3 +1,4 @@
 define A fun1 B;
-    A move B;
+    A move B of A;
+    creat my A my C;
 enddef
