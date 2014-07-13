@@ -1,4 +1,7 @@
 define A fun1 B;
-    A move B of A;
+    while A greater than B,
+        A move B of A,
+    end;
+
     creat my A my C;
 enddef

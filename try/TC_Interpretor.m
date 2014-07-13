@@ -79,7 +79,13 @@
     [_root removeAllObjects];
     int i;
     int j;
-    
+    for(i = 0; i < [_defines count]; i++)
+    {
+        if([[_defines objectAtIndex:i] explain] == TC_IGNORE)
+        {
+            [_defines removeObject:[_defines objectAtIndex:i]];
+        }
+    }
     //define statement
     int head = [[_defines objectAtIndex:0] explain];
     if(head == TC_DEFINE)
