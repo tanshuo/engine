@@ -83,8 +83,13 @@
                 return -1;
             }
         }
-        [self bind_function:current To: sel];
-        [_target performSelector:sel withObject:[t params]];
+        if(sel == 0)
+        {
+            _message = [NSMutableString stringWithString:@"unsolved function symbol"];
+            return -1;
+        }
+        else
+            [_target performSelector:sel withObject:[t params]];
         _ip++;
         //how to call it?
         //..

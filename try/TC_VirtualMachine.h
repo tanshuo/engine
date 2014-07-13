@@ -52,7 +52,7 @@
 
 
 //look for unsolved function and bind them with address
-- (void) bind_function:(TC_INS_FUNCTION*)func To:(void*)addr;
+- (int) bind_function:(TC_INS_FUNCTION*)func To:(SEL*)addr;
 - (SEL) seach_bind: (TC_INS_FUNCTION*)func;
 
 @end
