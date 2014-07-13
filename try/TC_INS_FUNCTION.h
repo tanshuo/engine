@@ -20,7 +20,7 @@ typedef enum{
 @property BOOL solved;
 @property (strong,nonatomic) NSString* name; //function name
 @property TC_INS_FUNC_LOCATION location;
-@property void* func;//if binded
+@property SEL func;//if binded
 @property int offset;//if defined
 @property int right_match;
 @end

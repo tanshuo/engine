@@ -1275,7 +1275,7 @@
                 [result appendString:@" push"];
                 [result appendString:@" "];
                 
-                tw = [[[_instruction_table objectAtIndex:i] src]word];
+                tw = [[[[_instruction_table objectAtIndex:i] src]var] word];
                 [result appendString:tw];
                 break;
             case ins_rtn:
