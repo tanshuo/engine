@@ -14,6 +14,7 @@
 #import "TC_INS_VARIABLE.h"
 #import "TC_INS_OFFSET.h"
 #import "TC_INS_FUNCTION.h"
+#import "TC_Sprite.h"
 
 
 #import "types.h"
@@ -35,6 +36,7 @@
 @property (strong,nonatomic) NSMutableArray* func_list;//get from the interprator
 @property (strong,nonatomic) NSMutableArray* ins_list;//instructionlist
 @property (strong,nonatomic) NSMutableArray* bind_list;
+@property (strong,nonatomic) TC_DisplayObject* target;
 
 + (TC_VirtualMachine*) initVM: (NSString*) script;
 
@@ -50,6 +52,6 @@
 
 //look for unsolved function and bind them with address
 - (void) bind_function:(TC_INS_FUNCTION*)func To:(void*)addr;
-- (void*) seach_bind: (TC_INS_FUNCTION*)func;
+- (SEL) seach_bind: (TC_INS_FUNCTION*)func;
 
 @end

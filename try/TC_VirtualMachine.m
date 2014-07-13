@@ -18,6 +18,7 @@
 @synthesize local_var_list = _local_var_list;
 @synthesize func_list = _func_list;
 @synthesize ins_list = _ins_list;
+@synthesize target = _target;
 
 - (int) run_next_ins
 {
@@ -62,8 +63,19 @@
     TC_INS_FUNCTION* current = (TC_INS_FUNCTION*)[t des];
     if([current solved] == NO && [current location] == FUN_BIND)
     {
-        void* sel = [self seach_bind:current];
+        SEL sel = [self seach_bind:current];
+        for(i = 0; i < [t.params count]; i++)
+        {
+            int re;
+            re = [self solve_var: [t.params objectAtIndex:i]];
+            if(re == -1)
+            {
+                return -1;
+            }
+        }
         [self bind_function:current To: sel];
+        [_target performSelector:sel withObject:[t params]];
+        _ip++;
         //how to call it?
         //..
     }
