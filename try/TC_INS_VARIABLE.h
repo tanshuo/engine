@@ -23,6 +23,7 @@ typedef enum{
     VAR_VECTOR3,
     VAR_INT,
     VAR_OBJECT,
+    VAR_STRING,
     VAR_OFF_SET,
 } TC_INS_VAR_TYPE;
 

@@ -12,6 +12,7 @@
 @synthesize bp = _bp;
 @synthesize sp = _sp;
 @synthesize true_false = _true_false;
+@synthesize check_call = _check_call;
 @synthesize result = _result;
 @synthesize current_instruction = _current_instruction;
 @synthesize var_stack = _var_stack;
@@ -73,7 +74,7 @@
     if([current solved] == NO && [current location] == FUN_BIND)
     {
         SEL sel;
-        sel = [self seach_bind:current];..//zhijie..
+        sel =  NSSelectorFromString(t.src);
         for(i = 0; i < [t.params count]; i++)
         {
             int re;
@@ -90,7 +91,7 @@
             return -1;
         }
         else
-            _result = [_target performSelector:sel withObject:[t params]];
+            [_target performSelector:sel withObject:[t params]];
         _ip++;
         //how to call it?
         //..
@@ -133,6 +134,10 @@
                 case VAR_FLOAT:
                     var.addr = (float*)malloc(sizeof(float));
                     *((float*)(var.addr)) = *((float*)(new.addr));
+                    break;
+                    
+                case VAR_STRING:
+                    var.addr = new.addr;
                     break;
                 case VAR_VECTOR2:
                     var.addr = (TC_Position2d*)malloc(sizeof(TC_Position2d));
