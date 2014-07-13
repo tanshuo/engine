@@ -119,7 +119,7 @@
         }
         if(name == nil)
         {
-            _message = [NSMutableString stringWithString:@"can not locate the function name"];
+            _message = [NSMutableString stringWithString:@"define can not locate the function name"];
             return -1;
         }
         
@@ -1346,6 +1346,12 @@
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
+    temp.word = @"are";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
     temp.word = @"equal";
     temp.explain = TC_FUNCTION;
     temp.right_match = 1;
@@ -1501,6 +1507,67 @@
     temp.explain = TC_FUNCTION;
     temp.right_match = 0;
     [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"move";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"rotate";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"kill";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"hide";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"setSeq";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"search";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"say";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"creat";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 2;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"adopt";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"abandon";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
     
     temp = [TC_Define alloc];
     temp.word = @"fun1";
@@ -1670,6 +1737,97 @@
     fun.location = FUN_BIND;
     fun.right_match = 1;
     [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"kill";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"adopt";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"abandon";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"hide";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 0;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"search";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"move";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"setSeq";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"rotate";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"creat";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 2;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"say";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
     
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;

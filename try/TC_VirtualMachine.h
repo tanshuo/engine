@@ -64,7 +64,7 @@
 - (void) set:(NSMutableArray*) params;// a set <5 6 7>
 - (void) is:(NSMutableArray*) params;// a is b
 
-- (void) move:(NSMutableArray*) params;// a move <5 6 >
+- (void) move:(NSMutableArray*) params;// a move <5 6 7>
 - (void) rotate:(NSMutableArray*) params;// a rotate <90>
 - (void) setSeq:(NSMutableArray*) params;// a set <3,4,5>
 
@@ -73,7 +73,8 @@
 - (void) adopt:(NSMutableArray*) params;// adopt a
 - (void) abandon:(NSMutableArray*) params;// abandon my child abondon a
 - (void) search:(NSMutableArray*) params;// search string
-- (void) creat:(NSMutableArray*) params;// create game object
+- (void) creat:(NSMutableArray*) params;// create prefab position return reult
+- (void) say:(NSMutableArray*) params;//say <"hello">
 
 
 
