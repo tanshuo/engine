@@ -1675,8 +1675,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "546"
             endingLineNumber = "546"
-            landmarkName = "-genLogical:"
-            landmarkType = "5">
+            landmarkName = "@implementation TC_Interpretor"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1883,8 +1883,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1684"
             endingLineNumber = "1684"
-            landmarkName = "-replace_word_layer:"
-            landmarkType = "5">
+            landmarkName = "@implementation TC_Interpretor"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1915,8 +1915,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1912"
             endingLineNumber = "1912"
-            landmarkName = "@implementation TC_Interpretor"
-            landmarkType = "3">
+            landmarkName = "-initFunction"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
