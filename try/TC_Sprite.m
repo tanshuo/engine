@@ -9,6 +9,12 @@
 #import "TC_Sprite.h"
 
 @implementation TC_Sprite
+
+@synthesize currentFrame = _currentFrame;
+@synthesize currentSequence = _currentSequence;
+@synthesize totalSequence = _totalSequence;
+@synthesize frameSpeed = _frameSpeed;
+
 - (void) born: (NSString*)prefab atGroup:(TC_ID)g
 {
     int i;

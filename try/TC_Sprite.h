@@ -18,6 +18,11 @@
     NSMutableArray* _anims;
     NSMutableArray* _totalFrame;
 }
+@property TC_ID currentFrame;
+@property TC_ID currentSequence;
+@property TC_ID totalSequence;
+@property TC_ID frameSpeed;
+
 - (void) born: (NSString*)prefab atGroup: (TC_ID)g;
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script  WithShader:(NSString*)shader WithFrame: (NSMutableArray*)frames WithGroup: (TC_ID)group;
 - (void) drawSelf;
