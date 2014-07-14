@@ -18,6 +18,7 @@
 
 @interface TC_DisplayObject:NSObject
 {
+    TC_OBJ_TYPE _type;
     TC_ID _id;
     NSString* _name;
     BOOL _show;
@@ -42,11 +43,16 @@
     TC_Position _position;
   
     TC_ID _currentline;
-    
+    TC_VirtualMachine* _virtual;
     
     TC_Signal _eventlist[50];
 }
 @property (strong,nonatomic) TC_VirtualMachine* virtual;
+@property TC_Position position;
+@property float rotation;
+@property float w;
+@property float h;
+@property TC_OBJ_TYPE type;
 
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture;
 

@@ -10,6 +10,13 @@
 #define try_types_h
 
 typedef enum{
+    OBJDISPLAY,
+    OBJSPRITE,
+    OBJCAMARA,
+    OBJLAYER,
+} TC_OBJ_TYPE;
+
+typedef enum{
     ins_jmp,
     ins_jmp_true,
     ins_jmp_false,

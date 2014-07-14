@@ -17,14 +17,24 @@
     TC_ID _group;
     BOOL _alive;
 }
+@property (strong,nonatomic) TC_Layer* parent;
+@property (strong,nonatomic) NSMutableArray* child;
+@property float relativeRotation;
+@property TC_Position relativePosition;
+@property TC_ID group;
+@property BOOL alive;
+@property int child_num;
+
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture WithGroup: (TC_ID)group;
 - (void) selfUpateWithAspect: (float)aspect;
 - (TC_Position)getRelativePosition;
 - (float)getRelativeRotation;
+- (TC_ID) getGroup;
+
 - (void) setRelativePositionWithX: (float)x WithY: (float)y;
 - (void) setRelativeRotation: (float) deg;
 - (void) setParent: (TC_Layer*) parent;
-- (TC_ID) getGroup;
+
 - (BOOL) addChild: (TC_Layer*) child;
 
 - (TC_Layer*) getChildByName: (NSString*)name;

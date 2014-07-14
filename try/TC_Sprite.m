@@ -19,6 +19,7 @@
         return;
     }
     [self InitialWithName:info.name WithX:0 WithY:0 WithZ:-90 WithHeight:info.h WithWidth:info.w WithScript:info.script WithShader:info.shader WithFrame:info.frame_txt WithGroup:0];
+    _type = OBJSPRITE;
     _currentFrame = 0;
     _currentSequence = 0;
     _totalFrame = [NSMutableArray arrayWithCapacity:10];

@@ -9,10 +9,21 @@
 #import "TC_Layer.h"
 
 @implementation TC_Layer
+
+@synthesize parent = _parent;
+@synthesize child = _child;
+@synthesize relativePosition = _relativePosition;
+@synthesize relativeRotation = _relativeRotation;
+@synthesize group = _group;
+@synthesize alive = _alive;
+@synthesize child_num = _child_num;
+
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture WithGroup: (TC_ID)group;
 {
+    
     TC_ID result = 0;
     result = [super InitialWithName:name WithX:x WithY:y WithZ:z WithHeight:height WithWidth:width WithScript:script WithShader:shader WithTexture:texture];
+    _type = OBJLAYER;
     if(!result)
     {
         return 0;

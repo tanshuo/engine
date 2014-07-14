@@ -24,6 +24,7 @@
     _child = [NSMutableArray arrayWithCapacity:10];
     _parent = nil;
     _name = @"camera";
+    _type = OBJCAMARA;
 };
 - (void) die
 {
