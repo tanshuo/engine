@@ -166,6 +166,7 @@
                 arg.solved = YES;
                 arg.location = VAR_STACK;
                 arg.addr = nil;
+                arg.obj = nil;
                 arg.type = VAR_UNKNOWN;
                 arg.argoffset = i;;
                 arg.var = [params objectAtIndex:i];

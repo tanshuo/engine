@@ -35,6 +35,7 @@ typedef enum{
 @property TC_INS_VAR_TYPE type;
 @property (strong,nonatomic) TC_WORD_LAYER* var;
 @property void* addr;
+@property id obj;
 
 - (void)dealloc;
 @end

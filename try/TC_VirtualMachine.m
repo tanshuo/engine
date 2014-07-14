@@ -92,7 +92,7 @@
         }
         else
             [_target performSelector:sel withObject:[t params]];
-        _ip++;
+        _ip ++;
         //how to call it?
         //..
     }
@@ -118,7 +118,7 @@
             }
             else if(new.solved == YES && new.location == VAR_SELF)
             {
-                new.addr = (__bridge void*)_target;
+                new.obj = _target;
             }
             else if(new.solved == YES && new.location == VAR_STACK)
             {
@@ -128,6 +128,8 @@
             var.solved = YES;
             var.type = new.type;
             var.var = new.var;
+            var.addr = nil;
+            var.obj =nil;
             var.location = VAR_STACK;
             switch(var.type)
             {
@@ -158,7 +160,7 @@
                     var.addr = nil;
                     break;
                 case VAR_OBJECT:
-                    var.addr = new.addr;// reference only
+                    var.obj = new.obj;// reference only
                     break;
             }
             var.argoffset = i;
@@ -171,6 +173,7 @@
         var.var = nil;
         var.location = VAR_STACK;
         var.addr = nil;
+        var.obj = nil;
         var.argoffset = oldip;// return offset
         [_var_stack addObject:var];
         _sp ++;
@@ -181,6 +184,7 @@
         var.var = nil;
         var.location = VAR_STACK;
         var.addr = nil;
+        var.obj = nil;
         var.argoffset = oldbp;// old frame pointer
         [_var_stack addObject:var];
         _ip = [current offset];
@@ -231,9 +235,21 @@
     _ip = rtn_ip;
     return 0;
 }
+
+//search variable deal with the first layer: if no solved: seach stack from top to bot, if no, search local list, search globol list. then process of statement. If it is an instance, gen a TC_INS_VARIABLE. if the word layer of seach target is nil, jump over;  *** if the first layer is my, return target's atrribute(refer in addr)
+- (int) solve_var:(TC_INS_VARIABLE*) w // -1 0
+{
+    
+    return -1;
+}
+
+
 + (TC_VirtualMachine*) initVM: (NSString*) script
 {
     return nil;
 }
+
+
+
 
 @end
