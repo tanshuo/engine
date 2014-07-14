@@ -11,13 +11,13 @@
 @implementation TC_Game
 + (void) gameStart
 {
+    _global = [NSMutableArray arrayWithCapacity:10];
     TC_Interpretor* _test = [TC_Interpretor alloc];
     [_test start];
     
     
     [_test readScript: @"test"];
     NSString* mss = [_test debug];
-    
     ///////////
     int i;
     txtlist = [NSMutableArray arrayWithCapacity:10];

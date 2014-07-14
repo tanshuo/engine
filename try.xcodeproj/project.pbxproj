@@ -74,6 +74,7 @@
 		F593536B195E64CD0097B712 /* TC_Define.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TC_Define.m; sourceTree = "<group>"; };
 		F59382E5195A879900CB2A80 /* TC_Game.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Game.h; path = try/TC_Game.h; sourceTree = "<group>"; };
 		F59382E6195A879900CB2A80 /* TC_Game.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Game.m; path = try/TC_Game.m; sourceTree = "<group>"; };
+		F596B36D1973D9AF00747655 /* TC_OBJ_VIRTUAL.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TC_OBJ_VIRTUAL.h; sourceTree = "<group>"; };
 		F596B490196C6FA000D60B63 /* test.script */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.script; sourceTree = "<group>"; };
 		F596B492196E1A7E00D60B63 /* TC_INS_OFFSET.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_INS_OFFSET.h; path = try/TC_INS_OFFSET.h; sourceTree = "<group>"; };
 		F596B493196E1A7E00D60B63 /* TC_INS_OFFSET.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_INS_OFFSET.m; path = try/TC_INS_OFFSET.m; sourceTree = "<group>"; };
@@ -247,6 +248,7 @@
 				F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */,
 				F597F91B195E0334004DEE23 /* TC_Shaderinfo.h */,
 				F597F91C195E0334004DEE23 /* TC_Shaderinfo.m */,
+				F596B36D1973D9AF00747655 /* TC_OBJ_VIRTUAL.h */,
 			);
 			name = utility;
 			sourceTree = "<group>";

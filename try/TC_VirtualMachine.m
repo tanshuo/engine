@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 tanshuo. All rights reserved.
 //
 
-#import "TC_VirtualMachine.h"
+#import "TC_OBJ_VIRTUAL.h"
 @implementation TC_VirtualMachine
 @synthesize ip = _ip;
 @synthesize bp = _bp;
@@ -70,6 +70,7 @@
 - (int) call_fun:(TC_Instruction*) t
 {
     int i;
+    TC_INS_VARIABLE* s;
     TC_INS_FUNCTION* current = (TC_INS_FUNCTION*)[t des];
     if([current solved] == NO && [current location] == FUN_BIND)
     {
@@ -77,9 +78,8 @@
         sel =  NSSelectorFromString(t.src);
         for(i = 0; i < [t.params count]; i++)
         {
-            int re;
-            re = [self solve_var: [t.params objectAtIndex:i]];
-            if(re == -1)
+            s = [self solve_var: [[t.params objectAtIndex:i] var] In:self];
+            if(s == nil)
             {
                 _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
                 return -1;
@@ -109,8 +109,8 @@
             // copy arguement;
             if(new.solved == NO)//may wrong
             {
-                int re = [self solve_var:new];
-                if(re == -1)
+                new = [self solve_var:[new var] In:self];
+                if(new == nil)
                 {
                     _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
                     return -1;
@@ -119,17 +119,13 @@
             else if(new.solved == YES && new.location == VAR_SELF)
             {
                 new.obj = _target;
+                new.type = VAR_OBJECT;
             }
             else if(new.solved == YES && new.location == VAR_STACK)
             {
                 new = [_var_stack objectAtIndex: (_bp + [new argoffset])];
             }
-            var = [TC_INS_VARIABLE alloc];
-            var.solved = YES;
             var.type = new.type;
-            var.var = new.var;
-            var.addr = nil;
-            var.obj =nil;
             var.location = VAR_STACK;
             switch(var.type)
             {
@@ -143,7 +139,7 @@
                     break;
                     
                 case VAR_STRING:
-                    var.addr = new.addr;
+                    var.obj = new.obj;
                     break;
                 case VAR_VECTOR2:
                     var.addr = (TC_Position2d*)malloc(sizeof(TC_Position2d));
@@ -163,6 +159,7 @@
                     var.obj = new.obj;// reference only
                     break;
             }
+            var.solved = YES;
             var.argoffset = i;
             [_var_stack addObject:var];
             _sp++;
@@ -237,10 +234,115 @@
 }
 
 //search variable deal with the first layer: if no solved: seach stack from top to bot, if no, search local list, search globol list. then process of statement. If it is an instance, gen a TC_INS_VARIABLE. if the word layer of seach target is nil, jump over;  *** if the first layer is my, return target's atrribute(refer in addr)
-- (int) solve_var:(TC_INS_VARIABLE*) w // -1 0
+- (TC_INS_VARIABLE*) solve_var:(TC_WORD_LAYER*) w In:(TC_VirtualMachine*)m// nil
 {
-    
-    return -1;
+    int i;
+
+    TC_WORD_LAYER* new_w;
+    TC_VirtualMachine* new_m;
+    if([w.word characterAtIndex:0] == '#')
+    {
+        return [self genInstance:w.word];
+    }
+    else if([w.word isEqualToString:@"my"])
+    {
+        if(w.next_layer == nil)
+        {
+            _message = [NSMutableString stringWithString:@"no indicated attribite for current object"];
+            return nil;
+        }
+        new_m = m;
+        new_w = w.next_layer;
+        return [self solve_var:new_w In:new_m];
+    }
+    else if(w.next_layer == nil)
+    {
+        for(i = m.sp; i >= 0; i --)
+        {
+            TC_INS_VARIABLE* nv = [m.var_stack objectAtIndex:i];
+            if([[[nv var] word] isEqualToString:w.word])
+            {
+                return nv;
+            }
+        }
+        for(i = 0; i < [m.local_var_list count]; i ++)
+        {
+            TC_INS_VARIABLE* nv = [m.local_var_list objectAtIndex:i];
+            if([[[nv var] word] isEqualToString:w.word])
+            {
+                return nv;
+            }
+        }
+        for(i = 0; i < [_global count]; i ++)
+        {
+            TC_INS_VARIABLE* nv = [_global objectAtIndex:i];
+            if([[[nv var] word] isEqualToString:w.word])
+            {
+                return nv;
+            }
+        }
+    }
+    else
+    {
+        for(i = m.sp; i >= 0; i --)
+        {
+            TC_INS_VARIABLE* nv = [m.var_stack objectAtIndex:i];
+            if([[[nv var] word] isEqualToString:w.word])
+            {
+                if(nv.type == VAR_OBJECT)
+                {
+                    new_w = w.next_layer;
+                    new_m = [[nv obj] virtual];
+                    return [self solve_var: new_w In:new_m];
+                }
+                else
+                {
+                    _message = [NSMutableString stringWithString:@"try to get an attribute of a non-object variable"];
+                    return nil;
+                }
+            }
+        }
+        //if not in the stack
+        for(i = 0; i < [m.local_var_list count]; i ++)
+        {
+            TC_INS_VARIABLE* nv = [m.local_var_list objectAtIndex:i];
+            if([[[nv var] word] isEqualToString:w.word])
+            {
+                if(nv.type == VAR_OBJECT)
+                {
+                    new_w = w.next_layer;
+                    new_m = [[nv obj] virtual];
+                    return [self solve_var: new_w In:new_m];
+                }
+                else
+                {
+                    _message = [NSMutableString stringWithString:@"try to get an attribute of a non-object variable"];
+                    return nil;
+                }
+            }
+        }
+        
+        //in globol
+        for(i = 0; i < [_global count]; i ++)
+        {
+            TC_INS_VARIABLE* nv = [m.local_var_list objectAtIndex:i];
+            if([[[nv var] word] isEqualToString:w.word])
+            {
+                if(nv.type == VAR_OBJECT)
+                {
+                    new_w = w.next_layer;
+                    new_m = [[nv obj] virtual];
+                    return [self solve_var: new_w In:new_m];
+                }
+                else
+                {
+                    _message = [NSMutableString stringWithString:@"try to get an attribute of a non-object variable"];
+                    return nil;
+                }
+            }
+        }
+    }
+    return 0;
 }
 
 
@@ -253,3 +355,4 @@
 
 
 @end
+

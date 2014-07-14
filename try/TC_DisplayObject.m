@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 tanshuo. All rights reserved.
 //
 
-#import "TC_DisplayObject.h"
+#import "TC_OBJ_VIRTUAL.h"
 
 
 @implementation TC_DisplayObject

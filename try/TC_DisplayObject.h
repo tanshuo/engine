@@ -42,10 +42,11 @@
     TC_Position _position;
   
     TC_ID _currentline;
-    TC_VirtualMachine* _virtual;
+    
     
     TC_Signal _eventlist[50];
 }
+@property (strong,nonatomic) TC_VirtualMachine* virtual;
 
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture;
 
