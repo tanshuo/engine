@@ -30,6 +30,7 @@ typedef enum{
 
 @interface TC_INS_VARIABLE : NSObject
 @property BOOL solved;
+@property BOOL borrow;
 @property int argoffset;
 @property TC_INS_VAR_LOCATION location;
 @property TC_INS_VAR_TYPE type;

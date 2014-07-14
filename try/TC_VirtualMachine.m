@@ -126,37 +126,47 @@
                 new = [_var_stack objectAtIndex: (_bp + [new argoffset])];
             }
             var.type = new.type;
+            var.addr = nil;
+            var.obj = nil;
             var.location = VAR_STACK;
             switch(var.type)
             {
                 case VAR_INT:
                     var.addr = (int*)malloc(sizeof(int));
+                    var.borrow = NO;
                     *((int*)(var.addr)) = *((int*)(new.addr));
                     break;
                 case VAR_FLOAT:
                     var.addr = (float*)malloc(sizeof(float));
                     *((float*)(var.addr)) = *((float*)(new.addr));
+                    var.borrow = NO;
                     break;
                     
                 case VAR_STRING:
                     var.obj = new.obj;
+                    var.borrow = NO;
                     break;
                 case VAR_VECTOR2:
                     var.addr = (TC_Position2d*)malloc(sizeof(TC_Position2d));
+                    var.borrow = NO;
                     *((TC_Position2d*)(var.addr)) = *((TC_Position2d*)(new.addr));
                     break;
                 case VAR_VECTOR3:
                     var.addr = (TC_Position*)malloc(sizeof(TC_Position));
+                    var.borrow = NO;
                     *((TC_Position*)(var.addr)) = *((TC_Position*)(new.addr));
                     break;
                 case VAR_UNKNOWN:
                     var.addr = nil;
+                    var.borrow = NO;
                     break;
                 case VAR_OFF_SET:
                     var.addr = nil;
+                    var.borrow = NO;
                     break;
                 case VAR_OBJECT:
                     var.obj = new.obj;// reference only
+                    var.borrow = NO;
                     break;
             }
             var.solved = YES;
@@ -166,6 +176,7 @@
         }
         var = [TC_INS_VARIABLE alloc];
         var.solved = YES;
+        var.borrow = NO;
         var.type = VAR_OFF_SET;
         var.var = nil;
         var.location = VAR_STACK;
@@ -177,6 +188,7 @@
         
         var = [TC_INS_VARIABLE alloc];
         var.solved = YES;
+        var.borrow = NO;
         var.type = VAR_OFF_SET;
         var.var = nil;
         var.location = VAR_STACK;

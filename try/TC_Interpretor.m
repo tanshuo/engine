@@ -168,7 +168,8 @@
                 arg.addr = nil;
                 arg.obj = nil;
                 arg.type = VAR_UNKNOWN;
-                arg.argoffset = i;;
+                arg.argoffset = i;
+                arg.borrow = NO;
                 arg.var = [params objectAtIndex:i];
                 [_var_stack addObject:arg];
             }
@@ -213,7 +214,10 @@
             var.solved = NO;
             var.location = VAR_STACK;
             var.argoffset = 0;
+            var.borrow = NO;
             var.type = VAR_UNKNOWN;
+            var.addr = nil;
+            var.obj = nil;
             var.var = l;
             TC_Instruction* A;
             A = [TC_Instruction alloc];
@@ -1713,7 +1717,10 @@
             temp = [TC_INS_VARIABLE alloc];
             temp.solved = YES;
             temp.argoffset = 0;
+            temp.addr = nil;
+            temp.obj = nil;
             temp.type = VAR_UNKNOWN;
+            temp.borrow = NO;
             temp.location = VAR_SELF;
             temp.var = [params objectAtIndex:i];
             [result addObject:temp];
@@ -1727,7 +1734,10 @@
             temp = [TC_INS_VARIABLE alloc];
             temp.solved = NO;
             temp.argoffset = 0;
+            temp.addr = nil;
+            temp.obj = nil;
             temp.type = VAR_UNKNOWN;
+            temp.borrow = NO;
             temp.location = VAR_STACK;
             temp.var = [params objectAtIndex:i];
             [result addObject:temp];
