@@ -354,9 +354,14 @@
             }
         }
     }
-    return 0;
+    return nil;
 }
 
+- (TC_INS_VARIABLE*) genInstance:(NSString*) w
+{
+
+    return nil;
+}
 
 + (TC_VirtualMachine*) initVM: (NSString*) script
 {

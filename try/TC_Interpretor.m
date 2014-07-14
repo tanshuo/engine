@@ -345,6 +345,7 @@
     int j = 0;
     BOOL flag = NO;
     BOOL stick = NO;
+    BOOL stick2 = NO;
     BOOL last_word_is_data = NO;
     [_defines removeAllObjects];
     int length = [_line lengthOfBytesUsingEncoding:NSASCIIStringEncoding];
@@ -458,10 +459,17 @@
         }
         else if(c == '>')
         {
-            if(stick == YES)
+            if(stick == YES && stick2 == NO)
             {
                 stick = NO;
                 //wordbuff[j] = 0;
+            }
+            else if(stick == YES && stick2 == YES)
+            {
+                wordbuff[j] = c;
+                j++;
+                i++;
+                continue;
             }
             else
             {
@@ -475,6 +483,7 @@
             if(stick == YES)
             {
                 flag = YES;
+                
                 wordbuff[j] = c;
                 i++;
                 continue;
@@ -513,6 +522,17 @@
         else if(!(c == EOF || c == ' ' || c == '\n' || c == '\t'))
         {
             flag = YES;
+            if(c == '\"')
+            {
+                if(stick2 == NO)
+                {
+                    stick2 = YES;
+                }
+                else
+                {
+                    stick2 = NO;
+                }
+            }
             wordbuff[j] = c;
             
             if(j < MAX_LINE_SIZE - 1)
@@ -700,6 +720,7 @@
     int i = 0;
     int state;
     BOOL stick = NO;
+    
     BOOL has_one = NO;
     TC_WORD_LAYER* newlayer;
     TC_WORD_LAYER* rootlayer;
