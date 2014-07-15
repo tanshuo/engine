@@ -33,6 +33,7 @@
     if(_input < 0)
     {
         _message = [NSMutableString stringWithString:@"no such file"];
+          NSLog(@"%@",_message); exit(1);
         return -1; // no file
     }
     else
@@ -91,9 +92,10 @@
     int head = [[_defines objectAtIndex:0] explain];
     if(head == TC_DECLARE)
     {
-        if([_defines count] != 5)
+        if([_defines count] != 4)
         {
             _message = [NSMutableString stringWithString:@"declare statement format error"];
+              NSLog(@"%@",_message); exit(1);
             return -1;
         }
         else
@@ -104,10 +106,10 @@
                 temp = [TC_Define alloc];
                 temp.word = [[_defines objectAtIndex:2] word];
                 temp.explain = TC_FUNCTION;
-                temp.right_match = [[[_defines objectAtIndex:4]word] integerValue];
+                temp.right_match = [[[_defines objectAtIndex:3]word] integerValue];
+               
                 [self.dictionary addObject: temp];
                 //_self_dec ++;
-                
                 TC_INS_FUNCTION* fun;
                 fun = [TC_INS_FUNCTION alloc];
                 fun.solved = NO;
@@ -116,6 +118,14 @@
                 fun.offset = 0;
                 fun.location = FUN_DEFINE;
                 fun.right_match = temp.right_match;
+                TC_Function_Layer* f = [TC_Function_Layer alloc];
+                f.name = fun.name;
+                if([self searchFunction:f])
+                {
+                    _message = [NSMutableString stringWithString:@"symbol has been used"];
+                      NSLog(@"%@",_message); exit(1);
+                    return -1;
+                }
                 [_func_table addObject:fun];
                 return 0;
             }
@@ -135,21 +145,27 @@
                 temp.argoffset = 0;
                 temp.borrow = NO;
                 temp.var = w;
-                if([[[_defines objectAtIndex:4]word]isEqualToString:@"float"])
+                if([self searchVariable:w])
+                {
+                    _message = [NSMutableString stringWithString:@"symbol has been used"];
+                      NSLog(@"%@",_message); exit(1);
+                        return -1;
+                }
+                if([[[_defines objectAtIndex:3]word]isEqualToString:@"float"])
                 {
                     temp.type = VAR_FLOAT;
                     float* data = (float*)malloc(sizeof(float));
                     *data = 0;
                     temp.addr = data;
                 }
-                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"int"])
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"int"])
                 {
                     temp.type = VAR_INT;
                     int* data = (int*)malloc(sizeof(int));
                     *data = 0;
                     temp.addr = data;
                 }
-                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"vector2"])
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"vector2"])
                 {
                     temp.type = VAR_VECTOR2;
                     TC_Position2d* data = (TC_Position2d*)malloc(sizeof(TC_Position2d));
@@ -157,7 +173,7 @@
                     data->y = 0;
                     temp.addr = data;
                 }
-                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"vector3"])
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"vector3"])
                 {
                     temp.type = VAR_VECTOR3;
                     TC_Position* data = (TC_Position*)malloc(sizeof(TC_Position));
@@ -166,19 +182,19 @@
                     data->z = 0;
                     temp.addr = data;
                 }
-                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"string"])
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"string"])
                 {
                     temp.type = VAR_STRING;
                     temp.obj = @"";
                     temp.borrow = YES;
                 }
-                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"object"])
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"object"])
                 {
                     temp.type = VAR_OBJECT;
                     temp.borrow = YES;
                     temp.obj = nil;
                 }
-                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"list"])
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"list"])
                 {
                     temp.type = VAR_LIST;
                     temp.obj = [NSMutableArray arrayWithCapacity:10];
@@ -195,6 +211,7 @@
         if([_defines count] < 2)
         {
             _message = [NSMutableString stringWithString:@"define statement format error"];
+              NSLog(@"%@",_message); exit(1);
             return -1;
         }
         if([[[_defines objectAtIndex:1]word] isEqualToString:@"start"])
@@ -230,12 +247,14 @@
             else
             {
                 _message = [NSMutableString stringWithString:@"define statement format error"];
+                  NSLog(@"%@",_message); exit(1);
                 return -1;
             }
         }
         if(name == nil)
         {
             _message = [NSMutableString stringWithString:@"define can not locate the function name"];
+              NSLog(@"%@",_message); exit(1);
             return -1;
         }
         
@@ -248,6 +267,7 @@
         if(result == nil)
         {
             _message = [NSMutableString stringWithString:@"function has not been declared: "];
+              NSLog(@"%@",_message); exit(1);
             [_message appendString:temp.name];
             return -1;
         }
@@ -255,12 +275,14 @@
         {
             _message = [NSMutableString stringWithString:@"function has been binded: "];
             [_message appendString:temp.name];
+              NSLog(@"%@",_message); exit(1);
             return -1;
         }
         else if(result.solved == YES)
         {
             _message = [NSMutableString stringWithString:@"function has been defined: "];
             [_message appendString:temp.name];
+              NSLog(@"%@",_message); exit(1);
             return -1;
         }
         else
@@ -291,6 +313,7 @@
         if([_defines count] != 1)
         {
             _message = [NSMutableString stringWithString:@"enddef statement format error"];
+              NSLog(@"%@",_message); exit(1);
             return -1;
         }
         
@@ -311,6 +334,7 @@
         if([_defines count] != 2)
         {
             _message = [NSMutableString stringWithString:@"push statement error, should be push VAR"];
+              NSLog(@"%@",_message); exit(1);
             return -1;
         }
         else
@@ -345,6 +369,7 @@
         if([_defines count] != 1)
         {
             _message = [NSMutableString stringWithString:@"return statement error"];
+              NSLog(@"%@",_message); exit(1);
             return -1;
         }
         else
@@ -452,6 +477,7 @@
     if(wordbuff == nil)
     {
         _message = [NSMutableString stringWithString:@"no enough mem"];
+          NSLog(@"%@",_message); exit(1);
         return -1;
     }
     char c;
@@ -480,6 +506,7 @@
             {
                 _message = [NSMutableString stringWithString:@"no such period"];
                 free(wordbuff);
+                  NSLog(@"%@",_message); exit(1);
                 return 0;// no such ,
             }
             [_defines addObject:token];
@@ -502,6 +529,7 @@
                 {
                     _message = [NSMutableString stringWithString:@"no such period"];
                     free(wordbuff);
+                      NSLog(@"%@",_message); exit(1);
                     return 0;// no such ,
                 }
                 [_defines addObject:token];
@@ -524,6 +552,7 @@
                 {
                     _message = [NSMutableString stringWithString:@"no such period"];
                     free(wordbuff);
+                      NSLog(@"%@",_message); exit(1);
                     return 0;// no such ,
                 }
                 [_defines addObject:token];
@@ -540,6 +569,7 @@
                 {
                     _message = [NSMutableString stringWithString:@"no such period"];
                     free(wordbuff);
+                      NSLog(@"%@",_message); exit(1);
                     return 0;// no such ,
                 }
                 [_defines addObject:token];
@@ -552,6 +582,7 @@
                 _message = [NSMutableString stringWithString:@"can not find the word: "];
                 [_message appendString:[NSString stringWithUTF8String:wordbuff]];
                 free(wordbuff);
+                  NSLog(@"%@",_message); exit(1);
                 return 0;
             } // no such word
         }
@@ -568,6 +599,7 @@
             {
                 _message = [NSMutableString stringWithString:@"double <"];
                 free(wordbuff);
+                  NSLog(@"%@",_message); exit(1);
                 return 0;
             }
         }
@@ -589,6 +621,7 @@
             {
                 _message = [NSMutableString stringWithString:@"double >"];
                 free(wordbuff);
+                  NSLog(@"%@",_message); exit(1);
                 return 0;
             }
         }
@@ -629,6 +662,7 @@
                 _message = [NSMutableString stringWithString:@"can not find the word: "];
                 [_message appendString:[NSString stringWithUTF8String:wordbuff]];
                 free(wordbuff);
+                  NSLog(@"%@",_message); exit(1);
                 return 0;// no such word
             }
             
@@ -655,6 +689,7 @@
             {
                 _message = [NSMutableString stringWithString:@"over flow"];
                 free(wordbuff);
+                  NSLog(@"%@",_message); exit(1);
                 return -1;
             }
         }
@@ -709,6 +744,7 @@
             if([function_express count] == 0)
             {
                  _message = [NSMutableString stringWithString:@"logical format error"];
+                  NSLog(@"%@",_message); exit(1);
                 return nil;
             }
             [fc_array addObject: function_express];
@@ -721,6 +757,7 @@
     if([function_express count] == 0)
     {
          _message = [NSMutableString stringWithString:@"logical format error"];
+          NSLog(@"%@",_message); exit(1);
         return nil;
     }
     [fc_array addObject: function_express];
@@ -728,6 +765,7 @@
     if([fc_array count] - 1 != [operator count])
     {
         _message = [NSMutableString stringWithString:@"logical format error"];
+          NSLog(@"%@",_message); exit(1);
         return nil; //grammer error
     }
     
@@ -848,6 +886,7 @@
             if(i >= [sentence count] - 1)
             {
                 _message = [NSMutableString stringWithString:@"owner can not apear an the end"];
+                  NSLog(@"%@",_message); exit(1);
                 return nil; //gramma error my is not the last
             }
             rootlayer = [TC_WORD_LAYER alloc];
@@ -864,6 +903,7 @@
             if(i == 0 || i >= [sentence count] - 1)
             {
                 _message = [NSMutableString stringWithString:@"of can not be at end or bigin"];
+                  NSLog(@"%@",_message); exit(1);
                 return nil; //gramma error of is not the first or the last
             }
             if(stick == NO) // if it is the first of genarate root
@@ -881,6 +921,7 @@
                 if([[sentence objectAtIndex:i - 1] explain] == TC_OF)
                 {
                     _message = [NSMutableString stringWithString:@"of can not be put together"];
+                      NSLog(@"%@",_message); exit(1);
                     return nil;
                 }
                 newlayer = rootlayer;
@@ -1012,6 +1053,7 @@
     else
     {
         _message = [NSMutableString stringWithString: @"parameters do not match"];
+          NSLog(@"%@",_message); exit(1);
         return nil;
     }
 }
@@ -1042,11 +1084,13 @@
             if([_root count] > 1 && type == -1)
             {
                 _message = [NSMutableString stringWithString: @"false branch control statement, more than one straight function"];
+                  NSLog(@"%@",_message); exit(1);
                 return -1;
             }
             else if([_root count] == 1 && type != -1)
             {
                 _message = [NSMutableString stringWithString: @"false branch control statement, no end state ment"];
+                  NSLog(@"%@",_message); exit(1);
                 return -1;
             }
         }
@@ -1055,6 +1099,7 @@
             if(type != TC_WHILE||type != TC_IF||type != -1)
             {
                 _message = [NSMutableString stringWithString: @"false branch control statement, first word must be if or while"];
+                  NSLog(@"%@",_message); exit(1);
                 return -1;
             }
         }
@@ -1063,6 +1108,7 @@
              if(type != TC_END)
              {
                  _message = [NSMutableString stringWithString: @"false branch control statement: last word must be end"];
+                   NSLog(@"%@",_message); exit(1);
                  return -1;
              }
         }
@@ -1070,6 +1116,7 @@
     if(while_count != end_count)
     {
         _message = [NSMutableString stringWithString: @"false branch control statement: end mismatches"];
+          NSLog(@"%@",_message); exit(1);
         return -1;
     }
     
@@ -1122,6 +1169,7 @@
             if([stack count] == 0)
             {
                 _message = [NSMutableString stringWithString: @"break is not in loop or if statement"];
+                  NSLog(@"%@",_message); exit(1);
                 return -1;
             }
             else
@@ -1142,6 +1190,7 @@
                 if(A.src == nil)
                 {
                     _message = [NSMutableString stringWithString: @"break is not in loop or if statement"];
+                      NSLog(@"%@",_message); exit(1);
                     return -1;
                 }
                 A.des = nil;
@@ -1484,6 +1533,7 @@
             {
                 _message = [NSMutableString stringWithString: @"define or enddef,push is inside the statement"];
                 [self clear_current];
+                  NSLog(@"%@",_message); exit(1);
                 return nil;
             }
         }
@@ -1614,6 +1664,12 @@
     
     temp = [TC_Define alloc];
     temp.word = @"on";
+    temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"as";
     temp.explain = TC_IGNORE;
     temp.right_match = 0;
     [self.dictionary addObject: temp];
@@ -2043,8 +2099,7 @@
             return [_func_table objectAtIndex:i];
         }
     }
-    _message = [NSMutableString stringWithString: @"can not find the symbol: "];
-    [_message appendString:fun.name];
+    
     return nil;
 }
 

@@ -40,15 +40,13 @@
         result.result = temp;
         result.current_instruction = nil;
         result.var_stack = [NSMutableArray arrayWithCapacity:10];
-        result.local_var_list = copy.local_var_list;
-        result.func_list = copy.func_list;
         result.ins_list = copy.ins_list;
         result.head = copy.head;
         result.update = copy.update;
-        
         result.target = nil;
+        result.local_var_list = copy.local_var_list;
+        result.func_list = copy.func_list;
         return result;
-
     }
     return result;
 };
