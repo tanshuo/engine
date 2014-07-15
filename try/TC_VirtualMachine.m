@@ -23,6 +23,11 @@
 
 - (int) run_next_ins
 {
+    if(_ip >= [_ins_list count])
+    {
+        _message = [NSMutableString stringWithString:@"no more instruction"];
+        return -1;
+    }
     TC_Instruction* current = [_ins_list objectAtIndex:_ip];
     int ins = [current instruct];
     int re;
