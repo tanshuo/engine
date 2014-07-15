@@ -111,6 +111,7 @@
         _bp = _sp + 1;
         _sp = _bp;
         TC_INS_VARIABLE* var;
+        var = [TC_INS_VARIABLE alloc];
         for(i = 0; i  < [t.params count];i ++)
         {
             TC_INS_VARIABLE* new = [t.params objectAtIndex:i];
