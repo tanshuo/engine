@@ -359,8 +359,163 @@
 
 - (TC_INS_VARIABLE*) genInstance:(NSString*) w
 {
-
-    return nil;
+    int i;
+    int j = 0;
+    int seg = 1;
+    BOOL end = NO;
+    NSString* s;
+    NSMutableArray* args = [NSMutableArray arrayWithCapacity:10];
+    char* cache;
+    cache = (char*)malloc(1024*1024*1);
+    if(cache == nil)
+    {
+        _message = [NSMutableString stringWithString:@"no enough memory"];
+        return nil;
+    }
+    w = [w substringFromIndex:1];
+    if(w == nil)
+    {
+        return nil;
+    }
+    TC_INS_VARIABLE* result;
+    result.solved = NO;
+    result.borrow = NO;
+    result.obj = nil;
+    result.addr = nil;
+    result.type = VAR_UNKNOWN;
+    result.argoffset = 0;
+    if([w lengthOfBytesUsingEncoding:NSASCIIStringEncoding] > 0)
+    {
+        if([w characterAtIndex:0] == '\"')
+        {
+            for(i = 0; i < [w lengthOfBytesUsingEncoding:NSASCIIStringEncoding]; i++)
+            {
+                if([w characterAtIndex:i] == '\"')
+                {
+                    end = YES;
+                    cache[j] = 0;
+                    s = [NSString stringWithCString:cache encoding:NSASCIIStringEncoding];
+                    result.obj = s;
+                    result.solved = YES;
+                    result.borrow = NO;
+                    result.type = VAR_STRING;
+                    free(cache);
+                    return result;
+                }
+                else
+                {
+                    cache[j] = [w characterAtIndex:i];
+                    j++;
+                }
+            }
+            _message = [NSMutableString stringWithString:@"can not find end of string"];
+            free(cache);
+            return nil;
+        }
+        else
+        {
+            for(i = 0; i < [w lengthOfBytesUsingEncoding:NSASCIIStringEncoding]; i++)
+            {
+                char c = [w characterAtIndex:i];
+                if(c  == ',')
+                {
+                    cache[j] = 0;
+                    s = [NSString stringWithCString:cache encoding:NSASCIIStringEncoding];
+                    [args addObject:s];
+                    j = 0;
+                    seg ++;
+                }
+                else if(c == ' '||c == '\t'||c=='\n')
+                {
+                    continue;
+                }
+                else
+                {
+                    cache[j] = c;
+                    j++;
+                }
+            }
+            cache[j] = 0;
+            s = [NSString stringWithCString:cache encoding:NSASCIIStringEncoding];
+            [args addObject:s];
+            
+            if(seg > 1)
+            {
+                if(seg == 2)
+                {
+                    TC_Position2d* data;
+                    data = (TC_Position2d*)malloc(sizeof(TC_Position2d));
+                    data->x = [[args objectAtIndex:0] floatValue];
+                    data->y = [[args objectAtIndex:1] floatValue];
+                    //bug
+                    result.addr = data;
+                    result.solved = YES;
+                    result.borrow = NO;
+                    result.type = VAR_VECTOR2;
+                    free(cache);
+                    return result;
+                }
+                else if(seg == 3)
+                {
+                    TC_Position* data;
+                    data = (TC_Position*)malloc(sizeof(TC_Position));
+                    data->x = [[args objectAtIndex:0] floatValue];
+                    data->y = [[args objectAtIndex:1] floatValue];
+                    data->z = [[args objectAtIndex:2] floatValue];
+                    //bug
+                    result.addr = data;
+                    result.solved = YES;
+                    result.borrow = NO;
+                    result.type = VAR_VECTOR3;
+                    free(cache);
+                    return result;
+                }
+                else
+                {
+                    _message = [NSMutableString stringWithString:@"arg can not over 3"];
+                    free(cache);
+                    return nil;
+                }
+            }
+            else
+            {
+                NSString* num = [args objectAtIndex:0];
+                for(i = 0; i < [num lengthOfBytesUsingEncoding:NSASCIIStringEncoding]; i ++)
+                {
+                    if([num characterAtIndex:i] == '.')
+                    {
+                        float* data;
+                        data = (float*)malloc(sizeof(float));
+                        *data = [[args objectAtIndex:0] floatValue];
+                        //bug
+                        result.addr = data;
+                        result.solved = YES;
+                        result.borrow = NO;
+                        result.type = VAR_FLOAT;
+                        free(cache);
+                        return result;
+                    }
+                }
+                int* data;
+                data = (int*)malloc(sizeof(int));
+                *data = [[args objectAtIndex:0] intValue];
+                //bug
+                result.addr = data;
+                result.solved = YES;
+                result.borrow = NO;
+                result.type = VAR_INT;
+                free(cache);
+                return result;
+            }
+        }
+    }
+    else
+    {
+        free(cache);
+        return result;
+    }
+    free(cache);
+    return result;
 }
 
 + (TC_VirtualMachine*) initVM: (NSString*) script
