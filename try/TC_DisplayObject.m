@@ -124,6 +124,32 @@
     {
         _virtual.ip = _virtual.update;
     }
+    //stack
+    //_virtual.var_stack
+    TC_INS_VARIABLE* var;
+    var = [TC_INS_VARIABLE alloc];
+    var.solved = YES;
+    var.borrow = NO;
+    var.type = VAR_OFF_SET;
+    var.var = nil;
+    var.location = VAR_STACK;
+    var.addr = nil;
+    var.obj = nil;
+    var.argoffset = -1;// return offset
+    [_virtual.var_stack addObject:var];
+    _virtual.sp ++;
+    
+    var = [TC_INS_VARIABLE alloc];
+    var.solved = YES;
+    var.borrow = NO;
+    var.type = VAR_OFF_SET;
+    var.var = nil;
+    var.location = VAR_STACK;
+    var.addr = nil;
+    var.obj = nil;
+    var.argoffset = -1;// old frame pointer
+    [_virtual.var_stack addObject:var];
+    ///
     while(true)
     {
         int re = [_virtual run_next_ins];
