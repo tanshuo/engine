@@ -13,5 +13,5 @@ define update;
             kill B,
         end,
     end;
-    gen CC;
+    gen CC; 
 enddef;
