@@ -170,16 +170,19 @@
                 {
                     temp.type = VAR_STRING;
                     temp.obj = @"";
+                    temp.borrow = YES;
                 }
                 else if([[[_defines objectAtIndex:4]word]isEqualToString:@"object"])
                 {
                     temp.type = VAR_OBJECT;
+                    temp.borrow = YES;
                     temp.obj = nil;
                 }
                 else if([[[_defines objectAtIndex:4]word]isEqualToString:@"list"])
                 {
                     temp.type = VAR_LIST;
                     temp.obj = [NSMutableArray arrayWithCapacity:10];
+                    temp.borrow = YES;
                 }
                 [_var_table addObject:temp];
                 //_self_var ++;

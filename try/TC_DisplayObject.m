@@ -111,6 +111,7 @@
 
 - (void) selfUpateWithAspect: (float)aspect
 {
+    
     if(!_active)
     {
         return;

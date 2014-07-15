@@ -152,11 +152,11 @@
                     
                 case VAR_STRING:
                     var.obj = new.obj;
-                    var.borrow = NO;
+                    var.borrow = YES;
                     break;
                 case VAR_LIST:
                     var.obj = new.obj;
-                    var.borrow = NO;
+                    var.borrow = YES;
                     break;
                 case VAR_VECTOR2:
                     var.addr = (TC_Position2d*)malloc(sizeof(TC_Position2d));
@@ -178,7 +178,7 @@
                     break;
                 case VAR_OBJECT:
                     var.obj = new.obj;// reference only
-                    var.borrow = NO;
+                    var.borrow = YES;
                     break;
             }
             var.solved = YES;
