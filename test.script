@@ -1,7 +1,7 @@
 define start;
     declare function fun1 as 1;
     declare function fun2 as 1;
-    declare variable A as vector3;
+    declare variable A as list;
     declare variable B as vector3;
 enddef;
 

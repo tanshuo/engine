@@ -247,7 +247,7 @@
     [_var_stack removeLastObject];
     _sp --;
     
-    while(_sp >= _bp)
+    while((int)_sp >= (int)_bp)
     {
         [_var_stack removeLastObject];
         _sp --;

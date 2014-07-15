@@ -150,6 +150,8 @@
     var.obj = nil;
     var.argoffset = -1;// old frame pointer
     [_virtual.var_stack addObject:var];
+    _virtual.sp ++;
+    _virtual.bp = 0;
     ///
     while(true)
     {
