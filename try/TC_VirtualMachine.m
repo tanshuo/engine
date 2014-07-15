@@ -528,8 +528,11 @@
     TC_VirtualMachine* result;
     result = [TC_VirtualMachine alloc];
     result.ip = 0;
-    result.bp = 0;
-    result.sp = 0;
+    result.bp = -1;
+    result.sp = -1;
+    result.has_start = NO;
+    result.head = -1;
+    result.update = -1;
     result.true_false = NO;
     result.check_call = NO;
     TC_INS_VARIABLE* temp;

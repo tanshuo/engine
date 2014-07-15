@@ -27,6 +27,10 @@
 @property TC_ID ip; // instruction position
 @property TC_ID bp; // stack base
 @property TC_ID sp; // stack top
+@property int head; // ip to start
+@property int update;// ip to update
+@property int has_start;// head or update
+
 @property BOOL true_false; // logical result
 @property BOOL check_call;
 @property (strong,nonatomic) id target;

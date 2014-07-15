@@ -88,7 +88,98 @@
     }
     //define statement
     int head = [[_defines objectAtIndex:0] explain];
-    if(head == TC_DEFINE)
+    if(head == TC_DECLARE)
+    {
+        if([_defines count] != 5)
+        {
+            _message = [NSMutableString stringWithString:@"declare statement format error"];
+            return -1;
+        }
+        else
+        {
+            if([[[_defines objectAtIndex:1]word] isEqualToString:@"function"])
+            {
+                TC_Define* temp;
+                temp = [TC_Define alloc];
+                temp.word = [[_defines objectAtIndex:2] word];
+                temp.explain = TC_FUNCTION;
+                temp.right_match = [[[_defines objectAtIndex:4]word] integerValue];
+                [self.dictionary addObject: temp];
+                
+                TC_INS_FUNCTION* fun;
+                fun = [TC_INS_FUNCTION alloc];
+                fun.solved = NO;
+                fun.name = temp.word;
+                fun.func = nil;
+                fun.offset = 0;
+                fun.location = FUN_DEFINE;
+                fun.right_match = temp.right_match;
+                [_func_table addObject:fun];
+                return 0;
+            }
+            else if([[[_defines objectAtIndex:1]word] isEqualToString:@"variable"])
+            {
+                TC_INS_VARIABLE* temp;
+                TC_WORD_LAYER* w;
+                temp = [TC_INS_VARIABLE alloc];
+                w = [TC_WORD_LAYER alloc];
+                w.word = [[_defines objectAtIndex:2] word];
+                w.next_layer = nil;
+                temp.solved = YES;
+                temp.location = VAR_BIND;
+                temp.addr = nil;
+                temp.obj = nil;
+                temp.type = VAR_UNKNOWN;
+                temp.argoffset = 0;
+                temp.borrow = NO;
+                temp.var = w;
+                if([[[_defines objectAtIndex:4]word]isEqualToString:@"float"])
+                {
+                    temp.type = VAR_FLOAT;
+                    float* data = (float*)malloc(sizeof(float));
+                    *data = 0;
+                    temp.addr = data;
+                }
+                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"int"])
+                {
+                    temp.type = VAR_INT;
+                    int* data = (int*)malloc(sizeof(int));
+                    *data = 0;
+                    temp.addr = data;
+                }
+                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"vector2"])
+                {
+                    temp.type = VAR_VECTOR2;
+                    TC_Position2d* data = (TC_Position2d*)malloc(sizeof(TC_Position2d));
+                    data->x = 0;
+                    data->y = 0;
+                    temp.addr = data;
+                }
+                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"vector3"])
+                {
+                    temp.type = VAR_VECTOR3;
+                    TC_Position* data = (TC_Position*)malloc(sizeof(TC_Position));
+                    data->x = 0;
+                    data->y = 0;
+                    data->z = 0;
+                    temp.addr = data;
+                }
+                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"string"])
+                {
+                    temp.type = VAR_STRING;
+                    temp.obj = @"";
+                }
+                else if([[[_defines objectAtIndex:4]word]isEqualToString:@"object"])
+                {
+                    temp.type = VAR_OBJECT;
+                    temp.obj = nil;
+                }
+                [_var_table addObject:temp];
+                return 0;
+            }
+        }
+    }
+    else if(head == TC_DEFINE)
     {
         if([_defines count] < 2)
         {
@@ -1422,7 +1513,13 @@
     temp = [TC_Define alloc];
     temp.word = @"define";
     temp.explain = TC_DEFINE;
-    temp.right_match = 2;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"declare";
+    temp.explain = TC_DECLARE;
+    temp.right_match = 0;
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
@@ -1566,6 +1663,18 @@
     
     temp = [TC_Define alloc];
     temp.word = @"return";
+    temp.explain = TC_RETURN;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"start";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"update";
     temp.explain = TC_FUNCTION;
     temp.right_match = 0;
     [self.dictionary addObject: temp];
@@ -1628,19 +1737,6 @@
     temp.word = @"abandon";
     temp.explain = TC_FUNCTION;
     temp.right_match = 1;
-    [self.dictionary addObject: temp];
-    
-    
-    temp = [TC_Define alloc];
-    temp.word = @"fun1";
-    temp.explain = TC_FUNCTION;
-    temp.right_match = 1;
-    [self.dictionary addObject: temp];
-    
-    temp = [TC_Define alloc];
-    temp.word = @"fun2";
-    temp.explain = TC_FUNCTION;
-    temp.right_match = 0;
     [self.dictionary addObject: temp];
 }
 
@@ -1914,27 +2010,17 @@
     
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;
-    fun.name = @"say";
-    fun.func = nil;
-    fun.offset = 0;
-    fun.location = FUN_BIND;
-    fun.right_match = 1;
-    [_func_table addObject:fun];
-    
-    
-    fun = [TC_INS_FUNCTION alloc];
-    fun.solved = NO;
-    fun.name = @"fun1";
+    fun.name = @"start";
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_DEFINE;
-    fun.right_match = 1;
+    fun.right_match = 0;
     [_func_table addObject:fun];
     
     
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;
-    fun.name = @"fun2";
+    fun.name = @"update";
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_DEFINE;

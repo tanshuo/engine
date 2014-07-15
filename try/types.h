@@ -47,6 +47,7 @@ typedef enum{
     TC_END_DEF,
     TC_PUSH,
     TC_RETURN,
+    TC_DECLARE,
 } TC_Explain;
 
 typedef unsigned int TC_ID;
