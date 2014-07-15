@@ -549,6 +549,12 @@
     [_it readScript:script];
     result.local_var_list = _it.var_table;
     result.func_list = _it.func_table;
+    result.ins_list = _it.instruction_table;
+    result.message = _it.message;
+    if([result.ins_list count] == 0)
+    {
+        NSLog(@"compiler error: %@",result.message);
+    }
     [_it clear_current];
     result.target = nil;
     return result;
