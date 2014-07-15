@@ -80,6 +80,10 @@
 - (void) creat:(NSMutableArray*) params;// create prefab position return reult
 - (void) say:(NSMutableArray*) params;//say <"hello">
 - (void) calculate:(NSMutableArray*) params;//calculate <"A->x + 4">;
-
+- (void) push:(NSMutableArray*) params;// list push <5,6,7>
+- (void) pop:(NSMutableArray*) params;// list pop <5,6,7>
+- (void) has_size:(NSMutableArray*) params;// A hassize
+- (void) getobject:(NSMutableArray*) params;// A get_object at 3
+- (void) remove:(NSMutableArray*) params;//list remove at 4
 
 @end

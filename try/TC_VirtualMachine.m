@@ -154,6 +154,10 @@
                     var.obj = new.obj;
                     var.borrow = NO;
                     break;
+                case VAR_LIST:
+                    var.obj = new.obj;
+                    var.borrow = NO;
+                    break;
                 case VAR_VECTOR2:
                     var.addr = (TC_Position2d*)malloc(sizeof(TC_Position2d));
                     var.borrow = NO;
@@ -628,6 +632,31 @@
 
 }
 - (void) say:(NSMutableArray*) params//say <"hello">
+{
+
+}
+
+- (void) push:(NSMutableArray*) params// list push <5,6,7>
+{
+
+}
+
+- (void) pop:(NSMutableArray*) params// list pop <5,6,7>
+{
+
+}
+
+- (void) has_size:(NSMutableArray*) params// A hassize
+{
+
+}
+
+- (void) getobject:(NSMutableArray*) params// A get_object at 3
+{
+
+}
+
+- (void) remove:(NSMutableArray*) params//list remove at 4
 {
 
 }

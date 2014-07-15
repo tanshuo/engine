@@ -26,6 +26,7 @@ typedef enum{
     VAR_OBJECT,
     VAR_STRING,
     VAR_OFF_SET,
+    VAR_LIST,
 } TC_INS_VAR_TYPE;
 
 @interface TC_INS_VARIABLE : NSObject
