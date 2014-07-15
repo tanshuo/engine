@@ -115,6 +115,15 @@
     {
         return;
     }
+    if(_virtual.has_start == NO)
+    {
+        _virtual.ip = _virtual.head;
+        _virtual.has_start = YES;
+    }
+    else
+    {
+        _virtual.ip = _virtual.update;
+    }
     while(true)
     {
         int re = [_virtual run_next_ins];

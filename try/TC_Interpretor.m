@@ -106,7 +106,7 @@
                 temp.explain = TC_FUNCTION;
                 temp.right_match = [[[_defines objectAtIndex:4]word] integerValue];
                 [self.dictionary addObject: temp];
-                _self_dec ++;
+                //_self_dec ++;
                 
                 TC_INS_FUNCTION* fun;
                 fun = [TC_INS_FUNCTION alloc];
@@ -177,7 +177,7 @@
                     temp.obj = nil;
                 }
                 [_var_table addObject:temp];
-                _self_var ++;
+                //_self_var ++;
                 return 0;
             }
         }
@@ -188,6 +188,14 @@
         {
             _message = [NSMutableString stringWithString:@"define statement format error"];
             return -1;
+        }
+        if([[[_defines objectAtIndex:1]word] isEqualToString:@"start"])
+        {
+            _self_dec = _current_ins_count;
+        }
+        if([[[_defines objectAtIndex:1]word] isEqualToString:@"update"])
+        {
+            _self_var = _current_ins_count;
         }
         //find name
         NSString* name = nil;

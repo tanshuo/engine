@@ -23,6 +23,8 @@
 
 - (int) run_next_ins
 {
+    
+    
     if(_ip >= [_ins_list count])
     {
         _message = [NSMutableString stringWithString:@"no more instruction"];
@@ -80,7 +82,8 @@
     if([current solved] == NO && [current location] == FUN_BIND)
     {
         SEL sel;
-        sel =  NSSelectorFromString(t.src);
+        NSString* se = [NSString stringWithFormat:@"%@:",t.src];
+        sel =  NSSelectorFromString(se);
         for(i = 0; i < [t.params count]; i++)
         {
             s = [self solve_var: [[t.params objectAtIndex:i] var] In:self];
@@ -96,7 +99,7 @@
             return -1;
         }
         else
-            [_target performSelector:sel withObject:[t params]];
+            [self performSelector:sel withObject:[t params]];
         _ip ++;
         //how to call it?
         //..
@@ -383,6 +386,7 @@
         return nil;
     }
     TC_INS_VARIABLE* result;
+    result = [TC_INS_VARIABLE alloc];
     result.solved = NO;
     result.borrow = NO;
     result.obj = nil;
@@ -551,6 +555,8 @@
     result.ins_list = [NSMutableArray arrayWithCapacity:10];
     [_it start];
     [_it readScript:script];
+    result.head = _it.self_dec;
+    result.update = _it.self_var;
     result.local_var_list = _it.var_table;
     result.func_list = _it.func_table;
     result.ins_list = _it.instruction_table;
@@ -565,6 +571,65 @@
 }
 
 
+- (void) equal:(NSMutableArray*) params //a equal b
+{
 
+}
+- (void) greater:(NSMutableArray*) params//...
+{
+
+}
+- (void) smaller:(NSMutableArray*) params//...
+{
+
+}
+- (void) set:(NSMutableArray*) params// a set <5 6 7>
+{
+
+}
+- (void) is:(NSMutableArray*) params// a is b
+{
+
+}
+- (void) move:(NSMutableArray*) params// a move <5 6 7>
+{
+
+}
+- (void) rotate:(NSMutableArray*) params// a rotate <90>
+{
+
+}
+- (void) setSeq:(NSMutableArray*) params// a set <3,4,5>
+{
+
+}
+- (void) kill:(NSMutableArray*) params// kill a
+{
+
+}
+- (void) hide:(NSMutableArray*) params// a hide
+{
+
+}
+- (void) adopt:(NSMutableArray*) params// adopt a
+{
+
+}
+- (void) abandon:(NSMutableArray*) params// abandon my child abondon a
+{
+
+}
+- (void) search:(NSMutableArray*) params// search string
+{
+
+}
+- (void) creat:(NSMutableArray*) params// create prefab position return reult
+{
+
+}
+- (void) say:(NSMutableArray*) params//say <"hello">
+{
+
+}
 @end
 
