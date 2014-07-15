@@ -20,7 +20,8 @@
 @synthesize message = _message;
 @synthesize instruction_table = _instruction_table;
 @synthesize var_stack = _var_stack;
-
+@synthesize self_dec = _self_dec;
+@synthesize self_var = _self_var;
 
 
 
@@ -105,6 +106,7 @@
                 temp.explain = TC_FUNCTION;
                 temp.right_match = [[[_defines objectAtIndex:4]word] integerValue];
                 [self.dictionary addObject: temp];
+                _self_dec ++;
                 
                 TC_INS_FUNCTION* fun;
                 fun = [TC_INS_FUNCTION alloc];
@@ -175,6 +177,7 @@
                     temp.obj = nil;
                 }
                 [_var_table addObject:temp];
+                _self_var ++;
                 return 0;
             }
         }
@@ -408,8 +411,11 @@
 }
 - (void)start
 {
+    //[self clear_current];
     _current_ins_count = 0;
     _currentLine = 0;
+    _self_dec = 0;
+    _self_var = 0;
     _defines = [NSMutableArray arrayWithCapacity:10];
     _dictionary = [NSMutableArray arrayWithCapacity:10];
     _root = [NSMutableArray arrayWithCapacity:10];
@@ -1795,12 +1801,16 @@
 
 - (void)clear_current
 {
+    
     _defines = [NSMutableArray arrayWithCapacity:10];
     _root = [NSMutableArray arrayWithCapacity:10];;
     _instruction_table = [NSMutableArray arrayWithCapacity:10];
-    _func_table = [NSMutableArray arrayWithCapacity:10];
-    _var_table = [NSMutableArray arrayWithCapacity:10];
     _var_stack = [NSMutableArray arrayWithCapacity:10];
+    _dictionary = [NSMutableArray arrayWithCapacity:10];
+    _func_table = [NSMutableArray arrayWithCapacity:10];
+   
+    _self_dec = 0;
+    _self_var = 0;
 }
 
 - (NSMutableArray*) replace_word_layer: (TC_Function_Layer*)f

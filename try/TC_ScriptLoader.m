@@ -12,10 +12,41 @@
 + (TC_VirtualMachine*)loadScriptWith: (NSString*)name
 {
     TC_VirtualMachine* result;
-    result = [self lookscript: name];
-    if(result == nil)
+    TC_VirtualMachine* copy;
+    copy = [self lookscript: name];
+    if(copy == nil)
     {
         result = [TC_VirtualMachine initVM:name];
+    }
+    else
+    {
+        result = [TC_VirtualMachine alloc];
+        result.ip = 0;
+        result.bp = -1;
+        result.sp = -1;
+        result.has_start = NO;
+        result.head = -1;
+        result.update = -1;
+        result.true_false = NO;
+        result.check_call = NO;
+        TC_INS_VARIABLE* temp;
+        temp.solved = NO;
+        temp.borrow = NO;
+        temp.addr = nil;
+        temp.obj = nil;
+        temp.argoffset = 0;
+        temp.type = VAR_UNKNOWN;
+        temp.location = VAR_STACK;
+        result.result = temp;
+        result.current_instruction = nil;
+        result.var_stack = [NSMutableArray arrayWithCapacity:10];
+        result.local_var_list = copy.local_var_list;
+        result.func_list = copy.func_list;
+        result.ins_list = copy.ins_list;
+        
+        result.target = nil;
+        return result;
+
     }
     return result;
 };

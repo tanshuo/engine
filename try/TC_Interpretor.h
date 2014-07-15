@@ -31,6 +31,8 @@
 @property (strong,nonatomic) NSMutableArray* func_table;
 @property (strong,nonatomic) NSMutableArray* var_table;
 @property (strong,nonatomic) NSMutableArray* var_stack;//arg stack
+@property int self_dec;
+@property int self_var;
 
 
 @property FILE* input;

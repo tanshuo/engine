@@ -549,6 +549,7 @@
     result.local_var_list = nil;
     result.func_list = nil;
     result.ins_list = [NSMutableArray arrayWithCapacity:10];
+    [_it start];
     [_it readScript:script];
     result.local_var_list = _it.var_table;
     result.func_list = _it.func_table;
