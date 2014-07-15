@@ -12,4 +12,5 @@
 #import "TC_Sprite.h"
 NSMutableArray* _global;
 TC_Interpretor* _it;
+double _timer;
 #endif

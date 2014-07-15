@@ -11,6 +11,7 @@
 @implementation TC_Game
 + (void) gameStart
 {
+    _timer = 0.0;
     _global = [NSMutableArray arrayWithCapacity:10];
     _it = [TC_Interpretor alloc];
     [_it start];

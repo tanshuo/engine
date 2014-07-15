@@ -55,6 +55,7 @@
 
 - (void) initDictionary;
 - (void) initFunction;
+- (void) initVar;
 
 - (TC_Define*) searchDictionary: (NSString*) word;
 - (TC_INS_FUNCTION*) searchFunction: (TC_Function_Layer*) fun;

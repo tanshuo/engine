@@ -79,7 +79,7 @@
 - (void) search:(NSMutableArray*) params;// search string
 - (void) creat:(NSMutableArray*) params;// create prefab position return reult
 - (void) say:(NSMutableArray*) params;//say <"hello">
-
+- (void) calculate:(NSMutableArray*) params;//calculate <"A->x + 4">;
 
 
 @end

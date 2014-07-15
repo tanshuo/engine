@@ -434,6 +434,7 @@
     _var_stack = [NSMutableArray arrayWithCapacity:10];
     [self initDictionary];
     [self initFunction];
+    [self initVar];
 }
 
 - (int) read_a_tokens
@@ -1752,6 +1753,243 @@
     temp.explain = TC_FUNCTION;
     temp.right_match = 1;
     [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"calculate";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+}
+
+- (void) initVar
+{
+    TC_INS_VARIABLE* temp;
+    TC_WORD_LAYER* w;
+    
+    //0
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"world_position";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_VECTOR3;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //1
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"position";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_VECTOR3;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //2
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"x";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_FLOAT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //3
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"y";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_FLOAT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //4
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"z";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_FLOAT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //5
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"rotation";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_FLOAT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //6
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"camera";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_OBJECT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //7
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"father";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_OBJECT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //8
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"show";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //9
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"active";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //10
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"alive";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //11
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"current_frame";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //12
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"current_sequence";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //13
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"frame_speed";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //14
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"child_num";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
 }
 
 - (TC_INS_FUNCTION*) searchFunction: (TC_Function_Layer*) fun
@@ -2043,6 +2281,15 @@
     fun.offset = 0;
     fun.location = FUN_DEFINE;
     fun.right_match = 0;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"calculate";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
     [_func_table addObject:fun];
 }
 @end

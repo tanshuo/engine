@@ -91,6 +91,7 @@
 {
     float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
     [TC_Game updateWithAspect:aspect];
+    _timer += self.timeSinceLastUpdate;
 }
 
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect //huitu
