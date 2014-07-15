@@ -48,8 +48,10 @@
     _baseModelViewMatrix = GLKMatrix4Rotate(_baseModelViewMatrix, GLKMathDegreesToRadians(_rotation), 0.0f, 0.0f, 1.0f);
     
     _virtual = [TC_ScriptLoader loadScriptWith:script];
+    _virtual.target = self;
     _program = [TC_ShaderLoader loadShaderWithVertexShader:shader WithFragmentShader:shader];
     _textureinfo = [TC_TextureLoader loadTexture:texture];
+    
     
     if(_program.sid == 0)
     {
@@ -112,6 +114,14 @@
     if(!_active)
     {
         return;
+    }
+    while(true)
+    {
+        int re = [_virtual run_next_ins];
+        if(re == -1)
+        {
+            break;
+        }
     }
     _projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90), aspect, 0.1f, 10000.0f);
   

@@ -12,17 +12,16 @@
 + (void) gameStart
 {
     _global = [NSMutableArray arrayWithCapacity:10];
-    TC_Interpretor* _test = [TC_Interpretor alloc];
-    [_test start];
-    
-    
-    [_test readScript: @"test"];
-    NSString* mss = [_test debug];
+    _it = [TC_Interpretor alloc];
+    [_it start];
+    //[_it readScript: @"test"];
+    //NSString* mss = [_it debug];
     ///////////
     int i;
     txtlist = [NSMutableArray arrayWithCapacity:10];
     shaderlist = [NSMutableArray arrayWithCapacity:10];
     gameObjectList = [NSMutableArray arrayWithCapacity:10];
+    scriptlist = [NSMutableArray arrayWithCapacity:10];
     
     initList();
     for(i = 0; i < CAMERA_NUM; i ++)

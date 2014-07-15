@@ -32,7 +32,7 @@
 - (TC_ID) getGroup;
 
 - (void) setRelativePositionWithX: (float)x WithY: (float)y;
-- (void) setRelativeRotation: (float) deg;
+
 - (void) setParent: (TC_Layer*) parent;
 
 - (BOOL) addChild: (TC_Layer*) child;

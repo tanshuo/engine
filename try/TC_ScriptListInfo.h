@@ -9,7 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 #import "types.h"
+#import "TC_VirtualMachine.h"
 
 @interface TC_ScriptListInfo : NSObject
+@property (strong,nonatomic) NSString* name;
+@property (strong,nonatomic) TC_VirtualMachine* vm;
 @property TC_ID owrner;
 @end

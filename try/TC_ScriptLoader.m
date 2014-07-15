@@ -11,7 +11,25 @@
 @implementation TC_ScriptLoader
 + (TC_VirtualMachine*)loadScriptWith: (NSString*)name
 {
-    
-    return nil;
+    TC_VirtualMachine* result;
+    result = [self lookscript: name];
+    if(result == nil)
+    {
+        result = [TC_VirtualMachine initVM:name];
+    }
+    return result;
 };
+
++ (TC_VirtualMachine*) lookscript: (NSString*) name
+{
+    int i;
+    for(i = 0; i < [scriptlist count]; i++)
+    {
+        if([[scriptlist objectAtIndex:i] isEqualToString:name])
+        {
+            return [[scriptlist objectAtIndex:i] vm];
+        }
+    }
+    return nil;
+}
 @end

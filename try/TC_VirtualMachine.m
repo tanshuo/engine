@@ -525,9 +525,34 @@
 
 + (TC_VirtualMachine*) initVM: (NSString*) script
 {
-    return nil;
+    TC_VirtualMachine* result;
+    result = [TC_VirtualMachine alloc];
+    result.ip = 0;
+    result.bp = 0;
+    result.sp = 0;
+    result.true_false = NO;
+    result.check_call = NO;
+    TC_INS_VARIABLE* temp;
+    temp.solved = NO;
+    temp.borrow = NO;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.argoffset = 0;
+    temp.type = VAR_UNKNOWN;
+    temp.location = VAR_STACK;
+    result.result = temp;
+    result.current_instruction = nil;
+    result.var_stack = [NSMutableArray arrayWithCapacity:10];
+    result.local_var_list = nil;
+    result.func_list = nil;
+    result.ins_list = [NSMutableArray arrayWithCapacity:10];
+    [_it readScript:script];
+    result.local_var_list = _it.var_table;
+    result.func_list = _it.func_table;
+    [_it clear_current];
+    result.target = nil;
+    return result;
 }
-
 
 
 

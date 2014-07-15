@@ -225,13 +225,13 @@
 		F5988C63195A18FF00A8DA5E /* utility */ = {
 			isa = PBXGroup;
 			children = (
-				F59F93D41970692D009C9A92 /* TC_ScriptListInfo.h */,
-				F59F93D51970692D009C9A92 /* TC_ScriptListInfo.m */,
 				F59F95DB1957F31B006876C9 /* types.h */,
-				F5988CBA195A84EC00A8DA5E /* TC_GameObjectList.h */,
 				F5988CB4195A83B000A8DA5E /* list.h */,
 				F59F95DC1957F87D006876C9 /* tool.h */,
 				F59F95DD1957F89A006876C9 /* tool.c */,
+				F5988CBA195A84EC00A8DA5E /* TC_GameObjectList.h */,
+				F59F93D41970692D009C9A92 /* TC_ScriptListInfo.h */,
+				F59F93D51970692D009C9A92 /* TC_ScriptListInfo.m */,
 				F5A1881B195977C30085672C /* TC_TextureInfo.h */,
 				F5A1881F195979950085672C /* TC_TextureInfo.m */,
 				F5FE4BE5195BC4E000D1C593 /* TC_PrefabInfo.h */,

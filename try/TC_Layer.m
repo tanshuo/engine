@@ -97,10 +97,7 @@
     _relativePosition.x = x;
     _relativePosition.y = y;
 }
-- (void) setRelativeRotation: (float) deg
-{
-    _relativeRotation = deg;
-}
+
 - (float) getRelativeRotation
 {
     return _relativeRotation;

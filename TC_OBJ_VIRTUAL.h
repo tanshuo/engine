@@ -11,4 +11,5 @@
 #import "TC_VirtualMachine.h"
 #import "TC_Sprite.h"
 NSMutableArray* _global;
+TC_Interpretor* _it;
 #endif
