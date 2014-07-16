@@ -23,8 +23,6 @@
 
 - (int) run_next_ins
 {
-    
-    
     if(_ip >= [_ins_list count])
     {
         _message = [NSMutableString stringWithString:@"no more instruction"];
@@ -78,6 +76,7 @@
 {
     int i;
     TC_INS_VARIABLE* s;
+    NSMutableArray* m = [NSMutableArray arrayWithCapacity:10];
     TC_INS_FUNCTION* current = (TC_INS_FUNCTION*)[t des];
     if([current solved] == NO && [current location] == FUN_BIND)
     {
@@ -86,12 +85,14 @@
         sel =  NSSelectorFromString(se);
         for(i = 0; i < [t.params count]; i++)
         {
-            s = [self solve_var: [[t.params objectAtIndex:i] var] In:self];
+            s = [self solve: [t.params objectAtIndex:i]];
             if(s == nil)
             {
                 _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
+                NSLog(@"%@",_message); exit(1);
                 return -1;
             }
+            [m addObject:s];
         }
         if(sel <= 0)
         {
@@ -99,7 +100,7 @@
             return -1;
         }
         else
-            [self performSelector:sel withObject:[t params]];
+            [self performSelector:sel withObject:m];
         _ip ++;
         //how to call it?
         //..
@@ -116,24 +117,7 @@
         {
             TC_INS_VARIABLE* new = [t.params objectAtIndex:i];
             // copy arguement;
-            if(new.solved == NO)//may wrong
-            {
-                new = [self solve_var:[new var] In:self];
-                if(new == nil)
-                {
-                    _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
-                    return -1;
-                }
-            }
-            else if(new.solved == YES && new.location == VAR_SELF)
-            {
-                new.obj = _target;
-                new.type = VAR_OBJECT;
-            }
-            else if(new.solved == YES && new.location == VAR_STACK)
-            {
-                new = [_var_stack objectAtIndex: (_bp + [new argoffset])];
-            }
+            new = [self solve: new];
             var.type = new.type;
             var.addr = nil;
             var.obj = nil;
@@ -261,6 +245,7 @@
 //search variable deal with the first layer: if no solved: seach stack from top to bot, if no, search local list, search globol list. then process of statement. If it is an instance, gen a TC_INS_VARIABLE. if the word layer of seach target is nil, jump over;  *** if the first layer is my, return target's atrribute(refer in addr)
 - (TC_INS_VARIABLE*) solve_var:(TC_WORD_LAYER*) w In:(TC_VirtualMachine*)m// nil
 {
+    //check
     int i;
 
     TC_WORD_LAYER* new_w;
@@ -282,14 +267,6 @@
     }
     else if(w.next_layer == nil)
     {
-        for(i = m.sp; i >= 0; i --)
-        {
-            TC_INS_VARIABLE* nv = [m.var_stack objectAtIndex:i];
-            if([[[nv var] word] isEqualToString:w.word])
-            {
-                return nv;
-            }
-        }
         for(i = 0; i < [m.local_var_list count]; i ++)
         {
             TC_INS_VARIABLE* nv = [m.local_var_list objectAtIndex:i];
@@ -309,24 +286,7 @@
     }
     else
     {
-        for(i = m.sp; i >= 0; i --)
-        {
-            TC_INS_VARIABLE* nv = [m.var_stack objectAtIndex:i];
-            if([[[nv var] word] isEqualToString:w.word])
-            {
-                if(nv.type == VAR_OBJECT)
-                {
-                    new_w = w.next_layer;
-                    new_m = [[nv obj] virtual];
-                    return [self solve_var: new_w In:new_m];
-                }
-                else
-                {
-                    _message = [NSMutableString stringWithString:@"try to get an attribute of a non-object variable"];
-                    return nil;
-                }
-            }
-        }
+        
         //if not in the stack
         for(i = 0; i < [m.local_var_list count]; i ++)
         {
@@ -572,6 +532,81 @@
     }
     [_it clear_current];
     result.target = nil;
+    return result;
+}
+
+- (TC_INS_VARIABLE*) solve: (TC_INS_VARIABLE*) v
+{
+    TC_INS_VARIABLE* result = [TC_INS_VARIABLE alloc];
+    int i;
+    if(v.solved == NO)//may wrong
+    {
+        if([v.var.word characterAtIndex:0] == '#')
+        {
+            result = [self solve_var:[v var]  In:self];
+        }
+        else if([v.var.word isEqualToString:@"my"])
+        {
+            result = [self solve_var:[v var]  In:self];
+        }
+        else
+        {
+            for(i = 0;i < [_var_stack count];i++)
+            {
+                if([[[_var_stack objectAtIndex:i] var].word isEqualToString:v.var.word])
+                {
+                    result = [_var_stack objectAtIndex:i];
+                    if([result type] == VAR_OBJECT && result.var.next_layer!=nil)
+                    {
+                        result = [self solve_var:[[result var] next_layer]  In:[((TC_DisplayObject*)(result.obj)) virtual]];
+                    }
+                }
+            }
+            if(result == nil)
+            {
+                _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
+                return nil;
+            }
+        }
+    }
+    else if(v.solved == YES && v.location == VAR_SELF)
+    {
+        result.obj = _target;
+        result.type = VAR_OBJECT;
+        result.solved = YES;
+        result.type = VAR_SELF;
+        result.argoffset = 0;
+        result.borrow = YES;
+        result.var = nil;
+        result.addr = nil;
+    }
+    else if(v.solved == YES && v.location == VAR_STACK)
+    {
+        result = [_var_stack objectAtIndex: (_bp + [v argoffset])];
+        if([result type] == VAR_OBJECT && [[result var] next_layer]!=nil)
+        {
+            result = [self solve_var:[[result var] next_layer]  In:[((TC_DisplayObject*)(result.obj)) virtual]];
+            if(result == nil)
+            {
+                _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
+                return nil;
+            }
+        }
+        //here and there
+    }
+    else if(v.solved == YES && v.location == VAR_BIND)
+    {
+        result = [_local_var_list objectAtIndex: [v argoffset]];
+        if([result type] == VAR_OBJECT && [[result var] next_layer]!=nil)
+        {
+            result = [self solve_var:[[result var] next_layer]  In:[((TC_DisplayObject*)(result.obj)) virtual]];
+            if(result == nil)
+            {
+                _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
+                return nil;
+            }
+        }
+    }
     return result;
 }
 

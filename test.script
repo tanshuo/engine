@@ -3,16 +3,22 @@ define start;
     declare function fun2 as 1;
     declare variable A  list;
     declare variable B to vector3;
+    declare variable C to vector3;
 enddef;
 
 define update;
+    my B fun1 C;
     A set by  <1,2,3>;
-    start;
+    gen CC;
     if A is <1,2,3>,
         A move to <6,7,8>,
         if A greater than <5,6,7>,
-            kill B,
+            kill CC,
         end,
     end;
     gen CC; 
+enddef;
+
+define A fun1 B;
+    A of B set C;
 enddef;

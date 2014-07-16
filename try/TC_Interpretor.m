@@ -1001,7 +1001,7 @@
             break;
         }
     }
-    return result;
+    return result; //here
 }
 
 - (TC_Function_Layer*) genFun: (NSMutableArray*) sentence
@@ -2106,11 +2106,38 @@
 - (TC_INS_VARIABLE*) searchVariable: (TC_WORD_LAYER*) var
 {
     int i;
+    TC_INS_VARIABLE* result = [TC_INS_VARIABLE alloc];
+    TC_INS_VARIABLE* copy;
     for(i = 0; i < [_var_stack count]; i++)
     {
         if([self cmp_word_layer: [[_var_stack objectAtIndex:i] var] With:var])
         {
-            return [_var_stack objectAtIndex:i];
+            copy =  [_var_stack objectAtIndex:i];
+            result.location = copy.location;
+            result.argoffset = copy.argoffset;
+            result.solved = YES;
+            result.type = copy.type;//goon
+            result.addr = copy.addr;
+            result.obj = copy.obj;
+            result.borrow = copy.borrow;
+            result.var = var;
+            return result;
+        }
+    }
+    for(i = 0; i < [_var_table count]; i++)
+    {
+        if([self cmp_word_layer: [[_var_table objectAtIndex:i] var] With:var])
+        {
+            copy =  [_var_table objectAtIndex:i];
+            result.location = copy.location;
+            result.argoffset = i;
+            result.solved = YES;
+            result.type = copy.type;//goon
+            result.addr = copy.addr;
+            result.obj = copy.obj;
+            result.borrow = copy.borrow;
+            result.var = var;
+            return result;
         }
     }
     return nil;
@@ -2118,25 +2145,11 @@
 
 - (BOOL) cmp_word_layer: (TC_WORD_LAYER*)a With: (TC_WORD_LAYER*)b;
 {
-    TC_WORD_LAYER* itera = a;
-    TC_WORD_LAYER* iterb = b;
-    while(itera!=nil&&iterb!=nil)
+    if([a.word isEqualToString: b.word])
     {
-        if([itera.word isEqualToString:iterb.word])
-        {
-            itera = itera.next_layer;
-            iterb = iterb.next_layer;
-        }
-        else
-        {
-            return NO;
-        }
+        return YES;
     }
-    if(itera!=nil || iterb!=nil)
-    {
-        return NO;
-    }
-    return YES;
+    return NO;
 }
 
 - (void)clear_current
@@ -2194,7 +2207,7 @@
             continue;
         }
         
-        temp = [self searchVariable: [params objectAtIndex:i]];
+        temp = [self searchVariable: [params objectAtIndex:i]];//there
         
         if(temp == nil)
         {

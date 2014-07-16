@@ -53,6 +53,7 @@
 
 //search variable deal with the first layer: if no solved: seach stack from top to bot, if no, search local list, search globol list. then process of statement. If it is an instance, gen a TC_INS_VARIABLE. if the word layer of seach target is nil, jump over;  *** if the first layer is my, return target's atrribute(refer in addr)
 - (TC_INS_VARIABLE*) solve_var:(TC_WORD_LAYER*) w In:(TC_VirtualMachine*)m; // -1 0
+- (TC_INS_VARIABLE*) solve: (TC_INS_VARIABLE*) v;
 
 - (TC_INS_VARIABLE*) genInstance:(NSString*) w;
 
