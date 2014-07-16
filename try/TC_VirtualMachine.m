@@ -656,7 +656,23 @@
 
 - (void) equal:(NSMutableArray*) params //a equal b
 {
-
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR2)
+    {
+    
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_VECTOR3)
+    {
+    
+    }
 }
 - (void) greater:(NSMutableArray*) params//...
 {

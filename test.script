@@ -1,4 +1,4 @@
-define start;
+define start:
     declare function fun1 as 1;
     declare function fun2 as 1;
     declare variable A  list;
@@ -6,18 +6,10 @@ define start;
     declare variable C to vector3;
 enddef;
 
-define update;
-gggg
-g
-g
-g
-g
-g
-
-g
-    my B fun1 C;
+define update:
+    while A greater than B,return,end;
 enddef;
 
-define A fun1 B;
+define A fun1 B:
     A of B set C;
 enddef;

@@ -48,7 +48,7 @@
     while(true)
     {
         c = getc(_input);
-        if(c != EOF && c != ';')
+        if(c != EOF && c != ';' && c != ':')
         {
             if(c == '\n' || c == '\t')
             {
@@ -516,7 +516,7 @@
         }
         
         c = [_line characterAtIndex:i];
-        if(stick == NO && (c == ',' || c == ';'||c == '.'))
+        if(stick == NO && (c == ',' || c == ';'||c == '.'||c == ':'))
         {
            
             wordbuff[j] = 0;
@@ -2082,6 +2082,21 @@
     temp.addr = nil;
     temp.obj = nil;
     temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
+    
+    //15
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"result";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_UNKNOWN;
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
