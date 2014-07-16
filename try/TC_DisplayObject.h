@@ -20,6 +20,7 @@
 {
     TC_OBJ_TYPE _type;
     TC_ID _id;
+    TC_ID _label;
     NSString* _name;
     BOOL _show;
     BOOL _active;
@@ -53,6 +54,9 @@
 @property float w;
 @property float h;
 @property TC_OBJ_TYPE type;
+@property TC_ID label;
+@property BOOL show;
+@property BOOL active;
 
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture;
 

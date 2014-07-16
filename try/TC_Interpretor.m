@@ -2101,6 +2101,21 @@
     temp.location = VAR_BIND;
     temp.var = w;
     [_var_table addObject:temp];
+    
+    //16
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"label";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_UNKNOWN;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    [_var_table addObject:temp];
 }
 
 - (TC_INS_FUNCTION*) searchFunction: (TC_Function_Layer*) fun

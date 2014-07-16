@@ -8,6 +8,7 @@ enddef;
 
 define update:
     while A greater than B,return,end;
+    move <1,1,0>;
 enddef;
 
 define A fun1 B:

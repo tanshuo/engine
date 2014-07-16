@@ -15,10 +15,13 @@
 @synthesize virtual = _virtual;
 @synthesize w = _w;
 @synthesize h = _h;
-
+@synthesize label = _label;
+@synthesize show = _show;
+@synthesize active = _active;
 
 - (TC_ID)InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader:(NSString*)shader WithTexture: (NSString*)texture
 {
+    _label = 0;
     _type = OBJDISPLAY;
     _id = genID();
     _name = [[NSString alloc] initWithString:name];
