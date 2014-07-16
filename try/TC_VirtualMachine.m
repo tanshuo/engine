@@ -553,6 +553,10 @@
         {
             for(i = 0;i < [_var_stack count];i++)
             {
+                if([[_var_stack objectAtIndex:i] var] == nil)
+                {
+                    continue;
+                }
                 if([[[_var_stack objectAtIndex:i] var].word isEqualToString:v.var.word])
                 {
                     result = [_var_stack objectAtIndex:i];

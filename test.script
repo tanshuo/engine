@@ -7,7 +7,7 @@ define start;
 enddef;
 
 define update;
-    my B fun1 C;
+
     A set by  <1,2,3>;
     gen CC;
     if A is <1,2,3>,
@@ -17,6 +17,7 @@ define update;
         end,
     end;
     gen CC; 
+    my B fun1 C;
 enddef;
 
 define A fun1 B;
