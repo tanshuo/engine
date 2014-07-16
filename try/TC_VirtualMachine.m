@@ -50,14 +50,16 @@
             {
                  _ip = [[current src] offset];
             }
-            _ip++;
+            else
+                _ip++;
             break;
         case ins_jmp_true:
             if(_true_false == YES)
             {
                 _ip = [[current src] offset];
             }
-            _ip++;
+            else
+                _ip++;
             break;
         case ins_push:
             for(i = (int)_sp; i >= (int)_bp; i--)

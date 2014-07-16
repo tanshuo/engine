@@ -7,7 +7,7 @@ define start:
 enddef;
 
 define update:
-    if <4> smaller than <3>,
+    if <1> smaller than <3>,
         rotate <1>,
     end;
 enddef;
