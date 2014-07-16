@@ -392,7 +392,7 @@
     for(i = 0;i < [_defines count];i ++)//gen logical layer
     {
         type = [[_defines objectAtIndex:i] explain];
-        if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END || type == TC_BREAK || type == TC_RETURN)
+        if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END || type == TC_BREAK || type == TC_RETURN || type == TC_ELSE)
         {
             TC_Conrol_Layer* newlayer;
             newlayer = [TC_Conrol_Layer alloc];
@@ -403,7 +403,7 @@
             {
                 int type;
                 type = [[_defines objectAtIndex:j] explain];
-                if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END ||type == TC_BREAK||type == TC_RETURN)
+                if(type ==  TC_IF || type ==  TC_AFTER || type ==  TC_WHILE || type == TC_THEN || type == TC_END ||type == TC_BREAK||type == TC_RETURN || type == TC_ELSE)
                 {
                     i = j - 1;
                     break;
@@ -1076,7 +1076,7 @@
         {
             end_count++;
         }
-        else if(type == TC_WHILE || type == TC_IF)
+        else if(type == TC_WHILE || type == TC_IF || type == TC_ELSE)
         {
             while_count++;
         }
@@ -1147,6 +1147,29 @@
             
             A = [TC_Instruction alloc];
             A.instruct = ins_jmp_false;
+            A.params = nil;
+            A.src = offset;
+            A.des = nil;
+            [_instruction_table addObject:A];
+            _current_ins_count ++;
+            [stack addObject:offset];
+        }
+        else if(type == TC_ELSE)
+        {
+            // calculate true or false
+            //[self genLogicalInstructionsWith: [[_root objectAtIndex:i] logical] At: _current_ins_count To: _instruction_table];
+            
+            // jump to the end if false
+            TC_Instruction* A;
+            TC_INS_OFFSET* offset;
+            offset = [TC_INS_OFFSET alloc];
+            offset.offset = 0;
+            offset.solved = NO;
+            offset.mark = MARK_IF_END;
+            offset.extra = 0;
+            
+            A = [TC_Instruction alloc];
+            A.instruct = ins_jmp_true;
             A.params = nil;
             A.src = offset;
             A.des = nil;
@@ -1563,6 +1586,12 @@
     TC_Define* temp = [TC_Define alloc];
     temp.word = @"if";
     temp.explain = TC_IF;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+   
+    temp = [TC_Define alloc];
+    temp.word = @"else";
+    temp.explain = TC_ELSE;
     temp.right_match = 0;
     [self.dictionary addObject: temp];
     

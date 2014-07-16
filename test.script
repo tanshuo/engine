@@ -7,15 +7,14 @@ define start:
 enddef;
 
 define update:
-    if <1> smaller than <3>,
-
+    if <2> smaller than <3>,
+        rotate <0>,
+    end,
+    else,
         rotate <1>,
     end;
     B set <"hello">; 
-    while <1> smaller than <3>,
-        rotate <1>,
-    break,
-    end;
+
 enddef;
 
 define A fun1 B:

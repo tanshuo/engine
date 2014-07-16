@@ -39,7 +39,7 @@ typedef enum{
     TC_END, // ; only
     TC_OF, //of
     TC_MY, //my
-    TC_DOT,//.
+    TC_ELSE,
     TC_AND, //and
     TC_OR, // or
     TC_AFTER, //after as soon as
