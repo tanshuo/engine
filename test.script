@@ -13,10 +13,11 @@ define update;
     if A is <1,2,3>,
         A move to <6,7,8>,
         if A greater than <5,6,7>,
-            kill CC,
+            kill CCB,
         end,
     end;
     gen CC; 
+    kill CC;
     my B fun1 C;
 enddef;
 

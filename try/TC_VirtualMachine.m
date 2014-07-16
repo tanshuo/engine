@@ -543,7 +543,7 @@
 
 - (TC_INS_VARIABLE*) solve: (TC_INS_VARIABLE*) v
 {
-    TC_INS_VARIABLE* result = [TC_INS_VARIABLE alloc];
+    TC_INS_VARIABLE* result = nil;
     int i;
     if(v.solved == NO)//may wrong
     {
@@ -581,6 +581,7 @@
     }
     else if(v.solved == YES && v.location == VAR_SELF)
     {
+        result = [TC_INS_VARIABLE alloc];
         result.obj = _target;
         result.type = VAR_OBJECT;
         result.solved = YES;
