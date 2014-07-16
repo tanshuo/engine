@@ -7,8 +7,9 @@ define start:
 enddef;
 
 define update:
-    while A greater than B,return,end;
-    rotate <1>;
+    if <4> smaller than <3>,
+        rotate <1>,
+    end;
 enddef;
 
 define A fun1 B:
