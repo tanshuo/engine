@@ -343,6 +343,7 @@
             l = [TC_WORD_LAYER alloc];
             l.word = [[_defines objectAtIndex:1] word];
             l.type = 0;
+            l.next_layer = nil;
             TC_INS_VARIABLE* var;
             var = [TC_INS_VARIABLE alloc];
             var.solved = NO;

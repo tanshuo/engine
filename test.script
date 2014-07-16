@@ -11,10 +11,7 @@ define update;
     A set by  <1,2,3>;
     gen CC;
     if A is <1,2,3>,
-        A move to <6,7,8>,
-        if A greater than <5,6,7>,
-            kill CCB,
-        end,
+       
     end;
     gen CC; 
     kill CC;

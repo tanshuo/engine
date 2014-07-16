@@ -31,6 +31,8 @@
     TC_Instruction* current = [_ins_list objectAtIndex:_ip];
     int ins = [current instruct];
     int re;
+    int i;
+    TC_INS_VARIABLE* temp = nil;
     switch(ins)
     {
         case ins_call:
@@ -56,10 +58,28 @@
             }
             break;
         case ins_push:
-        
-            [_var_stack addObject:[current src]];
-            _sp ++;
-            _ip ++;
+            for(i = (int)_sp; i >= (int)_bp; i--)
+            {
+                if(i >= 0 && i < [_var_stack count])
+                {
+                    if([[[[_var_stack objectAtIndex:i] var] word] isEqualToString:[[[current src]var]word]])
+                    {
+                        temp = [_var_stack objectAtIndex:i];
+                        break;
+                    }
+                }
+            }
+            if(temp)
+            {
+                [_var_stack setObject:[current src] atIndexedSubscript:i];
+                _ip ++;
+            }
+            else
+            {
+                [_var_stack addObject:[current src]];
+                _sp ++;
+                _ip ++;
+            }
             break;
         case ins_rtn:
             re = [self return_fun:current];
