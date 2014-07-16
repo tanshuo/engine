@@ -12,7 +12,7 @@
 
 - (void)dealloc
 {
-    if(_borrow == NO)
-        free(_addr);
+
+    free(_addr);
 }
 @end

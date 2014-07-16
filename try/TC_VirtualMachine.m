@@ -1055,5 +1055,29 @@
 {
 
 }
+
+
+/////////////////////////////////////////////////////////////
+- (void) ref
+{
+    TC_INS_VARIABLE* iter;
+    
+    iter = [_local_var_list objectAtIndex:0];
+    ((TC_Position*)iter.addr)->x = ((TC_DisplayObject*)_target).position.x;
+    ((TC_Position*)iter.addr)->y = ((TC_DisplayObject*)_target).position.y;
+    ((TC_Position*)iter.addr)->z = ((TC_DisplayObject*)_target).position.z;
+    
+    iter = [_local_var_list objectAtIndex:1];
+    ((TC_Position*)iter.addr)->x = ((TC_Layer*)_target).relativePosition.x;
+    ((TC_Position*)iter.addr)->y = ((TC_Layer*)_target).relativePosition.y;
+    ((TC_Position*)iter.addr)->z = ((TC_Layer*)_target).relativePosition.z;
+    
+}
+
+- (void) sync
+{
+
+}
+
 @end
 

@@ -62,7 +62,12 @@
 - (int) bind_function:(TC_INS_FUNCTION*)func To:(SEL*)addr;
 - (SEL) seach_bind: (TC_INS_FUNCTION*)func;
 
+- (void) ref;
+- (void) sync;
+
+
 //bind list
+//////////////////////////////////////////////////////////
 - (void) equal:(NSMutableArray*) params; //a equal b
 - (void) greater:(NSMutableArray*) params;//...
 - (void) smaller:(NSMutableArray*) params;//...
