@@ -49,6 +49,7 @@
     TC_Signal _eventlist[50];
 }
 @property (strong,nonatomic) TC_VirtualMachine* virtual;
+@property (strong,nonatomic) NSString* name;
 @property TC_Position position;
 @property float rotation;
 @property float w;
@@ -57,6 +58,7 @@
 @property TC_ID label;
 @property BOOL show;
 @property BOOL active;
+@property TC_ID oid;
 
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture;
 

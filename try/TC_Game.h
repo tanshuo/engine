@@ -21,9 +21,9 @@
 #import "TC_Sprite.h"
 #import "TC_Interpretor.h"
 #import "TC_OBJ_VIRTUAL.h"
-#define CAMERA_NUM 1
 
-TC_Camera* camera[CAMERA_NUM];
+
+
 
 @interface TC_Game : NSObject
 + (void) gameStart;

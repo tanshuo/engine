@@ -57,6 +57,7 @@
         for(i = 0;i < [copy.local_var_list count];i ++)
         {
             TC_INS_VARIABLE* t;
+            t =  [copy.local_var_list objectAtIndex:i];
             TC_INS_VARIABLE* temp;
             temp = [TC_INS_VARIABLE  alloc];
             temp.solved = t.solved;
@@ -66,6 +67,50 @@
             temp.argoffset = t.argoffset;
             temp.type = t.type;
             temp.location = t.location;
+            if(t.addr != nil)
+            {
+                switch(t.type)
+                {
+                    case VAR_VECTOR2:
+                        temp.addr = malloc(sizeof(TC_Position));
+                        temp.obj = nil;
+                        break;
+                    case VAR_VECTOR3:
+                        temp.addr = malloc(sizeof(TC_Position2d));
+                        temp.obj = nil;
+                        break;
+                    case VAR_FLOAT:
+                        temp.addr = malloc(sizeof(float));
+                        temp.obj = nil;
+                        break;
+                    case VAR_INT:
+                        temp.addr = malloc(sizeof(int));
+                        temp.obj = nil;
+                        break;
+                    case VAR_STRING:
+                        free(temp.addr);
+                        temp.addr = nil;
+                        break;
+                    case VAR_LIST:
+                        free(temp.addr);
+                        temp.addr = nil;
+                        break;
+                    case VAR_OBJECT:
+                        free(temp.addr);
+                        temp.addr = nil;
+                        break;
+                    case VAR_OFF_SET:
+                        free(temp.addr);
+                        temp.addr = nil;
+                        temp.obj = nil;
+                        break;
+                    case VAR_UNKNOWN:
+                        free(temp.addr);
+                        temp.addr = nil;
+                        temp.obj = nil;
+                        break;
+                }
+            }
             [result.local_var_list addObject:temp];
         }
         result.func_list = copy.func_list;

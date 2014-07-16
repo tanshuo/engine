@@ -12,7 +12,7 @@
 
 - (void)dealloc
 {
-
     free(_addr);
+    _addr = nil;
 }
 @end

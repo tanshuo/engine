@@ -18,6 +18,8 @@
 @synthesize label = _label;
 @synthesize show = _show;
 @synthesize active = _active;
+@synthesize oid = _id;
+@synthesize name = _name;
 
 - (TC_ID)InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader:(NSString*)shader WithTexture: (NSString*)texture
 {
@@ -129,7 +131,7 @@
         _virtual.ip = _virtual.update;
     }
     //stack
-    //_virtual.var_stack
+    [_virtual ref];
     TC_INS_VARIABLE* var;
     var = [TC_INS_VARIABLE alloc];
     var.solved = YES;

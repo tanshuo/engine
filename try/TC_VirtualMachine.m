@@ -1016,15 +1016,79 @@
 }
 - (void) adopt:(NSMutableArray*) params// adopt a
 {
-
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    A = [params objectAtIndex:0];
+    if(A.type != VAR_OBJECT || B.type != VAR_OBJECT)
+    {
+        _check_call = NO;
+        return;
+    }
+    else if(((TC_Layer*)A.obj).type == OBJDISPLAY || ((TC_Layer*)B.obj).type == OBJDISPLAY)
+    {
+        _check_call = NO;
+        return;
+    }
+    [A.obj addChild:B.obj];
 }
 - (void) abandon:(NSMutableArray*) params// abandon my child abondon a
 {
-
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    A = [params objectAtIndex:0];
+    if(A.type != VAR_OBJECT || B.type != VAR_INT)
+    {
+        _check_call = NO;
+        return;
+    }
+    else if(((TC_Layer*)A.obj).type == OBJDISPLAY)
+    {
+        _check_call = NO;
+        return;
+    }
+    [A.obj removeChildByID:*((int*)(B.addr))];
 }
 - (void) search:(NSMutableArray*) params// search string
 {
-
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    if(B.type != VAR_STRING)
+    {
+        _check_call = NO;
+        return;
+    }
+    int result = findIDByName((char*)[((NSString*)B.obj) cStringUsingEncoding:NSASCIIStringEncoding]);
+    TC_INS_VARIABLE* v = [TC_INS_VARIABLE alloc];
+    v.type = VAR_INT;
+    v.location = VAR_BIND;
+    v.addr = malloc(sizeof(int));
+    v.obj = nil;
+    v.solved = YES;
+    v.borrow = YES;
+    v.argoffset = 0;
+    v.var = nil;
+    *((int*)(v.addr)) = result;
+    _result = v;
 }
 - (void) creat:(NSMutableArray*) params// create prefab position return reult
 {
@@ -1070,12 +1134,66 @@
     ((TC_Position*)iter.addr)->x = ((TC_DisplayObject*)_target).position.x;
     ((TC_Position*)iter.addr)->y = ((TC_DisplayObject*)_target).position.y;
     ((TC_Position*)iter.addr)->z = ((TC_DisplayObject*)_target).position.z;
+    if([(TC_DisplayObject*)_target type] != OBJDISPLAY)
+    {
+        iter = [_local_var_list objectAtIndex:1];
+        ((TC_Position*)iter.addr)->x = ((TC_Layer*)_target).relativePosition.x;
+        ((TC_Position*)iter.addr)->y = ((TC_Layer*)_target).relativePosition.y;
+        ((TC_Position*)iter.addr)->z = ((TC_Layer*)_target).relativePosition.z;
+        
+        iter = [_local_var_list objectAtIndex:2];
+        *((float*)(iter.addr)) = ((TC_Layer*)_target).relativePosition.x;
+        
+        iter = [_local_var_list objectAtIndex:3];
+        *((float*)(iter.addr)) = ((TC_Layer*)_target).relativePosition.y;
+        
+        iter = [_local_var_list objectAtIndex:4];
+        *((float*)(iter.addr)) = ((TC_Layer*)_target).relativePosition.z;
+        
+        iter = [_local_var_list objectAtIndex:5];
+        *((float*)(iter.addr)) = ((TC_Layer*)_target).relativeRotation;
+        
+        iter = [_local_var_list objectAtIndex:6];
+        iter.obj = camera[[_target group]];
+        
+        iter = [_local_var_list objectAtIndex:7];
+        iter.obj = [_target parent];
+        
+        iter = [_local_var_list objectAtIndex:10];
+        *((int*)(iter.addr)) = [(TC_Layer*)_target alive];
+        
+        iter = [_local_var_list objectAtIndex:14];
+        *((int*)(iter.addr)) = [(TC_Layer*)_target child_num];
+    }
     
-    iter = [_local_var_list objectAtIndex:1];
-    ((TC_Position*)iter.addr)->x = ((TC_Layer*)_target).relativePosition.x;
-    ((TC_Position*)iter.addr)->y = ((TC_Layer*)_target).relativePosition.y;
-    ((TC_Position*)iter.addr)->z = ((TC_Layer*)_target).relativePosition.z;
+    if([(TC_DisplayObject*)_target type] == OBJSPRITE)
+    {
+        iter = [_local_var_list objectAtIndex:11];
+        *((int*)(iter.addr)) = [(TC_Sprite*)_target currentFrame];
+        
+        iter = [_local_var_list objectAtIndex:12];
+        *((int*)(iter.addr)) = [(TC_Sprite*)_target currentSequence];
+        
+        iter = [_local_var_list objectAtIndex:13];
+        *((int*)(iter.addr)) = [(TC_Sprite*)_target frameSpeed];
+    }
     
+    iter = [_local_var_list objectAtIndex:8];
+    *((int*)(iter.addr)) = [(TC_DisplayObject*)_target show];
+    
+    iter = [_local_var_list objectAtIndex:9];
+    *((int*)(iter.addr)) = [(TC_DisplayObject*)_target active];
+    iter = [_local_var_list objectAtIndex:15];
+    iter.obj = [[_target virtual] result];
+    
+    iter = [_local_var_list objectAtIndex:16];
+    *((int*)(iter.addr)) = [(TC_DisplayObject*)_target label];
+    
+    iter = [_local_var_list objectAtIndex:17];
+    *((int*)(iter.addr)) = [(TC_DisplayObject*)_target oid];
+    
+    iter = [_local_var_list objectAtIndex:18];
+    iter.obj = [(TC_DisplayObject*)_target name];
 }
 
 - (void) sync
@@ -1085,3 +1203,7 @@
 
 @end
 
+/*
+ 
+
+ */

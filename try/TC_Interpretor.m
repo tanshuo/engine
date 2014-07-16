@@ -1875,6 +1875,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(TC_Position));
     [_var_table addObject:temp];
     
     //1
@@ -1890,6 +1891,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(TC_Position));
     [_var_table addObject:temp];
     
     //2
@@ -1905,6 +1907,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(float));
     [_var_table addObject:temp];
     
     //3
@@ -1920,6 +1923,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(float));
     [_var_table addObject:temp];
     
     //4
@@ -1935,6 +1939,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(float));
     [_var_table addObject:temp];
     
     //5
@@ -1950,6 +1955,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(float));
     [_var_table addObject:temp];
     
     //6
@@ -1995,6 +2001,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(int));
     [_var_table addObject:temp];
     
     //9
@@ -2010,6 +2017,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(int));
     [_var_table addObject:temp];
     
     //10
@@ -2025,6 +2033,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(int));
     [_var_table addObject:temp];
     
     //11
@@ -2040,6 +2049,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(int));
     [_var_table addObject:temp];
     
     //12
@@ -2055,6 +2065,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(int));
     [_var_table addObject:temp];
     
     //13
@@ -2070,6 +2081,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(int));
     [_var_table addObject:temp];
     
     //14
@@ -2085,6 +2097,7 @@
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
+    temp.addr = malloc(sizeof(int));
     [_var_table addObject:temp];
     
     //15
@@ -2111,7 +2124,39 @@
     temp.argoffset = 0;
     temp.addr = nil;
     temp.obj = nil;
-    temp.type = VAR_UNKNOWN;
+    temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    temp.addr = malloc(sizeof(int));
+    [_var_table addObject:temp];
+    
+    //17
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"id";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_INT;
+    temp.borrow = YES;
+    temp.location = VAR_BIND;
+    temp.var = w;
+    temp.addr = malloc(sizeof(int));
+    [_var_table addObject:temp];
+    
+    //18
+    temp = [TC_INS_VARIABLE alloc];
+    w = [TC_WORD_LAYER alloc];
+    w.word = @"name";
+    w.next_layer = nil;
+    temp.solved = YES;
+    temp.argoffset = 0;
+    temp.addr = nil;
+    temp.obj = nil;
+    temp.type = VAR_STRING;
     temp.borrow = YES;
     temp.location = VAR_BIND;
     temp.var = w;
