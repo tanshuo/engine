@@ -10,6 +10,10 @@ define update:
     if <1> smaller than <3>,
         rotate <1>,
     end;
+    B set <"hello">; 
+    if <1> smaller than <3>,
+        rotate <1>,
+    end;
 enddef;
 
 define A fun1 B:

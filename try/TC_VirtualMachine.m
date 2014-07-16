@@ -395,11 +395,18 @@
     result.addr = nil;
     result.type = VAR_UNKNOWN;
     result.argoffset = 0;
-    if([w lengthOfBytesUsingEncoding:NSASCIIStringEncoding] > 0)
+    if([w lengthOfBytesUsingEncoding:NSASCIIStringEncoding] >= 1)
     {
         if([w characterAtIndex:0] == '\"')
         {
-            for(i = 0; i < [w lengthOfBytesUsingEncoding:NSASCIIStringEncoding]; i++)
+            if([w lengthOfBytesUsingEncoding:NSASCIIStringEncoding] < 2)
+            {
+                _message = [NSMutableString stringWithString:@"\" missing"];
+                free(cache);
+                NSLog(@"%@",_message); exit(1);
+                return nil;
+            }
+            for(i = 1; i < [w lengthOfBytesUsingEncoding:NSASCIIStringEncoding]; i++)
             {
                 if([w characterAtIndex:i] == '\"')
                 {

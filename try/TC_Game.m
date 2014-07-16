@@ -49,6 +49,7 @@
     [s setRelativePositionWithX:20 WithY:20];
     [s adjust:1];
     [[TC_Sprite alloc] born:@"prefab1" atGroup:0];
+    
    // [[TC_Sprite alloc] born:@"prefab1" atGroup:0];
 }
 + (void) updateWithAspect: (float)aspect;
