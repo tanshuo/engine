@@ -117,6 +117,7 @@
         if(sel <= 0)
         {
             _message = [NSMutableString stringWithString:@"unsolved function symbol"];
+            NSLog(@"%@",_message); exit(1);
             return -1;
         }
         else
@@ -239,6 +240,7 @@
         else
         {
             _message = [NSMutableString stringWithString:@"stack cracked"];
+            NSLog(@"%@",_message); exit(1);
             return -1;
         }
         
@@ -251,6 +253,7 @@
     else
     {
         _message = [NSMutableString stringWithString:@"stack cracked"];
+        NSLog(@"%@",_message); exit(1);
         return -1;
     }
     int rtn_ip = var.argoffset;
@@ -285,6 +288,7 @@
         if(w.next_layer == nil)
         {
             _message = [NSMutableString stringWithString:@"no indicated attribite for current object"];
+            NSLog(@"%@",_message); exit(1);
             return nil;
         }
         new_m = m;
@@ -328,6 +332,7 @@
                 else
                 {
                     _message = [NSMutableString stringWithString:@"try to get an attribute of a non-object variable"];
+                    NSLog(@"%@",_message); exit(1);
                     return nil;
                 }
             }
@@ -348,6 +353,7 @@
                 else
                 {
                     _message = [NSMutableString stringWithString:@"try to get an attribute of a non-object variable"];
+                    NSLog(@"%@",_message); exit(1);
                     return nil;
                 }
             }
@@ -369,6 +375,7 @@
     if(cache == nil)
     {
         _message = [NSMutableString stringWithString:@"no enough memory"];
+        NSLog(@"%@",_message); exit(1);
         return nil;
     }
     w = [w substringFromIndex:1];
@@ -410,6 +417,7 @@
             }
             _message = [NSMutableString stringWithString:@"can not find end of string"];
             free(cache);
+            NSLog(@"%@",_message); exit(1);
             return nil;
         }
         else
@@ -474,6 +482,7 @@
                 {
                     _message = [NSMutableString stringWithString:@"arg can not over 3"];
                     free(cache);
+                    NSLog(@"%@",_message); exit(1);
                     return nil;
                 }
             }
@@ -595,6 +604,7 @@
             if(result == nil)
             {
                 _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
+                NSLog(@"%@",_message); exit(1);
                 return nil;
             }
         }
@@ -620,6 +630,7 @@
             if(result == nil)
             {
                 _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
+                NSLog(@"%@",_message); exit(1);
                 return nil;
             }
         }
@@ -634,6 +645,7 @@
             if(result == nil)
             {
                 _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
+                NSLog(@"%@",_message); exit(1);
                 return nil;
             }
         }

@@ -7,14 +7,14 @@ define start;
 enddef;
 
 define update;
+gggg
+g
+g
+g
+g
+g
 
-    A set by  <1,2,3>;
-    gen CC;
-    if A is <1,2,3>,
-       
-    end;
-    gen CC; 
-    kill CC;
+g
     my B fun1 C;
 enddef;
 
