@@ -195,6 +195,12 @@
         [_var_stack addObject:var];
         _ip = [current offset];
     }
+    else
+    {
+        _message = [NSMutableString stringWithString:@"unsolved function symbol"];
+        NSLog(@"%@",_message); exit(1);
+        return -1;
+    }
     return 0;
 }
 
