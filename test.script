@@ -7,16 +7,11 @@ define start:
 enddef;
 
 define update:
-    if <2> smaller than <3>,
-        rotate <0>,
-    end,
-    else,
-        rotate <1>,
-    end;
-    B set <"hello">; 
+    A set <1>;
+    fun1 A;
 
 enddef;
 
 define A fun1 B:
-    A of B set C;
+    rotate B;
 enddef;
