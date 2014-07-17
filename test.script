@@ -7,11 +7,12 @@ define start:
 enddef;
 
 define update:
-    A set <1>;
+    A set <1.0>;
     fun1 A;
-
 enddef;
 
 define A fun1 B:
-    rotate B;
+    if B greater than <0> or  B greater than <1.5>,
+        rotate B,
+    end;
 enddef;

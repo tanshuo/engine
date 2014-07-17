@@ -777,6 +777,8 @@
         newlayer.straight = [self genFun: function_express];
         if(newlayer.straight == nil)
         {
+            _message = [NSMutableString stringWithString: @"cannot read the expression"];
+            NSLog(@"%@",_message); exit(1);
             return nil;
         }
         newlayer.left = nil;
@@ -788,6 +790,8 @@
     old.straight = [self genFun:[fc_array objectAtIndex:0]];
     if(old.straight == nil)
     {
+        _message = [NSMutableString stringWithString: @"cannot read the expression"];
+        NSLog(@"%@",_message); exit(1);
         return nil;
     }
     old.left = nil;
@@ -802,6 +806,11 @@
             TC_Logical_Layer* newleaf = [TC_Logical_Layer alloc];
             TC_Logical_Layer* newroot = [TC_Logical_Layer alloc];
             newleaf.straight = [self genFun:[fc_array objectAtIndex:i + 1]];
+            if(newleaf.straight == nil)
+            {
+                _message = [NSMutableString stringWithString: @"cannot read the expression"];
+                NSLog(@"%@",_message); exit(1);
+            }
             newleaf.type = 0;
             newleaf.left = nil;
             newleaf.right  = nil;
@@ -818,7 +827,8 @@
             old.straight = [self genFun:[fc_array objectAtIndex:i + 1]];
             if(old.straight == nil)
             {
-                return nil;
+                _message = [NSMutableString stringWithString: @"cannot read the expression"];
+                NSLog(@"%@",_message); exit(1);
             }
             old.left = nil;
             old.right = nil;
@@ -1887,310 +1897,7 @@
 }
 
 - (void) initVar
-{
-    TC_INS_VARIABLE* temp;
-    TC_WORD_LAYER* w;
-    
-    //0
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"world_position";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_VECTOR3;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(TC_Position));
-    [_var_table addObject:temp];
-    
-    //1
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"position";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_VECTOR3;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(TC_Position));
-    [_var_table addObject:temp];
-    
-    //2
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"x";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_FLOAT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(float));
-    [_var_table addObject:temp];
-    
-    //3
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"y";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_FLOAT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(float));
-    [_var_table addObject:temp];
-    
-    //4
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"z";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_FLOAT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(float));
-    [_var_table addObject:temp];
-    
-    //5
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"rotation";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_FLOAT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(float));
-    [_var_table addObject:temp];
-    
-    //6
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"camera";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_OBJECT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    [_var_table addObject:temp];
-    
-    //7
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"father";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_OBJECT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    [_var_table addObject:temp];
-    
-    //8
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"show";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_INT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(int));
-    [_var_table addObject:temp];
-    
-    //9
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"active";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_INT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(int));
-    [_var_table addObject:temp];
-    
-    //10
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"alive";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_INT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(int));
-    [_var_table addObject:temp];
-    
-    //11
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"current_frame";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_INT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(int));
-    [_var_table addObject:temp];
-    
-    //12
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"current_sequence";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_INT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(int));
-    [_var_table addObject:temp];
-    
-    //13
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"frame_speed";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_INT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(int));
-    [_var_table addObject:temp];
-    
-    //14
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"child_num";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_INT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(int));
-    [_var_table addObject:temp];
-    
-    //15
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"result";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_UNKNOWN;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    [_var_table addObject:temp];
-    
-    //16
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"label";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_INT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(int));
-    [_var_table addObject:temp];
-    
-    //17
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"id";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_INT;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    temp.addr = malloc(sizeof(int));
-    [_var_table addObject:temp];
-    
-    //18
-    temp = [TC_INS_VARIABLE alloc];
-    w = [TC_WORD_LAYER alloc];
-    w.word = @"name";
-    w.next_layer = nil;
-    temp.solved = YES;
-    temp.argoffset = 0;
-    temp.addr = nil;
-    temp.obj = nil;
-    temp.type = VAR_STRING;
-    temp.borrow = YES;
-    temp.location = VAR_BIND;
-    temp.var = w;
-    [_var_table addObject:temp];
-}
+{}
 
 - (TC_INS_FUNCTION*) searchFunction: (TC_Function_Layer*) fun
 {

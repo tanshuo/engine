@@ -131,7 +131,6 @@
         _virtual.ip = _virtual.update;
     }
     //stack
-    [_virtual ref];
     TC_INS_VARIABLE* var;
     var = [TC_INS_VARIABLE alloc];
     var.solved = YES;
@@ -167,6 +166,7 @@
         }
     }
     [_virtual.var_stack removeAllObjects];
+    
     
     _projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90), aspect, 0.1f, 10000.0f);
   

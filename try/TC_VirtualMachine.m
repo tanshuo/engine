@@ -766,6 +766,24 @@
             result = YES;
         }
     }
+    else if(A.type == VAR_INT && B.type == VAR_FLOAT)
+    {
+        int a = *((int*)(A.addr));
+        float b = *((float*)(B.addr));
+        if(a > b)
+        {
+            result = YES;
+        }
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_INT)
+    {
+        float a = *((float*)(A.addr));
+        int b = *((int*)(B.addr));
+        if(a > b)
+        {
+            result = YES;
+        }
+    }
     else
     {
         _check_call = NO;
@@ -804,6 +822,24 @@
             result = YES;
         }
     }
+    else if(A.type == VAR_INT && B.type == VAR_FLOAT)
+    {
+        int a = *((int*)(A.addr));
+        float b = *((float*)(B.addr));
+        if(a < b)
+        {
+            result = YES;
+        }
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_INT)
+    {
+        float a = *((float*)(A.addr));
+        int b = *((int*)(B.addr));
+        if(a < b)
+        {
+            result = YES;
+        }
+    }
     else
     {
         _check_call = NO;
@@ -826,6 +862,7 @@
     {
         A.type = B.type;
         A.obj = nil;
+        free(A.addr);
         A.addr = malloc(sizeof(TC_Position2d));
         ((TC_Position2d*)(A.addr))->x = ((TC_Position2d*)(B.addr))->x;
         ((TC_Position2d*)(A.addr))->y = ((TC_Position2d*)(B.addr))->y;
@@ -834,6 +871,7 @@
     {
         A.type = B.type;
         A.obj = nil;
+        free(A.addr);
         A.addr = malloc(sizeof(TC_Position));
         ((TC_Position*)(A.addr))->x = ((TC_Position*)(B.addr))->x;
         ((TC_Position*)(A.addr))->y = ((TC_Position*)(B.addr))->y;
@@ -850,6 +888,7 @@
     {
         A.type = B.type;
         A.obj = nil;
+        free(A.addr);
         A.addr = malloc(sizeof(int));
         *((int*)(A.addr)) = *((int*)(B.addr));
     }
@@ -857,6 +896,7 @@
     {
         A.type = B.type;
         A.obj = nil;
+        free(A.addr);
         A.addr = malloc(sizeof(float));
         *((float*)(A.addr)) = *((float*)(B.addr));
     }
@@ -901,7 +941,6 @@
 
     if(B.type == VAR_VECTOR2)
     {
-        
         p.x += ((TC_Position2d*)(B.addr))->x;
         p.y += ((TC_Position2d*)(B.addr))->y;
         ((TC_Layer*)(A.obj)).relativePosition = p;
@@ -983,7 +1022,7 @@
         return;
     }
     ((TC_Sprite*)(A.obj)).currentSequence = ((TC_Position*)(B.addr))->x;
-    ((TC_Sprite*)(A.obj)).currentFrame = ((TC_Position*)(B.addr))->y;
+    ((TC_Sprite*)(A.obj)).currentSequence = ((TC_Position*)(B.addr))->y;
     ((TC_Sprite*)(A.obj)).frameSpeed = ((TC_Position*)(B.addr))->z;
     
 }
@@ -1133,84 +1172,4 @@
 
 
 /////////////////////////////////////////////////////////////
-- (void) ref
-{
-    TC_INS_VARIABLE* iter;
-    
-    iter = [_local_var_list objectAtIndex:0];
-    ((TC_Position*)iter.addr)->x = ((TC_DisplayObject*)_target).position.x;
-    ((TC_Position*)iter.addr)->y = ((TC_DisplayObject*)_target).position.y;
-    ((TC_Position*)iter.addr)->z = ((TC_DisplayObject*)_target).position.z;
-    if([(TC_DisplayObject*)_target type] != OBJDISPLAY)
-    {
-        iter = [_local_var_list objectAtIndex:1];
-        ((TC_Position*)iter.addr)->x = ((TC_Layer*)_target).relativePosition.x;
-        ((TC_Position*)iter.addr)->y = ((TC_Layer*)_target).relativePosition.y;
-        ((TC_Position*)iter.addr)->z = ((TC_Layer*)_target).relativePosition.z;
-        
-        iter = [_local_var_list objectAtIndex:2];
-        *((float*)(iter.addr)) = ((TC_Layer*)_target).relativePosition.x;
-        
-        iter = [_local_var_list objectAtIndex:3];
-        *((float*)(iter.addr)) = ((TC_Layer*)_target).relativePosition.y;
-        
-        iter = [_local_var_list objectAtIndex:4];
-        *((float*)(iter.addr)) = ((TC_Layer*)_target).relativePosition.z;
-        
-        iter = [_local_var_list objectAtIndex:5];
-        *((float*)(iter.addr)) = ((TC_Layer*)_target).relativeRotation;
-        
-        iter = [_local_var_list objectAtIndex:6];
-        iter.obj = camera[[_target group]];
-        
-        iter = [_local_var_list objectAtIndex:7];
-        iter.obj = [_target parent];
-        
-        iter = [_local_var_list objectAtIndex:10];
-        *((int*)(iter.addr)) = [(TC_Layer*)_target alive];
-        
-        iter = [_local_var_list objectAtIndex:14];
-        *((int*)(iter.addr)) = [(TC_Layer*)_target child_num];
-    }
-    
-    if([(TC_DisplayObject*)_target type] == OBJSPRITE)
-    {
-        iter = [_local_var_list objectAtIndex:11];
-        *((int*)(iter.addr)) = [(TC_Sprite*)_target currentFrame];
-        
-        iter = [_local_var_list objectAtIndex:12];
-        *((int*)(iter.addr)) = [(TC_Sprite*)_target currentSequence];
-        
-        iter = [_local_var_list objectAtIndex:13];
-        *((int*)(iter.addr)) = [(TC_Sprite*)_target frameSpeed];
-    }
-    
-    iter = [_local_var_list objectAtIndex:8];
-    *((int*)(iter.addr)) = [(TC_DisplayObject*)_target show];
-    
-    iter = [_local_var_list objectAtIndex:9];
-    *((int*)(iter.addr)) = [(TC_DisplayObject*)_target active];
-    iter = [_local_var_list objectAtIndex:15];
-    iter.obj = [[_target virtual] result];
-    
-    iter = [_local_var_list objectAtIndex:16];
-    *((int*)(iter.addr)) = [(TC_DisplayObject*)_target label];
-    
-    iter = [_local_var_list objectAtIndex:17];
-    *((int*)(iter.addr)) = [(TC_DisplayObject*)_target oid];
-    
-    iter = [_local_var_list objectAtIndex:18];
-    iter.obj = [(TC_DisplayObject*)_target name];
-}
-
-- (void) sync
-{
-
-}
-
 @end
-
-/*
- 
-
- */
