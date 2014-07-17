@@ -1307,6 +1307,12 @@
         A.params = [self replace_word_layer: l.straight];
         A.src = l.straight.name;
         A.des = [self searchFunction:l.straight];
+        if(A.des == nil)
+        {
+            _message = [NSMutableString stringWithString: @"wrong statement"];
+            [self clear_current];
+            NSLog(@"%@",_message); exit(1);
+        }
         [table addObject:A];
         _current_ins_count ++;
         return;
@@ -1321,12 +1327,24 @@
             A.params = [self replace_word_layer: l.right.straight];
             A.src = l.right.straight.name;
             A.des = [self searchFunction:l.right.straight];
+            if(A.des == nil)
+            {
+                _message = [NSMutableString stringWithString: @"wrong statement"];
+                [self clear_current];
+                NSLog(@"%@",_message); exit(1);
+            }
             TC_Instruction* B;
             B = [TC_Instruction alloc];
             B.instruct = ins_call;
             B.params = [self replace_word_layer: l.right.straight];
             B.src = l.right.straight.name;
             B.des = [self searchFunction:l.right.straight];
+            if(B.des == nil)
+            {
+                _message = [NSMutableString stringWithString: @"wrong statement"];
+                [self clear_current];
+                NSLog(@"%@",_message); exit(1);
+            }
             [table addObject:A];
             [table addObject:B];
             _current_ins_count += 2;
@@ -1339,6 +1357,12 @@
             A.params = [self replace_word_layer: l.right.straight];
             A.src = l.right.straight.name;
             A.des = [self searchFunction:l.right.straight];
+            if(A.des == nil)
+            {
+                _message = [NSMutableString stringWithString: @"wrong statement"];
+                [self clear_current];
+                NSLog(@"%@",_message); exit(1);
+            }
             
             TC_Instruction* B;
             B = [TC_Instruction alloc];
@@ -1346,6 +1370,12 @@
             B.params = [self replace_word_layer: l.left.straight];
             B.src = l.left.straight.name;
             B.des = [self searchFunction:l.left.straight];
+            if(B.des == nil)
+            {
+                _message = [NSMutableString stringWithString: @"wrong statement"];
+                [self clear_current];
+                NSLog(@"%@",_message); exit(1);
+            }
             
             TC_Instruction* C;
             C = [TC_Instruction alloc];
@@ -1422,6 +1452,12 @@
             A.params = [self replace_word_layer: l.right.straight];
             A.src = l.right.straight.name;
             A.des = [self searchFunction:l.right.straight];
+            if(A.des == nil)
+            {
+                _message = [NSMutableString stringWithString: @"wrong statement"];
+                [self clear_current];
+                NSLog(@"%@",_message); exit(1);
+            }
             
             [table addObject:C];
             [table addObject:A];
@@ -1436,6 +1472,12 @@
             A.params = [self replace_word_layer: l.right.straight];
             A.src = l.right.straight.name;
             A.des = [self searchFunction:l.right.straight];
+            if(A.des == nil)
+            {
+                _message = [NSMutableString stringWithString: @"wrong statement"];
+                [self clear_current];
+                NSLog(@"%@",_message); exit(1);
+            }
             
             [table addObject:A];
             _current_ins_count += 1;
@@ -1465,7 +1507,13 @@
             B.instruct = ins_call;
             B.params = [self replace_word_layer: l.left.straight];
             B.src = l.left.straight.name;
-            B.des = [self searchFunction:l.left.straight];;
+            B.des = [self searchFunction:l.left.straight];
+            if(B.des == nil)
+            {
+                _message = [NSMutableString stringWithString: @"wrong statement"];
+                [self clear_current];
+                NSLog(@"%@",_message); exit(1);
+            }
             
             [table addObject:C];
             [table addObject:B];
@@ -1480,6 +1528,12 @@
             B.params = [self replace_word_layer: l.left.straight];
             B.src = l.left.straight.name;
             B.des = [self searchFunction:l.left.straight];
+            if(B.des == nil)
+            {
+                _message = [NSMutableString stringWithString: @"wrong statement"];
+                [self clear_current];
+                NSLog(@"%@",_message); exit(1);
+            }
             
             [table addObject:B];
             _current_ins_count += 1;
