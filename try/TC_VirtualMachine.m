@@ -24,6 +24,7 @@
 
 - (int) run_next_ins
 {
+    
     if(_ip >= [_ins_list count])
     {
         _message = [NSMutableString stringWithString:@"no more instruction"];
@@ -45,22 +46,31 @@
             break;
         case ins_jmp:
             _ip = [[current src] offset];
+            _true_false = NO;
             break;
         case ins_jmp_false:
             if(_true_false == NO)
             {
                  _ip = [[current src] offset];
+                _true_false = NO;
             }
             else
+            {
+                _true_false = NO;
                 _ip++;
+            }
             break;
         case ins_jmp_true:
             if(_true_false == YES)
             {
                 _ip = [[current src] offset];
+                _true_false = NO;
             }
             else
+            {
+                _true_false = NO;
                 _ip++;
+            }
             break;
         case ins_push:
             for(i = (int)_sp; i >= (int)_bp; i--)

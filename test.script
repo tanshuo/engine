@@ -4,18 +4,22 @@ define start:
     declare variable A  list;
     declare variable B to vector3;
     declare variable C to vector3;
-
+    C set <1>;
 enddef;
 
 define update:
-    C set <100>;
     if C greater than <99.99>,
         move <1.0,1.0>,
     end;
     <"frame_speed"> change to <1>;
     move <1.0,-1.0>;
     fun1 A;
-    create <"prefab1">  at <20,20,0> to C;
+    if C is <1>,
+        create <"prefab1">  at <1,1,0> to C,
+    end,
+    else,
+        rotate <3>,
+    end;
 enddef;
 
 define A fun1 B:
