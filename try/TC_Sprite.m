@@ -14,11 +14,12 @@
 @synthesize currentSequence = _currentSequence;
 @synthesize totalSequence = _totalSequence;
 @synthesize frameSpeed = _frameSpeed;
+@synthesize totalFrame = _totalFrame;
 
 - (void) born: (NSString*)prefab atGroup:(TC_ID)g
 {
     int i;
-    TC_PrefabInfo* info = [TC_PrefabLoader loadPrefab:prefab WithName:@"test"];
+    TC_PrefabInfo* info = [TC_PrefabLoader loadPrefab:prefab WithName:prefab];
     if(info == nil)
     {
         printf("cannot open prefab\n");

@@ -27,7 +27,7 @@
 
 - (int) loadFile:(NSString *)file
 {
-    NSString* path = [[NSBundle mainBundle] pathForResource:@"test" ofType:@"script"];
+    NSString* path = [[NSBundle mainBundle] pathForResource:file ofType:@"script"];
     
     _input = fopen([path cStringUsingEncoding:NSASCIIStringEncoding], "r");
     if(_input < 0)
@@ -1606,6 +1606,10 @@
     int result;
     int i;
     [self loadFile:file];
+    if(_input == nil)
+    {
+        return nil;
+    }
     while([self readLine] > 0)
     {
         result = [self read_a_tokens];
@@ -1895,9 +1899,9 @@
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
-    temp.word = @"creat";
+    temp.word = @"create";
     temp.explain = TC_FUNCTION;
-    temp.right_match = 2;
+    temp.right_match = 3;
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
@@ -1948,6 +1952,17 @@
     temp.right_match = 1;
     [self.dictionary addObject: temp];
     
+    temp = [TC_Define alloc];
+    temp.word = @"change";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"change";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
 }
 
 - (void) initVar
@@ -2230,11 +2245,11 @@
     
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;
-    fun.name = @"creat";
+    fun.name = @"create";
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_BIND;
-    fun.right_match = 2;
+    fun.right_match = 3;
     [_func_table addObject:fun];
     
     fun = [TC_INS_FUNCTION alloc];
@@ -2310,6 +2325,22 @@
     fun.right_match = 1;
     [_func_table addObject:fun];
     
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"change";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
     
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"get";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
 }
 @end

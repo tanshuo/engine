@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 tanshuo. All rights reserved.
 //
 
+
 #import "TC_OBJ_VIRTUAL.h"
 @implementation TC_VirtualMachine
 @synthesize ip = _ip;
@@ -1136,9 +1137,47 @@
     *((int*)(v.addr)) = result;
     _result = v;
 }
-- (void) creat:(NSMutableArray*) params// create prefab position return reult
+- (void) create:(NSMutableArray*) params// A create prefab position to B
 {
-
+    _check_call = YES;
+    if([params count] != 4)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* prefab;
+    prefab = [params objectAtIndex:1];
+    TC_INS_VARIABLE* position;
+    position = [params objectAtIndex:2];
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:3];
+    TC_INS_VARIABLE* parent;
+    parent = [params objectAtIndex:0];
+    TC_Position temp;
+    
+    if(prefab.type != VAR_STRING || position.type != VAR_VECTOR3 || parent.type != VAR_OBJECT)
+    {
+        _check_call = NO;
+        return;
+    }
+    if(((TC_DisplayObject*)parent).type == OBJDISPLAY)
+    {
+        _check_call = NO;
+        return;
+    }
+    
+    TC_Sprite* result = [TC_Sprite alloc];
+    [result born:prefab.obj atGroup:[_target group]];
+    temp.x = ((TC_Position*)(position.addr))->x;
+    temp.y = ((TC_Position*)(position.addr))->y;
+    temp.z = ((TC_Position*)(position.addr))->z;
+    result.relativePosition = temp;
+    
+    [((TC_Layer*)(parent.obj)) addChild:result];
+    
+    A.obj = result;
+    free(A.addr);
+    A.type = VAR_OBJECT;
 }
 - (void) say:(NSMutableArray*) params//say <"hello">
 {
@@ -1170,6 +1209,190 @@
 
 }
 
+- (void) change:(NSMutableArray*) params//<"x"> change to <4>
+{
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    NSString* attribute;
+    TC_Position temp;
+    A = [params objectAtIndex:0];
+    if(A.type != VAR_STRING)
+    {
+        _check_call = NO;
+        return;
+    }
+    attribute = A.obj;
+    B = [params objectAtIndex:1];
+    
+    if([attribute isEqualToString:@"position"] && ((TC_DisplayObject*)_target).type != OBJDISPLAY)
+    {
+        if(B.type == VAR_VECTOR2)
+        {
+            temp.x = ((TC_Position2d*)(B.addr))->x;
+            temp.y = ((TC_Position2d*)(B.addr))->y;
+            temp.z = ((TC_Layer*)_target).relativePosition.z;
+            ((TC_Layer*)_target).relativePosition = temp;
+        }
+        else if(B.type == VAR_VECTOR3)
+        {
+            temp.x = ((TC_Position*)(B.addr))->x;
+            temp.y = ((TC_Position*)(B.addr))->y;
+            temp.z = ((TC_Position*)(B.addr))->z;
+            ((TC_Layer*)_target).relativePosition = temp;
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+    else if([attribute isEqualToString:@"position"] && ((TC_DisplayObject*)_target).type != OBJDISPLAY)
+    {
+        if(B.type == VAR_FLOAT)
+        {
+            ((TC_Layer*)_target).relativeRotation = *((float*)(B.addr));
+        }
+        else if(B.type == VAR_INT)
+        {
+            ((TC_Layer*)_target).relativeRotation = *((int*)(B.addr));
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+    else if([attribute isEqualToString:@"scale"])
+    {
+        if(B.type == VAR_VECTOR2)
+        {
+            temp.x = ((TC_Position2d*)(B.addr))->x;
+            temp.y = ((TC_Position2d*)(B.addr))->y;
+            ((TC_DisplayObject*)_target).h = temp.x;
+            ((TC_DisplayObject*)_target).w = temp.y;
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+    else if([attribute isEqualToString:@"alive"]&& ((TC_DisplayObject*)_target).type != OBJDISPLAY)
+    {
+        if(B.type == VAR_INT)
+        {
+            if(((int*)(B.addr)) == 0)
+            {
+                ((TC_Layer*)_target).alive = NO;
+            }
+            else
+            {
+                ((TC_Layer*)_target).alive = YES;
+            }
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+    else if([attribute isEqualToString:@"show"])
+    {
+        if(B.type == VAR_INT)
+        {
+            if(((int*)(B.addr)) == 0)
+            {
+                ((TC_DisplayObject*)_target).show = NO;
+            }
+            else
+            {
+                ((TC_DisplayObject*)_target).show = YES;
+            }
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+    else if([attribute isEqualToString:@"active"])
+    {
+        if(B.type == VAR_INT)
+        {
+            if(((int*)(B.addr)) == 0)
+            {
+                ((TC_DisplayObject*)_target).active = NO;
+            }
+            else
+            {
+                ((TC_DisplayObject*)_target).active = YES;
+            }
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+    else if([attribute isEqualToString:@"label"])
+    {
+        if(B.type == VAR_INT)
+        {
+           ((TC_DisplayObject*)_target).label = *((int*)(B.addr));
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+    else if([attribute isEqualToString:@"current_seq"] && ((TC_DisplayObject*)_target).type == OBJSPRITE)
+    {
+        if(B.type == VAR_INT)
+        {
+            ((TC_Sprite*)_target).currentSequence = *((int*)(B.addr));
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+    else if([attribute isEqualToString:@"current_frame"] && ((TC_DisplayObject*)_target).type == OBJSPRITE)
+    {
+        if(B.type == VAR_INT)
+        {
+            ((TC_Sprite*)_target).currentFrame = *((int*)(B.addr));
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+    else if([attribute isEqualToString:@"frame_speed"] && ((TC_DisplayObject*)_target).type == OBJSPRITE)
+    {
+        if(B.type == VAR_INT)
+        {
+            ((TC_Sprite*)_target).frameSpeed = *((int*)(B.addr));
+        }
+        else
+        {
+            _check_call = NO;
+            return;
+        }
+    }
+}
 
+- (void) get:(NSMutableArray*) params//A get <"scale">
+{
+    
+}
 /////////////////////////////////////////////////////////////
 @end

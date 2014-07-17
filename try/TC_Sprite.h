@@ -21,6 +21,7 @@
 @property TC_ID currentFrame;
 @property TC_ID currentSequence;
 @property TC_ID totalSequence;
+@property (strong,nonatomic) NSMutableArray* totalFrame;
 @property TC_ID frameSpeed;
 
 - (void) born: (NSString*)prefab atGroup: (TC_ID)g;

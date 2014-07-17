@@ -80,7 +80,7 @@
 - (void) adopt:(NSMutableArray*) params;// adopt a
 - (void) abandon:(NSMutableArray*) params;// abandon my child abondon a
 - (void) search:(NSMutableArray*) params;// search string
-- (void) creat:(NSMutableArray*) params;// create prefab position return reult
+- (void) create:(NSMutableArray*) params;// create prefab position return reult
 - (void) say:(NSMutableArray*) params;//say <"hello">
 - (void) calculate:(NSMutableArray*) params;//calculate <"A->x + 4">;
 - (void) push:(NSMutableArray*) params;// list push <5,6,7>

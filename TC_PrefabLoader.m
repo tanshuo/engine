@@ -134,6 +134,8 @@ int readData(char* buff,FILE* input)
     input = fopen([path cStringUsingEncoding:NSASCIIStringEncoding], "r");
     if(input == NULL)
     {
+        NSLog(@"can not open file: %@",prefab);
+        exit(1);
         return nil;
     }
     result = [TC_PrefabInfo alloc];
