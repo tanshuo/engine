@@ -49,7 +49,6 @@
             if(_last_true == YES)
             {
                 _ip = [[current src] offset];
-                _last_true = YES;
             }
             else
             {
@@ -59,7 +58,6 @@
             break;
         case ins_jmp:
             _ip = [[current src] offset];
-            _last_true = _true_false;
             _true_false = NO;
             break;
         case ins_jmp_false:
