@@ -13,12 +13,12 @@ define update:
     end;
     <"frame_speed"> change to <1>;
     move <1.0,-1.0>;
-    fun1 A;
+    
     if C is <1>,
         create <"prefab1">  at <1,1,0> to C,
     end,
     else,
-        rotate <3>,
+        fun1 <3>,
     end;
 enddef;
 

@@ -23,6 +23,7 @@ typedef enum{
     ins_call,
     ins_push,
     ins_rtn,
+    ins_jmp_last,
 } TC_INS;
 
 

@@ -21,6 +21,7 @@
 @synthesize func_list = _func_list;
 @synthesize ins_list = _ins_list;
 @synthesize target = _target;
+@synthesize last_true = _last_true;
 
 - (int) run_next_ins
 {
@@ -44,18 +45,33 @@
                 return -1;
             }
             break;
+        case ins_jmp_last:
+            if(_last_true == YES)
+            {
+                _ip = [[current src] offset];
+                _last_true = YES;
+            }
+            else
+            {
+                _true_false = YES;
+                _ip++;
+            }
+            break;
         case ins_jmp:
             _ip = [[current src] offset];
+            _last_true = _true_false;
             _true_false = NO;
             break;
         case ins_jmp_false:
             if(_true_false == NO)
             {
                  _ip = [[current src] offset];
+                _last_true = _true_false;
                 _true_false = NO;
             }
             else
             {
+                _last_true = _true_false;
                 _true_false = NO;
                 _ip++;
             }
@@ -63,11 +79,13 @@
         case ins_jmp_true:
             if(_true_false == YES)
             {
+                _last_true = _true_false;
                 _ip = [[current src] offset];
                 _true_false = NO;
             }
             else
             {
+                _last_true = _true_false;
                 _true_false = NO;
                 _ip++;
             }
@@ -109,6 +127,7 @@
 
 - (int) call_fun:(TC_Instruction*) t
 {
+    _ip ++;
     int i;
     TC_INS_VARIABLE* s;
     NSMutableArray* m = [NSMutableArray arrayWithCapacity:10];
@@ -139,7 +158,7 @@
         }
         else
             [self performSelector:sel withObject:m];
-        _ip ++;
+        
         //how to call it?
         //..
     }

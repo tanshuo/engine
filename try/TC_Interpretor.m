@@ -1179,7 +1179,7 @@
             offset.extra = 0;
             
             A = [TC_Instruction alloc];
-            A.instruct = ins_jmp_true;
+            A.instruct = ins_jmp_last;
             A.params = nil;
             A.src = offset;
             A.des = nil;

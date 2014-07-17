@@ -32,6 +32,7 @@
 @property int has_start;// head or update
 
 @property BOOL true_false; // logical result
+@property BOOL last_true;
 @property BOOL check_call;
 @property (strong,nonatomic) id target;
 @property (strong,nonatomic) TC_INS_VARIABLE* result; //calculated value
