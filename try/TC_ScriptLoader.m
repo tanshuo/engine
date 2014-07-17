@@ -72,11 +72,11 @@
                 switch(t.type)
                 {
                     case VAR_VECTOR2:
-                        temp.addr = malloc(sizeof(TC_Position));
+                        temp.addr = malloc(sizeof(TC_Position2d));
                         temp.obj = nil;
                         break;
                     case VAR_VECTOR3:
-                        temp.addr = malloc(sizeof(TC_Position2d));
+                        temp.addr = malloc(sizeof(TC_Position));
                         temp.obj = nil;
                         break;
                     case VAR_FLOAT:
@@ -88,25 +88,43 @@
                         temp.obj = nil;
                         break;
                     case VAR_STRING:
-                        free(temp.addr);
-                        temp.addr = nil;
+                        if(temp.addr != nil)
+                        {
+                            free(temp.addr);
+                            temp.addr = nil;
+                        }
+                        temp.obj = t.obj;
                         break;
                     case VAR_LIST:
-                        free(temp.addr);
-                        temp.addr = nil;
+                        if(temp.addr != nil)
+                        {
+                            free(temp.addr);
+                            temp.addr = nil;
+                        }
+                        temp.obj = t.obj;
                         break;
                     case VAR_OBJECT:
-                        free(temp.addr);
-                        temp.addr = nil;
+                        if(temp.addr != nil)
+                        {
+                            free(temp.addr);
+                            temp.addr = nil;
+                        }
+                        temp.obj = t.obj;
                         break;
                     case VAR_OFF_SET:
-                        free(temp.addr);
-                        temp.addr = nil;
+                        if(temp.addr != nil)
+                        {
+                            free(temp.addr);
+                            temp.addr = nil;
+                        }
                         temp.obj = nil;
                         break;
                     case VAR_UNKNOWN:
-                        free(temp.addr);
-                        temp.addr = nil;
+                        if(temp.addr != nil)
+                        {
+                            free(temp.addr);
+                            temp.addr = nil;
+                        }
                         temp.obj = nil;
                         break;
                 }

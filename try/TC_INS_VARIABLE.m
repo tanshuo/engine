@@ -12,7 +12,8 @@
 
 - (void)dealloc
 {
-    free(_addr);
+    if(_addr != nil)
+        free(_addr);
     _addr = nil;
 }
 @end

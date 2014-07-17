@@ -48,6 +48,7 @@
     [s born:@"prefab1" atGroup:0];
     [s setRelativePositionWithX:20 WithY:20];
     [s adjust:1];
+    
     [[TC_Sprite alloc] born:@"prefab1" atGroup:0];
     
    // [[TC_Sprite alloc] born:@"prefab1" atGroup:0];
@@ -55,7 +56,18 @@
 + (void) updateWithAspect: (float)aspect;
 {
     int i;
-    for(i = 0; i < [gameObjectList count]; i ++)
+    int num;
+    num = [gameObjectList count];
+    for(i = 0; i < num; i ++)
+    {
+        [[gameObjectList objectAtIndex:i] selfUpateWithAspect:aspect];
+        if([[gameObjectList objectAtIndex:i] lonely])
+        {
+            [[gameObjectList objectAtIndex:i] kill];
+        }
+    }
+    num = [gameObjectList count];
+    for(; i < num; i ++)
     {
         if([gameObjectList objectAtIndex:i])
         {
@@ -63,7 +75,15 @@
             {
                 [[gameObjectList objectAtIndex:i] kill];
             }
-            [[gameObjectList objectAtIndex:i] selfUpateWithAspect:aspect];
+        }
+    }
+    for(i = 0; i < num; i ++)
+    {
+        if([[gameObjectList objectAtIndex:i] alive] == NO)
+        {
+            [gameObjectList removeObject:[gameObjectList objectAtIndex:i]];
+            i --;
+            num --;
         }
     }
 }

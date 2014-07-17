@@ -15,7 +15,7 @@ define update:
     <"frame_speed"> change to <1>;
     move <1.0,-1.0>;
     fun1 A;
-    create <"prefab1">  at <20,20,20> to C;
+    create <"prefab1">  at <20,20,0> to C;
 enddef;
 
 define A fun1 B:

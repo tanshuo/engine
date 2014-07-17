@@ -1998,7 +1998,26 @@
             result.argoffset = copy.argoffset;
             result.solved = YES;
             result.type = copy.type;//goon
-            result.addr = copy.addr;
+            if(copy.type == VAR_VECTOR2)
+            {
+                result.addr = malloc(sizeof(TC_Position2d));
+                *((TC_Position2d*)(result.addr)) = *((TC_Position2d*)(copy.addr));
+            }
+            else if(copy.type == VAR_VECTOR3)
+            {
+                result.addr = malloc(sizeof(TC_Position));
+                *((TC_Position*)(result.addr)) = *((TC_Position*)(copy.addr));
+            }
+            else if(copy.type == VAR_INT)
+            {
+                result.addr = malloc(sizeof(int));
+                *((int*)(result.addr)) = *((int*)(copy.addr));
+            }
+            else if(copy.type == VAR_FLOAT)
+            {
+                result.addr = malloc(sizeof(float));
+                *((float*)(result.addr)) = *((float*)(copy.addr));
+            }
             result.obj = copy.obj;
             result.borrow = copy.borrow;
             result.var = var;
@@ -2014,7 +2033,26 @@
             result.argoffset = i;
             result.solved = YES;
             result.type = copy.type;//goon
-            result.addr = copy.addr;
+            if(copy.type == VAR_VECTOR2)
+            {
+                result.addr = malloc(sizeof(TC_Position2d));
+                *((TC_Position2d*)(result.addr)) = *((TC_Position2d*)(copy.addr));
+            }
+            else if(copy.type == VAR_VECTOR3)
+            {
+                result.addr = malloc(sizeof(TC_Position));
+                *((TC_Position*)(result.addr)) = *((TC_Position*)(copy.addr));
+            }
+            else if(copy.type == VAR_INT)
+            {
+                result.addr = malloc(sizeof(int));
+                *((int*)(result.addr)) = *((int*)(copy.addr));
+            }
+            else if(copy.type == VAR_FLOAT)
+            {
+                result.addr = malloc(sizeof(float));
+                *((float*)(result.addr)) = *((float*)(copy.addr));
+            }
             result.obj = copy.obj;
             result.borrow = copy.borrow;
             result.var = var;

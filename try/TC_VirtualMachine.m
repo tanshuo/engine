@@ -117,6 +117,8 @@
                 NSLog(@"%@",_message); exit(1);
                 return -1;
             }
+            s.location = [(TC_INS_VARIABLE*)[t.params objectAtIndex:i] location];
+            s.argoffset = [(TC_INS_VARIABLE*)[t.params objectAtIndex:i] argoffset];
             [m addObject:s];
         }
         if(sel <= 0)
@@ -863,7 +865,8 @@
     {
         A.type = B.type;
         A.obj = nil;
-        free(A.addr);
+        if(A.addr != nil)
+            free(A.addr);
         A.addr = malloc(sizeof(TC_Position2d));
         ((TC_Position2d*)(A.addr))->x = ((TC_Position2d*)(B.addr))->x;
         ((TC_Position2d*)(A.addr))->y = ((TC_Position2d*)(B.addr))->y;
@@ -872,7 +875,8 @@
     {
         A.type = B.type;
         A.obj = nil;
-        free(A.addr);
+        if(A.addr != nil)
+            free(A.addr);
         A.addr = malloc(sizeof(TC_Position));
         ((TC_Position*)(A.addr))->x = ((TC_Position*)(B.addr))->x;
         ((TC_Position*)(A.addr))->y = ((TC_Position*)(B.addr))->y;
@@ -881,7 +885,8 @@
     else if(B.type == VAR_STRING || B.type == VAR_OBJECT||B.type == VAR_LIST)
     {
         A.type = B.type;
-        free(A.addr);
+        if(A.addr != nil)
+            free(A.addr);
         A.addr = nil;
         A.obj = B.obj;
     }
@@ -889,7 +894,8 @@
     {
         A.type = B.type;
         A.obj = nil;
-        free(A.addr);
+        if(A.addr != nil)
+            free(A.addr);
         A.addr = malloc(sizeof(int));
         *((int*)(A.addr)) = *((int*)(B.addr));
     }
@@ -897,7 +903,8 @@
     {
         A.type = B.type;
         A.obj = nil;
-        free(A.addr);
+        if(A.addr != nil)
+            free(A.addr);
         A.addr = malloc(sizeof(float));
         *((float*)(A.addr)) = *((float*)(B.addr));
     }
@@ -1176,7 +1183,9 @@
     [((TC_Layer*)(parent.obj)) addChild:result];
     
     A.obj = result;
-    free(A.addr);
+    if(A.addr != nil)
+        free(A.addr);
+    A.addr = nil;
     A.type = VAR_OBJECT;
 }
 - (void) say:(NSMutableArray*) params//say <"hello">

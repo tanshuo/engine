@@ -47,6 +47,7 @@
     if(!_alive)
     {
         [self die];
+        return;
     }
     if(_parent == nil)
     {
@@ -178,7 +179,7 @@
 - (TC_Layer*) removeLastChild
 {
     TC_Layer* result = nil;
-    if(_child_num > 0)
+    if([_child count] > 0)
     {
         _child_num --;
         result = [_child lastObject];
@@ -187,11 +188,21 @@
     }
     return result;
 }
+
 - (void) removeAllChild
 {
-    while(_child_num > 0)
+    while([_child count] > 0)
         [self removeLastChild];
+    _child_num = 0;
 }
+
+- (void) removeChild:(TC_Layer*) l
+{
+    l.parent = nil;
+    [_child removeObject:l];
+    _child_num --;
+}
+
 + (void) removeLayer: (TC_Layer*)layer
 {
     TC_Layer* temp;
@@ -238,8 +249,9 @@
     [TC_Layer removeLayer:self];
     if(_parent)
     {
-        [_parent removeChildByID:_id];
+        [_parent removeChild:self];
+        _parent = nil;
     }
-    [gameObjectList removeObject:self];
+    //[gameObjectList removeObject:self];
 }
 @end
