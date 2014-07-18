@@ -67,6 +67,7 @@
             temp.argoffset = t.argoffset;
             temp.type = t.type;
             temp.location = t.location;
+            temp.var = t.var;
             if(t.addr != nil)
             {
                 switch(t.type)

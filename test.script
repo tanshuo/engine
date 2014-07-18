@@ -8,7 +8,7 @@ define start:
 enddef;
 
 define update:
-    C set <1>;
+    C of I set <1>;
     if C is <0>,
         create <"prefab1">  at <1,1,0> to A,
     end,

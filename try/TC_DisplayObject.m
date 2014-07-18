@@ -54,6 +54,7 @@
     
     _virtual = [TC_ScriptLoader loadScriptWith:script];
     _virtual.target = self;
+    ((TC_INS_VARIABLE*)[_virtual.local_var_list objectAtIndex:0]).obj = self;
     _program = [TC_ShaderLoader loadShaderWithVertexShader:shader WithFragmentShader:shader];
     _textureinfo = [TC_TextureLoader loadTexture:texture];
     

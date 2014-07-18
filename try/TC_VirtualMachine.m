@@ -659,8 +659,18 @@
         result.solved = YES;
         result.argoffset = 0;
         result.borrow = YES;
-        result.var = nil;
+        result.var = v.var;
         result.addr = nil;
+        if([[result var] next_layer]!=nil)
+        {
+            result = [self solve_var:[[result var] next_layer]  In:[((TC_DisplayObject*)(result.obj)) virtual]];
+            if(result == nil)
+            {
+                _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
+                NSLog(@"%@",_message); exit(1);
+                return nil;
+            }
+        }
     }
     else if(v.solved == YES && v.location == VAR_STACK)
     {

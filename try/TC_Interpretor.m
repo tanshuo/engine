@@ -1966,7 +1966,24 @@
 }
 
 - (void) initVar
-{}
+{
+    TC_INS_VARIABLE* var;
+    TC_WORD_LAYER* temp;
+    temp = [TC_WORD_LAYER alloc];
+    temp.word = @"I";
+    temp.next_layer = nil;
+    temp.type = 0;
+    var = [TC_INS_VARIABLE alloc];
+    var.solved = YES;
+    var.location = VAR_BIND;
+    var.argoffset = 0;
+    var.borrow = YES;
+    var.type = VAR_OBJECT;
+    var.addr = nil;
+    var.obj = nil;
+    var.var = temp;
+    [_var_table addObject:var];
+}
 
 - (TC_INS_FUNCTION*) searchFunction: (TC_Function_Layer*) fun
 {
