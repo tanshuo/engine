@@ -56,6 +56,10 @@ NSData* ResizeTextureWith(CGImageRef im,GLuint* width,GLuint* height)
 + (TC_TextureInfo*)loadTexture: (NSString*)t
 {
     TC_TextureInfo* result;
+    if(t == nil)
+    {
+        return nil;
+    }
     if((result = [TC_TextureLoader lookTxt:t]))
     {
         result.counter ++;

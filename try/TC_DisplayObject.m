@@ -79,6 +79,7 @@
     glEnableVertexAttribArray(GLKVertexAttribTexCoord0);
     glVertexAttribPointer(GLKVertexAttribTexCoord0, 3, GL_FLOAT, GL_FALSE, 32, BUFFER_OFFSET(24));
     addEntry(_id, [name cStringUsingEncoding:NSASCIIStringEncoding]);
+    NSLog(@"%@ has been create",self.name);
     return _id;
 };
 

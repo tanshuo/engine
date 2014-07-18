@@ -1340,7 +1340,62 @@
 
 - (void) say:(NSMutableArray*) params//say <"hello">
 {
+    NSString* somebody;
+    NSString* something;
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:0];
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    if(A.type != VAR_OBJECT)
+    {
+        _check_call = NO;
+        return;
+    }
+    somebody = ((TC_DisplayObject*)A.obj).name;
     
+    switch(B.type)
+    {
+        case VAR_STRING:
+            something = B.obj;
+            break;
+        
+        case VAR_INT:
+            something = [NSString stringWithFormat:@"%d",*((int*)(B.addr))];
+            break;
+        
+        case VAR_FLOAT:
+            something = [NSString stringWithFormat:@"%f",*((float*)(B.addr))];
+            break;
+        
+        case VAR_VECTOR2:
+            something = [NSString stringWithFormat:@"<%f, %f>",((TC_Position2d*)(B.addr))->x,((TC_Position2d*)(B.addr))->y];
+            break;
+            
+        case VAR_VECTOR3:
+            something = [NSString stringWithFormat:@"<%f, %f, %f>",((TC_Position*)(B.addr))->x,((TC_Position*)(B.addr))->y,((TC_Position*)(B.addr))->z];
+            break;
+            
+        case VAR_OBJECT:
+            something = ((TC_DisplayObject*)(B.obj)).name;
+            break;
+            
+        case VAR_UNKNOWN:
+            something = @"unknown";
+            break;
+            
+        case VAR_LIST:
+            something = [NSString stringWithFormat: @"list with %d objects",[((NSMutableArray*)(B.obj)) count]];
+            break;
+        case VAR_OFF_SET:
+            break;
+    }
+    NSLog(@"%@ output: %@", somebody, something);
 }
 
 - (void) push:(NSMutableArray*) params// list push <5,6,7>

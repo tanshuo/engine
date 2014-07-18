@@ -1309,7 +1309,7 @@
         A.des = [self searchFunction:l.straight];
         if(A.des == nil)
         {
-            _message = [NSMutableString stringWithString: @"wrong statement"];
+            _message = [NSMutableString stringWithString: @"wrong statement 1"];
             [self clear_current];
             NSLog(@"%@",_message); exit(1);
         }
@@ -1329,7 +1329,7 @@
             A.des = [self searchFunction:l.right.straight];
             if(A.des == nil)
             {
-                _message = [NSMutableString stringWithString: @"wrong statement"];
+                _message = [NSMutableString stringWithString: @"wrong statement 2"];
                 [self clear_current];
                 NSLog(@"%@",_message); exit(1);
             }
@@ -1341,7 +1341,7 @@
             B.des = [self searchFunction:l.right.straight];
             if(B.des == nil)
             {
-                _message = [NSMutableString stringWithString: @"wrong statement"];
+                _message = [NSMutableString stringWithString: @"wrong statement 3"];
                 [self clear_current];
                 NSLog(@"%@",_message); exit(1);
             }
@@ -1359,7 +1359,7 @@
             A.des = [self searchFunction:l.right.straight];
             if(A.des == nil)
             {
-                _message = [NSMutableString stringWithString: @"wrong statement"];
+                _message = [NSMutableString stringWithString: @"wrong statement 4"];
                 [self clear_current];
                 NSLog(@"%@",_message); exit(1);
             }
@@ -1372,7 +1372,7 @@
             B.des = [self searchFunction:l.left.straight];
             if(B.des == nil)
             {
-                _message = [NSMutableString stringWithString: @"wrong statement"];
+                _message = [NSMutableString stringWithString: @"wrong statement 5"];
                 [self clear_current];
                 NSLog(@"%@",_message); exit(1);
             }
@@ -1454,7 +1454,7 @@
             A.des = [self searchFunction:l.right.straight];
             if(A.des == nil)
             {
-                _message = [NSMutableString stringWithString: @"wrong statement"];
+                _message = [NSMutableString stringWithString: @"wrong statement 6"];
                 [self clear_current];
                 NSLog(@"%@",_message); exit(1);
             }
@@ -1474,7 +1474,7 @@
             A.des = [self searchFunction:l.right.straight];
             if(A.des == nil)
             {
-                _message = [NSMutableString stringWithString: @"wrong statement"];
+                _message = [NSMutableString stringWithString: @"wrong statement 7"];
                 [self clear_current];
                 NSLog(@"%@",_message); exit(1);
             }
@@ -1510,7 +1510,7 @@
             B.des = [self searchFunction:l.left.straight];
             if(B.des == nil)
             {
-                _message = [NSMutableString stringWithString: @"wrong statement"];
+                _message = [NSMutableString stringWithString: @"wrong statement 8"];
                 [self clear_current];
                 NSLog(@"%@",_message); exit(1);
             }
@@ -1530,7 +1530,7 @@
             B.des = [self searchFunction:l.left.straight];
             if(B.des == nil)
             {
-                _message = [NSMutableString stringWithString: @"wrong statement"];
+                _message = [NSMutableString stringWithString: @"wrong statement 9"];
                 [self clear_current];
                 NSLog(@"%@",_message); exit(1);
             }
@@ -2452,6 +2452,15 @@
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;
     fun.name = @"getZ";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"say";
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_BIND;
