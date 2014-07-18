@@ -1309,9 +1309,9 @@
         A.des = [self searchFunction:l.straight];
         if(A.des == nil)
         {
-            _message = [NSMutableString stringWithString: @"wrong statement 1"];
+            _message = [NSMutableString stringWithString: @"can not find function at line: "];
             [self clear_current];
-            NSLog(@"%@",_message); exit(1);
+            NSLog(@"%@%d",_message,_currentLine); exit(1);
         }
         [table addObject:A];
         _current_ins_count ++;
