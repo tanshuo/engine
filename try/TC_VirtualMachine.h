@@ -90,4 +90,8 @@
 - (void) getobject:(NSMutableArray*) params;// A get_object at 3
 - (void) remove:(NSMutableArray*) params;//list remove at 4
 
+- (void) getX:(NSMutableArray*) params;
+- (void) getY:(NSMutableArray*) params;
+- (void) getZ:(NSMutableArray*) params;
+
 @end

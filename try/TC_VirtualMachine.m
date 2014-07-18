@@ -1226,9 +1226,25 @@
     A.addr = nil;
     A.type = VAR_OBJECT;
 }
+
+- (void) getX:(NSMutableArray*) params// <1,2,3> getX to C .. <1,2,3> getX
+{
+    
+}
+
+- (void) getY:(NSMutableArray*) params// <1,2,3> getX to C .. <1,2,3> getX
+{
+    
+}
+
+- (void) getZ:(NSMutableArray*) params// <1,2,3> getX to C .. <1,2,3> getX
+{
+    
+}
+
 - (void) say:(NSMutableArray*) params//say <"hello">
 {
-
+    
 }
 
 - (void) push:(NSMutableArray*) params// list push <5,6,7>
@@ -1256,16 +1272,17 @@
 
 }
 
-- (void) change:(NSMutableArray*) params//<"x"> change to <4>
+- (void) change:(NSMutableArray*) params//<"x"> change to <4> in A
 {
     _check_call = YES;
-    if([params count] != 2)
+    if([params count] != 2 && [params count] != 3)
     {
         _check_call = NO;
         return;
     }
-    TC_INS_VARIABLE* A;
-    TC_INS_VARIABLE* B;
+    TC_INS_VARIABLE* A = nil;
+    TC_INS_VARIABLE* B = nil;
+    TC_INS_VARIABLE* C = nil;
     NSString* attribute;
     TC_Position temp;
     A = [params objectAtIndex:0];
@@ -1276,22 +1293,41 @@
     }
     attribute = A.obj;
     B = [params objectAtIndex:1];
+    if([params count] == 3)
+    {
+        C = [params objectAtIndex:2];
+    }
+    if(C.type != VAR_OBJECT)
+    {
+        _check_call = NO;
+        return;
+    }
     
-    if([attribute isEqualToString:@"position"] && ((TC_DisplayObject*)_target).type != OBJDISPLAY)
+    TC_DisplayObject* target;
+    if(C != nil)
+    {
+        target = C.obj;
+    }
+    else
+    {
+        target = _target;
+    }
+    
+    if([attribute isEqualToString:@"position"] && ((TC_DisplayObject*)target).type != OBJDISPLAY)
     {
         if(B.type == VAR_VECTOR2)
         {
             temp.x = ((TC_Position2d*)(B.addr))->x;
             temp.y = ((TC_Position2d*)(B.addr))->y;
-            temp.z = ((TC_Layer*)_target).relativePosition.z;
-            ((TC_Layer*)_target).relativePosition = temp;
+            temp.z = ((TC_Layer*)target).relativePosition.z;
+            ((TC_Layer*)target).relativePosition = temp;
         }
         else if(B.type == VAR_VECTOR3)
         {
             temp.x = ((TC_Position*)(B.addr))->x;
             temp.y = ((TC_Position*)(B.addr))->y;
             temp.z = ((TC_Position*)(B.addr))->z;
-            ((TC_Layer*)_target).relativePosition = temp;
+            ((TC_Layer*)target).relativePosition = temp;
         }
         else
         {
@@ -1299,15 +1335,15 @@
             return;
         }
     }
-    else if([attribute isEqualToString:@"position"] && ((TC_DisplayObject*)_target).type != OBJDISPLAY)
+    else if([attribute isEqualToString:@"position"] && ((TC_DisplayObject*)target).type != OBJDISPLAY)
     {
         if(B.type == VAR_FLOAT)
         {
-            ((TC_Layer*)_target).relativeRotation = *((float*)(B.addr));
+            ((TC_Layer*)target).relativeRotation = *((float*)(B.addr));
         }
         else if(B.type == VAR_INT)
         {
-            ((TC_Layer*)_target).relativeRotation = *((int*)(B.addr));
+            ((TC_Layer*)target).relativeRotation = *((int*)(B.addr));
         }
         else
         {
@@ -1321,8 +1357,8 @@
         {
             temp.x = ((TC_Position2d*)(B.addr))->x;
             temp.y = ((TC_Position2d*)(B.addr))->y;
-            ((TC_DisplayObject*)_target).h = temp.x;
-            ((TC_DisplayObject*)_target).w = temp.y;
+            ((TC_DisplayObject*)target).h = temp.x;
+            ((TC_DisplayObject*)target).w = temp.y;
         }
         else
         {
@@ -1330,17 +1366,17 @@
             return;
         }
     }
-    else if([attribute isEqualToString:@"alive"]&& ((TC_DisplayObject*)_target).type != OBJDISPLAY)
+    else if([attribute isEqualToString:@"alive"]&& ((TC_DisplayObject*)target).type != OBJDISPLAY)
     {
         if(B.type == VAR_INT)
         {
             if(((int*)(B.addr)) == 0)
             {
-                ((TC_Layer*)_target).alive = NO;
+                ((TC_Layer*)target).alive = NO;
             }
             else
             {
-                ((TC_Layer*)_target).alive = YES;
+                ((TC_Layer*)target).alive = YES;
             }
         }
         else
@@ -1355,11 +1391,11 @@
         {
             if(((int*)(B.addr)) == 0)
             {
-                ((TC_DisplayObject*)_target).show = NO;
+                ((TC_DisplayObject*)target).show = NO;
             }
             else
             {
-                ((TC_DisplayObject*)_target).show = YES;
+                ((TC_DisplayObject*)target).show = YES;
             }
         }
         else
@@ -1374,11 +1410,11 @@
         {
             if(((int*)(B.addr)) == 0)
             {
-                ((TC_DisplayObject*)_target).active = NO;
+                ((TC_DisplayObject*)target).active = NO;
             }
             else
             {
-                ((TC_DisplayObject*)_target).active = YES;
+                ((TC_DisplayObject*)target).active = YES;
             }
         }
         else
@@ -1391,7 +1427,7 @@
     {
         if(B.type == VAR_INT)
         {
-           ((TC_DisplayObject*)_target).label = *((int*)(B.addr));
+           ((TC_DisplayObject*)target).label = *((int*)(B.addr));
         }
         else
         {
@@ -1399,11 +1435,11 @@
             return;
         }
     }
-    else if([attribute isEqualToString:@"current_seq"] && ((TC_DisplayObject*)_target).type == OBJSPRITE)
+    else if([attribute isEqualToString:@"current_seq"] && ((TC_DisplayObject*)target).type == OBJSPRITE)
     {
         if(B.type == VAR_INT)
         {
-            ((TC_Sprite*)_target).currentSequence = *((int*)(B.addr));
+            ((TC_Sprite*)target).currentSequence = *((int*)(B.addr));
         }
         else
         {
@@ -1411,11 +1447,11 @@
             return;
         }
     }
-    else if([attribute isEqualToString:@"current_frame"] && ((TC_DisplayObject*)_target).type == OBJSPRITE)
+    else if([attribute isEqualToString:@"current_frame"] && ((TC_DisplayObject*)target).type == OBJSPRITE)
     {
         if(B.type == VAR_INT)
         {
-            ((TC_Sprite*)_target).currentFrame = *((int*)(B.addr));
+            ((TC_Sprite*)target).currentFrame = *((int*)(B.addr));
         }
         else
         {
@@ -1423,11 +1459,11 @@
             return;
         }
     }
-    else if([attribute isEqualToString:@"frame_speed"] && ((TC_DisplayObject*)_target).type == OBJSPRITE)
+    else if([attribute isEqualToString:@"frame_speed"] && ((TC_DisplayObject*)target).type == OBJSPRITE)
     {
         if(B.type == VAR_INT)
         {
-            ((TC_Sprite*)_target).frameSpeed = *((int*)(B.addr));
+            ((TC_Sprite*)target).frameSpeed = *((int*)(B.addr));
         }
         else
         {
@@ -1437,9 +1473,213 @@
     }
 }
 
-- (void) get:(NSMutableArray*) params//A get <"scale">
+- (void) get:(NSMutableArray*) params//B get <"scale"> to A
 {
+    _check_call = YES;
+    if([params count] != 2 && [params count] != 3)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A = nil;
+    TC_INS_VARIABLE* B = nil;
+    TC_INS_VARIABLE* C = nil;
+    TC_INS_VARIABLE* des = nil;
     
+    NSString* attribute;
+    TC_Position temp;
+    TC_DisplayObject* target;
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    if([params count] == 3)
+    {
+        C = [params objectAtIndex:2];
+    }
+    if(A.type != VAR_OBJECT)
+    {
+        _check_call = NO;
+        return;
+    }
+    if(B.type != VAR_STRING)
+    {
+        _check_call = NO;
+        return;
+    }
+    attribute = B.obj;
+    target = A.obj;
+    if(C == nil)
+    {
+        des = _result;
+    }
+    else
+    {
+        des = C;
+    }
+    
+    if([attribute isEqualToString:@"position"])
+    {
+        des.type = VAR_VECTOR3;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        temp = [(TC_Layer*)target relativePosition];
+        des.addr = malloc(sizeof(TC_Position));
+        *((TC_Position*)(des.addr)) = temp;
+    }
+    else if([attribute isEqualToString:@"screen_position"])
+    {
+        des.type = VAR_VECTOR3;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        temp = [target position];
+        des.addr = malloc(sizeof(TC_Position));
+        *((TC_Position*)(des.addr)) = temp;
+    }
+    else if([attribute isEqualToString:@"rotation"])
+    {
+        des.type = VAR_FLOAT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(float));
+        *((float*)(des.addr)) = [(TC_Layer*)target relativeRotation];
+    }
+    else if([attribute isEqualToString:@"name"])
+    {
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.type = VAR_STRING;
+        des.obj = target.name;
+    }
+    else if([attribute isEqualToString:@"label"])
+    {
+        des.type = VAR_INT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(int));
+        *((int*)(des.addr)) = [target label];
+    }
+    else if([attribute isEqualToString:@"group"])
+    {
+        des.type = VAR_INT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(int));
+        *((int*)(des.addr)) = [(TC_Layer*)target group];
+    }
+    else if([attribute isEqualToString:@"alive"])
+    {
+        des.type = VAR_INT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(int));
+        *((int*)(des.addr)) = [(TC_Layer*)target alive];
+    }
+    else if([attribute isEqualToString:@"active"])
+    {
+        des.type = VAR_INT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(int));
+        *((int*)(des.addr)) = [(TC_DisplayObject*)target active];
+    }
+    else if([attribute isEqualToString:@"current_sequence"])
+    {
+        des.type = VAR_INT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(int));
+        *((int*)(des.addr)) = [(TC_Sprite*)target currentSequence];
+    }
+    else if([attribute isEqualToString:@"current_frame"])
+    {
+        des.type = VAR_INT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(int));
+        *((int*)(des.addr)) = [(TC_Sprite*)target currentFrame];
+    }
+    else if([attribute isEqualToString:@"frame_speed"])
+    {
+        des.type = VAR_INT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(int));
+        *((int*)(des.addr)) = [(TC_Sprite*)target frameSpeed];
+    }
+    else if([attribute isEqualToString:@"id"])
+    {
+        des.type = VAR_INT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(int));
+        *((int*)(des.addr)) = [(TC_DisplayObject*)target oid];
+    }
+    else if([attribute isEqualToString:@"parent"])
+    {
+        des.type = VAR_OBJECT;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.obj = [((TC_Layer*)target) parent];
+    }
+    else if([attribute isEqualToString:@"childs"])
+    {
+        des.type = VAR_LIST;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.obj = [((TC_Layer*)target) child];
+    }
 }
 /////////////////////////////////////////////////////////////
 @end
