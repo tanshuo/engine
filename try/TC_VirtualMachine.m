@@ -1229,7 +1229,25 @@
 
 - (void) getX:(NSMutableArray*) params// <1,2,3> getX to C .. <1,2,3> getX
 {
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
     
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:0];
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    B.obj = nil;
+    if(B.addr)
+    {
+        free(B.addr);
+        B.addr = nil;
+    }
+    B.addr = malloc(sizeof(int));
+    *((int*)B.addr) = *((int*)A.addr);
 }
 
 - (void) getY:(NSMutableArray*) params// <1,2,3> getX to C .. <1,2,3> getX
