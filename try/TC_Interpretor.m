@@ -2125,7 +2125,7 @@
             [result addObject:temp];
             continue;
         }
-        
+        //todo
         temp = [self searchVariable: [params objectAtIndex:i]];//there
         
         if(temp == nil)

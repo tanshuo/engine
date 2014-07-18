@@ -49,10 +49,11 @@
             if(_last_true == YES)
             {
                 _ip = [[current src] offset];
+                _last_true = YES;
             }
             else
             {
-                _true_false = YES;
+                _last_true = NO;
                 _ip++;
             }
             break;
@@ -69,7 +70,7 @@
             }
             else
             {
-                _last_true = _true_false;
+                _last_true = YES;
                 _true_false = NO;
                 _ip++;
             }
@@ -77,13 +78,13 @@
         case ins_jmp_true:
             if(_true_false == YES)
             {
-                _last_true = _true_false;
+                _last_true = YES;
                 _ip = [[current src] offset];
                 _true_false = NO;
             }
             else
             {
-                _last_true = _true_false;
+                _last_true = NO;
                 _true_false = NO;
                 _ip++;
             }
@@ -144,8 +145,8 @@
                 NSLog(@"%@",_message); exit(1);
                 return -1;
             }
-            s.location = [(TC_INS_VARIABLE*)[t.params objectAtIndex:i] location];
-            s.argoffset = [(TC_INS_VARIABLE*)[t.params objectAtIndex:i] argoffset];
+            //s.location = [(TC_INS_VARIABLE*)[t.params objectAtIndex:i] location];
+            //s.argoffset = [(TC_INS_VARIABLE*)[t.params objectAtIndex:i] argoffset];
             [m addObject:s];
         }
         if(sel <= 0)

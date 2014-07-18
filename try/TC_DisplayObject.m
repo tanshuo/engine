@@ -125,6 +125,8 @@
     {
         _virtual.ip = _virtual.head;
         _virtual.has_start = YES;
+        _virtual.true_false = NO;
+        _virtual.last_true = YES;
     }
     else
     {
