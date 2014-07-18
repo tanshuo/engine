@@ -9,7 +9,7 @@ enddef;
 
 define update:
     C of I set <1>;
-    if C is <0>,
+    if C is <1>,
         create <"prefab1">  at <1,1,0> to A,
     end,
     else,

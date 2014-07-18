@@ -1955,11 +1955,29 @@
     temp = [TC_Define alloc];
     temp.word = @"change";
     temp.explain = TC_FUNCTION;
+    temp.right_match = 2;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"get";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 2;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"getX";
+    temp.explain = TC_FUNCTION;
     temp.right_match = 1;
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
-    temp.word = @"change";
+    temp.word = @"getY";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"getZ";
     temp.explain = TC_FUNCTION;
     temp.right_match = 1;
     [self.dictionary addObject: temp];
@@ -1979,6 +1997,21 @@
     var.argoffset = 0;
     var.borrow = YES;
     var.type = VAR_OBJECT;
+    var.addr = nil;
+    var.obj = nil;
+    var.var = temp;
+    [_var_table addObject:var];
+    
+    temp = [TC_WORD_LAYER alloc];
+    temp.word = @"result";
+    temp.next_layer = nil;
+    temp.type = 0;
+    var = [TC_INS_VARIABLE alloc];
+    var.solved = YES;
+    var.location = VAR_BIND;
+    var.argoffset = 0;
+    var.borrow = YES;
+    var.type = VAR_UNKNOWN;
     var.addr = nil;
     var.obj = nil;
     var.var = temp;
@@ -2386,12 +2419,39 @@
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_BIND;
-    fun.right_match = 1;
+    fun.right_match = 2;
     [_func_table addObject:fun];
     
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;
     fun.name = @"get";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 2;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"getX";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"getY";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"getZ";
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_BIND;
