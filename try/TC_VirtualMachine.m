@@ -761,6 +761,24 @@
             result = YES;
         }
     }
+    else if(A.type == VAR_INT && B.type == VAR_FLOAT)
+    {
+        int a = *((int*)(A.addr));
+        int b = *((float*)(B.addr));
+        if(a - b < 0.000000001 || b - a < 0.000000001 )
+        {
+            result = YES;
+        }
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_INT)
+    {
+        int a = *((float*)(A.addr));
+        int b = *((int*)(B.addr));
+        if(a - b < 0.000000001 || b - a < 0.000000001 )
+        {
+            result = YES;
+        }
+    }
     else if(A.type == VAR_STRING && B.type == VAR_STRING)
     {
         if([(NSString*)A.obj isEqualToString:(NSString*)B.obj])
@@ -1240,24 +1258,84 @@
     A = [params objectAtIndex:0];
     TC_INS_VARIABLE* B;
     B = [params objectAtIndex:1];
+    if(A.type != VAR_VECTOR3 && A.type != VAR_VECTOR2)
+    {
+        _check_call = NO;
+        return;
+    }
     B.obj = nil;
     if(B.addr)
     {
         free(B.addr);
         B.addr = nil;
     }
-    B.addr = malloc(sizeof(int));
-    *((int*)B.addr) = *((int*)A.addr);
+    B.type = VAR_FLOAT;
+    B.addr = malloc(sizeof(float));
+    if(A.type == VAR_VECTOR3)
+        *((float*)B.addr) = ((TC_Position*)A.addr)->x;
+    else
+        *((float*)B.addr) = ((TC_Position2d*)A.addr)->x;
 }
 
-- (void) getY:(NSMutableArray*) params// <1,2,3> getX to C .. <1,2,3> getX
+- (void) getY:(NSMutableArray*) params// <1,2,3> gety to C .. <1,2,3> getY
 {
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
     
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:0];
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    if(A.type != VAR_VECTOR3 && A.type != VAR_VECTOR2)
+    {
+        _check_call = NO;
+        return;
+    }
+    B.obj = nil;
+    if(B.addr)
+    {
+        free(B.addr);
+        B.addr = nil;
+    }
+    B.type = VAR_FLOAT;
+    B.addr = malloc(sizeof(float));
+    if(A.type == VAR_VECTOR3)
+        *((float*)B.addr) = ((TC_Position*)A.addr)->y;
+    else
+        *((float*)B.addr) = ((TC_Position2d*)A.addr)->y;
 }
 
-- (void) getZ:(NSMutableArray*) params// <1,2,3> getX to C .. <1,2,3> getX
+- (void) getZ:(NSMutableArray*) params// <1,2,3> getz to C .. <1,2,3> getz
 {
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
     
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:0];
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    if(A.type != VAR_VECTOR3)
+    {
+        _check_call = NO;
+        return;
+    }
+    B.obj = nil;
+    if(B.addr)
+    {
+        free(B.addr);
+        B.addr = nil;
+    }
+    B.type = VAR_FLOAT;
+    B.addr = malloc(sizeof(float));
+    *((float*)B.addr) = ((TC_Position*)A.addr)->z;
 }
 
 - (void) say:(NSMutableArray*) params//say <"hello">

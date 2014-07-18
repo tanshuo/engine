@@ -9,6 +9,7 @@ enddef;
 
 define update:
     C of I set <2,1>;
+    C getY to C;
     if C is <1>,
         create <"prefab1">  at <1,1,0> to A,
     end,
