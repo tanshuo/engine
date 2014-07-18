@@ -756,7 +756,7 @@
     {
         float a = *((float*)(A.addr));
         float b = *((float*)(B.addr));
-        if((b - a < 0.000000001)||(a - b < 0.000000001))
+        if((a - b < 0.000000001  && a - b >= 0)||(b - a < 0.000000001  && b - a >= 0))
         {
             result = YES;
         }
@@ -764,17 +764,17 @@
     else if(A.type == VAR_INT && B.type == VAR_FLOAT)
     {
         int a = *((int*)(A.addr));
-        int b = *((float*)(B.addr));
-        if(a - b < 0.000000001 || b - a < 0.000000001 )
+        float b = *((float*)(B.addr));
+        if((a - b < 0.000000001  && a - b >= 0)||(b - a < 0.000000001  && b - a >= 0))
         {
             result = YES;
         }
     }
     else if(A.type == VAR_FLOAT && B.type == VAR_INT)
     {
-        int a = *((float*)(A.addr));
+        float a = *((float*)(A.addr));
         int b = *((int*)(B.addr));
-        if(a - b < 0.000000001 || b - a < 0.000000001 )
+        if((a - b < 0.000000001  && a - b >= 0)||(b - a < 0.000000001  && b - a >= 0))
         {
             result = YES;
         }

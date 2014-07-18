@@ -8,9 +8,10 @@ define start:
 enddef;
 
 define update:
-    C  set <2,1>;
-    C getY to C;
-    if C is <2>,
+    gen D;
+    D  set <2,1>;
+    D getY to D;
+    if D is <2>,
         create <"prefab1">  at <1,1,0> to A,
         say A,
     end,
