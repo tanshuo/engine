@@ -29,7 +29,7 @@
 @property TC_ID sp; // stack top
 @property int head; // ip to start
 @property int update;// ip to update
-@property int has_start;// head or update
+@property BOOL has_start;// head or update
 
 @property BOOL true_false; // logical result
 @property BOOL last_true;
