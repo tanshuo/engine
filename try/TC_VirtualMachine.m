@@ -142,7 +142,7 @@
             if(s == nil)
             {
                 _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
-                NSLog(@"%@",_message); exit(1);
+                NSLog(@"%@ %@",_message,[(TC_INS_VARIABLE*)[t.params objectAtIndex:i] var].word); exit(1);
                 return -1;
             }
             //s.location = [(TC_INS_VARIABLE*)[t.params objectAtIndex:i] location];
@@ -152,7 +152,7 @@
         if(sel <= 0)
         {
             _message = [NSMutableString stringWithString:@"unsolved function symbol"];
-            NSLog(@"%@",_message); exit(1);
+            NSLog(@"%@ %@",_message,t.src); exit(1);
             return -1;
         }
         else
@@ -254,7 +254,7 @@
     else
     {
         _message = [NSMutableString stringWithString:@"unsolved function symbol"];
-        NSLog(@"%@",_message); exit(1);
+        NSLog(@"%@ %@",_message,t.src); exit(1);
         return -1;
     }
     return 0;
@@ -646,7 +646,7 @@
             if(result == nil)
             {
                 _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
-                NSLog(@"%@",_message); exit(1);
+                NSLog(@"%@ %@",_message,v.var.word); exit(1);
                 return nil;
             }
         }
@@ -667,7 +667,7 @@
             if(result == nil)
             {
                 _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
-                NSLog(@"%@",_message); exit(1);
+                NSLog(@"%@ %@",_message,v.var.next_layer.word); exit(1);
                 return nil;
             }
         }
@@ -681,7 +681,7 @@
             if(result == nil)
             {
                 _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
-                NSLog(@"%@",_message); exit(1);
+                NSLog(@"%@ %@",_message,v.var.word); exit(1);
                 return nil;
             }
         }
@@ -696,7 +696,7 @@
             if(result == nil)
             {
                 _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
-                NSLog(@"%@",_message); exit(1);
+                NSLog(@"%@ %@",_message,v.var.word); exit(1);
                 return nil;
             }
         }
