@@ -1400,27 +1400,155 @@
 
 - (void) push:(NSMutableArray*) params// list push <5,6,7>
 {
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:0];
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
     
+    if(A.type != VAR_LIST)
+    {
+        _check_call = NO;
+        return;
+    }
+    [((NSMutableArray*)(A.obj)) addObject:B.obj];
 }
 
-- (void) pop:(NSMutableArray*) params// list pop <5,6,7>
+- (void) pop:(NSMutableArray*) params// list pop to A
 {
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:0];
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    TC_INS_VARIABLE* temp;
+    NSMutableArray* a = [NSMutableArray arrayWithCapacity:10];
     
+    if(A.type != VAR_LIST)
+    {
+        _check_call = NO;
+        return;
+    }
+    temp = [((NSMutableArray*)(A.obj)) lastObject];
+    [a addObject:B];
+    [a addObject: temp];
+    [self set: a];
+    [((NSMutableArray*)(A.obj)) removeLastObject];
 }
 
-- (void) has_size:(NSMutableArray*) params// A hassize
+
+- (void) getSize:(NSMutableArray*) params// A getSize to B
 {
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:0];
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+
+    if(A.type != VAR_LIST)
+    {
+        _check_call = NO;
+        return;
+    }
     
+    B.type = VAR_INT;
+    if(B.addr)
+    {
+        free(B.addr);
+        B.addr = nil;
+    }
+    B.obj = nil;
+    B.addr = malloc(sizeof(int));
+    *((int*)B.addr) = [(NSMutableArray*)A.obj count];
 }
 
-- (void) getobject:(NSMutableArray*) params// A get_object at 3
+- (void) getobject:(NSMutableArray*) params// A get_object at 3 to B
 {
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:0];
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    TC_INS_VARIABLE* C;
+    C = [params objectAtIndex:2];
+    TC_INS_VARIABLE* temp;
+    NSMutableArray* a = [NSMutableArray arrayWithCapacity:10];
     
+    if(A.type != VAR_LIST)
+    {
+        _check_call = NO;
+        return;
+    }
+    if(B.type != VAR_INT)
+    {
+        _check_call = NO;
+        return;
+    }
+    int index = *((int*)B.addr);
+    int size = [(NSMutableArray*)A.obj count];
+    if(index >= size)
+    {
+        _check_call = NO;
+        return;
+    }
+    
+    temp = [(NSMutableArray*)A.obj objectAtIndex:index];
+    [a addObject:C];
+    [a addObject:temp];
+    [self set: a];
 }
 
 - (void) remove:(NSMutableArray*) params//list remove at 4
 {
-    
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:0];
+    TC_INS_VARIABLE* B;
+    B = [params objectAtIndex:1];
+    if(A.type != VAR_LIST)
+    {
+        _check_call = NO;
+        return;
+    }
+    if(B.type != VAR_INT)
+    {
+        _check_call = NO;
+        return;
+    }
+    int index = *((int*)(B.addr));
+    int size = [(NSMutableArray*)A.obj count];
+    if(index >= size)
+    {
+        _check_call = NO;
+        return;
+    }
+    else
+        [((NSMutableArray*)(A.obj)) removeObjectAtIndex:index];
 }
 
 - (void) change:(NSMutableArray*) params//<"x"> change to <4> in A

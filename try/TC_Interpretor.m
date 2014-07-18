@@ -1935,15 +1935,15 @@
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
-    temp.word = @"has_size";
+    temp.word = @"getSize";
     temp.explain = TC_FUNCTION;
-    temp.right_match = 0;
+    temp.right_match = 1;
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
     temp.word = @"getobject";
     temp.explain = TC_FUNCTION;
-    temp.right_match = 1;
+    temp.right_match = 2;
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
@@ -2388,11 +2388,11 @@
     
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;
-    fun.name = @"has_size";
+    fun.name = @"getSize";
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_BIND;
-    fun.right_match = 0;
+    fun.right_match = 1;
     [_func_table addObject:fun];
     
     fun = [TC_INS_FUNCTION alloc];
@@ -2401,7 +2401,7 @@
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_BIND;
-    fun.right_match = 1;
+    fun.right_match = 2;
     [_func_table addObject:fun];
     
     fun = [TC_INS_FUNCTION alloc];
