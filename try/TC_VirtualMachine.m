@@ -64,7 +64,7 @@
         case ins_jmp_false:
             if(_true_false == NO)
             {
-                 _ip = [[current src] offset];
+                _ip = [[current src] offset];
                 _last_true = _true_false;
                 _true_false = NO;
             }
@@ -311,7 +311,7 @@
 {
     //check
     int i;
-
+    
     TC_WORD_LAYER* new_w;
     TC_VirtualMachine* new_m;
     if([w.word characterAtIndex:0] == '#')
@@ -984,7 +984,7 @@
     p.x = x;
     p.y = y;
     p.z = z;
-
+    
     if(B.type == VAR_VECTOR2)
     {
         p.x += ((TC_Position2d*)(B.addr))->x;
@@ -1249,33 +1249,33 @@
 
 - (void) push:(NSMutableArray*) params// list push <5,6,7>
 {
-
+    
 }
 
 - (void) pop:(NSMutableArray*) params// list pop <5,6,7>
 {
-
+    
 }
 
 - (void) has_size:(NSMutableArray*) params// A hassize
 {
-
+    
 }
 
 - (void) getobject:(NSMutableArray*) params// A get_object at 3
 {
-
+    
 }
 
 - (void) remove:(NSMutableArray*) params//list remove at 4
 {
-
+    
 }
 
 - (void) change:(NSMutableArray*) params//<"x"> change to <4> in A
 {
     _check_call = YES;
-    if([params count] != 2 && [params count] != 3)
+    if([params count] != 3)
     {
         _check_call = NO;
         return;
@@ -1293,10 +1293,8 @@
     }
     attribute = A.obj;
     B = [params objectAtIndex:1];
-    if([params count] == 3)
-    {
-        C = [params objectAtIndex:2];
-    }
+    C = [params objectAtIndex:2];
+    
     if(C.type != VAR_OBJECT)
     {
         _check_call = NO;
@@ -1304,14 +1302,7 @@
     }
     
     TC_DisplayObject* target;
-    if(C != nil)
-    {
-        target = C.obj;
-    }
-    else
-    {
-        target = _target;
-    }
+    target = C.obj;
     
     if([attribute isEqualToString:@"position"] && ((TC_DisplayObject*)target).type != OBJDISPLAY)
     {
@@ -1427,7 +1418,7 @@
     {
         if(B.type == VAR_INT)
         {
-           ((TC_DisplayObject*)target).label = *((int*)(B.addr));
+            ((TC_DisplayObject*)target).label = *((int*)(B.addr));
         }
         else
         {
@@ -1476,7 +1467,7 @@
 - (void) get:(NSMutableArray*) params//B get <"scale"> to A
 {
     _check_call = YES;
-    if([params count] != 2 && [params count] != 3)
+    if([params count] != 3)
     {
         _check_call = NO;
         return;
@@ -1491,10 +1482,8 @@
     TC_DisplayObject* target;
     A = [params objectAtIndex:0];
     B = [params objectAtIndex:1];
-    if([params count] == 3)
-    {
-        C = [params objectAtIndex:2];
-    }
+    C = [params objectAtIndex:2];
+    
     if(A.type != VAR_OBJECT)
     {
         _check_call = NO;
@@ -1507,54 +1496,110 @@
     }
     attribute = B.obj;
     target = A.obj;
-    if(C == nil)
+    des = C;
+    
+    if(target.type != OBJDISPLAY)
     {
-        des = _result;
+        if([attribute isEqualToString:@"position"])
+        {
+            des.type = VAR_VECTOR3;
+            des.obj = nil;
+            if(des.addr)
+            {
+                free(des.addr);
+                des.addr = nil;
+            }
+            temp = [(TC_Layer*)target relativePosition];
+            des.addr = malloc(sizeof(TC_Position));
+            *((TC_Position*)(des.addr)) = temp;
+        }
+        else if([attribute isEqualToString:@"alive"])
+        {
+            des.type = VAR_INT;
+            des.obj = nil;
+            if(des.addr)
+            {
+                free(des.addr);
+                des.addr = nil;
+            }
+            des.addr = malloc(sizeof(int));
+            *((int*)(des.addr)) = [(TC_Layer*)target alive];
+        }
+        else if([attribute isEqualToString:@"parent"])
+        {
+            des.type = VAR_OBJECT;
+            if(des.addr)
+            {
+                free(des.addr);
+                des.addr = nil;
+            }
+            des.obj = [((TC_Layer*)target) parent];
+        }
+        else if([attribute isEqualToString:@"childs"])
+        {
+            des.type = VAR_LIST;
+            if(des.addr)
+            {
+                free(des.addr);
+                des.addr = nil;
+            }
+            des.obj = [((TC_Layer*)target) child];
+        }
+        else if([attribute isEqualToString:@"rotation"])
+        {
+            des.type = VAR_FLOAT;
+            des.obj = nil;
+            if(des.addr)
+            {
+                free(des.addr);
+                des.addr = nil;
+            }
+            des.addr = malloc(sizeof(float));
+            *((float*)(des.addr)) = [(TC_Layer*)target relativeRotation];
+        }
+        
     }
-    else
+    if(target.type == OBJSPRITE)
     {
-        des = C;
+        if([attribute isEqualToString:@"current_sequence"])
+        {
+            des.type = VAR_INT;
+            des.obj = nil;
+            if(des.addr)
+            {
+                free(des.addr);
+                des.addr = nil;
+            }
+            des.addr = malloc(sizeof(int));
+            *((int*)(des.addr)) = [(TC_Sprite*)target currentSequence];
+        }
+        else if([attribute isEqualToString:@"current_frame"])
+        {
+            des.type = VAR_INT;
+            des.obj = nil;
+            if(des.addr)
+            {
+                free(des.addr);
+                des.addr = nil;
+            }
+            des.addr = malloc(sizeof(int));
+            *((int*)(des.addr)) = [(TC_Sprite*)target currentFrame];
+        }
+        else if([attribute isEqualToString:@"frame_speed"])
+        {
+            des.type = VAR_INT;
+            des.obj = nil;
+            if(des.addr)
+            {
+                free(des.addr);
+                des.addr = nil;
+            }
+            des.addr = malloc(sizeof(int));
+            *((int*)(des.addr)) = [(TC_Sprite*)target frameSpeed];
+        }
     }
     
-    if([attribute isEqualToString:@"position"])
-    {
-        des.type = VAR_VECTOR3;
-        des.obj = nil;
-        if(des.addr)
-        {
-            free(des.addr);
-            des.addr = nil;
-        }
-        temp = [(TC_Layer*)target relativePosition];
-        des.addr = malloc(sizeof(TC_Position));
-        *((TC_Position*)(des.addr)) = temp;
-    }
-    else if([attribute isEqualToString:@"screen_position"])
-    {
-        des.type = VAR_VECTOR3;
-        des.obj = nil;
-        if(des.addr)
-        {
-            free(des.addr);
-            des.addr = nil;
-        }
-        temp = [target position];
-        des.addr = malloc(sizeof(TC_Position));
-        *((TC_Position*)(des.addr)) = temp;
-    }
-    else if([attribute isEqualToString:@"rotation"])
-    {
-        des.type = VAR_FLOAT;
-        des.obj = nil;
-        if(des.addr)
-        {
-            free(des.addr);
-            des.addr = nil;
-        }
-        des.addr = malloc(sizeof(float));
-        *((float*)(des.addr)) = [(TC_Layer*)target relativeRotation];
-    }
-    else if([attribute isEqualToString:@"name"])
+    if([attribute isEqualToString:@"name"])
     {
         if(des.addr)
         {
@@ -1563,6 +1608,18 @@
         }
         des.type = VAR_STRING;
         des.obj = target.name;
+    }
+    else if([attribute isEqualToString:@"id"])
+    {
+        des.type = VAR_INT;
+        des.obj = nil;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        des.addr = malloc(sizeof(int));
+        *((int*)(des.addr)) = [(TC_DisplayObject*)target oid];
     }
     else if([attribute isEqualToString:@"label"])
     {
@@ -1588,18 +1645,6 @@
         des.addr = malloc(sizeof(int));
         *((int*)(des.addr)) = [(TC_Layer*)target group];
     }
-    else if([attribute isEqualToString:@"alive"])
-    {
-        des.type = VAR_INT;
-        des.obj = nil;
-        if(des.addr)
-        {
-            free(des.addr);
-            des.addr = nil;
-        }
-        des.addr = malloc(sizeof(int));
-        *((int*)(des.addr)) = [(TC_Layer*)target alive];
-    }
     else if([attribute isEqualToString:@"active"])
     {
         des.type = VAR_INT;
@@ -1612,74 +1657,21 @@
         des.addr = malloc(sizeof(int));
         *((int*)(des.addr)) = [(TC_DisplayObject*)target active];
     }
-    else if([attribute isEqualToString:@"current_sequence"])
+    
+    else if([attribute isEqualToString:@"screen_position"])
     {
-        des.type = VAR_INT;
+        des.type = VAR_VECTOR3;
         des.obj = nil;
         if(des.addr)
         {
             free(des.addr);
             des.addr = nil;
         }
-        des.addr = malloc(sizeof(int));
-        *((int*)(des.addr)) = [(TC_Sprite*)target currentSequence];
+        temp = [target position];
+        des.addr = malloc(sizeof(TC_Position));
+        *((TC_Position*)(des.addr)) = temp;
     }
-    else if([attribute isEqualToString:@"current_frame"])
-    {
-        des.type = VAR_INT;
-        des.obj = nil;
-        if(des.addr)
-        {
-            free(des.addr);
-            des.addr = nil;
-        }
-        des.addr = malloc(sizeof(int));
-        *((int*)(des.addr)) = [(TC_Sprite*)target currentFrame];
-    }
-    else if([attribute isEqualToString:@"frame_speed"])
-    {
-        des.type = VAR_INT;
-        des.obj = nil;
-        if(des.addr)
-        {
-            free(des.addr);
-            des.addr = nil;
-        }
-        des.addr = malloc(sizeof(int));
-        *((int*)(des.addr)) = [(TC_Sprite*)target frameSpeed];
-    }
-    else if([attribute isEqualToString:@"id"])
-    {
-        des.type = VAR_INT;
-        des.obj = nil;
-        if(des.addr)
-        {
-            free(des.addr);
-            des.addr = nil;
-        }
-        des.addr = malloc(sizeof(int));
-        *((int*)(des.addr)) = [(TC_DisplayObject*)target oid];
-    }
-    else if([attribute isEqualToString:@"parent"])
-    {
-        des.type = VAR_OBJECT;
-        if(des.addr)
-        {
-            free(des.addr);
-            des.addr = nil;
-        }
-        des.obj = [((TC_Layer*)target) parent];
-    }
-    else if([attribute isEqualToString:@"childs"])
-    {
-        des.type = VAR_LIST;
-        if(des.addr)
-        {
-            free(des.addr);
-            des.addr = nil;
-        }
-        des.obj = [((TC_Layer*)target) child];
-    }
+    
 }
 /////////////////////////////////////////////////////////////
 @end
