@@ -9,6 +9,7 @@ enddef;
 
 define update:
     gen D;
+    createEmptyList on D;
     result  set <2,1>;
     result getY to D;
     if D is <2>,

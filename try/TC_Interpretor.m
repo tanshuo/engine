@@ -1953,6 +1953,12 @@
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
+    temp.word = @"createEmptyList";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
     temp.word = @"change";
     temp.explain = TC_FUNCTION;
     temp.right_match = 2;
@@ -2412,6 +2418,16 @@
     fun.location = FUN_BIND;
     fun.right_match = 1;
     [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"createEmptyList";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
     
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;

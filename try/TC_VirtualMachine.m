@@ -1551,6 +1551,26 @@
         [((NSMutableArray*)(A.obj)) removeObjectAtIndex:index];
 }
 
+- (void) createEmptyList:(NSMutableArray *)params // createEmpty LIST on A
+{
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A;
+    A = [params objectAtIndex:1];
+    if(A.addr)
+    {
+        free(A.addr);
+        A.addr = nil;
+    }
+    A.obj = [NSMutableArray arrayWithCapacity:10];
+    A.type = VAR_LIST;
+}
+
+
 - (void) change:(NSMutableArray*) params//<"x"> change to <4> in A
 {
     _check_call = YES;
