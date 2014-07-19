@@ -42,12 +42,24 @@
 - (int) readLine
 {
     char c;
+    BOOL comment = NO;
+    BOOL instring = NO;
     NSMutableString* linecache = [NSMutableString stringWithCapacity:10];
     char buff[2];
     
     while(true)
     {
         c = getc(_input);
+        if(c == '#')
+        {
+            if(instring == NO)
+                comment = YES;
+        }
+        else if(c == '\"')
+        {
+            instring = !instring;
+        }
+        
         if(c != EOF && c != ';' && c != ':')
         {
             if(c == '\n' || c == '\t')
@@ -55,12 +67,14 @@
                 if(c == '\n')
                 {
                     _currentLine++;
+                    comment = NO;
                 }
                 c = ' ';
             }
             buff[0] = c;
             buff[1] = 0;
-            [linecache appendString: [NSMutableString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+            if(!comment)
+                [linecache appendString: [NSMutableString stringWithCString:buff encoding:NSASCIIStringEncoding]];
             //index ++;
         }
         else if(c == EOF)

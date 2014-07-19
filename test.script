@@ -17,7 +17,7 @@ define update:
         say A,
     end,
     else,
-        fun1 <3>,
+       fun1 <3>,
     end;
 enddef;
 
