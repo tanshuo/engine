@@ -95,4 +95,8 @@
 - (void) getY:(NSMutableArray*) params;
 - (void) getZ:(NSMutableArray*) params;
 
+- (void)add:(NSMutableArray*) params;
+- (void)minus:(NSMutableArray*) params;
+- (void)multiply:(NSMutableArray*) params;
+- (void)devide:(NSMutableArray*) params;
 @end

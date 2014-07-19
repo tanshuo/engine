@@ -705,6 +705,393 @@
 }
 
 ///////////////////////////////////////////////////////////////////
+- (void)add:(NSMutableArray*) params
+{
+    _check_call = YES;
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    TC_INS_VARIABLE* target;
+    TC_Position2d temp2;
+    TC_Position temp3;
+    
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    target = [_local_var_list objectAtIndex:1];
+    
+    if(A.type == VAR_INT && B.type == VAR_INT)
+    {
+        target.type = VAR_INT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(int));
+        *((int*)target.addr) = *((int*)A.addr) + *((int*)B.addr);
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_INT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((float*)A.addr) + *((int*)B.addr);
+    }
+    else if(A.type == VAR_INT && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((int*)A.addr) + *((float*)B.addr);
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((float*)A.addr) + *((float*)B.addr);
+    }
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR2)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x + ((TC_Position2d*)B.addr)->x;
+        temp2.y = ((TC_Position2d*)A.addr)->y + ((TC_Position2d*)B.addr)->y;
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x + ((TC_Position*)B.addr)->x;
+        temp3.y = ((TC_Position*)A.addr)->y + ((TC_Position*)B.addr)->y;
+        temp3.z = ((TC_Position*)A.addr)->z + ((TC_Position*)B.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+}
+
+- (void)minus:(NSMutableArray*) params
+{
+    _check_call = YES;
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    TC_INS_VARIABLE* target;
+    TC_Position2d temp2;
+    TC_Position temp3;
+    
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    target = [_local_var_list objectAtIndex:1];
+    
+    if(A.type == VAR_INT && B.type == VAR_INT)
+    {
+        target.type = VAR_INT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(int));
+        *((int*)target.addr) = *((int*)A.addr) - *((int*)B.addr);
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_INT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((float*)A.addr) - *((int*)B.addr);
+    }
+    else if(A.type == VAR_INT && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((int*)A.addr) - *((float*)B.addr);
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((float*)A.addr) - *((float*)B.addr);
+    }
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR2)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x - ((TC_Position2d*)B.addr)->x;
+        temp2.y = ((TC_Position2d*)A.addr)->y - ((TC_Position2d*)B.addr)->y;
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x - ((TC_Position*)B.addr)->x;
+        temp3.y = ((TC_Position*)A.addr)->y - ((TC_Position*)B.addr)->y;
+        temp3.z = ((TC_Position*)A.addr)->z - ((TC_Position*)B.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+}
+
+- (void)multiply:(NSMutableArray*) params
+{
+    _check_call = YES;
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    TC_INS_VARIABLE* target;
+    TC_Position2d temp2;
+    TC_Position temp3;
+    
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    target = [_local_var_list objectAtIndex:1];
+    
+    if(A.type == VAR_INT && B.type == VAR_INT)
+    {
+        target.type = VAR_INT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(int));
+        *((int*)target.addr) = *((int*)A.addr) * *((int*)B.addr);
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_INT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((float*)A.addr) * *((int*)B.addr);
+    }
+    else if(A.type == VAR_INT && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((int*)A.addr) * *((float*)B.addr);
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((float*)A.addr) * *((float*)B.addr);
+    }
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR2)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x * ((TC_Position2d*)B.addr)->x;
+        temp2.y = ((TC_Position2d*)A.addr)->y * ((TC_Position2d*)B.addr)->y;
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x * ((TC_Position*)B.addr)->x;
+        temp3.y = ((TC_Position*)A.addr)->y * ((TC_Position*)B.addr)->y;
+        temp3.z = ((TC_Position*)A.addr)->z * ((TC_Position*)B.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+}
+
+- (void)devide:(NSMutableArray*) params
+{
+    _check_call = YES;
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    TC_INS_VARIABLE* target;
+    TC_Position2d temp2;
+    TC_Position temp3;
+    
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    target = [_local_var_list objectAtIndex:1];
+    
+    if(A.type == VAR_INT && B.type == VAR_INT)
+    {
+        target.type = VAR_INT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(int));
+        *((int*)target.addr) = *((int*)A.addr) / *((int*)B.addr);
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_INT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((float*)A.addr) / *((int*)B.addr);
+    }
+    else if(A.type == VAR_INT && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((int*)A.addr) / *((float*)B.addr);
+    }
+    else if(A.type == VAR_FLOAT && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = *((float*)A.addr) / *((float*)B.addr);
+    }
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR2)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x / ((TC_Position2d*)B.addr)->x;
+        temp2.y = ((TC_Position2d*)A.addr)->y / ((TC_Position2d*)B.addr)->y;
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x / ((TC_Position*)B.addr)->x;
+        temp3.y = ((TC_Position*)A.addr)->y / ((TC_Position*)B.addr)->y;
+        temp3.z = ((TC_Position*)A.addr)->z / ((TC_Position*)B.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+}
 
 - (void) equal:(NSMutableArray*) params //a equal b
 {
