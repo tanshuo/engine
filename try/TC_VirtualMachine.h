@@ -63,6 +63,10 @@
 - (int) bind_function:(TC_INS_FUNCTION*)func To:(SEL*)addr;
 - (SEL) seach_bind: (TC_INS_FUNCTION*)func;
 
+//parsing forfular to tokens
++ (NSMutableArray*) parseString: (NSString*) s;
++ (NSMutableArray*) genPostfix: (NSMutableArray*) a;
+
 
 //bind list
 //////////////////////////////////////////////////////////

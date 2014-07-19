@@ -18,3 +18,5 @@ NSMutableArray* scriptlist;
 + (TC_VirtualMachine*)loadScriptWith: (NSString*)name;
 + (TC_VirtualMachine*) lookscript: (NSString*) name;
 @end
+
+

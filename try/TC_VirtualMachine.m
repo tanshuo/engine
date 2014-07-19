@@ -23,6 +23,91 @@
 @synthesize target = _target;
 @synthesize last_true = _last_true;
 
++ (NSMutableArray*) parseString: (NSString*) s
+{
+    char c;
+    int i;
+    int j = 0;
+    char buff[200];
+    NSMutableArray* result;
+    result = [NSMutableArray arrayWithCapacity:10];
+    
+    for(i = 0; i < [s lengthOfBytesUsingEncoding:NSASCIIStringEncoding]; i++)
+    {
+        c = [s characterAtIndex:i];
+        if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')')
+        {
+            buff[j] = 0;
+            [result addObject: [NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+            j = 0;
+            buff[0] = c;
+            buff[1] = 0;
+            [result addObject: [NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+        }
+        else
+        {
+            buff[j] = c;
+            j ++;
+        }
+    }
+    buff[j] = 0;
+    [result addObject: [NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+    
+    return result;
+}
+
++ (NSMutableArray*) genPostfix: (NSMutableArray*) a
+{
+    int i;
+    NSString* iter;
+    NSMutableArray* stack_high = [NSMutableArray arrayWithCapacity:10];
+    NSMutableArray* stack_low = [NSMutableArray arrayWithCapacity:10];
+    NSMutableArray* sub = [NSMutableArray arrayWithCapacity:10];
+    
+    for(i = 0; i < [a count]; i++)
+    {
+        iter = [a objectAtIndex: i];
+        if([iter isEqualToString: @"+"] || [iter isEqualToString: @"-"])
+        {
+            if(i + 1 >= [a count])
+            {
+                return nil;
+            }
+            [stack_high addObject:[a objectAtIndex:i+1]];
+            [stack_low addObject:iter];
+            i ++;
+        }
+        else if([iter isEqualToString: @"*"] || [iter isEqualToString: @"/"])
+        {
+            if(i + 1 >= [a count])
+            {
+                return nil;
+            }
+            [stack_high addObject:[a objectAtIndex:i+1]];
+            [stack_high addObject:iter];
+            i ++;
+        }
+        else if([iter isEqualToString: @"("])
+        {
+            for(i = i + 1; i < [a count]; i++)
+            {
+                if([iter isEqualToString: @")"])
+                {
+                    [stack_high addObjectsFromArray: [self genPostfix:sub]];
+                }
+                [sub addObject: [a objectAtIndex:i]];
+            }
+            return nil;
+        }
+        else
+        {
+            [stack_high addObject: iter];
+        }
+    }
+    [stack_high addObjectsFromArray:stack_low];
+    return stack_high;
+}
+
 - (int) run_next_ins
 {
     
@@ -611,6 +696,8 @@
     result.target = nil;
     return result;
 }
+
+
 
 - (TC_INS_VARIABLE*) solve: (TC_INS_VARIABLE*) v
 {
@@ -2359,5 +2446,32 @@
     }
     
 }
+
+
+- (void) calculate:(NSMutableArray*) params
+{
+    NSMutableArray* postfix = [NSMutableArray arrayWithCapacity:10];
+    _check_call = YES;
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    TC_INS_VARIABLE* A = nil;
+    TC_INS_VARIABLE* B = nil;
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    if(B.type != VAR_STRING)
+    {
+        _check_call = NO;
+        return;
+    }
+    if(A.type == VAR_SELF)
+    {
+        A = [_local_var_list objectAtIndex:1];
+    }
+    postfix = [TC_VirtualMachine genPostfix: [TC_VirtualMachine parseString:B.obj]];
+}
+
 /////////////////////////////////////////////////////////////
 @end
