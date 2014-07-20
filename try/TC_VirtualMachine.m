@@ -23,6 +23,16 @@
 @synthesize target = _target;
 @synthesize last_true = _last_true;
 
++ (BOOL)isNum:(NSString*) s
+{
+    if([s isEqualToString: @"+"] || [s isEqualToString: @"-"] || [s isEqualToString: @"*"] || [s isEqualToString: @"/"] || [s isEqualToString: @"sin"] || [s isEqualToString: @"cos"])
+    {
+        return NO;
+    }
+    else
+        return YES;
+}
+
 + (NSMutableArray*) parseString: (NSString*) s
 {
     char c;
@@ -44,6 +54,10 @@
             buff[1] = 0;
             [result addObject: [NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
         }
+        else if(c == '\t' || c == ' ' || c == '\n')
+        {
+            continue;
+        }
         else
         {
             buff[j] = c;
@@ -52,7 +66,33 @@
     }
     buff[j] = 0;
     [result addObject: [NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
-    
+    NSString* iter;
+    for(i = 0; i < [result count]; i++)
+    {
+        iter = [result objectAtIndex:i];
+        c = [iter characterAtIndex:0];
+        if(c - '0' >= 0 || c - '0' <= 9)
+        {
+            iter = [NSString stringWithFormat:@"#%@",iter];
+        }
+        else if(c == '<')
+        {
+            for(j = 1; j < [iter lengthOfBytesUsingEncoding:NSASCIIStringEncoding]; j++)
+            {
+                if([iter characterAtIndex:j] != 'c')
+                {
+                    buff[j] = [iter characterAtIndex:j];
+                    j ++;
+                }
+                else
+                {
+                    buff[j] = 0;
+                    break;
+                }
+            }
+             iter = [NSString stringWithFormat:@"#%@",[NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+        }
+    }
     return result;
 }
 
@@ -106,6 +146,40 @@
     }
     [stack_high addObjectsFromArray:stack_low];
     return stack_high;
+}
+
+- (TC_INS_VARIABLE*)findVarByName: (NSString*)name
+{
+    int i;
+    if([name characterAtIndex:0] == '#')
+    {
+        return [self genInstance:name];
+    }
+    else
+    {
+        for(i = 0; i < [_var_stack count]; i++)
+        {
+            if([[[[_var_stack objectAtIndex:i] var] word] isEqualToString:name])
+            {
+                return [_var_stack objectAtIndex:i];
+            }
+        }
+        for(i = 0; i < [_local_var_list count]; i++)
+        {
+            if([[[[_local_var_list objectAtIndex:i] var] word] isEqualToString:name])
+            {
+                return [_local_var_list objectAtIndex:i];
+            }
+        }
+        for(i = 0; i < [_global count]; i++)
+        {
+            if([[[[_global objectAtIndex:i] var] word] isEqualToString:name])
+            {
+                return [_global objectAtIndex:i];
+            }
+        }
+    }
+    return nil;
 }
 
 - (int) run_next_ins
@@ -1176,6 +1250,150 @@
         temp3.x = ((TC_Position*)A.addr)->x / ((TC_Position*)B.addr)->x;
         temp3.y = ((TC_Position*)A.addr)->y / ((TC_Position*)B.addr)->y;
         temp3.z = ((TC_Position*)A.addr)->z / ((TC_Position*)B.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+}
+
+- (void) sin:(NSMutableArray*) params // sin S
+{
+    _check_call = YES;
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    TC_INS_VARIABLE* target;
+    TC_Position2d temp2;
+    TC_Position temp3;
+    
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    target = [_local_var_list objectAtIndex:1];
+    if(B.type == VAR_INT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = sinf(*((int*)B.addr));
+    }
+    else if(B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = sinf(*((float*)B.addr));
+    }
+    else if(B.type == VAR_VECTOR2)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = sinf(((TC_Position2d*)(B.addr))->x);
+        temp2.y = sinf(((TC_Position2d*)(B.addr))->y);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = sinf(((TC_Position*)(B.addr))->x);
+        temp3.y = sinf(((TC_Position*)(B.addr))->y);
+        temp3.z = sinf(((TC_Position*)(B.addr))->z);
+        *((TC_Position*)target.addr) = temp3;
+    }
+}
+
+- (void) cos:(NSMutableArray*) params // sin S
+{
+    _check_call = YES;
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    TC_INS_VARIABLE* target;
+    TC_Position2d temp2;
+    TC_Position temp3;
+    
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    target = [_local_var_list objectAtIndex:1];
+    if(B.type == VAR_INT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = cosf(*((int*)B.addr));
+    }
+    else if(B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = cosf(*((float*)B.addr));
+    }
+    else if(B.type == VAR_VECTOR2)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = cosf(((TC_Position2d*)(B.addr))->x);
+        temp2.y = cosf(((TC_Position2d*)(B.addr))->y);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = cosf(((TC_Position*)(B.addr))->x);
+        temp3.y = cosf(((TC_Position*)(B.addr))->y);
+        temp3.z = cosf(((TC_Position*)(B.addr))->z);
         *((TC_Position*)target.addr) = temp3;
     }
 }
@@ -2459,8 +2677,11 @@
     }
     TC_INS_VARIABLE* A = nil;
     TC_INS_VARIABLE* B = nil;
+    
+    TC_INS_VARIABLE* arg;
     A = [params objectAtIndex:0];
     B = [params objectAtIndex:1];
+    NSMutableArray* p = [NSMutableArray arrayWithCapacity:10];
     if(B.type != VAR_STRING)
     {
         _check_call = NO;
@@ -2471,6 +2692,84 @@
         A = [_local_var_list objectAtIndex:1];
     }
     postfix = [TC_VirtualMachine genPostfix: [TC_VirtualMachine parseString:B.obj]];
+    int i;
+    NSString* iter;
+   
+    for(i = 0; i < [postfix count]; i ++)
+    {
+        TC_INS_VARIABLE* a = [TC_INS_VARIABLE alloc];
+        TC_INS_VARIABLE* b = [TC_INS_VARIABLE alloc];
+        iter = [postfix objectAtIndex:i];
+        p = [NSMutableArray arrayWithCapacity:10];
+        if([iter isEqualToString: @"sin"])
+        {
+            if(i == 0)
+            {
+                _check_call = NO;
+                return;
+            }
+            if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]])
+            {
+                continue;
+            }
+            arg = [self findVarByName: [postfix objectAtIndex:i - 1]];
+            [p addObject: arg];
+            [p addObject: arg];
+            [self sin:p];
+            [p removeAllObjects];
+            [p addObject:a];
+            [p addObject:_result];
+            [self set: p];
+            
+        }
+        else if([iter isEqualToString: @"cos"])
+        {
+            if(i == 0)
+            {
+                _check_call = NO;
+                return;
+            }
+            if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]])
+            {
+                continue;
+            }
+            arg = [self findVarByName: [postfix objectAtIndex:i - 1]];
+            [p addObject: arg];
+            [p addObject: arg];
+            [self cos:p];
+            ...
+        }
+        else if([iter isEqualToString: @"+"])
+        {
+            if(i < 2)
+            {
+                _check_call = NO;
+                return;
+            }
+             if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]] || ![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 2]])
+             {
+                 continue;
+             }
+            arg = [self findVarByName: [postfix objectAtIndex:i - 1]];
+            [p addObject: arg];
+            arg = [self findVarByName: [postfix objectAtIndex:i - 2]];
+            [p addObject: arg];
+            [self add:p];
+        }
+        else if([iter isEqualToString: @"-"])
+        {
+        
+        }
+        else if([iter isEqualToString: @"*"])
+        {
+            
+        }
+        else if([iter isEqualToString: @"/"])
+        {
+            
+        }
+        
+    }
 }
 
 /////////////////////////////////////////////////////////////
