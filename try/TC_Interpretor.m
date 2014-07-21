@@ -1608,6 +1608,9 @@
             case ins_rtn:
                 [result appendString:@" rtn"];
                 break;
+            case ins_jmp_last:
+                [result appendString:@" ins_jmp_last"];
+                break;
         }
         
         [result appendString:@"\n"];
@@ -1998,6 +2001,24 @@
     
     temp = [TC_Define alloc];
     temp.word = @"getZ";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"setX";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"setY";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 1;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
+    temp.word = @"setZ";
     temp.explain = TC_FUNCTION;
     temp.right_match = 1;
     [self.dictionary addObject: temp];
@@ -2482,6 +2503,33 @@
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;
     fun.name = @"getZ";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"setX";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"setY";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"setZ";
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_BIND;

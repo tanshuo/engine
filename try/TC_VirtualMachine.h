@@ -99,6 +99,10 @@
 - (void) getY:(NSMutableArray*) params;
 - (void) getZ:(NSMutableArray*) params;
 
+- (void) setX:(NSMutableArray*) params; //A setX <1>
+- (void) setY:(NSMutableArray*) params;
+- (void) setZ:(NSMutableArray*) params;
+
 - (void)add:(NSMutableArray*) params;
 - (void)minus:(NSMutableArray*) params;
 - (void)multiply:(NSMutableArray*) params;
