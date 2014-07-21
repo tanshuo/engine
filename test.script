@@ -9,7 +9,8 @@ enddef;
 
 define update:
     move <1,1,0>;
-    
+    calculate <"1 + (2  * sin(4+5))">;
+    say result;
 enddef;
 
 define A fun1 B:

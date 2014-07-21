@@ -23,6 +23,27 @@
 @synthesize target = _target;
 @synthesize last_true = _last_true;
 
++ (NSString*)varTostring:(TC_INS_VARIABLE*)v
+{
+    if(v.type == VAR_INT)
+    {
+        return [NSString stringWithFormat:@"#%d", *((int*)v.addr)];
+    }
+    else if(v.type == VAR_FLOAT)
+    {
+        return [NSString stringWithFormat:@"#%f", *((float*)v.addr)];
+    }
+    else if(v.type == VAR_VECTOR2)
+    {
+        return [NSString stringWithFormat:@"#%f,%f", ((TC_Position2d*)v.addr)->x,((TC_Position2d*)v.addr)->y];
+    }
+    else if(v.type == VAR_VECTOR3)
+    {
+        return [NSString stringWithFormat:@"#%f,%f,%f", ((TC_Position*)v.addr)->x,((TC_Position*)v.addr)->y,((TC_Position*)v.addr)->z];
+    }
+    return nil;
+}
+
 + (BOOL)isNum:(NSString*) s
 {
     if([s isEqualToString: @"+"] || [s isEqualToString: @"-"] || [s isEqualToString: @"*"] || [s isEqualToString: @"/"] || [s isEqualToString: @"sin"] || [s isEqualToString: @"cos"])
@@ -47,8 +68,11 @@
         c = [s characterAtIndex:i];
         if(c == '+' || c == '-' || c == '*' || c == '/' || c == '(' || c == ')')
         {
-            buff[j] = 0;
-            [result addObject: [NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+            if(j != 0)
+            {
+                buff[j] = 0;
+                [result addObject: [NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+            }
             j = 0;
             buff[0] = c;
             buff[1] = 0;
@@ -65,15 +89,16 @@
         }
     }
     buff[j] = 0;
-    [result addObject: [NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+    if(j != 0)
+        [result addObject: [NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
     NSString* iter;
     for(i = 0; i < [result count]; i++)
     {
         iter = [result objectAtIndex:i];
         c = [iter characterAtIndex:0];
-        if(c - '0' >= 0 || c - '0' <= 9)
+        if(c - '0' >= 0 && c - '0' <= 9)
         {
-            iter = [NSString stringWithFormat:@"#%@",iter];
+            result[i] = [NSString stringWithFormat:@"#%@",iter];
         }
         else if(c == '<')
         {
@@ -90,15 +115,20 @@
                     break;
                 }
             }
-             iter = [NSString stringWithFormat:@"#%@",[NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+            result[i] = [NSString stringWithFormat:@"#%@",[NSString stringWithCString:buff encoding:NSASCIIStringEncoding]];
         }
     }
     return result;
 }
 
+
 + (NSMutableArray*) genPostfix: (NSMutableArray*) a
 {
     int i;
+    int leftp = 0;
+    int rightp = 0;
+    NSString* buffer = nil;
+    NSString* buffer2 = nil;
     NSString* iter;
     NSMutableArray* stack_high = [NSMutableArray arrayWithCapacity:10];
     NSMutableArray* stack_low = [NSMutableArray arrayWithCapacity:10];
@@ -113,9 +143,14 @@
             {
                 return nil;
             }
-            [stack_high addObject:[a objectAtIndex:i+1]];
-            [stack_low addObject:iter];
-            i ++;
+            if(![[a objectAtIndex:i+1] isEqualToString:@"("] && ![[a objectAtIndex:i+1] isEqualToString:@"sin"] && ![[a objectAtIndex:i+1] isEqualToString:@"cos"])
+            {
+                [stack_high addObject:[a objectAtIndex:i+1]];
+                [stack_low addObject:iter];
+                i ++;
+            }
+            else
+                [stack_low addObject:iter];
         }
         else if([iter isEqualToString: @"*"] || [iter isEqualToString: @"/"])
         {
@@ -123,21 +158,64 @@
             {
                 return nil;
             }
-            [stack_high addObject:[a objectAtIndex:i+1]];
-            [stack_high addObject:iter];
-            i ++;
+            if(![[a objectAtIndex:i+1] isEqualToString:@"("] && ![[a objectAtIndex:i+1] isEqualToString:@"sin"] && ![[a objectAtIndex:i+1] isEqualToString:@"cos"])
+            {
+                [stack_high addObject:[a objectAtIndex:i+1]];
+                [stack_low addObject:iter];
+                i ++;
+            }
+            else
+                buffer = iter;
+        }
+        else if([iter isEqualToString: @"sin"] || [iter isEqualToString: @"cos"])
+        {
+            if(i + 1 >= [a count])
+            {
+                return nil;
+            }
+            if(![[a objectAtIndex:i+1] isEqualToString:@"("] && ![[a objectAtIndex:i+1] isEqualToString:@"sin"] && ![[a objectAtIndex:i+1] isEqualToString:@"cos"])
+            {
+                [stack_high addObject:[a objectAtIndex:i+1]];
+                [stack_low addObject:iter];
+                i ++;
+            }
+            else
+                buffer2 = iter;
         }
         else if([iter isEqualToString: @"("])
         {
+            leftp ++;
             for(i = i + 1; i < [a count]; i++)
             {
+                iter = [a objectAtIndex: i];
                 if([iter isEqualToString: @")"])
                 {
-                    [stack_high addObjectsFromArray: [self genPostfix:sub]];
+                    rightp++;
+                    if(leftp == rightp)
+                    {
+                        [stack_high addObjectsFromArray: [self genPostfix:sub]];
+                        if(buffer2)
+                        {
+                            [stack_high addObject:buffer2];
+                            buffer2 = nil;
+                        }
+                        if(buffer)
+                        {
+                            [stack_high addObject:buffer];
+                            buffer = nil;
+                        }
+                        break;
+                    }
+                }
+                else if([iter isEqualToString: @"("])
+                {
+                    leftp++;
                 }
                 [sub addObject: [a objectAtIndex:i]];
             }
-            return nil;
+            
+            if(i == [a count])
+                return nil;
         }
         else
         {
@@ -2056,15 +2134,15 @@
         case VAR_STRING:
             something = B.obj;
             break;
-        
+            
         case VAR_INT:
             something = [NSString stringWithFormat:@"%d",*((int*)(B.addr))];
             break;
-        
+            
         case VAR_FLOAT:
             something = [NSString stringWithFormat:@"%f",*((float*)(B.addr))];
             break;
-        
+            
         case VAR_VECTOR2:
             something = [NSString stringWithFormat:@"<%f, %f>",((TC_Position2d*)(B.addr))->x,((TC_Position2d*)(B.addr))->y];
             break;
@@ -2151,7 +2229,7 @@
     A = [params objectAtIndex:0];
     TC_INS_VARIABLE* B;
     B = [params objectAtIndex:1];
-
+    
     if(A.type != VAR_LIST)
     {
         _check_call = NO;
@@ -2693,83 +2771,172 @@
     }
     postfix = [TC_VirtualMachine genPostfix: [TC_VirtualMachine parseString:B.obj]];
     int i;
+    int loop = 0;
     NSString* iter;
-   
-    for(i = 0; i < [postfix count]; i ++)
+    NSString* iter2;
+    NSString* iter3;
+    TC_INS_VARIABLE* temp = [TC_INS_VARIABLE alloc];
+    while([postfix count] > 1 && loop < 100)
     {
-        TC_INS_VARIABLE* a = [TC_INS_VARIABLE alloc];
-        TC_INS_VARIABLE* b = [TC_INS_VARIABLE alloc];
-        iter = [postfix objectAtIndex:i];
-        p = [NSMutableArray arrayWithCapacity:10];
-        if([iter isEqualToString: @"sin"])
+        loop ++;
+        for(i = 0; i < [postfix count]; i ++)
         {
-            if(i == 0)
+            iter = [postfix objectAtIndex:i];
+            p = [NSMutableArray arrayWithCapacity:10];
+            if([iter isEqualToString: @"sin"])
             {
-                _check_call = NO;
-                return;
+                if(i == 0)
+                {
+                    _check_call = NO;
+                    return;
+                }
+                iter2 = [postfix objectAtIndex:i - 1];
+                [postfix removeObject:iter2];
+                if(![TC_VirtualMachine isNum: iter2])
+                {
+                    continue;
+                }
+                arg = [self findVarByName: iter2];
+                [p addObject: arg];
+                [p addObject: arg];
+                [self sin:p];
+                [p removeAllObjects];
+                [p addObject:temp];
+                [p addObject:[_local_var_list objectAtIndex:1]];
+                [self set: p];
+                postfix[i - 1] = [TC_VirtualMachine varTostring: temp];
             }
-            if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]])
+            else if([iter isEqualToString: @"cos"])
             {
-                continue;
+                if(i == 0)
+                {
+                    _check_call = NO;
+                    return;
+                }
+                iter2 = [postfix objectAtIndex:i - 1];
+                [postfix removeObject:iter2];
+                if(![TC_VirtualMachine isNum: iter2])
+                {
+                    continue;
+                }
+                arg = [self findVarByName: iter2];
+                [p addObject: arg];
+                [p addObject: arg];
+                [self cos:p];
+                [p removeAllObjects];
+                [p addObject:temp];
+                [p addObject:[_local_var_list objectAtIndex:1]];
+                [self set: p];
+                postfix[i - 1] = [TC_VirtualMachine varTostring: temp];
             }
-            arg = [self findVarByName: [postfix objectAtIndex:i - 1]];
-            [p addObject: arg];
-            [p addObject: arg];
-            [self sin:p];
-            [p removeAllObjects];
-            [p addObject:a];
-            [p addObject:_result];
-            [self set: p];
-            
-        }
-        else if([iter isEqualToString: @"cos"])
-        {
-            if(i == 0)
+            else if([iter isEqualToString: @"+"])
             {
-                _check_call = NO;
-                return;
+                if(i < 2)
+                {
+                    _check_call = NO;
+                    return;
+                }
+                if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]] || ![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 2]])
+                {
+                    continue;
+                }
+                iter2 = [postfix objectAtIndex:i - 1];
+                [postfix removeObject:iter2];
+                iter3 = [postfix objectAtIndex:i - 2];
+                [postfix removeObject:iter3];
+                [p addObject:[self findVarByName:iter2]];
+                [p addObject:[self findVarByName:iter3]];
+                [self add:p];
+                [p removeAllObjects];
+                [p addObject:temp];
+                [p addObject:[_local_var_list objectAtIndex:1]];
+                [self set: p];
+                postfix[i - 2] = [TC_VirtualMachine varTostring: temp];
             }
-            if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]])
+            else if([iter isEqualToString: @"-"])
             {
-                continue;
+                if(i < 2)
+                {
+                    _check_call = NO;
+                    return;
+                }
+                if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]] || ![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 2]])
+                {
+                    continue;
+                }
+                iter2 = [postfix objectAtIndex:i - 1];
+                [postfix removeObject:iter2];
+                iter3 = [postfix objectAtIndex:i - 2];
+                [postfix removeObject:iter3];
+                [p addObject:[self findVarByName:iter2]];
+                [p addObject:[self findVarByName:iter3]];
+                [self minus:p];
+                [p removeAllObjects];
+                [p addObject:temp];
+                [p addObject:[_local_var_list objectAtIndex:1]];
+                [self set: p];
+                postfix[i - 2] = [TC_VirtualMachine varTostring: temp];
             }
-            arg = [self findVarByName: [postfix objectAtIndex:i - 1]];
-            [p addObject: arg];
-            [p addObject: arg];
-            [self cos:p];
-            ...
-        }
-        else if([iter isEqualToString: @"+"])
-        {
-            if(i < 2)
+            else if([iter isEqualToString: @"*"])
             {
-                _check_call = NO;
-                return;
+                if(i < 2)
+                {
+                    _check_call = NO;
+                    return;
+                }
+                if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]] || ![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 2]])
+                {
+                    continue;
+                }
+                iter2 = [postfix objectAtIndex:i - 1];
+                [postfix removeObject:iter2];
+                iter3 = [postfix objectAtIndex:i - 2];
+                [postfix removeObject:iter3];
+                [p addObject:[self findVarByName:iter2]];
+                [p addObject:[self findVarByName:iter3]];
+                [self multiply:p];
+                [p removeAllObjects];
+                [p addObject:temp];
+                [p addObject:[_local_var_list objectAtIndex:1]];
+                [self set: p];
+                postfix[i - 2] = [TC_VirtualMachine varTostring: temp];
             }
-             if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]] || ![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 2]])
-             {
-                 continue;
-             }
-            arg = [self findVarByName: [postfix objectAtIndex:i - 1]];
-            [p addObject: arg];
-            arg = [self findVarByName: [postfix objectAtIndex:i - 2]];
-            [p addObject: arg];
-            [self add:p];
+            else if([iter isEqualToString: @"/"])
+            {
+                if(i < 2)
+                {
+                    _check_call = NO;
+                    return;
+                }
+                if(![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 1]] || ![TC_VirtualMachine isNum:[postfix objectAtIndex:i - 2]])
+                {
+                    continue;
+                }
+                iter2 = [postfix objectAtIndex:i - 1];
+                [postfix removeObject:iter2];
+                iter3 = [postfix objectAtIndex:i - 2];
+                [postfix removeObject:iter3];
+                [p addObject:[self findVarByName:iter2]];
+                [p addObject:[self findVarByName:iter3]];
+                [self devide:p];
+                [p removeAllObjects];
+                [p addObject:temp];
+                [p addObject:[_local_var_list objectAtIndex:1]];
+                [self set: p];
+                postfix[i - 2] = [TC_VirtualMachine varTostring: temp];
+            }
         }
-        else if([iter isEqualToString: @"-"])
-        {
-        
-        }
-        else if([iter isEqualToString: @"*"])
-        {
-            
-        }
-        else if([iter isEqualToString: @"/"])
-        {
-            
-        }
-        
     }
+    
+    if([postfix count] !=1 )
+    {
+        _check_call = NO;
+        return;
+    }
+    [p removeAllObjects];
+    [p addObject:[_local_var_list objectAtIndex:1]];
+    [p addObject: [self genInstance:[postfix objectAtIndex:0]]];
+    [self set: p];
 }
 
 /////////////////////////////////////////////////////////////
