@@ -194,6 +194,7 @@
                     if(leftp == rightp)
                     {
                         [stack_high addObjectsFromArray: [self genPostfix:sub]];
+                        sub = [NSMutableArray arrayWithCapacity:10];
                         if(buffer2)
                         {
                             [stack_high addObject:buffer2];
@@ -2791,7 +2792,7 @@
                     return;
                 }
                 iter2 = [postfix objectAtIndex:i - 1];
-                [postfix removeObject:iter2];
+                [postfix removeObjectAtIndex:i-1];
                 if(![TC_VirtualMachine isNum: iter2])
                 {
                     continue;
@@ -2814,7 +2815,7 @@
                     return;
                 }
                 iter2 = [postfix objectAtIndex:i - 1];
-                [postfix removeObject:iter2];
+                [postfix removeObjectAtIndex:i - 1];
                 if(![TC_VirtualMachine isNum: iter2])
                 {
                     continue;
@@ -2841,9 +2842,9 @@
                     continue;
                 }
                 iter2 = [postfix objectAtIndex:i - 1];
-                [postfix removeObject:iter2];
+                [postfix removeObjectAtIndex:i - 1];
                 iter3 = [postfix objectAtIndex:i - 2];
-                [postfix removeObject:iter3];
+                [postfix removeObjectAtIndex:i - 2];
                 [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
                 [self add:p];
@@ -2865,9 +2866,9 @@
                     continue;
                 }
                 iter2 = [postfix objectAtIndex:i - 1];
-                [postfix removeObject:iter2];
+                [postfix removeObjectAtIndex:i - 1];
                 iter3 = [postfix objectAtIndex:i - 2];
-                [postfix removeObject:iter3];
+                [postfix removeObjectAtIndex:i - 2];
                 [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
                 [self minus:p];
@@ -2889,9 +2890,9 @@
                     continue;
                 }
                 iter2 = [postfix objectAtIndex:i - 1];
-                [postfix removeObject:iter2];
+                [postfix removeObjectAtIndex: i - 1];
                 iter3 = [postfix objectAtIndex:i - 2];
-                [postfix removeObject:iter3];
+                [postfix removeObjectAtIndex:i - 2];
                 [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
                 [self multiply:p];
@@ -2913,9 +2914,9 @@
                     continue;
                 }
                 iter2 = [postfix objectAtIndex:i - 1];
-                [postfix removeObject:iter2];
+                [postfix removeObjectAtIndex:i - 1];
                 iter3 = [postfix objectAtIndex:i - 2];
-                [postfix removeObject:iter3];
+                [postfix removeObjectAtIndex:i - 2];
                 [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
                 [self devide:p];
