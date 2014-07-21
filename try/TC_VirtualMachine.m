@@ -1157,6 +1157,37 @@
         temp2.y = ((TC_Position2d*)B.addr)->y + *((float*)A.addr);
         *((TC_Position2d*)target.addr) = temp2;
     }
+    //////////////////////////
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position2d*)A.addr)->x + ((TC_Position*)B.addr)->x;
+        temp3.y = ((TC_Position2d*)A.addr)->y + ((TC_Position*)B.addr)->y;
+        temp3.z = ((TC_Position*)B.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position2d*)B.addr)->x + ((TC_Position*)A.addr)->x;
+        temp3.y = ((TC_Position2d*)B.addr)->y + ((TC_Position*)A.addr)->y;
+        temp3.z = ((TC_Position*)A.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
 }
 
 - (void)minus:(NSMutableArray*) params
@@ -1279,9 +1310,9 @@
             target.addr = nil;
         }
         target.addr = malloc(sizeof(TC_Position));
-        temp3.x = ((TC_Position*)B.addr)->x - *((int*)A.addr);
-        temp3.y = ((TC_Position*)B.addr)->y - *((int*)A.addr);
-        temp3.z = ((TC_Position*)B.addr)->z - *((int*)A.addr);
+        temp3.x = *((int*)A.addr) - ((TC_Position*)B.addr)->x;
+        temp3.y = *((int*)A.addr) - ((TC_Position*)B.addr)->y;
+        temp3.z = *((int*)A.addr) - ((TC_Position*)B.addr)->z;
         *((TC_Position*)target.addr) = temp3;
     }
     else if(A.type == VAR_VECTOR3 && B.type == VAR_FLOAT)
@@ -1309,9 +1340,9 @@
             target.addr = nil;
         }
         target.addr = malloc(sizeof(TC_Position));
-        temp3.x = ((TC_Position*)B.addr)->x - *((float*)A.addr);
-        temp3.y = ((TC_Position*)B.addr)->y - *((float*)A.addr);
-        temp3.z = ((TC_Position*)B.addr)->z - *((float*)A.addr);
+        temp3.x = *((float*)A.addr) - ((TC_Position*)B.addr)->x;
+        temp3.y = *((float*)A.addr) - ((TC_Position*)B.addr)->y;
+        temp3.z = *((float*)A.addr) - ((TC_Position*)B.addr)->z;
         *((TC_Position*)target.addr) = temp3;
     }
     ///
@@ -1339,8 +1370,8 @@
             target.addr = nil;
         }
         target.addr = malloc(sizeof(TC_Position2d));
-        temp2.x = ((TC_Position2d*)B.addr)->x - *((int*)A.addr);
-        temp2.y = ((TC_Position2d*)B.addr)->y - *((int*)A.addr);
+        temp2.x = *((int*)A.addr) - ((TC_Position2d*)B.addr)->x;
+        temp2.y = *((int*)A.addr) - ((TC_Position2d*)B.addr)->y;
         *((TC_Position2d*)target.addr) = temp2;
     }
     else if(A.type == VAR_VECTOR2 && B.type == VAR_FLOAT)
@@ -1367,9 +1398,40 @@
             target.addr = nil;
         }
         target.addr = malloc(sizeof(TC_Position2d));
-        temp2.x = ((TC_Position2d*)B.addr)->x - *((float*)A.addr);
-        temp2.y = ((TC_Position2d*)B.addr)->y - *((float*)A.addr);
+        temp2.x = *((float*)A.addr) - ((TC_Position2d*)B.addr)->x;
+        temp2.y = *((float*)A.addr) - ((TC_Position2d*)B.addr)->y;
         *((TC_Position2d*)target.addr) = temp2;
+    }
+    ////////////////////////
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position2d*)A.addr)->x - ((TC_Position*)B.addr)->x;
+        temp3.y = ((TC_Position2d*)A.addr)->y - ((TC_Position*)B.addr)->y;
+        temp3.z = ((TC_Position*)B.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x - ((TC_Position2d*)B.addr)->x;
+        temp3.y = ((TC_Position*)A.addr)->y - ((TC_Position2d*)B.addr)->y;
+        temp3.z = ((TC_Position*)A.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
     }
 }
 
@@ -1585,6 +1647,38 @@
         temp2.y = ((TC_Position2d*)B.addr)->y * *((float*)A.addr);
         *((TC_Position2d*)target.addr) = temp2;
     }
+    /////////////////
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position2d*)A.addr)->x * ((TC_Position*)B.addr)->x;
+        temp3.y = ((TC_Position2d*)A.addr)->y * ((TC_Position*)B.addr)->y;
+        temp3.z = ((TC_Position*)B.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position2d*)B.addr)->x * ((TC_Position*)A.addr)->x;
+        temp3.y = ((TC_Position2d*)B.addr)->y * ((TC_Position*)A.addr)->y;
+        temp3.z = ((TC_Position*)A.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+
 }
 
 - (void)devide:(NSMutableArray*) params
@@ -1707,9 +1801,9 @@
             target.addr = nil;
         }
         target.addr = malloc(sizeof(TC_Position));
-        temp3.x = ((TC_Position*)B.addr)->x / *((int*)A.addr);
-        temp3.y = ((TC_Position*)B.addr)->y / *((int*)A.addr);
-        temp3.z = ((TC_Position*)B.addr)->z / *((int*)A.addr);
+        temp3.x = *((int*)A.addr) / ((TC_Position*)B.addr)->x;
+        temp3.y = *((int*)A.addr) / ((TC_Position*)B.addr)->y;
+        temp3.z = *((int*)A.addr) / ((TC_Position*)B.addr)->z;
         *((TC_Position*)target.addr) = temp3;
     }
     else if(A.type == VAR_VECTOR3 && B.type == VAR_FLOAT)
@@ -1737,9 +1831,9 @@
             target.addr = nil;
         }
         target.addr = malloc(sizeof(TC_Position));
-        temp3.x = ((TC_Position*)B.addr)->x / *((float*)A.addr);
-        temp3.y = ((TC_Position*)B.addr)->y / *((float*)A.addr);
-        temp3.z = ((TC_Position*)B.addr)->z / *((float*)A.addr);
+        temp3.x = *((float*)A.addr) / ((TC_Position*)B.addr)->x;
+        temp3.y = *((float*)A.addr) / ((TC_Position*)B.addr)->y;
+        temp3.z = *((float*)A.addr) / ((TC_Position*)B.addr)->z;
         *((TC_Position*)target.addr) = temp3;
     }
     ///
@@ -1767,8 +1861,8 @@
             target.addr = nil;
         }
         target.addr = malloc(sizeof(TC_Position2d));
-        temp2.x = ((TC_Position2d*)B.addr)->x / *((int*)A.addr);
-        temp2.y = ((TC_Position2d*)B.addr)->y / *((int*)A.addr);
+        temp2.x = *((int*)A.addr) / ((TC_Position2d*)B.addr)->x;
+        temp2.y = *((int*)A.addr) / ((TC_Position2d*)B.addr)->y;
         *((TC_Position2d*)target.addr) = temp2;
     }
     else if(A.type == VAR_VECTOR2 && B.type == VAR_FLOAT)
@@ -1795,9 +1889,40 @@
             target.addr = nil;
         }
         target.addr = malloc(sizeof(TC_Position2d));
-        temp2.x = ((TC_Position2d*)B.addr)->x / *((float*)A.addr);
-        temp2.y = ((TC_Position2d*)B.addr)->y / *((float*)A.addr);
+        temp2.x = *((float*)A.addr) / ((TC_Position2d*)B.addr)->x;
+        temp2.y = *((float*)A.addr) / ((TC_Position2d*)B.addr)->y;
         *((TC_Position2d*)target.addr) = temp2;
+    }
+    ////////////////////////
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position2d*)A.addr)->x / ((TC_Position*)B.addr)->x;
+        temp3.y = ((TC_Position2d*)A.addr)->y / ((TC_Position*)B.addr)->y;
+        temp3.z = ((TC_Position*)B.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x / ((TC_Position2d*)B.addr)->x;
+        temp3.y = ((TC_Position*)A.addr)->y / ((TC_Position2d*)B.addr)->y;
+        temp3.z = ((TC_Position*)A.addr)->z;
+        *((TC_Position*)target.addr) = temp3;
     }
 }
 
