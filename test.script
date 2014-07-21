@@ -9,7 +9,7 @@ enddef;
 
 define update:
     move <1,1,0>;
-    calculate <"(sin(9) * sin(9)) + cos(9)*cos(9)">;
+    calculate <"cos(sin(0))">;
     say result;
 enddef;
 
