@@ -1040,6 +1040,123 @@
         temp3.z = ((TC_Position*)A.addr)->z + ((TC_Position*)B.addr)->z;
         *((TC_Position*)target.addr) = temp3;
     }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x + *((int*)B.addr);
+        temp3.y = ((TC_Position*)A.addr)->y + *((int*)B.addr);
+        temp3.z = ((TC_Position*)A.addr)->z + *((int*)B.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR3 && A.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)B.addr)->x + *((int*)A.addr);
+        temp3.y = ((TC_Position*)B.addr)->y + *((int*)A.addr);
+        temp3.z = ((TC_Position*)B.addr)->z + *((int*)A.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x + *((float*)B.addr);
+        temp3.y = ((TC_Position*)A.addr)->y + *((float*)B.addr);
+        temp3.z = ((TC_Position*)A.addr)->z + *((float*)B.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR3 && A.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)B.addr)->x + *((float*)A.addr);
+        temp3.y = ((TC_Position*)B.addr)->y + *((float*)A.addr);
+        temp3.z = ((TC_Position*)B.addr)->z + *((float*)A.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    ///
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x + *((int*)B.addr);
+        temp2.y = ((TC_Position2d*)A.addr)->y + *((int*)B.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)B.addr)->x + *((int*)A.addr);
+        temp2.y = ((TC_Position2d*)B.addr)->y + *((int*)A.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x + *((float*)B.addr);
+        temp2.y = ((TC_Position2d*)A.addr)->y + *((float*)B.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)B.addr)->x + *((float*)A.addr);
+        temp2.y = ((TC_Position2d*)B.addr)->y + *((float*)A.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
 }
 
 - (void)minus:(NSMutableArray*) params
@@ -1136,6 +1253,123 @@
         temp3.y = ((TC_Position*)A.addr)->y - ((TC_Position*)B.addr)->y;
         temp3.z = ((TC_Position*)A.addr)->z - ((TC_Position*)B.addr)->z;
         *((TC_Position*)target.addr) = temp3;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x - *((int*)B.addr);
+        temp3.y = ((TC_Position*)A.addr)->y - *((int*)B.addr);
+        temp3.z = ((TC_Position*)A.addr)->z - *((int*)B.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR3 && A.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)B.addr)->x - *((int*)A.addr);
+        temp3.y = ((TC_Position*)B.addr)->y - *((int*)A.addr);
+        temp3.z = ((TC_Position*)B.addr)->z - *((int*)A.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x - *((float*)B.addr);
+        temp3.y = ((TC_Position*)A.addr)->y - *((float*)B.addr);
+        temp3.z = ((TC_Position*)A.addr)->z - *((float*)B.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR3 && A.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)B.addr)->x - *((float*)A.addr);
+        temp3.y = ((TC_Position*)B.addr)->y - *((float*)A.addr);
+        temp3.z = ((TC_Position*)B.addr)->z - *((float*)A.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    ///
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x - *((int*)B.addr);
+        temp2.y = ((TC_Position2d*)A.addr)->y - *((int*)B.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)B.addr)->x - *((int*)A.addr);
+        temp2.y = ((TC_Position2d*)B.addr)->y - *((int*)A.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x - *((float*)B.addr);
+        temp2.y = ((TC_Position2d*)A.addr)->y - *((float*)B.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)B.addr)->x - *((float*)A.addr);
+        temp2.y = ((TC_Position2d*)B.addr)->y - *((float*)A.addr);
+        *((TC_Position2d*)target.addr) = temp2;
     }
 }
 
@@ -1234,6 +1468,123 @@
         temp3.z = ((TC_Position*)A.addr)->z * ((TC_Position*)B.addr)->z;
         *((TC_Position*)target.addr) = temp3;
     }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x * *((int*)B.addr);
+        temp3.y = ((TC_Position*)A.addr)->y * *((int*)B.addr);
+        temp3.z = ((TC_Position*)A.addr)->z * *((int*)B.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR3 && A.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)B.addr)->x * *((int*)A.addr);
+        temp3.y = ((TC_Position*)B.addr)->y * *((int*)A.addr);
+        temp3.z = ((TC_Position*)B.addr)->z * *((int*)A.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x * *((float*)B.addr);
+        temp3.y = ((TC_Position*)A.addr)->y * *((float*)B.addr);
+        temp3.z = ((TC_Position*)A.addr)->z * *((float*)B.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR3 && A.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)B.addr)->x * *((float*)A.addr);
+        temp3.y = ((TC_Position*)B.addr)->y * *((float*)A.addr);
+        temp3.z = ((TC_Position*)B.addr)->z * *((float*)A.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    ///
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x * *((int*)B.addr);
+        temp2.y = ((TC_Position2d*)A.addr)->y * *((int*)B.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)B.addr)->x * *((int*)A.addr);
+        temp2.y = ((TC_Position2d*)B.addr)->y * *((int*)A.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x * *((float*)B.addr);
+        temp2.y = ((TC_Position2d*)A.addr)->y * *((float*)B.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)B.addr)->x * *((float*)A.addr);
+        temp2.y = ((TC_Position2d*)B.addr)->y * *((float*)A.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
 }
 
 - (void)devide:(NSMutableArray*) params
@@ -1330,6 +1681,123 @@
         temp3.y = ((TC_Position*)A.addr)->y / ((TC_Position*)B.addr)->y;
         temp3.z = ((TC_Position*)A.addr)->z / ((TC_Position*)B.addr)->z;
         *((TC_Position*)target.addr) = temp3;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x / *((int*)B.addr);
+        temp3.y = ((TC_Position*)A.addr)->y / *((int*)B.addr);
+        temp3.z = ((TC_Position*)A.addr)->z / *((int*)B.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR3 && A.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)B.addr)->x / *((int*)A.addr);
+        temp3.y = ((TC_Position*)B.addr)->y / *((int*)A.addr);
+        temp3.z = ((TC_Position*)B.addr)->z / *((int*)A.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(A.type == VAR_VECTOR3 && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)A.addr)->x / *((float*)B.addr);
+        temp3.y = ((TC_Position*)A.addr)->y / *((float*)B.addr);
+        temp3.z = ((TC_Position*)A.addr)->z / *((float*)B.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    else if(B.type == VAR_VECTOR3 && A.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = ((TC_Position*)B.addr)->x / *((float*)A.addr);
+        temp3.y = ((TC_Position*)B.addr)->y / *((float*)A.addr);
+        temp3.z = ((TC_Position*)B.addr)->z / *((float*)A.addr);
+        *((TC_Position*)target.addr) = temp3;
+    }
+    ///
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x / *((int*)B.addr);
+        temp2.y = ((TC_Position2d*)A.addr)->y / *((int*)B.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_INT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)B.addr)->x / *((int*)A.addr);
+        temp2.y = ((TC_Position2d*)B.addr)->y / *((int*)A.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(A.type == VAR_VECTOR2 && B.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)A.addr)->x / *((float*)B.addr);
+        temp2.y = ((TC_Position2d*)A.addr)->y / *((float*)B.addr);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR2 && A.type == VAR_FLOAT)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = ((TC_Position2d*)B.addr)->x / *((float*)A.addr);
+        temp2.y = ((TC_Position2d*)B.addr)->y / *((float*)A.addr);
+        *((TC_Position2d*)target.addr) = temp2;
     }
 }
 
@@ -2801,10 +3269,18 @@
                 [p addObject: arg];
                 [p addObject: arg];
                 [self sin:p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 [p removeAllObjects];
                 [p addObject:temp];
                 [p addObject:[_local_var_list objectAtIndex:1]];
                 [self set: p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 postfix[i - 1] = [TC_VirtualMachine varTostring: temp];
             }
             else if([iter isEqualToString: @"cos"])
@@ -2824,10 +3300,18 @@
                 [p addObject: arg];
                 [p addObject: arg];
                 [self cos:p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 [p removeAllObjects];
                 [p addObject:temp];
                 [p addObject:[_local_var_list objectAtIndex:1]];
                 [self set: p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 postfix[i - 1] = [TC_VirtualMachine varTostring: temp];
             }
             else if([iter isEqualToString: @"+"])
@@ -2848,10 +3332,19 @@
                 [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
                 [self add:p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 [p removeAllObjects];
                 [p addObject:temp];
+                
                 [p addObject:[_local_var_list objectAtIndex:1]];
                 [self set: p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 postfix[i - 2] = [TC_VirtualMachine varTostring: temp];
             }
             else if([iter isEqualToString: @"-"])
@@ -2872,10 +3365,18 @@
                 [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
                 [self minus:p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 [p removeAllObjects];
                 [p addObject:temp];
                 [p addObject:[_local_var_list objectAtIndex:1]];
                 [self set: p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 postfix[i - 2] = [TC_VirtualMachine varTostring: temp];
             }
             else if([iter isEqualToString: @"*"])
@@ -2896,10 +3397,18 @@
                 [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
                 [self multiply:p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 [p removeAllObjects];
                 [p addObject:temp];
                 [p addObject:[_local_var_list objectAtIndex:1]];
                 [self set: p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 postfix[i - 2] = [TC_VirtualMachine varTostring: temp];
             }
             else if([iter isEqualToString: @"/"])
@@ -2920,10 +3429,18 @@
                 [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
                 [self devide:p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 [p removeAllObjects];
                 [p addObject:temp];
                 [p addObject:[_local_var_list objectAtIndex:1]];
                 [self set: p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
                 postfix[i - 2] = [TC_VirtualMachine varTostring: temp];
             }
         }

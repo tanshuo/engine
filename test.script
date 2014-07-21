@@ -1,20 +1,21 @@
 define start:
-    declare function fun1 as 1;
-    declare function fun2 as 1;
-    declare variable A  list;
-    declare variable B to vector3;
-    declare variable C to vector3;
-
+    declare variable speed as vector3;
+    declare variable t as float;
+    declare variable delta as vector3;
+    declare function round 1;
+    t set <0,0>;
 enddef;
 
 define update:
-    move <1,1,0>;
-    calculate <"cos(sin(0))">;
+    calculate <"t + 0.1">;
     say result;
+    t set result;
+    calculate <"sin(t) * 1">;
+    speed set result;
+    round speed;
+
 enddef;
 
-define A fun1 B:
-    if B greater than <0> or  B greater than <1.5>,
-        rotate B,
-    end;
+define round speed:
+    move speed;
 enddef;
