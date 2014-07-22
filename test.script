@@ -8,7 +8,14 @@ define start:
 enddef;
 
 define update:
-    calculate <"t + 0.1">;
+
+    if t greater than <10>,
+        delta set <-0.1>,
+    end,
+    else,
+        delta set <-0.2>,
+    end;
+    calculate <"t + delta">;
     say result;
     t set result;
     calculate <"sin(t) * 1">;
