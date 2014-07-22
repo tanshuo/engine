@@ -27,6 +27,7 @@
 @property TC_ID ip; // instruction position
 @property TC_ID bp; // stack base
 @property TC_ID sp; // stack top
+@property (strong,nonatomic) NSMutableArray* current_fun;// current name of the function
 @property int head; // ip to start
 @property int update;// ip to update
 @property BOOL has_start;// head or update

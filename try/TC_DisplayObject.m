@@ -160,6 +160,8 @@
     [_virtual.var_stack addObject:var];
     _virtual.sp ++;
     _virtual.bp = 0;
+    _virtual.current_fun = [NSMutableArray arrayWithCapacity:10];
+    
     ///
     while(true)
     {

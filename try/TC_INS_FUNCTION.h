@@ -23,4 +23,5 @@ typedef enum{
 @property SEL func;//if binded
 @property int offset;//if defined
 @property int right_match;
+@property (strong,nonatomic) NSMutableArray* args;
 @end

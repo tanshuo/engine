@@ -310,6 +310,7 @@
             result.solved = YES;
             result.location = FUN_DEFINE;
             result.offset = _current_ins_count;
+            result.args = params;
             
             TC_INS_VARIABLE* arg;
             for(i = 0; i < [params count]; i++)

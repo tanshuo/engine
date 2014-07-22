@@ -22,6 +22,7 @@
 @synthesize ins_list = _ins_list;
 @synthesize target = _target;
 @synthesize last_true = _last_true;
+@synthesize current_fun = _current_fun;
 
 + (NSString*)varTostring:(TC_INS_VARIABLE*)v
 {
@@ -236,11 +237,12 @@
     }
     else
     {
-        for(i = 0; i < [_var_stack count]; i++)
+        NSMutableArray* args = ((TC_INS_FUNCTION*)[_current_fun lastObject]).args;
+        for(i = 0; i < [args count]; i++)
         {
-            if([[[[_var_stack objectAtIndex:i] var] word] isEqualToString:name])
+            if([[[args objectAtIndex:i] word] isEqualToString:name])
             {
-                return [_var_stack objectAtIndex:i];
+                return [_var_stack objectAtIndex:_bp + i];
             }
         }
         for(i = 0; i < [_local_var_list count]; i++)
@@ -258,6 +260,8 @@
             }
         }
     }
+    NSLog(@"can not find variable: %@", name);
+    exit(1);
     return nil;
 }
 
@@ -364,13 +368,16 @@
 
 - (int) call_fun:(TC_Instruction*) t
 {
-    _ip ++;
+    
     int i;
     TC_INS_VARIABLE* s;
+    
     NSMutableArray* m = [NSMutableArray arrayWithCapacity:10];
     TC_INS_FUNCTION* current = (TC_INS_FUNCTION*)[t des];
+    
     if([current solved] == NO && [current location] == FUN_BIND)
     {
+        _ip ++;
         SEL sel;
         NSString* se = [NSString stringWithFormat:@"%@:",t.src];
         sel =  NSSelectorFromString(se);
@@ -401,6 +408,7 @@
     }
     else if(current.solved == YES && current.location == FUN_DEFINE)
     {
+        [_current_fun addObject: current];
         int oldbp = _bp;
         int oldip = _ip + 1;
         _bp = _sp + 1;
@@ -416,6 +424,7 @@
             var.addr = nil;
             var.obj = nil;
             var.location = VAR_STACK;
+            var.var = new.var;
             switch(var.type)
             {
                 case VAR_INT:
@@ -500,6 +509,7 @@
 
 - (int) return_fun:(TC_Instruction*) t// -1 0
 {
+    [_current_fun removeLastObject];
     TC_INS_VARIABLE* var;
     var = [_var_stack lastObject];
     while(var.type != VAR_OFF_SET)
@@ -815,6 +825,7 @@
     result.bp = -1;
     result.sp = -1;
     result.has_start = NO;
+    result.current_fun = [NSMutableArray arrayWithCapacity:10];
     result.head = -1;
     result.update = -1;
     result.true_false = NO;
