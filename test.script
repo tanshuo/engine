@@ -1,9 +1,10 @@
 define start:
-    declare variable speed as vector3;
+    declare variable speed as vector2;
     declare variable t as float;
     declare variable delta as vector3;
     declare function round 1;
-    t set <0,0>;
+    t set <0>;
+    <"scale"> change to <0.1,0.1> in I;
 enddef;
 
 define update:
@@ -11,7 +12,9 @@ define update:
     say result;
     t set result;
     calculate <"sin(t) * 1">;
-    speed set result;
+    speed setX result;
+    calculate <"cos(t) * 1">;
+    speed setY result;
     round speed;
 
 enddef;

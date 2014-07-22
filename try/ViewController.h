@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
 #import "TC_Game.h"
-#define FPS 25
+#define FPS 60
 @interface ViewController : GLKViewController
 
 @end

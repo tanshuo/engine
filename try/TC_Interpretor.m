@@ -71,10 +71,12 @@
                 }
                 c = ' ';
             }
-            buff[0] = c;
-            buff[1] = 0;
             if(!comment)
+            {
+                buff[0] = c;
+                buff[1] = 0;
                 [linecache appendString: [NSMutableString stringWithCString:buff encoding:NSASCIIStringEncoding]];
+            }
             //index ++;
         }
         else if(c == EOF)
@@ -92,7 +94,11 @@
 }
 - (int) genTree
 {
-    [_root removeAllObjects];
+   [_root removeAllObjects];
+    if([_defines count] == 0)
+    {
+        return 0;
+    }
     int i;
     int j;
     for(i = 0; i < [_defines count]; i++)
@@ -1077,7 +1083,7 @@
         return result;
     else
     {
-        _message = [NSMutableString stringWithString: @"parameters do not match"];
+        _message = [NSMutableString stringWithFormat:@"parameters do not match at line: %d",_currentLine];
           NSLog(@"%@",_message); exit(1);
         return nil;
     }

@@ -107,4 +107,6 @@
 - (void)minus:(NSMutableArray*) params;
 - (void)multiply:(NSMutableArray*) params;
 - (void)devide:(NSMutableArray*) params;
+
+- (void) change:(NSMutableArray*) params;//<"x"> change to <4> in A
 @end
