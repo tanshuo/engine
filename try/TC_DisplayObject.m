@@ -109,13 +109,6 @@
     
 };
 
-- (int) actWithScript
-{
-    return 0;
-};
-
-
-
 - (void) selfUpateWithAspect: (float)aspect
 {
     
@@ -173,10 +166,8 @@
     }
     [_virtual.var_stack removeAllObjects];
     
-    
     _projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(90), aspect, 0.1f, 10000.0f);
-  
-    [self actWithScript];
+
     
     GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(_position.x,_position.y,_position.z);
     modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, GLKMathDegreesToRadians(_rotation), 0.0f, 0.0f, 1.0f);

@@ -2,7 +2,7 @@ define start:
     declare variable sp as vector2;
     
     declare function round 1;
-
+    <"position"> change to <100,100> in I;
 enddef;
 
 define update:

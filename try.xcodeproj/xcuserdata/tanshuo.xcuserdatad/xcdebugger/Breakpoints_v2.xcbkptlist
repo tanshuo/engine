@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/ViewController.m"
-            timestampString = "427103384.481157"
+            timestampString = "427714478.547182"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427709210.434135"
+            timestampString = "427713991.862849"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "247"
-            endingLineNumber = "247"
+            startingLineNumber = "238"
+            endingLineNumber = "238"
             landmarkName = "-dealloc"
             landmarkType = "5">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427709210.434135"
+            timestampString = "427713991.862849"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "242"
-            endingLineNumber = "242"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
             landmarkName = "-SetUniformWithProjection:WithNormal:WithSampler:"
             landmarkType = "5">
          </BreakpointContent>
@@ -170,7 +170,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/ViewController.m"
-            timestampString = "427103384.481157"
+            timestampString = "427714478.547182"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "103"
@@ -518,7 +518,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/ViewController.m"
-            timestampString = "427103384.481157"
+            timestampString = "427714478.547182"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "95"
@@ -2134,11 +2134,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427709210.434135"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "168"
-            endingLineNumber = "168"
+            startingLineNumber = "161"
+            endingLineNumber = "161"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2358,11 +2358,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427382355.579163"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "112"
+            endingLineNumber = "112"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2406,11 +2406,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427709210.434135"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "165"
-            endingLineNumber = "165"
+            startingLineNumber = "158"
+            endingLineNumber = "158"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2422,11 +2422,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427382355.579163"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2438,7 +2438,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/ViewController.m"
-            timestampString = "427103450.284876"
+            timestampString = "427714478.547182"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "94"
@@ -2454,11 +2454,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427382355.579163"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "127"
-            endingLineNumber = "127"
+            startingLineNumber = "120"
+            endingLineNumber = "120"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2486,11 +2486,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427382355.579163"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2518,11 +2518,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427709210.434135"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "162"
+            endingLineNumber = "162"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -2678,11 +2678,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427709210.434135"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "170"
-            endingLineNumber = "170"
+            startingLineNumber = "163"
+            endingLineNumber = "163"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3270,11 +3270,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427709210.434135"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "166"
-            endingLineNumber = "166"
+            startingLineNumber = "159"
+            endingLineNumber = "159"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3286,11 +3286,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427709210.434135"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
+            startingLineNumber = "160"
+            endingLineNumber = "160"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4294,11 +4294,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427678317.34674"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "122"
-            endingLineNumber = "122"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4454,11 +4454,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_DisplayObject.m"
-            timestampString = "427684951.805476"
+            timestampString = "427713021.000793"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "-selfUpateWithAspect:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4828,6 +4828,22 @@
             startingLineNumber = "372"
             endingLineNumber = "372"
             landmarkName = "-call_fun:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/ViewController.m"
+            timestampString = "427714414.113846"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
+            landmarkName = "-update"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
