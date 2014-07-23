@@ -129,8 +129,8 @@
 {
     UITouch* touch = [touches anyObject];
     CGPoint touchpoint = [touch locationInView:self.view];
-    control.x = touchpoint.x;
-    control.y = touchpoint.y;
+    control.x = touchpoint.x - self.view.bounds.size.width / 2;
+    control.y = -(touchpoint.y - self.view.bounds.size.height / 2);
     control.count = TLL;
 }
 

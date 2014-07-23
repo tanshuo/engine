@@ -3131,7 +3131,7 @@
             return;
         }
     }
-    else if([attribute isEqualToString:@"position"] && ((TC_DisplayObject*)target).type != OBJDISPLAY)
+    else if([attribute isEqualToString:@"rotation"] && ((TC_DisplayObject*)target).type != OBJDISPLAY)
     {
         if(B.type == VAR_FLOAT)
         {

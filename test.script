@@ -1,6 +1,8 @@
 define start:
     declare variable sp as vector2;
     declare function round 1;
+    declare variable debug int;
+    declare variable m_y int;
     <"position"> change to <0,0> in I;
 enddef;
 
@@ -13,5 +15,7 @@ enddef;
 
 define round speed:
     get <"touch_position"> to speed;
-    say speed;
+    get <"position"> to debug;
+    <"position"> change to speed in I;
+    say debug;
 enddef;
