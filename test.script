@@ -11,9 +11,9 @@ define update:
     get <"touch_position"> to sp;
     sp getX to left;
     sp getY to right;
-    left set <1>;
-    right set <1>;
-    calculate <"left * left + right * right">;
+    left set <3>;
+    right set <4>;
+    calculate <"(sqrt(left * 4 - 1 * right))">;
     say result;
     left set result;
     calculate <sp / result>;

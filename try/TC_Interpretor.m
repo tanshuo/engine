@@ -1706,6 +1706,12 @@
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
+    temp.word = @"touched";
+    temp.explain = TC_FUNCTION;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
     temp.word = @"define";
     temp.explain = TC_DEFINE;
     temp.right_match = 0;
@@ -2296,6 +2302,15 @@
     fun.offset = 0;
     fun.location = FUN_BIND;
     fun.right_match = 1;
+    [_func_table addObject:fun];
+    
+    fun = [TC_INS_FUNCTION alloc];
+    fun.solved = NO;
+    fun.name = @"touched";
+    fun.func = nil;
+    fun.offset = 0;
+    fun.location = FUN_BIND;
+    fun.right_match = 0;
     [_func_table addObject:fun];
     
     fun = [TC_INS_FUNCTION alloc];

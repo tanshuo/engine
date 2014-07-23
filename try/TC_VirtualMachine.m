@@ -47,7 +47,7 @@
 
 + (BOOL)isNum:(NSString*) s
 {
-    if([s isEqualToString: @"+"] || [s isEqualToString: @"-"] || [s isEqualToString: @"*"] || [s isEqualToString: @"/"] || [s isEqualToString: @"sin"] || [s isEqualToString: @"cos"])
+    if([s isEqualToString: @"+"] || [s isEqualToString: @"-"] || [s isEqualToString: @"*"] || [s isEqualToString: @"/"] || [s isEqualToString: @"sin"] || [s isEqualToString: @"cos"] || [s isEqualToString: @"sqrt"])
     {
         return NO;
     }
@@ -159,25 +159,25 @@
             {
                 return nil;
             }
-            if(![[a objectAtIndex:i+1] isEqualToString:@"("] && ![[a objectAtIndex:i+1] isEqualToString:@"sin"] && ![[a objectAtIndex:i+1] isEqualToString:@"cos"])
+            if(![[a objectAtIndex:i+1] isEqualToString:@"("] && ![[a objectAtIndex:i+1] isEqualToString:@"sin"] && ![[a objectAtIndex:i+1] isEqualToString:@"cos"]&& ![[a objectAtIndex:i+1] isEqualToString:@"sqrt"])
             {
                 [stack_high addObject:[a objectAtIndex:i+1]];
-                [stack_low addObject:iter];
+                [stack_high addObject:iter];
                 i ++;
             }
             else
                 buffer = iter;
         }
-        else if([iter isEqualToString: @"sin"] || [iter isEqualToString: @"cos"])
+        else if([iter isEqualToString: @"sin"] || [iter isEqualToString: @"cos"] || [iter isEqualToString: @"sqrt"])
         {
             if(i + 1 >= [a count])
             {
                 return nil;
             }
-            if(![[a objectAtIndex:i+1] isEqualToString:@"("] && ![[a objectAtIndex:i+1] isEqualToString:@"sin"] && ![[a objectAtIndex:i+1] isEqualToString:@"cos"])
+            if(![[a objectAtIndex:i+1] isEqualToString:@"("] && ![[a objectAtIndex:i+1] isEqualToString:@"sin"] && ![[a objectAtIndex:i+1] isEqualToString:@"cos"]&& ![[a objectAtIndex:i+1] isEqualToString:@"sqrt"])
             {
                 [stack_high addObject:[a objectAtIndex:i+1]];
-                [stack_low addObject:iter];
+                [stack_high addObject:iter];
                 i ++;
             }
             else
@@ -2022,6 +2022,78 @@
     }
 }
 
+- (void) sqrt:(NSMutableArray*) params
+{
+    _check_call = YES;
+    TC_INS_VARIABLE* A;
+    TC_INS_VARIABLE* B;
+    TC_INS_VARIABLE* target;
+    TC_Position2d temp2;
+    TC_Position temp3;
+    
+    if([params count] != 2)
+    {
+        _check_call = NO;
+        return;
+    }
+    A = [params objectAtIndex:0];
+    B = [params objectAtIndex:1];
+    target = [_local_var_list objectAtIndex:1];
+    if(B.type == VAR_INT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = sqrtf(*((int*)B.addr));
+    }
+    else if(B.type == VAR_FLOAT)
+    {
+        target.type = VAR_FLOAT;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(float));
+        *((float*)target.addr) = sqrtf(*((float*)B.addr));
+    }
+    else if(B.type == VAR_VECTOR2)
+    {
+        target.type = VAR_VECTOR2;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position2d));
+        temp2.x = sqrtf(((TC_Position2d*)(B.addr))->x);
+        temp2.y = sqrtf(((TC_Position2d*)(B.addr))->y);
+        *((TC_Position2d*)target.addr) = temp2;
+    }
+    else if(B.type == VAR_VECTOR3)
+    {
+        target.type = VAR_VECTOR3;
+        target.obj = nil;
+        if(target.addr)
+        {
+            free(target.addr);
+            target.addr = nil;
+        }
+        target.addr = malloc(sizeof(TC_Position));
+        temp3.x = sqrtf(((TC_Position*)(B.addr))->x);
+        temp3.y = sqrtf(((TC_Position*)(B.addr))->y);
+        temp3.z = sqrtf(((TC_Position*)(B.addr))->z);
+        *((TC_Position*)target.addr) = temp3;
+    }
+}
+
 - (void) sin:(NSMutableArray*) params // sin S
 {
     _check_call = YES;
@@ -2164,6 +2236,16 @@
         temp3.z = cosf(((TC_Position*)(B.addr))->z);
         *((TC_Position*)target.addr) = temp3;
     }
+}
+
+- (void) touched:(NSMutableArray*) params // touched
+{
+    BOOL result = NO;
+    if(control.count > 0)
+    {
+        result = YES;
+    }
+    _true_false = _true_false || result;
 }
 
 - (void) equal:(NSMutableArray*) params //a equal b
@@ -3174,7 +3256,7 @@
     TC_INS_VARIABLE* C = nil;
     NSString* attribute;
     TC_Position temp;
-    TC_Position2d temp2;
+    
     A = [params objectAtIndex:0];
     if(A.type != VAR_STRING)
     {
@@ -3690,6 +3772,37 @@
                 }
                 postfix[i - 1] = [TC_VirtualMachine varTostring: temp];
             }
+            else if([iter isEqualToString: @"sqrt"])
+            {
+                if(i == 0)
+                {
+                    _check_call = NO;
+                    return;
+                }
+                iter2 = [postfix objectAtIndex:i - 1];
+                [postfix removeObjectAtIndex:i - 1];
+                if(![TC_VirtualMachine isNum: iter2])
+                {
+                    continue;
+                }
+                arg = [self findVarByName: iter2];
+                [p addObject: arg];
+                [p addObject: arg];
+                [self sqrt:p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
+                [p removeAllObjects];
+                [p addObject:temp];
+                [p addObject:[_local_var_list objectAtIndex:1]];
+                [self set: p];
+                if(_check_call == NO)
+                {
+                    return;
+                }
+                postfix[i - 1] = [TC_VirtualMachine varTostring: temp];
+            }
             else if([iter isEqualToString: @"+"])
             {
                 if(i < 2)
@@ -3738,8 +3851,8 @@
                 [postfix removeObjectAtIndex:i - 1];
                 iter3 = [postfix objectAtIndex:i - 2];
                 [postfix removeObjectAtIndex:i - 2];
-                [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
+                [p addObject:[self findVarByName:iter2]];
                 [self minus:p];
                 if(_check_call == NO)
                 {
@@ -3802,8 +3915,8 @@
                 [postfix removeObjectAtIndex:i - 1];
                 iter3 = [postfix objectAtIndex:i - 2];
                 [postfix removeObjectAtIndex:i - 2];
-                [p addObject:[self findVarByName:iter2]];
                 [p addObject:[self findVarByName:iter3]];
+                [p addObject:[self findVarByName:iter2]];
                 [self devide:p];
                 if(_check_call == NO)
                 {
