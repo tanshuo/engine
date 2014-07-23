@@ -26,7 +26,7 @@
 @property int child_num;
 
 - (TC_ID) InitialWithName: (NSString*) name WithX: (GLfloat)x WithY: (GLfloat)y WithZ: (GLfloat)z WithHeight: (GLfloat)height WithWidth: (GLfloat)width WithScript: (NSString*) script WithShader: (NSString*) shader WithTexture: (NSString*)texture WithGroup: (TC_ID)group;
-- (void) selfUpateWithAspect: (float)aspect;
+- (void) selfUpateWithleft: (float)left Right:(float)right Bottom:(float) bottom Top:(float)top;
 - (TC_Position)getRelativePosition;
 - (float)getRelativeRotation;
 - (TC_ID) getGroup;

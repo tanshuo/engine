@@ -42,7 +42,7 @@
     [gameObjectList addObject:self];
     return result;
 }
-- (void) selfUpateWithAspect: (float)aspect
+- (void) selfUpateWithleft: (float)left Right:(float)right Bottom:(float) bottom Top:(float)top
 {
     if(!_alive)
     {
@@ -71,7 +71,7 @@
     _position.y = finalPosition.y;
     _position.z = finalPosition.z;
     _rotation = _relativeRotation + [_parent getRelativeRotation];
-    [super selfUpateWithAspect:aspect];
+    [super selfUpateWithleft:left Right:right Bottom:bottom Top:top];
 }
 
 - (TC_Layer*) getParent

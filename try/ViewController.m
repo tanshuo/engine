@@ -89,8 +89,11 @@
 
 - (void)update//jiaoben
 {
-    float aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
-    [TC_Game updateWithAspect:aspect];
+    float left = self.view.bounds.origin.x - self.view.bounds.size.width / 2;
+    float right = self.view.bounds.origin.x + self.view.bounds.size.width / 2;
+    float bottom = self.view.bounds.origin.y - self.view.bounds.size.height / 2;
+    float top = self.view.bounds.origin.y + self.view.bounds.size.height / 2;
+    [TC_Game upateWithleft:left Right:right Bottom:bottom Top:top];
     _timer += self.timeSinceLastUpdate;
 }
 

@@ -70,7 +70,7 @@
 - (void) sendSignalTo: (int)_id WithData1:(float)data1 WithData2:(float)data2;
 - (int) waitToSignal: (TC_ID)what_to_do;//if no more, return 0;if no such signal, break out reading script.
 
-- (void) selfUpateWithAspect: (float)aspect;//only method in update, all stepss in one frame,
+- (void) selfUpateWithleft: (float)left Right:(float)right Bottom:(float) bottom Top:(float)top;//only method in update, all stepss in one frame,
 
 
 - (TC_ID) getID;

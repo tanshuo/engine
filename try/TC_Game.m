@@ -53,14 +53,14 @@
     
    // [[TC_Sprite alloc] born:@"prefab1" atGroup:0];
 }
-+ (void) updateWithAspect: (float)aspect;
++ (void) upateWithleft: (float)left Right:(float)right Bottom:(float) bottom Top:(float)top
 {
     int i;
     int num;
     num = [gameObjectList count];
     for(i = 0; i < num; i ++)
     {
-        [[gameObjectList objectAtIndex:i] selfUpateWithAspect:aspect];
+        [[gameObjectList objectAtIndex:i] selfUpateWithleft:left Right:right Bottom:bottom Top:top];
         if([[gameObjectList objectAtIndex:i] lonely])
         {
             [[gameObjectList objectAtIndex:i] kill];

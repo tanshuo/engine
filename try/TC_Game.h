@@ -27,7 +27,7 @@
 
 @interface TC_Game : NSObject
 + (void) gameStart;
-+ (void) updateWithAspect: (float)aspect;
++ (void) upateWithleft: (float)left Right:(float)right Bottom:(float) bottom Top:(float)top;
 + (void) display;
 + (void) sceneInit;
 @end
