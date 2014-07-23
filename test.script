@@ -1,20 +1,27 @@
 define start:
     declare variable sp as vector2;
     declare function round 1;
-    declare variable debug int;
-    declare variable m_y int;
+    declare variable left int;
+    declare variable right int;
     <"position"> change to <0,0> in I;
 enddef;
 
 define update:
-
-    sp set <1>;
-    round sp;
-
+    sp set <0,0>;
+    get <"touch_position"> to sp;
+    sp getX to left;
+    sp getY to right;
+    left set <1>;
+    right set <1>;
+    calculate <"left * left + right * right">;
+    say result;
+    left set result;
+    calculate <sp / result>;
+    move result;
 enddef;
 
 define round speed:
-    get <"touch_position"> to speed;
+
     get <"position"> to debug;
     <"position"> change to speed in I;
     say debug;

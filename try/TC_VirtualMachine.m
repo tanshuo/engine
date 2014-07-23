@@ -1712,6 +1712,11 @@
     
     if(A.type == VAR_INT && B.type == VAR_INT)
     {
+        if(*((int*)B.addr) == 0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_INT;
         target.obj = nil;
         if(target.addr)
@@ -1724,6 +1729,11 @@
     }
     else if(A.type == VAR_FLOAT && B.type == VAR_INT)
     {
+        if(*((int*)B.addr) == 0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_FLOAT;
         target.obj = nil;
         if(target.addr)
@@ -1736,6 +1746,11 @@
     }
     else if(A.type == VAR_INT && B.type == VAR_FLOAT)
     {
+        if(*((float*)B.addr) == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_FLOAT;
         target.obj = nil;
         if(target.addr)
@@ -1748,6 +1763,11 @@
     }
     else if(A.type == VAR_FLOAT && B.type == VAR_FLOAT)
     {
+        if(*((float*)B.addr) == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_FLOAT;
         target.obj = nil;
         if(target.addr)
@@ -1760,6 +1780,11 @@
     }
     else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR2)
     {
+        if(((TC_Position2d*)B.addr)->x == 0.0 || ((TC_Position2d*)B.addr)->y == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR2;
         target.obj = nil;
         if(target.addr)
@@ -1774,6 +1799,11 @@
     }
     else if(A.type == VAR_VECTOR3 && B.type == VAR_VECTOR3)
     {
+        if(((TC_Position*)B.addr)->x == 0.0 || ((TC_Position*)B.addr)->y == 0.0 || ((TC_Position*)B.addr)->z == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR3;
         target.obj = nil;
         if(target.addr)
@@ -1789,6 +1819,11 @@
     }
     else if(A.type == VAR_VECTOR3 && B.type == VAR_INT)
     {
+        if(*((int*)B.addr) == 0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR3;
         target.obj = nil;
         if(target.addr)
@@ -1804,6 +1839,11 @@
     }
     else if(B.type == VAR_VECTOR3 && A.type == VAR_INT)
     {
+        if(((TC_Position*)B.addr)->x == 0.0 || ((TC_Position*)B.addr)->y == 0.0 || ((TC_Position*)B.addr)->z == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR3;
         target.obj = nil;
         if(target.addr)
@@ -1819,6 +1859,11 @@
     }
     else if(A.type == VAR_VECTOR3 && B.type == VAR_FLOAT)
     {
+        if(*((float*)B.addr) == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR3;
         target.obj = nil;
         if(target.addr)
@@ -1834,6 +1879,11 @@
     }
     else if(B.type == VAR_VECTOR3 && A.type == VAR_FLOAT)
     {
+        if(((TC_Position*)B.addr)->x == 0.0 || ((TC_Position*)B.addr)->y == 0.0 || ((TC_Position*)B.addr)->z == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR3;
         target.obj = nil;
         if(target.addr)
@@ -1850,6 +1900,11 @@
     ///
     else if(A.type == VAR_VECTOR2 && B.type == VAR_INT)
     {
+        if(*((int*)B.addr) == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR2;
         target.obj = nil;
         if(target.addr)
@@ -1864,6 +1919,11 @@
     }
     else if(B.type == VAR_VECTOR2 && A.type == VAR_INT)
     {
+        if(((TC_Position2d*)B.addr)->x == 0.0 || ((TC_Position2d*)B.addr)->y == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR2;
         target.obj = nil;
         if(target.addr)
@@ -1878,6 +1938,11 @@
     }
     else if(A.type == VAR_VECTOR2 && B.type == VAR_FLOAT)
     {
+        if(*((int*)B.addr) == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR2;
         target.obj = nil;
         if(target.addr)
@@ -1892,6 +1957,11 @@
     }
     else if(B.type == VAR_VECTOR2 && A.type == VAR_FLOAT)
     {
+        if(((TC_Position2d*)B.addr)->x == 0.0 || ((TC_Position2d*)B.addr)->y == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR2;
         target.obj = nil;
         if(target.addr)
@@ -1907,6 +1977,11 @@
     ////////////////////////
     else if(A.type == VAR_VECTOR2 && B.type == VAR_VECTOR3)
     {
+        if(((TC_Position*)B.addr)->x == 0.0 || ((TC_Position*)B.addr)->y == 0.0 || ((TC_Position*)B.addr)->z == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR3;
         target.obj = nil;
         if(target.addr)
@@ -1922,6 +1997,16 @@
     }
     else if(B.type == VAR_VECTOR2 && A.type == VAR_VECTOR3)
     {
+        if(((TC_Position2d*)B.addr)->x == 0.0 || ((TC_Position2d*)B.addr)->y == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
+        if(((TC_Position2d*)B.addr)->x == 0.0 || ((TC_Position2d*)B.addr)->y == 0.0)
+        {
+            _check_call = NO;
+            return;
+        }
         target.type = VAR_VECTOR3;
         target.obj = nil;
         if(target.addr)
