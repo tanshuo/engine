@@ -3,20 +3,21 @@ define start:
     declare function round 1;
     declare variable left int;
     declare variable right int;
+    declare variable temp int;
     <"position"> change to <0,0> in I;
 enddef;
 
 define update:
-    sp set <0,0>;
-    get <"touch_position"> to sp;
-    sp getX to left;
-    sp getY to right;
-    left set <3>;
-    right set <4>;
-    calculate <"(sqrt(left * 4 - 1 * right))">;
+    if touched,
+        sp set <0,0>,
+        get <"touch_position"> to sp,
+        sp getX to left,
+        sp getY to right,
+        calculate <"(sqrt(left * left + right * right))">,
+        temp set result,
+        calculate <"sp / result">,
+    end;
     say result;
-    left set result;
-    calculate <sp / result>;
     move result;
 enddef;
 
