@@ -3498,6 +3498,16 @@
             des.addr = malloc(sizeof(int));
             *((int*)(des.addr)) = [(TC_Layer*)target alive];
         }
+        else if([attribute isEqualToString:@"camera"])
+        {
+            des.type = VAR_OBJECT;
+            if(des.addr)
+            {
+                free(des.addr);
+                des.addr = nil;
+            }
+            des.obj = camera[[((TC_Layer*)target) group]];
+        }
         else if([attribute isEqualToString:@"parent"])
         {
             des.type = VAR_OBJECT;

@@ -47,10 +47,10 @@
 }
 + (void) sceneInit
 {
-    //[[TC_Layer alloc] InitialWithName:@"hello" WithX:10 WithY:10 WithZ:0 WithHeight:10 WithWidth:10 WithScript:nil WithShader:@"Shader" WithTexture:@"test" WithGroup:0];
+    
     TC_Sprite* s = [TC_Sprite alloc];
     [s born:@"prefab1" atGroup:0];
-    [s setRelativePositionWithX:20 WithY:20];
+    [s setRelativePositionWithX:100 WithY:100];
     [s adjust:1];
     
     [[TC_Sprite alloc] born:@"prefab1" atGroup:0];

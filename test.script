@@ -1,28 +1,33 @@
 define start:
     declare variable sp as vector2;
+    declare variable cp as vector2;
     declare function round 1;
     declare variable left int;
     declare variable right int;
     declare variable temp int;
-    <"position"> change to <0,0> in I;
+    
 enddef;
 
 define update:
     if touched,
         sp set <0,0>,
+        cp set <0,0>,
         get <"touch_position"> to sp,
-        sp getX to left,
-        sp getY to right,
+        get <"screen_position"> to cp,
+        calculate <"sp - cp">,
+        result getX to left,
+        result getY to right,
+        temp set as result,
         calculate <"(sqrt(left * left + right * right))">,
-        temp set result,
-        calculate <"sp / result">,
+        calculate <"temp / result">,
     end;
-    say result;
-    move result;
+    get <"camera"> to temp;
+    temp move result;
+    say result of temp;
+    # move result;
 enddef;
 
 define round speed:
-
     get <"position"> to debug;
     <"position"> change to speed in I;
     say debug;
