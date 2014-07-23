@@ -10,6 +10,7 @@
 #import <GLKit/GLKit.h>
 #import "TC_Game.h"
 #define FPS 60
+#define TLL 3
 @interface ViewController : GLKViewController
 
 @end

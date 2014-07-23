@@ -12,5 +12,4 @@
 #import <GLKit/GLKit.h>
 #import "types.h"
 NSMutableArray *gameObjectList;
-
 #endif

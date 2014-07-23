@@ -125,5 +125,13 @@
     }
 }
 
+- (void) touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    UITouch* touch = [touches anyObject];
+    CGPoint touchpoint = [touch locationInView:self.view];
+    control.x = touchpoint.x;
+    control.y = touchpoint.y;
+    control.count = TLL;
+}
 
 @end

@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 tanshuo. All rights reserved.
 //
 
+#import "TC_GameObjectList.h"
 #import "TC_DisplayObject.h"
 
 @interface TC_Layer : TC_DisplayObject{

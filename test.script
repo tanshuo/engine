@@ -12,9 +12,6 @@ define update:
 enddef;
 
 define round speed:
-    while speed smaller than <80>,
-        calculate <"speed + 1">,
-        speed set result,
-
-    end;
+    get <"touch_position"> to speed;
+    say speed;
 enddef;

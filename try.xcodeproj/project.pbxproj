@@ -51,6 +51,7 @@
 		F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A18819195963320085672C /* TC_TextureLoader.m */; };
 		F5A18820195979950085672C /* TC_TextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A1881F195979950085672C /* TC_TextureInfo.m */; };
 		F5A18822195986860085672C /* test in Resources */ = {isa = PBXBuildFile; fileRef = F5A18821195986860085672C /* test */; };
+		F5AA868C197FE78400EAC71B /* TC_Control.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AA868B197FE78400EAC71B /* TC_Control.m */; };
 		F5C83AA21968C9F100BEF65C /* TC_Logical_Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C83AA11968C9F100BEF65C /* TC_Logical_Layer.m */; };
 		F5FD5E34195D34E100EF5C6F /* test1 in Resources */ = {isa = PBXBuildFile; fileRef = F5FD5E33195D34E100EF5C6F /* test1 */; };
 		F5FE4BE0195BC45100D1C593 /* prefab1.pre in Resources */ = {isa = PBXBuildFile; fileRef = F5FE4BDF195BC45100D1C593 /* prefab1.pre */; };
@@ -144,6 +145,8 @@
 		F5A1881B195977C30085672C /* TC_TextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_TextureInfo.h; path = try/TC_TextureInfo.h; sourceTree = "<group>"; };
 		F5A1881F195979950085672C /* TC_TextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureInfo.m; path = try/TC_TextureInfo.m; sourceTree = "<group>"; };
 		F5A18821195986860085672C /* test */ = {isa = PBXFileReference; lastKnownFileType = file; name = test; path = ../../Downloads/test; sourceTree = "<group>"; };
+		F5AA868A197FE78400EAC71B /* TC_Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Control.h; path = try/TC_Control.h; sourceTree = "<group>"; };
+		F5AA868B197FE78400EAC71B /* TC_Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Control.m; path = try/TC_Control.m; sourceTree = "<group>"; };
 		F5C83AA01968C9F100BEF65C /* TC_Logical_Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Logical_Layer.h; path = try/TC_Logical_Layer.h; sourceTree = "<group>"; };
 		F5C83AA11968C9F100BEF65C /* TC_Logical_Layer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Logical_Layer.m; path = try/TC_Logical_Layer.m; sourceTree = "<group>"; };
 		F5FD5E33195D34E100EF5C6F /* test1 */ = {isa = PBXFileReference; lastKnownFileType = file; name = test1; path = ../../Downloads/test1; sourceTree = "<group>"; };
@@ -183,8 +186,11 @@
 		F59382E4195A874400CB2A80 /* interface */ = {
 			isa = PBXGroup;
 			children = (
+				F596B36D1973D9AF00747655 /* TC_OBJ_VIRTUAL.h */,
 				F59382E5195A879900CB2A80 /* TC_Game.h */,
 				F59382E6195A879900CB2A80 /* TC_Game.m */,
+				F5AA868A197FE78400EAC71B /* TC_Control.h */,
+				F5AA868B197FE78400EAC71B /* TC_Control.m */,
 			);
 			name = interface;
 			sourceTree = "<group>";
@@ -246,7 +252,6 @@
 				F59F95E0195802F2006876C9 /* TC_VirtualMachine.m */,
 				F597F91B195E0334004DEE23 /* TC_Shaderinfo.h */,
 				F597F91C195E0334004DEE23 /* TC_Shaderinfo.m */,
-				F596B36D1973D9AF00747655 /* TC_OBJ_VIRTUAL.h */,
 			);
 			name = utility;
 			sourceTree = "<group>";
@@ -509,6 +514,7 @@
 				F59ECDA51954C4AD00D7EB5D /* AppDelegate.m in Sources */,
 				F596B497196E1C9E00D60B63 /* TC_INS_VARIABLE.m in Sources */,
 				F597F91D195E0334004DEE23 /* TC_Shaderinfo.m in Sources */,
+				F5AA868C197FE78400EAC71B /* TC_Control.m in Sources */,
 				F59382E7195A879900CB2A80 /* TC_Game.m in Sources */,
 				F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */,
 				F59F93D61970692D009C9A92 /* TC_ScriptListInfo.m in Sources */,

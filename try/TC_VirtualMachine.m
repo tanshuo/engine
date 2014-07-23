@@ -3089,6 +3089,7 @@
     TC_INS_VARIABLE* C = nil;
     NSString* attribute;
     TC_Position temp;
+    TC_Position2d temp2;
     A = [params objectAtIndex:0];
     if(A.type != VAR_STRING)
     {
@@ -3283,6 +3284,7 @@
     
     NSString* attribute;
     TC_Position temp;
+    TC_Position2d temp2;
     TC_DisplayObject* target;
     A = [params objectAtIndex:0];
     B = [params objectAtIndex:1];
@@ -3464,7 +3466,7 @@
     
     else if([attribute isEqualToString:@"screen_position"])
     {
-        des.type = VAR_VECTOR3;
+        des.type = VAR_VECTOR2;
         des.obj = nil;
         if(des.addr)
         {
@@ -3472,10 +3474,33 @@
             des.addr = nil;
         }
         temp = [target position];
-        des.addr = malloc(sizeof(TC_Position));
-        *((TC_Position*)(des.addr)) = temp;
+        temp2.x = temp.x;
+        temp2.y = temp.y;
+        des.addr = malloc(sizeof(TC_Position2d));
+        *((TC_Position2d*)(des.addr)) = temp2;
     }
-    
+    else if([attribute isEqualToString:@"touch_position"])
+    {
+        des.obj = nil;
+        des.type = VAR_UNKNOWN;
+        if(des.addr)
+        {
+            free(des.addr);
+            des.addr = nil;
+        }
+        if(control.count > 0)
+        {
+            temp2.x = control.x;
+            temp2.y = control.y;
+        }
+        else
+        {
+            return;
+        }
+        des.type = VAR_VECTOR2;
+        des.addr = malloc(sizeof(TC_Position2d));
+        *((TC_Position2d*)(des.addr)) = temp2;
+    }
 }
 
 

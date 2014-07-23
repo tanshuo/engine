@@ -11,10 +11,13 @@
 #import "TC_VirtualMachine.h"
 #import "TC_Camera.h"
 #import "TC_Sprite.h"
+#import "TC_Control.h"
 #define CAMERA_NUM 3
 
 TC_Camera* camera[CAMERA_NUM];
 NSMutableArray* _global;
 TC_Interpretor* _it;
+TC_Control* control;
+
 double _timer;
 #endif

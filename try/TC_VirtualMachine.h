@@ -110,4 +110,5 @@
 - (void)devide:(NSMutableArray*) params;
 
 - (void) change:(NSMutableArray*) params;//<"x"> change to <4> in A
+- (void) get:(NSMutableArray*) params;//I get  <scale> to A
 @end

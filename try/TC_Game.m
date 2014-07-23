@@ -23,6 +23,10 @@
     shaderlist = [NSMutableArray arrayWithCapacity:10];
     gameObjectList = [NSMutableArray arrayWithCapacity:10];
     scriptlist = [NSMutableArray arrayWithCapacity:10];
+    control = [TC_Control alloc];
+    control.x = 0;
+    control.y = 0;
+    control.count = 0;
     
     initList();
     for(i = 0; i < CAMERA_NUM; i ++)
@@ -85,6 +89,10 @@
             i --;
             num --;
         }
+    }
+    if(control.count > 0)
+    {
+        control.count --;
     }
 }
 + (void) display
