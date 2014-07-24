@@ -1845,6 +1845,12 @@
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
+    temp.word = @"-";
+    temp.explain = TC_IGNORE;
+    temp.right_match = 0;
+    [self.dictionary addObject: temp];
+    
+    temp = [TC_Define alloc];
     temp.word = @"to";
     temp.explain = TC_IGNORE;
     temp.right_match = 0;

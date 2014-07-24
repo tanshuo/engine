@@ -21,10 +21,10 @@ define update:
         calculate <"(sqrt(left * left + right * right))">,
         calculate <"temp / result">,
     end;
-    get <"camera"> to temp;
-    temp move result;
-    say result of temp;
-    # move result;
+    #get <"camera"> to temp;
+    #temp move result;
+    #say result of temp;
+    move result;
 enddef;
 
 define round speed:
