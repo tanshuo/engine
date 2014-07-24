@@ -51,6 +51,7 @@
 		F5A1881A195963320085672C /* TC_TextureLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A18819195963320085672C /* TC_TextureLoader.m */; };
 		F5A18820195979950085672C /* TC_TextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A1881F195979950085672C /* TC_TextureInfo.m */; };
 		F5A18822195986860085672C /* test in Resources */ = {isa = PBXBuildFile; fileRef = F5A18821195986860085672C /* test */; };
+		F5A6D4B91981B871009531DE /* scenetest.scn in Resources */ = {isa = PBXBuildFile; fileRef = F5A6D4B81981B871009531DE /* scenetest.scn */; };
 		F5AA868C197FE78400EAC71B /* TC_Control.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AA868B197FE78400EAC71B /* TC_Control.m */; };
 		F5C83AA21968C9F100BEF65C /* TC_Logical_Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C83AA11968C9F100BEF65C /* TC_Logical_Layer.m */; };
 		F5FD5E34195D34E100EF5C6F /* test1 in Resources */ = {isa = PBXBuildFile; fileRef = F5FD5E33195D34E100EF5C6F /* test1 */; };
@@ -145,6 +146,7 @@
 		F5A1881B195977C30085672C /* TC_TextureInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_TextureInfo.h; path = try/TC_TextureInfo.h; sourceTree = "<group>"; };
 		F5A1881F195979950085672C /* TC_TextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureInfo.m; path = try/TC_TextureInfo.m; sourceTree = "<group>"; };
 		F5A18821195986860085672C /* test */ = {isa = PBXFileReference; lastKnownFileType = file; name = test; path = ../../Downloads/test; sourceTree = "<group>"; };
+		F5A6D4B81981B871009531DE /* scenetest.scn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scenetest.scn; sourceTree = "<group>"; };
 		F5AA868A197FE78400EAC71B /* TC_Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Control.h; path = try/TC_Control.h; sourceTree = "<group>"; };
 		F5AA868B197FE78400EAC71B /* TC_Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Control.m; path = try/TC_Control.m; sourceTree = "<group>"; };
 		F5C83AA01968C9F100BEF65C /* TC_Logical_Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Logical_Layer.h; path = try/TC_Logical_Layer.h; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 		F59ECD841954C4AC00D7EB5D = {
 			isa = PBXGroup;
 			children = (
+				F5A6D4B71981B7FE009531DE /* scene */,
 				F5988CB8195A83EF00A8DA5E /* shader */,
 				F5988CB9195A842000A8DA5E /* texture */,
 				F596B48F196C6F6C00D60B63 /* script */,
@@ -384,6 +387,14 @@
 				F59ECDC31954C4AD00D7EB5D /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F5A6D4B71981B7FE009531DE /* scene */ = {
+			isa = PBXGroup;
+			children = (
+				F5A6D4B81981B871009531DE /* scenetest.scn */,
+			);
+			name = scene;
 			sourceTree = "<group>";
 		};
 		F5FE4BE1195BC45E00D1C593 /* prefabs */ = {
@@ -479,6 +490,7 @@
 				F59ECDA81954C4AD00D7EB5D /* Main_iPhone.storyboard in Resources */,
 				F59ECDB41954C4AD00D7EB5D /* Images.xcassets in Resources */,
 				F59ECD9F1954C4AD00D7EB5D /* InfoPlist.strings in Resources */,
+				F5A6D4B91981B871009531DE /* scenetest.scn in Resources */,
 				F596B491196C6FA000D60B63 /* test.script in Resources */,
 				F59ECDAF1954C4AD00D7EB5D /* Shader.vsh in Resources */,
 			);

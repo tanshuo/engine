@@ -260,7 +260,7 @@
             }
         }
     }
-    NSLog(@"can not find variable: %@", name);
+    NSLog(@"VM: can not find variable: %@", name);
     exit(1);
     return nil;
 }
@@ -387,7 +387,7 @@
             if(s == nil)
             {
                 _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
-                NSLog(@"%@ %@",_message,[(TC_INS_VARIABLE*)[t.params objectAtIndex:i] var].word); exit(1);
+                NSLog(@"VM: %@ %@",_message,[(TC_INS_VARIABLE*)[t.params objectAtIndex:i] var].word); exit(1);
                 return -1;
             }
             //s.location = [(TC_INS_VARIABLE*)[t.params objectAtIndex:i] location];
@@ -397,7 +397,7 @@
         if(sel <= 0)
         {
             _message = [NSMutableString stringWithString:@"unsolved function symbol"];
-            NSLog(@"%@ %@",_message,t.src); exit(1);
+            NSLog(@"VM: %@ %@",_message,t.src); exit(1);
             return -1;
         }
         else
@@ -501,7 +501,7 @@
     else
     {
         _message = [NSMutableString stringWithString:@"unsolved function symbol"];
-        NSLog(@"%@ %@",_message,t.src); exit(1);
+        NSLog(@"VM: %@ %@",_message,t.src); exit(1);
         return -1;
     }
     return 0;
@@ -523,7 +523,7 @@
         else
         {
             _message = [NSMutableString stringWithString:@"stack cracked"];
-            NSLog(@"%@",_message); exit(1);
+            NSLog(@"VM: %@",_message); exit(1);
             return -1;
         }
         
@@ -536,7 +536,7 @@
     else
     {
         _message = [NSMutableString stringWithString:@"stack cracked"];
-        NSLog(@"%@",_message); exit(1);
+        NSLog(@"VM: %@",_message); exit(1);
         return -1;
     }
     int rtn_ip = var.argoffset;
@@ -571,7 +571,7 @@
         if(w.next_layer == nil)
         {
             _message = [NSMutableString stringWithString:@"no indicated attribite for current object"];
-            NSLog(@"%@",_message); exit(1);
+            NSLog(@"VM: %@",_message); exit(1);
             return nil;
         }
         new_m = m;
@@ -615,7 +615,7 @@
                 else
                 {
                     _message = [NSMutableString stringWithString:@"try to get an attribute of a non-object variable"];
-                    NSLog(@"%@",_message); exit(1);
+                    NSLog(@"VM: %@",_message); exit(1);
                     return nil;
                 }
             }
@@ -636,7 +636,7 @@
                 else
                 {
                     _message = [NSMutableString stringWithString:@"try to get an attribute of a non-object variable"];
-                    NSLog(@"%@",_message); exit(1);
+                    NSLog(@"VM: %@",_message); exit(1);
                     return nil;
                 }
             }
@@ -658,7 +658,7 @@
     if(cache == nil)
     {
         _message = [NSMutableString stringWithString:@"no enough memory"];
-        NSLog(@"%@",_message); exit(1);
+        NSLog(@"VM: %@",_message); exit(1);
         return nil;
     }
     w = [w substringFromIndex:1];
@@ -682,7 +682,7 @@
             {
                 _message = [NSMutableString stringWithString:@"\" missing"];
                 free(cache);
-                NSLog(@"%@",_message); exit(1);
+                NSLog(@"VM: %@",_message); exit(1);
                 return nil;
             }
             for(i = 1; i < [w lengthOfBytesUsingEncoding:NSASCIIStringEncoding]; i++)
@@ -707,7 +707,7 @@
             }
             _message = [NSMutableString stringWithString:@"can not find end of string"];
             free(cache);
-            NSLog(@"%@",_message); exit(1);
+            NSLog(@"VM: %@",_message); exit(1);
             return nil;
         }
         else
@@ -772,7 +772,7 @@
                 {
                     _message = [NSMutableString stringWithString:@"arg can not over 3"];
                     free(cache);
-                    NSLog(@"%@",_message); exit(1);
+                    NSLog(@"VM: %@",_message); exit(1);
                     return nil;
                 }
             }
@@ -854,7 +854,7 @@
     result.message = _it.message;
     if([result.ins_list count] == 0)
     {
-        NSLog(@"compiler error: %@",result.message);
+        NSLog(@"VM: compiler error: %@",result.message);
     }
     [_it clear_current];
     result.target = nil;
@@ -897,7 +897,7 @@
             if(result == nil)
             {
                 _message = [NSMutableString stringWithString:@"unsolved variable symbol"];
-                NSLog(@"%@ %@",_message,v.var.word); exit(1);
+                NSLog(@"VM: %@ %@",_message,v.var.word); exit(1);
                 return nil;
             }
         }
@@ -917,8 +917,8 @@
             result = [self solve_var:[[result var] next_layer]  In:[((TC_DisplayObject*)(result.obj)) virtual]];
             if(result == nil)
             {
-                _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
-                NSLog(@"%@ %@",_message,v.var.next_layer.word); exit(1);
+                _message = [NSMutableString stringWithFormat:@"unsolved variable local symbol"];
+                NSLog(@"VM: %@ %@",_message,v.var.next_layer.word); exit(1);
                 return nil;
             }
         }
@@ -931,8 +931,8 @@
             result = [self solve_var:[[result var] next_layer]  In:[((TC_DisplayObject*)(result.obj)) virtual]];
             if(result == nil)
             {
-                _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
-                NSLog(@"%@ %@",_message,v.var.word); exit(1);
+                _message = [NSMutableString stringWithFormat:@"unsolved variable local symbol"];
+                NSLog(@"VM: %@ %@",_message,v.var.word); exit(1);
                 return nil;
             }
         }
@@ -946,10 +946,34 @@
             result = [self solve_var:[[result var] next_layer]  In:[((TC_DisplayObject*)(result.obj)) virtual]];
             if(result == nil)
             {
-                _message = [NSMutableString stringWithFormat:@"unsolved variable symbol"];
-                NSLog(@"%@ %@",_message,v.var.word); exit(1);
+                _message = [NSMutableString stringWithFormat:@"unsolved variable local symbol"];
+                NSLog(@"VM: %@ %@",_message,v.var.word); exit(1);
                 return nil;
             }
+        }
+    }
+    else if(v.solved == YES && v.location == VAR_GLOBOL)
+    {
+        for(i = 0;i < [_global count];i++)
+        {
+            if([[_global objectAtIndex:i] var] == nil)
+            {
+                continue;
+            }
+            if([[[_global objectAtIndex:i] var].word isEqualToString:v.var.word])
+            {
+                result = [_global objectAtIndex:i];
+                if([result type] == VAR_OBJECT && result.var.next_layer!=nil)
+                {
+                    result = [self solve_var:[[result var] next_layer]  In:[((TC_DisplayObject*)(result.obj)) virtual]];
+                }
+            }
+        }
+        if(result == nil)
+        {
+            _message = [NSMutableString stringWithFormat:@"unsolved variable global symbol"];
+            NSLog(@"VM: %@ %@",_message,v.var.word); exit(1);
+            return nil;
         }
     }
     return result;
@@ -3067,7 +3091,7 @@
         case VAR_OFF_SET:
             break;
     }
-    NSLog(@"%@ output: %@", somebody, something);
+    NSLog(@"VM: %@ output: %@", somebody, something);
 }
 
 - (void) push:(NSMutableArray*) params// list push <5,6,7>

@@ -15,7 +15,7 @@
 #define CAMERA_NUM 3
 
 TC_Camera* camera[CAMERA_NUM];
-NSMutableArray* _global;
+
 TC_Interpretor* _it;
 TC_Control* control;
 

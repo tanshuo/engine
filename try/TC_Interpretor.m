@@ -224,6 +224,81 @@
                 //_self_var ++;
                 return 0;
             }
+            else if([[[_defines objectAtIndex:1]word] isEqualToString:@"global"])
+            {
+                TC_INS_VARIABLE* temp;
+                TC_WORD_LAYER* w;
+                temp = [TC_INS_VARIABLE alloc];
+                w = [TC_WORD_LAYER alloc];
+                w.word = [[_defines objectAtIndex:2] word];
+                w.next_layer = nil;
+                temp.solved = YES;
+                temp.location = VAR_GLOBOL;
+                temp.addr = nil;
+                temp.obj = nil;
+                temp.type = VAR_UNKNOWN;
+                temp.argoffset = 0;
+                temp.borrow = NO;
+                temp.var = w;
+                if([self searchVariable:w])
+                {
+                    _message = [NSMutableString stringWithString:@"symbol has been used"];
+                    NSLog(@"%@",_message); exit(1);
+                    return -1;
+                }
+                if([[[_defines objectAtIndex:3]word]isEqualToString:@"float"])
+                {
+                    temp.type = VAR_FLOAT;
+                    float* data = (float*)malloc(sizeof(float));
+                    *data = 0;
+                    temp.addr = data;
+                }
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"int"])
+                {
+                    temp.type = VAR_INT;
+                    int* data = (int*)malloc(sizeof(int));
+                    *data = 0;
+                    temp.addr = data;
+                }
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"vector2"])
+                {
+                    temp.type = VAR_VECTOR2;
+                    TC_Position2d* data = (TC_Position2d*)malloc(sizeof(TC_Position2d));
+                    data->x = 0;
+                    data->y = 0;
+                    temp.addr = data;
+                }
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"vector3"])
+                {
+                    temp.type = VAR_VECTOR3;
+                    TC_Position* data = (TC_Position*)malloc(sizeof(TC_Position));
+                    data->x = 0;
+                    data->y = 0;
+                    data->z = 0;
+                    temp.addr = data;
+                }
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"string"])
+                {
+                    temp.type = VAR_STRING;
+                    temp.obj = @"";
+                    temp.borrow = YES;
+                }
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"object"])
+                {
+                    temp.type = VAR_OBJECT;
+                    temp.borrow = YES;
+                    temp.obj = nil;
+                }
+                else if([[[_defines objectAtIndex:3]word]isEqualToString:@"list"])
+                {
+                    temp.type = VAR_LIST;
+                    temp.obj = [NSMutableArray arrayWithCapacity:10];
+                    temp.borrow = YES;
+                }
+                [_global addObject:temp];
+                //_self_var ++;
+                return 0;
+            }
         }
     }
     else if(head == TC_DEFINE)
@@ -2139,6 +2214,41 @@
         if([self cmp_word_layer: [[_var_table objectAtIndex:i] var] With:var])
         {
             copy =  [_var_table objectAtIndex:i];
+            result.location = copy.location;
+            result.argoffset = i;
+            result.solved = YES;
+            result.type = copy.type;//goon
+            if(copy.type == VAR_VECTOR2)
+            {
+                result.addr = malloc(sizeof(TC_Position2d));
+                *((TC_Position2d*)(result.addr)) = *((TC_Position2d*)(copy.addr));
+            }
+            else if(copy.type == VAR_VECTOR3)
+            {
+                result.addr = malloc(sizeof(TC_Position));
+                *((TC_Position*)(result.addr)) = *((TC_Position*)(copy.addr));
+            }
+            else if(copy.type == VAR_INT)
+            {
+                result.addr = malloc(sizeof(int));
+                *((int*)(result.addr)) = *((int*)(copy.addr));
+            }
+            else if(copy.type == VAR_FLOAT)
+            {
+                result.addr = malloc(sizeof(float));
+                *((float*)(result.addr)) = *((float*)(copy.addr));
+            }
+            result.obj = copy.obj;
+            result.borrow = copy.borrow;
+            result.var = var;
+            return result;
+        }
+    }
+    for(i = 0; i < [_global count]; i++)
+    {
+        if([self cmp_word_layer: [[_global objectAtIndex:i] var] With:var])
+        {
+            copy =  [_global objectAtIndex:i];
             result.location = copy.location;
             result.argoffset = i;
             result.solved = YES;

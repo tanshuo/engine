@@ -4,7 +4,7 @@ define start:
     declare function round 1;
     declare variable left int;
     declare variable right int;
-    declare variable temp int;
+    declare global temp int;
     
 enddef;
 
@@ -20,6 +20,7 @@ define update:
         temp set as result,
         calculate <"(sqrt(left * left + right * right))">,
         calculate <"temp / result">,
+        say result,
     end;
     #get <"camera"> to temp;
     #temp move result;

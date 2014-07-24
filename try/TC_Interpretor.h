@@ -8,16 +8,18 @@
 
 #import <UIKit/UIKit.h>
 #import <GLKit/GLKit.h>
+#import "types.h"
 #import "TC_VirtualMachine.h"
 #import "TC_Define.h"
 #import "TC_Control_Layer.h"
-#import "types.h"
 #import "TC_INS_OFFSET.h"
 #import "TC_INS_FUNCTION.h"
 #import "TC_INS_VARIABLE.h"
 #import "TC_Instruction.h"
+
 #define MAX_LINE_SIZE 16 * 1024
 
+NSMutableArray* _global;
 
 @interface TC_Interpretor : NSObject
 @property TC_ID currentLine;
