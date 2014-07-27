@@ -48,7 +48,7 @@ typedef enum shape{
 @property (strong,nonatomic) NSMutableArray* hinges;
 
 - (void)move; //move to a new place and register collide buffer.
-- (void)writeBufferWithWidth:(float) w WithHeight: (float) h;
+- (int)writeBufferWithWidth:(float) w WithHeight: (float) h;
 
 + (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y;
 + (int)searchBufferInfoIndexFrom:(NSMutableArray*)entry By:(TC_PhysicsBody*) target;

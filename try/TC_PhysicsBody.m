@@ -15,7 +15,7 @@
 }
 
 
-- (void)writeBufferWithWidth:(float) w WithHeight: (float) h
+- (int)writeBufferWithWidth:(float) w WithHeight: (float) h
 {
     int i,j;
     float temp;
@@ -151,6 +151,10 @@
     int buffer_index_top = (int)((max_y + h/2)/ grid_h) + 1;
     int buffer_index_bot = (int)((min_y + h/2) / grid_w) + 1;
     
+    //check bounds
+    if(buffer_index_left < 0 || buffer_index_right >= COLLIDE_DETECTOR_BUFFER_WIDTH || buffer_index_bot < 0 || buffer_index_top >= COLLIDE_DETECTOR_BUFFER_HEIGHT)
+        return -1;
+    
     //calculate cross section
     cross_section_top = (buffer_index_top > _buffer_index_top)?_buffer_index_top:buffer_index_top;
     cross_section_bot = (buffer_index_bot < _buffer_index_bot)?_buffer_index_bot:buffer_index_bot;
@@ -165,6 +169,8 @@
             NSMutableArray* entry;
             int index;
             entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+                return -1;
             index = [TC_PhysicsBody searchBufferInfoIndexFrom:entry By:self];
             if(index != -1)
                 [entry removeObjectAtIndex:index];
@@ -177,6 +183,8 @@
             NSMutableArray* entry;
             int index;
             entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+                return -1;
             index = [TC_PhysicsBody searchBufferInfoIndexFrom:entry By:self];
             if(index != -1)
                 [entry removeObjectAtIndex:index];
@@ -189,6 +197,8 @@
             NSMutableArray* entry;
             int index;
             entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+                return -1;
             index = [TC_PhysicsBody searchBufferInfoIndexFrom:entry By:self];
             if(index != -1)
                 [entry removeObjectAtIndex:index];
@@ -201,6 +211,8 @@
             NSMutableArray* entry;
             int index;
             entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+                return -1;
             index = [TC_PhysicsBody searchBufferInfoIndexFrom:entry By:self];
             if(index != -1)
                 [entry removeObjectAtIndex:index];
@@ -215,6 +227,8 @@
             NSMutableArray* entry;
             TC_BufferInfo* new;
             entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+                return -1;
             new = [TC_BufferInfo alloc];
             new.target = self;
             [entry addObject:new];
@@ -226,6 +240,8 @@
         {NSMutableArray* entry;
             TC_BufferInfo* new;
             entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+                return -1;
             new = [TC_BufferInfo alloc];
             new.target = self;
             [entry addObject:new];
@@ -238,6 +254,8 @@
             NSMutableArray* entry;
             TC_BufferInfo* new;
             entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+                return -1;
             new = [TC_BufferInfo alloc];
             new.target = self;
             [entry addObject:new];
@@ -250,6 +268,8 @@
             NSMutableArray* entry;
             TC_BufferInfo* new;
             entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+                return -1;
             new = [TC_BufferInfo alloc];
             new.target = self;
             [entry addObject:new];
@@ -261,8 +281,27 @@
     _buffer_index_top = buffer_index_top;
     _buffer_index_right = buffer_index_right;
     _buffer_index_left = buffer_index_left;
+    
+    return 0;
 }
 
-+ (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y;
-+ (int)searchBufferInfoIndexFrom:(NSMutableArray*)entry By:(TC_PhysicsBody*) target;
++ (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y
+{
+    int index = x * COLLIDE_DETECTOR_BUFFER_WIDTH + y;
+    if(index >= COLLIDE_DETECTOR_BUFFER_WIDTH * COLLIDE_DETECTOR_BUFFER_HEIGHT)
+        return nil;
+    return collide_buffer[index];
+}
++ (int)searchBufferInfoIndexFrom:(NSMutableArray*)entry By:(TC_PhysicsBody*) target
+{
+    int i;
+    for(i = 0;i < [entry count]; i ++)
+    {
+        if(entry[i] == target)
+        {
+            return i;
+        }
+    }
+    return -1;
+}
 @end
