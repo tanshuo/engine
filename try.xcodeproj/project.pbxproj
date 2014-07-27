@@ -52,6 +52,10 @@
 		F5A18820195979950085672C /* TC_TextureInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A1881F195979950085672C /* TC_TextureInfo.m */; };
 		F5A18822195986860085672C /* test in Resources */ = {isa = PBXBuildFile; fileRef = F5A18821195986860085672C /* test */; };
 		F5A6D4B91981B871009531DE /* scenetest.scn in Resources */ = {isa = PBXBuildFile; fileRef = F5A6D4B81981B871009531DE /* scenetest.scn */; };
+		F5A6D4BD1984CEAD009531DE /* TC_PhysicsBody.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6D4BC1984CEAD009531DE /* TC_PhysicsBody.m */; };
+		F5A6D4C01984D0CB009531DE /* TC_ContactInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6D4BF1984D0CB009531DE /* TC_ContactInfo.m */; };
+		F5A6D4C41984F74A009531DE /* TC_PhysicsWorld.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6D4C31984F74A009531DE /* TC_PhysicsWorld.m */; };
+		F5A6D4C81984FBDC009531DE /* TC_BufferInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = F5A6D4C71984FBDC009531DE /* TC_BufferInfo.m */; };
 		F5AA868C197FE78400EAC71B /* TC_Control.m in Sources */ = {isa = PBXBuildFile; fileRef = F5AA868B197FE78400EAC71B /* TC_Control.m */; };
 		F5C83AA21968C9F100BEF65C /* TC_Logical_Layer.m in Sources */ = {isa = PBXBuildFile; fileRef = F5C83AA11968C9F100BEF65C /* TC_Logical_Layer.m */; };
 		F5FD5E34195D34E100EF5C6F /* test1 in Resources */ = {isa = PBXBuildFile; fileRef = F5FD5E33195D34E100EF5C6F /* test1 */; };
@@ -147,6 +151,15 @@
 		F5A1881F195979950085672C /* TC_TextureInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_TextureInfo.m; path = try/TC_TextureInfo.m; sourceTree = "<group>"; };
 		F5A18821195986860085672C /* test */ = {isa = PBXFileReference; lastKnownFileType = file; name = test; path = ../../Downloads/test; sourceTree = "<group>"; };
 		F5A6D4B81981B871009531DE /* scenetest.scn */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = scenetest.scn; sourceTree = "<group>"; };
+		F5A6D4BB1984CEAD009531DE /* TC_PhysicsBody.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_PhysicsBody.h; path = try/TC_PhysicsBody.h; sourceTree = "<group>"; };
+		F5A6D4BC1984CEAD009531DE /* TC_PhysicsBody.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_PhysicsBody.m; path = try/TC_PhysicsBody.m; sourceTree = "<group>"; };
+		F5A6D4BE1984D0CB009531DE /* TC_ContactInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_ContactInfo.h; path = try/TC_ContactInfo.h; sourceTree = "<group>"; };
+		F5A6D4BF1984D0CB009531DE /* TC_ContactInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_ContactInfo.m; path = try/TC_ContactInfo.m; sourceTree = "<group>"; };
+		F5A6D4C11984D233009531DE /* physics_set.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = physics_set.h; sourceTree = "<group>"; };
+		F5A6D4C21984F74A009531DE /* TC_PhysicsWorld.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_PhysicsWorld.h; path = try/TC_PhysicsWorld.h; sourceTree = "<group>"; };
+		F5A6D4C31984F74A009531DE /* TC_PhysicsWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_PhysicsWorld.m; path = try/TC_PhysicsWorld.m; sourceTree = "<group>"; };
+		F5A6D4C61984FBDC009531DE /* TC_BufferInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_BufferInfo.h; path = ../ts/ts/TC_BufferInfo.h; sourceTree = "<group>"; };
+		F5A6D4C71984FBDC009531DE /* TC_BufferInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_BufferInfo.m; path = ../ts/ts/TC_BufferInfo.m; sourceTree = "<group>"; };
 		F5AA868A197FE78400EAC71B /* TC_Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Control.h; path = try/TC_Control.h; sourceTree = "<group>"; };
 		F5AA868B197FE78400EAC71B /* TC_Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Control.m; path = try/TC_Control.m; sourceTree = "<group>"; };
 		F5C83AA01968C9F100BEF65C /* TC_Logical_Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Logical_Layer.h; path = try/TC_Logical_Layer.h; sourceTree = "<group>"; };
@@ -306,6 +319,7 @@
 		F59ECD841954C4AC00D7EB5D = {
 			isa = PBXGroup;
 			children = (
+				F5A6D4BA19833037009531DE /* physics */,
 				F5A6D4B71981B7FE009531DE /* scene */,
 				F5988CB8195A83EF00A8DA5E /* shader */,
 				F5988CB9195A842000A8DA5E /* texture */,
@@ -395,6 +409,22 @@
 				F5A6D4B81981B871009531DE /* scenetest.scn */,
 			);
 			name = scene;
+			sourceTree = "<group>";
+		};
+		F5A6D4BA19833037009531DE /* physics */ = {
+			isa = PBXGroup;
+			children = (
+				F5A6D4C11984D233009531DE /* physics_set.h */,
+				F5A6D4BB1984CEAD009531DE /* TC_PhysicsBody.h */,
+				F5A6D4BC1984CEAD009531DE /* TC_PhysicsBody.m */,
+				F5A6D4BE1984D0CB009531DE /* TC_ContactInfo.h */,
+				F5A6D4BF1984D0CB009531DE /* TC_ContactInfo.m */,
+				F5A6D4C21984F74A009531DE /* TC_PhysicsWorld.h */,
+				F5A6D4C31984F74A009531DE /* TC_PhysicsWorld.m */,
+				F5A6D4C61984FBDC009531DE /* TC_BufferInfo.h */,
+				F5A6D4C71984FBDC009531DE /* TC_BufferInfo.m */,
+			);
+			name = physics;
 			sourceTree = "<group>";
 		};
 		F5FE4BE1195BC45E00D1C593 /* prefabs */ = {
@@ -511,6 +541,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5A6D4C01984D0CB009531DE /* TC_ContactInfo.m in Sources */,
 				F59F95E1195802F2006876C9 /* TC_VirtualMachine.m in Sources */,
 				F59F95DE1957F89A006876C9 /* tool.c in Sources */,
 				F5FE4BE4195BC4A500D1C593 /* TC_PrefabLoader.m in Sources */,
@@ -523,10 +554,12 @@
 				F5988CB7195A83B000A8DA5E /* TC_Camera.m in Sources */,
 				F59CB516195E464600A89176 /* TC_Interpretor.m in Sources */,
 				F5C83AA21968C9F100BEF65C /* TC_Logical_Layer.m in Sources */,
+				F5A6D4C41984F74A009531DE /* TC_PhysicsWorld.m in Sources */,
 				F59ECDA51954C4AD00D7EB5D /* AppDelegate.m in Sources */,
 				F596B497196E1C9E00D60B63 /* TC_INS_VARIABLE.m in Sources */,
 				F597F91D195E0334004DEE23 /* TC_Shaderinfo.m in Sources */,
 				F5AA868C197FE78400EAC71B /* TC_Control.m in Sources */,
+				F5A6D4C81984FBDC009531DE /* TC_BufferInfo.m in Sources */,
 				F59382E7195A879900CB2A80 /* TC_Game.m in Sources */,
 				F5988C66195A1B7800A8DA5E /* TC_Layer.m in Sources */,
 				F59F93D61970692D009C9A92 /* TC_ScriptListInfo.m in Sources */,
@@ -539,6 +572,7 @@
 				F59750B81958DAC400D235C2 /* TC_ShaderLoader.m in Sources */,
 				F59CB51C195E49E700A89176 /* TC_Instruction.m in Sources */,
 				F596B49A196E1F6500D60B63 /* TC_INS_FUNCTION.m in Sources */,
+				F5A6D4BD1984CEAD009531DE /* TC_PhysicsBody.m in Sources */,
 				F59A87F9195F2D76008A390F /* TC_Function_Layer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

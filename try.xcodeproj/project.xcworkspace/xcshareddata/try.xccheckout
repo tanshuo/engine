@@ -17,6 +17,8 @@
 	<string>try.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
+		<key>10BC516C-CEE7-4523-82FD-01A7F9021C5B</key>
+		<string>../../../ts</string>
 		<key>F3912C6E-1C1C-4B20-B166-16FE5DDD31EC</key>
 		<string>../..</string>
 	</dict>
@@ -35,6 +37,14 @@
 			<string>F3912C6E-1C1C-4B20-B166-16FE5DDD31EC</string>
 			<key>IDESourceControlWCCName</key>
 			<string>try</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>10BC516C-CEE7-4523-82FD-01A7F9021C5B</string>
+			<key>IDESourceControlWCCName</key>
+			<string>ts</string>
 		</dict>
 	</array>
 </dict>

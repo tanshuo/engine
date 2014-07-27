@@ -9,7 +9,7 @@ define start:
 enddef;
 
 define update:
-    if touched,
+    if screen_touched,
         sp set <0,0>,
         cp set <0,0>,
         get <"touch_position"> to sp,

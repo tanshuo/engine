@@ -2262,7 +2262,7 @@
     }
 }
 
-- (void) touched:(NSMutableArray*) params // touched
+- (void) screen_touched:(NSMutableArray*) params // touched
 {
     BOOL result = NO;
     if(control.count > 0)

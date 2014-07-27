@@ -1781,7 +1781,7 @@
     [self.dictionary addObject: temp];
     
     temp = [TC_Define alloc];
-    temp.word = @"touched";
+    temp.word = @"screen_touched";
     temp.explain = TC_FUNCTION;
     temp.right_match = 0;
     [self.dictionary addObject: temp];
@@ -2422,7 +2422,7 @@
     
     fun = [TC_INS_FUNCTION alloc];
     fun.solved = NO;
-    fun.name = @"touched";
+    fun.name = @"screen_touched";
     fun.func = nil;
     fun.offset = 0;
     fun.location = FUN_BIND;
