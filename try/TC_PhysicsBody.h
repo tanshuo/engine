@@ -21,7 +21,8 @@
 @property float vy;
 @property float w;
 
-//@property TC_SHAPE shape;
+@property TC_SHAPE shape;
+@property float r;
 @property float vetex_a_x;
 @property float vetex_a_y;
 @property float vetex_b_x;
@@ -31,7 +32,15 @@
 @property float vetex_d_x;
 @property float vetex_d_y;
 
+@property unsigned int buffer_index_left_top;
+@property unsigned int buffer_index_left_bot;
+@property unsigned int buffer_index_right_top;
+@property unsigned int buffer_index_right_bot;
+
 @property (strong,nonatomic) NSMutableArray* contact_points;
 @property (strong,nonatomic) NSMutableArray* hinges;
 
+- (void)move; //move to a new place and register collide buffer.
+- (void)cleanBuffer;
+- (void)writeBuffer;
 @end
