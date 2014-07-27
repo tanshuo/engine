@@ -12,12 +12,6 @@
 #define COLLIDE_DETECTOR_BUFFER_HEIGHT 30
 #define COLLIDE_DETECTOR_BUFFER_WIDTH 30
 
-typedef enum shape{
-    BOX_CIRCLE,
-    BOX_RECT,
-    BOX_TRI,
-} TC_SHAPE;
-
 typedef struct vector2d
 {
     float x;

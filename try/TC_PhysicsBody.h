@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 #import "physics_set.h"
+#import "TC_BufferInfo.h"
+
+typedef enum shape{
+    BOX_CIRCLE,
+    BOX_RECT,
+    BOX_TRI,
+} TC_SHAPE;
 
 @interface TC_PhysicsBody : NSObject
 @property BOOL freeze; // if the body is affected by weak net force, or very slow speed the flag will on;
@@ -32,15 +39,17 @@
 @property float vetex_d_x;
 @property float vetex_d_y;
 
-@property unsigned int buffer_index_left_top;
-@property unsigned int buffer_index_left_bot;
-@property unsigned int buffer_index_right_top;
-@property unsigned int buffer_index_right_bot;
+@property unsigned int buffer_index_left;
+@property unsigned int buffer_index_right;
+@property unsigned int buffer_index_top;
+@property unsigned int buffer_index_bot;
 
 @property (strong,nonatomic) NSMutableArray* contact_points;
 @property (strong,nonatomic) NSMutableArray* hinges;
 
 - (void)move; //move to a new place and register collide buffer.
-- (void)cleanBuffer;
-- (void)writeBuffer;
+- (void)writeBufferWithWidth:(float) w WithHeight: (float) h;
+
++ (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y;
++ (int)searchBufferInfoIndexFrom:(NSMutableArray*)entry By:(TC_PhysicsBody*) target;
 @end

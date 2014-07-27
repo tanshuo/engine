@@ -11,6 +11,8 @@
 
 @interface TC_PhysicsWorld : NSObject
 @property unsigned int time;
+@property float world_width;
+@property float world_height;
 
 - (void) start;
 - (void) update;
