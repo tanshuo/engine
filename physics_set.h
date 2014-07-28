@@ -11,6 +11,7 @@
 #include "TC_ContactInfo.h"
 #define COLLIDE_DETECTOR_BUFFER_HEIGHT 30
 #define COLLIDE_DETECTOR_BUFFER_WIDTH 30
+#define THRESHOLD 1.0
 
 typedef struct vector2d
 {

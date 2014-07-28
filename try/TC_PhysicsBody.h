@@ -27,6 +27,7 @@ typedef enum shape{
 @property float vx;
 @property float vy;
 @property float w;
+@property float e;
 
 @property TC_SHAPE shape;
 @property float r;
@@ -47,7 +48,9 @@ typedef enum shape{
 @property (strong,nonatomic) NSMutableArray* contact_points;
 @property (strong,nonatomic) NSMutableArray* hinges;
 
-- (void)move; //move to a new place and register collide buffer.
+- (void)initWithX:(float)x WithY:(float)y WithProperty:(BOOL)dynamic WithRotation:(float)rotation WithShape:(TC_SHAPE) shape WithVetexAX: (float)vax WithVetexAY: (float)vay WithVetexBX: (float)vbx WithVetexBY: (float)vby WithVetexCX: (float)vcx WithVetexCY: (float)vcy WithVetexDX: (float)vdx WithVetexDY: (float)vdy WithRadius:(float)r WithCoefficient:(float)e WithWidth:(float)w WithHeight:(float)h;
+
+- (void)updateWithwidth:(float)w Height:(float)h; //move to a new place and register collide buffer.
 - (int)writeBufferWithWidth:(float) w WithHeight: (float) h;
 
 + (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y;
