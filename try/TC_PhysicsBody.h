@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "physics_set.h"
 #import "TC_BufferInfo.h"
+#import "TC_ContactInfo.h"
+#import "phy_math.h"
 
 typedef enum shape{
     BOX_CIRCLE,
@@ -48,10 +50,14 @@ typedef enum shape{
 @property (strong,nonatomic) NSMutableArray* contact_points;
 @property (strong,nonatomic) NSMutableArray* hinges;
 
-- (void)initWithX:(float)x WithY:(float)y WithProperty:(BOOL)dynamic WithRotation:(float)rotation WithShape:(TC_SHAPE) shape WithVetexAX: (float)vax WithVetexAY: (float)vay WithVetexBX: (float)vbx WithVetexBY: (float)vby WithVetexCX: (float)vcx WithVetexCY: (float)vcy WithVetexDX: (float)vdx WithVetexDY: (float)vdy WithRadius:(float)r WithCoefficient:(float)e WithWidth:(float)w WithHeight:(float)h;
+- (void)initWithX:(float)x WithY:(float)y WithWidth:(float)w WithHeight:(float)h WithProperty:(BOOL)dynamic WithRotation:(float)rotation WithShape:(TC_SHAPE) shape  WithRadius:(float)r WithCoefficient:(float)e WithWorldWidth:(float)ww WithWorldHeight:(float)wh;
 
 - (void)updateWithwidth:(float)w Height:(float)h; //move to a new place and register collide buffer.
 - (int)writeBufferWithWidth:(float) w WithHeight: (float) h;
+- (void)collideDetectWith: (TC_PhysicsBody*) box;
+- (BOOL)isCollideWith: (TC_PhysicsBody*) box;
+- (TC_ContactInfo*)genCollide;
+
 
 + (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y;
 + (int)searchBufferInfoIndexFrom:(NSMutableArray*)entry By:(TC_PhysicsBody*) target;

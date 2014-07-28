@@ -160,6 +160,7 @@
 		F5A6D4C31984F74A009531DE /* TC_PhysicsWorld.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_PhysicsWorld.m; path = try/TC_PhysicsWorld.m; sourceTree = "<group>"; };
 		F5A6D4C61984FBDC009531DE /* TC_BufferInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_BufferInfo.h; path = ../ts/ts/TC_BufferInfo.h; sourceTree = "<group>"; };
 		F5A6D4C71984FBDC009531DE /* TC_BufferInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_BufferInfo.m; path = ../ts/ts/TC_BufferInfo.m; sourceTree = "<group>"; };
+		F5A6D4C91985EFF6009531DE /* phy_math.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = phy_math.h; sourceTree = "<group>"; };
 		F5AA868A197FE78400EAC71B /* TC_Control.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Control.h; path = try/TC_Control.h; sourceTree = "<group>"; };
 		F5AA868B197FE78400EAC71B /* TC_Control.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TC_Control.m; path = try/TC_Control.m; sourceTree = "<group>"; };
 		F5C83AA01968C9F100BEF65C /* TC_Logical_Layer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TC_Logical_Layer.h; path = try/TC_Logical_Layer.h; sourceTree = "<group>"; };
@@ -423,6 +424,7 @@
 				F5A6D4C31984F74A009531DE /* TC_PhysicsWorld.m */,
 				F5A6D4C61984FBDC009531DE /* TC_BufferInfo.h */,
 				F5A6D4C71984FBDC009531DE /* TC_BufferInfo.m */,
+				F5A6D4C91985EFF6009531DE /* phy_math.h */,
 			);
 			name = physics;
 			sourceTree = "<group>";
