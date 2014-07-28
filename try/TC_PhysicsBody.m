@@ -469,6 +469,7 @@
 
 - (BOOL)isCollideWith: (TC_PhysicsBody*) box
 {
+    int i;
     //First use a circle area to approxy collide
     float l = (self.position_x - box.position_x) * (self.position_x - box.position_x) + (self.position_y - box.position_y) * (self.position_y - box.position_y);
     if(l > (self.r + box.r) * (self.r + box.r))
@@ -483,11 +484,67 @@
         float x2[4] = {box.vetex_a_x,box.vetex_b_x,box.vetex_c_x,box.vetex_d_x};
         float y1[4] = {self.vetex_a_y,self.vetex_b_y,self.vetex_c_y,self.vetex_d_y};
         float y2[4] = {box.vetex_a_y,box.vetex_b_y,box.vetex_c_y,box.vetex_d_y};
-        int i;
-        for(i = 0; i < 4;i ++)
+        VECTOR2D* tangent1[4];
+        VECTOR2D* tangent2[4];
+        VECTOR2D* normal1[4];
+        VECTOR2D* normal2[4];
+        
+        tangent1[0] = genTangentVector(x1[0], y1[0], x1[1], y1[1]);
+        tangent1[1] = genTangentVector(x1[1], y1[1], x1[2], y1[2]);
+        tangent1[2] = genTangentVector(x1[2], y1[2], x1[3], y1[3]);
+        tangent1[3] = genTangentVector(x1[3], y1[3], x1[0], y1[0]);
+        tangent2[0] = genTangentVector(x2[0], y2[0], x2[1], y2[1]);
+        tangent2[1] = genTangentVector(x2[1], y2[1], x2[2], y2[2]);
+        tangent2[2] = genTangentVector(x2[2], y2[2], x2[3], y2[3]);
+        tangent2[3] = genTangentVector(x2[3], y2[3], x2[0], y2[0]);
+        
+        normal1[0] = genNomalVector(x1[0], y1[0], x1[1], y1[1]);
+        normal1[1] = genNomalVector(x1[1], y1[1], x1[2], y1[2]);
+        normal1[2] = genNomalVector(x1[2], y1[2], x1[3], y1[3]);
+        normal1[3] = genNomalVector(x1[3], y1[3], x1[0], y1[0]);
+        normal2[0] = genNomalVector(x1[0], y1[0], x1[1], y1[1]);
+        normal2[1] = genNomalVector(x1[1], y1[1], x1[2], y1[2]);
+        normal2[2] = genNomalVector(x1[2], y1[2], x1[3], y1[3]);
+        normal2[3] = genNomalVector(x1[3], y1[3], x1[0], y1[0]);
+        
+        float dot1l[4];
+        float dot2l[4];
+        for(i = 0; i < 4; i ++)
         {
-            
+            dot1l[0] = genDot(tangent1[0] , normal1[i]);
+            dot1l[1] = genDot(tangent1[1] , normal1[i]);
+            dot1l[2] = genDot(tangent1[2] , normal1[i]);
+            dot1l[3] = genDot(tangent1[3] , normal1[i]);
+            dot2l[0] = genDot(tangent2[0] , normal1[i]);
+            dot2l[1] = genDot(tangent2[1] , normal1[i]);
+            dot2l[2] = genDot(tangent2[2] , normal1[i]);
+            dot2l[3] = genDot(tangent2[3] , normal1[i]);
         }
+        
+        float dot1_max = dot1l[0];
+        float dot2_max = dot2l[0];
+        float dot1_min = dot1l[0];
+        float dot2_min = dot2l[0];
+        for(i = 1; i < 4; i ++)
+        {
+            if(dot1l[i] > dot1_max)
+            {
+                dot1_max = dot1l[i];
+            }
+            if(dot1l[i] < dot1_min)
+            {
+                dot1_min = dot1l[i];
+            }
+            if(dot2l[i] > dot2_max)
+            {
+                dot2_max = dot2l[i];
+            }
+            if(dot1l[i] < dot1_min)
+            {
+                dot2_min = dot2l[i];
+            }
+        }
+        ...
     }
     else  if(self.shape == BOX_TRI && box.shape == BOX_RECT)
     {

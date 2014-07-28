@@ -14,10 +14,12 @@ typedef enum right_left{
 } TC_SHRINK_DIRECTION;
 
 @interface TC_ContactInfo : NSObject
-@property float p1_x; //normal pushing impulse
+@property float p1_x; //contact points
 @property float p1_y;
-@property float p2_x; //tangent friction force
+@property float p2_x;
 @property float p2_y;
+@property float normal_x;
+@property float normal_y;
 @property TC_SHRINK_DIRECTION left_right;
 @property id owner;
 @end
