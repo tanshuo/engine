@@ -53,7 +53,7 @@ typedef enum shape{
 - (BOOL)isPossibleCollideWith: (TC_PhysicsBody*) box;
 - (TC_ContactInfo*)genCollide;
 
-- (float)maxSeperationDistanceBetween:(TC_PhysicsBody*)box1 And:(TC_PhysicsBody*)box2 At: (int*)edge;
+- (float)maxSeperationDistanceBetween:(TC_PhysicsBody*)box1 And:(TC_PhysicsBody*)box2 From: (int*)edge To: (int*) vetex;
 - (float)seperationByEdgeNormal:(VECTOR2D*)normal ByEdge:(int)edge WithBox:(TC_PhysicsBody*)box1 WithBox:(TC_PhysicsBody*)box2 At:(int*) vetex;
 
 + (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y;

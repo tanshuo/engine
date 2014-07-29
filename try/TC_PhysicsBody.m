@@ -445,7 +445,7 @@
     return genDot(normal,&v);
 }
 
-- (float)maxSeperationDistanceBetween:(TC_PhysicsBody*)box1 And:(TC_PhysicsBody*)box2 At: (int*)edge
+- (float)maxSeperationDistanceBetween:(TC_PhysicsBody*)box1 And:(TC_PhysicsBody*)box2 From: (int*)edge To: (int*) vetex
 {
     int i;
     int count = box1.vetex_count;
@@ -488,16 +488,56 @@
     float next_l = [self seperationByEdgeNormal:&normal1[e_next] ByEdge:e_next WithBox:box1 WithBox:box2 At:&vetex_next];
     
     float result;
+    int delta;
     if(current_l >= pre_l && current_l >= next_l)
     {
         result = current_l;
+        *vetex = vetex_current;
+        return result;
     }
     else if (pre_l >= current_l && pre_l >= next_l)
     {
         result = pre_l;
+        *vetex = vetex_pre;
+        delta = -1;
     }
     else
+    {
         result = next_l;
+        *vetex = vetex_next;
+        delta = 1;
+    }
+    
+    while(1)
+    {
+        if(delta > 0)
+        {
+            e_pre = (e_pre - 1 > 0)? e_pre - 1 : count - 1;
+            float s = [self seperationByEdgeNormal:&normal1[e_pre] ByEdge:e_pre WithBox:box1 WithBox:box2 At:&vetex_pre];
+            if(s > pre_l)
+            {
+                result = pre_l;
+                *edge = e_pre;
+                *vetex = vetex_pre;
+            }
+            else
+                return result;
+        }
+        else if(delta < 0)
+        {
+            e_next = (e_next < count - 1)? e_next + 1 : 0;
+            float s = [self seperationByEdgeNormal:&normal1[e_next] ByEdge:e_next WithBox:box1 WithBox:box2 At:&vetex_next];
+            if(s > next_l)
+            {
+                result = next_l;
+                *edge = e_next;
+                *vetex = vetex_next;
+            }
+            else
+                return result;
+        }
+        
+    }
     return result;
 }
 
