@@ -33,14 +33,9 @@ typedef enum shape{
 
 @property TC_SHAPE shape;
 @property float r;
-@property float vetex_a_x;
-@property float vetex_a_y;
-@property float vetex_b_x;
-@property float vetex_b_y;
-@property float vetex_c_x;
-@property float vetex_c_y;
-@property float vetex_d_x;
-@property float vetex_d_y;
+@property float* vetex_x;
+@property float* vetex_y;
+@property int vetex_count;;
 
 @property unsigned int buffer_index_left;
 @property unsigned int buffer_index_right;
@@ -55,10 +50,14 @@ typedef enum shape{
 - (void)updateWithwidth:(float)w Height:(float)h; //move to a new place and register collide buffer.
 - (int)writeBufferWithWidth:(float) w WithHeight: (float) h;
 - (void)collideDetectWith: (TC_PhysicsBody*) box;
-- (BOOL)isCollideWith: (TC_PhysicsBody*) box;
+- (BOOL)isPossibleCollideWith: (TC_PhysicsBody*) box;
 - (TC_ContactInfo*)genCollide;
 
+- (float)maxSeperationDistanceBetween:(TC_PhysicsBody*)box1 And:(TC_PhysicsBody*)box2 At: (int*)edge;
+- (float)seperationByEdgeNormal:(VECTOR2D*)normal ByEdge:(int)edge WithBox:(TC_PhysicsBody*)box1 WithBox:(TC_PhysicsBody*)box2 At:(int*) vetex;
 
 + (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y;
 + (int)searchBufferInfoIndexFrom:(NSMutableArray*)entry By:(TC_PhysicsBody*) target;
+
+-(void)dealloc;
 @end

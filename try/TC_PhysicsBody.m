@@ -12,6 +12,7 @@
 
 - (void)initWithX:(float)x WithY:(float)y WithWidth:(float)w WithHeight:(float)h WithProperty:(BOOL)dynamic WithRotation:(float)rotation WithShape:(TC_SHAPE) shape  WithRadius:(float)r WithCoefficient:(float)e WithWorldWidth:(float)ww WithWorldHeight:(float)wh
 {
+    int i;
     _position_x = x;
     _position_y = y;
     _dynamic = YES;
@@ -23,26 +24,30 @@
     _rotation = rotation;
     _shape = shape;
     _r = r;
+    
+    _vetex_count = 4;
+    _vetex_x = malloc(_vetex_count * sizeof(float));
+    _vetex_y = malloc(_vetex_count * sizeof(float));
     if(self.shape == BOX_RECT)
     {
-        _vetex_a_x = x - w / 2.0;
-        _vetex_a_y = y + h / 2.0;
-        _vetex_b_x = x + w / 2.0;
-        _vetex_b_y = y + h / 2.0;
-        _vetex_c_x = x + w / 2.0;
-        _vetex_c_y = y - h / 2.0;
-        _vetex_d_x = x - w / 2.0;
-        _vetex_d_y = y - h / 2.0;
+        _vetex_x[0] = x - w / 2.0;
+        _vetex_y[0] = y + h / 2.0;
+        _vetex_x[1] = x + w / 2.0;
+        _vetex_y[1] = y + h / 2.0;
+        _vetex_x[2] = x + w / 2.0;
+        _vetex_y[2] = y - h / 2.0;
+        _vetex_x[3] = x - w / 2.0;
+        _vetex_y[3] = y - h / 2.0;
         _r = sqrtf(w * w + h * h) / 2.0;
     }
     else if(self.shape == BOX_TRI)
     {
-        _vetex_a_x = x;
-        _vetex_a_y = y + r;
-        _vetex_b_x = x + 3.0 * r / 2.0 / sqrtf(3.0);
-        _vetex_b_y = y - r / 2.0;
-        _vetex_c_x = x - 3.0 * r / 2.0 / sqrtf(3.0);
-        _vetex_c_y = y - r / 2.0;
+        _vetex_x[0] = x;
+        _vetex_y[0] = y + r;
+        _vetex_x[1] = x + 3.0 * r / 2.0 / sqrtf(3.0);
+        _vetex_y[1] = y - r / 2.0;
+        _vetex_x[2] = x - 3.0 * r / 2.0 / sqrtf(3.0);
+        _vetex_y[2] = y - r / 2.0;
     }
     _contact_points = [NSMutableArray arrayWithCapacity:10];
     _hinges = [NSMutableArray arrayWithCapacity:10];
@@ -63,109 +68,89 @@
             max_y = _position_y + _r;
             break;
         case BOX_TRI:
-            temp = _vetex_a_x;
-            if(_vetex_b_x > temp)
+            temp = _vetex_x[0];
+            if(_vetex_x[1] > temp)
             {
-                temp = _vetex_b_x;
+                temp = _vetex_x[1];
             }
-            if(_vetex_c_x > temp)
+            if(_vetex_x[2] > temp)
             {
-                temp = _vetex_c_x;
+                temp = _vetex_x[2];
             }
             max_x = temp;
             
-            temp = _vetex_a_y;
-            if(_vetex_b_y > temp)
+            temp = _vetex_y[0];
+            if(_vetex_y[1] > temp)
             {
-                temp = _vetex_b_y;
+                temp = _vetex_y[1];
             }
-            if(_vetex_c_y > temp)
+            if(_vetex_y[2] > temp)
             {
-                temp = _vetex_c_y;
+                temp = _vetex_y[2];
             }
             max_y = temp;
             
-            temp = _vetex_a_x;
-            if(_vetex_b_x < temp)
+            temp = _vetex_x[0];
+            if(_vetex_x[1] < temp)
             {
-                temp = _vetex_b_x;
+                temp = _vetex_x[1];
             }
-            if(_vetex_c_x < temp)
+            if(_vetex_x[2] < temp)
             {
-                temp = _vetex_c_x;
+                temp = _vetex_x[2];
             }
             min_x = temp;
             
-            temp = _vetex_a_y;
-            if(_vetex_b_y < temp)
+            temp = _vetex_y[0];
+            if(_vetex_y[1] < temp)
             {
-                temp = _vetex_b_y;
+                temp = _vetex_y[1];
             }
-            if(_vetex_c_y < temp)
+            if(_vetex_y[2] < temp)
             {
-                temp = _vetex_c_y;
+                temp = _vetex_y[2];
             }
             min_y = temp;
             break;
             
         case BOX_RECT:
-            temp = _vetex_a_x;
-            if(_vetex_b_x > temp)
+            temp = _vetex_x[0];
+            for(i = 1; i < _vetex_count; i++)
             {
-                temp = _vetex_b_x;
-            }
-            if(_vetex_c_x > temp)
-            {
-                temp = _vetex_c_x;
-            }
-            if(_vetex_d_x > temp)
-            {
-                temp = _vetex_d_x;
+                if(_vetex_x[i] > temp)
+                {
+                    temp = _vetex_x[i];
+                }
             }
             max_x = temp;
             
-            temp = _vetex_a_y;
-            if(_vetex_b_y > temp)
+            temp = _vetex_y[0];
+            for(i = 1; i < _vetex_count; i++)
             {
-                temp = _vetex_b_y;
-            }
-            if(_vetex_c_y > temp)
-            {
-                temp = _vetex_c_y;
-            }
-            if(_vetex_d_y > temp)
-            {
-                temp = _vetex_d_y;
+                if(_vetex_y[i] > temp)
+                {
+                    temp = _vetex_y[i];
+                }
             }
             max_y = temp;
             
-            temp = _vetex_a_x;
-            if(_vetex_b_x < temp)
+            temp = _vetex_x[0];
+            for(i = 1; i < _vetex_count; i++)
             {
-                temp = _vetex_b_x;
-            }
-            if(_vetex_c_x < temp)
-            {
-                temp = _vetex_c_x;
-            }
-            if(_vetex_d_x < temp)
-            {
-                temp = _vetex_d_x;
+                if(_vetex_x[i] < temp)
+                {
+                    temp = _vetex_y[i];
+                }
             }
             min_x = temp;
             
-            temp = _vetex_a_y;
-            if(_vetex_b_y < temp)
+            temp = _vetex_y[0];
+            for(i = 1; i < _vetex_count; i++)
             {
-                temp = _vetex_b_y;
-            }
-            if(_vetex_c_y < temp)
-            {
-                temp = _vetex_c_y;
-            }
-            if(_vetex_d_y < temp)
-            {
-                temp = _vetex_b_y;
+                if(_vetex_y[i] < temp)
+                {
+                    temp = _vetex_y[i];
+                }
             }
             min_y = temp;
             break;
@@ -206,109 +191,89 @@
             max_y = _position_y + _r;
             break;
         case BOX_TRI:
-            temp = _vetex_a_x;
-            if(_vetex_b_x > temp)
+            temp = _vetex_x[0];
+            if(_vetex_x[1] > temp)
             {
-                temp = _vetex_b_x;
+                temp = _vetex_x[1];
             }
-            if(_vetex_c_x > temp)
+            if(_vetex_x[2] > temp)
             {
-                temp = _vetex_c_x;
+                temp = _vetex_x[2];
             }
             max_x = temp;
             
-            temp = _vetex_a_y;
-            if(_vetex_b_y > temp)
+            temp = _vetex_y[0];
+            if(_vetex_y[1] > temp)
             {
-                temp = _vetex_b_y;
+                temp = _vetex_y[1];
             }
-            if(_vetex_c_y > temp)
+            if(_vetex_y[2] > temp)
             {
-                temp = _vetex_c_y;
+                temp = _vetex_y[2];
             }
             max_y = temp;
             
-            temp = _vetex_a_x;
-            if(_vetex_b_x < temp)
+            temp = _vetex_x[0];
+            if(_vetex_x[1] < temp)
             {
-                temp = _vetex_b_x;
+                temp = _vetex_x[1];
             }
-            if(_vetex_c_x < temp)
+            if(_vetex_x[2] < temp)
             {
-                temp = _vetex_c_x;
+                temp = _vetex_x[2];
             }
             min_x = temp;
             
-            temp = _vetex_a_y;
-            if(_vetex_b_y < temp)
+            temp = _vetex_y[0];
+            if(_vetex_y[1] < temp)
             {
-                temp = _vetex_b_y;
+                temp = _vetex_y[1];
             }
-            if(_vetex_c_y < temp)
+            if(_vetex_y[2] < temp)
             {
-                temp = _vetex_c_y;
+                temp = _vetex_y[2];
             }
             min_y = temp;
             break;
             
         case BOX_RECT:
-            temp = _vetex_a_x;
-            if(_vetex_b_x > temp)
+            temp = _vetex_x[0];
+            for(i = 1; i < _vetex_count; i++)
             {
-                temp = _vetex_b_x;
-            }
-            if(_vetex_c_x > temp)
-            {
-                temp = _vetex_c_x;
-            }
-            if(_vetex_d_x > temp)
-            {
-                temp = _vetex_d_x;
+                if(_vetex_x[i] > temp)
+                {
+                    temp = _vetex_x[i];
+                }
             }
             max_x = temp;
             
-            temp = _vetex_a_y;
-            if(_vetex_b_y > temp)
+            temp = _vetex_y[0];
+            for(i = 1; i < _vetex_count; i++)
             {
-                temp = _vetex_b_y;
-            }
-            if(_vetex_c_y > temp)
-            {
-                temp = _vetex_c_y;
-            }
-            if(_vetex_d_y > temp)
-            {
-                temp = _vetex_d_y;
+                if(_vetex_y[i] > temp)
+                {
+                    temp = _vetex_y[i];
+                }
             }
             max_y = temp;
             
-            temp = _vetex_a_x;
-            if(_vetex_b_x < temp)
+            temp = _vetex_x[0];
+            for(i = 1; i < _vetex_count; i++)
             {
-                temp = _vetex_b_x;
-            }
-            if(_vetex_c_x < temp)
-            {
-                temp = _vetex_c_x;
-            }
-            if(_vetex_d_x < temp)
-            {
-                temp = _vetex_d_x;
+                if(_vetex_x[i] < temp)
+                {
+                    temp = _vetex_y[i];
+                }
             }
             min_x = temp;
             
-            temp = _vetex_a_y;
-            if(_vetex_b_y < temp)
+            temp = _vetex_y[0];
+            for(i = 1; i < _vetex_count; i++)
             {
-                temp = _vetex_b_y;
-            }
-            if(_vetex_c_y < temp)
-            {
-                temp = _vetex_c_y;
-            }
-            if(_vetex_d_y < temp)
-            {
-                temp = _vetex_b_y;
+                if(_vetex_y[i] < temp)
+                {
+                    temp = _vetex_y[i];
+                }
             }
             min_y = temp;
             break;
@@ -457,6 +422,85 @@
     return 0;
 }
 
+- (float)seperationByEdgeNormal:(VECTOR2D*)normal ByEdge:(int)edge WithBox:(TC_PhysicsBody*)box1 WithBox:(TC_PhysicsBody*)box2 At:(int*) vetex
+{
+    int i;
+    VECTOR2D v;
+    genVector2(&v,box2.vetex_x[0] - box2.position_x,box2.vetex_y[0] - box2.position_y);
+    float mindot = genDot(normal,&v);
+    float temp;
+    int ve = 0;
+    for(i = 1; i < box2.vetex_count; i++)
+    {
+        genVector2(&v,box2.vetex_x[i] - box2.position_x,box2.vetex_y[i] - box2.position_y);
+        temp = genDot(normal,&v);
+        if(temp < mindot)
+        {
+            mindot = temp;
+            ve = i;
+        }
+    }
+    *vetex = ve;
+    genVector2(&v,box2.vetex_x[ve] - box1.vetex_x[edge],box2.vetex_y[ve] - box1.vetex_y[edge]);
+    return genDot(normal,&v);
+}
+
+- (float)maxSeperationDistanceBetween:(TC_PhysicsBody*)box1 And:(TC_PhysicsBody*)box2 At: (int*)edge
+{
+    int i;
+    int count = box1.vetex_count;
+    VECTOR2D d;
+    VECTOR2D normal1[box1.vetex_count];
+    float dot_max;
+    
+    d.x = box2.position_x - box1.position_x;
+    d.y = box2.position_y - box1.position_y;
+    for(i = 0; i < count; i ++)
+    {
+        int index_end = (i + 1 < count)? i + 1 : 0;
+        genNomalVector(&normal1[i],box1.vetex_x[i], box1.vetex_y[i],box1.vetex_x[index_end], box1.vetex_y[index_end]);
+    }
+    
+    float temp;
+    int e;
+    dot_max = genDot(&d,&normal1[0]);
+    e = 0;
+    for(i = 1; i < count; i++)
+    {
+        temp = genDot(&d,&normal1[i]);
+        if(temp > dot_max)
+        {
+            dot_max = temp;
+            e = i;
+        }
+    }
+    *edge = e;
+    
+    int vetex_current;
+    int vetex_pre;
+    int vetex_next;
+    int e_pre;
+    int e_next;
+    float current_l = [self seperationByEdgeNormal:&normal1[e] ByEdge:e WithBox:box1 WithBox:box2 At:&vetex_current];
+    e_pre = (e > 0)? e - 1 : count - 1;
+    float pre_l = [self seperationByEdgeNormal:&normal1[e_pre] ByEdge:e_pre WithBox:box1 WithBox:box2 At:&vetex_pre];
+    e_next = (e < count - 1)? e + 1 : 0;
+    float next_l = [self seperationByEdgeNormal:&normal1[e_next] ByEdge:e_next WithBox:box1 WithBox:box2 At:&vetex_next];
+    
+    float result;
+    if(current_l >= pre_l && current_l >= next_l)
+    {
+        result = current_l;
+    }
+    else if (pre_l >= current_l && pre_l >= next_l)
+    {
+        result = pre_l;
+    }
+    else
+        result = next_l;
+    return result;
+}
+
 - (TC_ContactInfo*)genCollide
 {
     return nil;
@@ -464,117 +508,21 @@
 
 - (void)collideDetectWith: (TC_PhysicsBody*) box
 {
-    
+    if([self isPossibleCollideWith:box])
+    {
+        return;
+    }
 }
 
-- (BOOL)isCollideWith: (TC_PhysicsBody*) box
+- (BOOL)isPossibleCollideWith: (TC_PhysicsBody*) box
 {
-    int i;
-    //First use a circle area to approxy collide
+    //use a circle area to approxy collide
     float l = (self.position_x - box.position_x) * (self.position_x - box.position_x) + (self.position_y - box.position_y) * (self.position_y - box.position_y);
     if(l > (self.r + box.r) * (self.r + box.r))
     {
-        return false;
+        return NO;
     }
-    
-    //SAT Algorithm
-    if(self.shape == BOX_RECT && box.shape == BOX_RECT)
-    {
-        float x1[4] = {self.vetex_a_x,self.vetex_b_x,self.vetex_c_x,self.vetex_d_x};
-        float x2[4] = {box.vetex_a_x,box.vetex_b_x,box.vetex_c_x,box.vetex_d_x};
-        float y1[4] = {self.vetex_a_y,self.vetex_b_y,self.vetex_c_y,self.vetex_d_y};
-        float y2[4] = {box.vetex_a_y,box.vetex_b_y,box.vetex_c_y,box.vetex_d_y};
-        VECTOR2D* tangent1[4];
-        VECTOR2D* tangent2[4];
-        VECTOR2D* normal1[4];
-        VECTOR2D* normal2[4];
-        
-        tangent1[0] = genTangentVector(x1[0], y1[0], x1[1], y1[1]);
-        tangent1[1] = genTangentVector(x1[1], y1[1], x1[2], y1[2]);
-        tangent1[2] = genTangentVector(x1[2], y1[2], x1[3], y1[3]);
-        tangent1[3] = genTangentVector(x1[3], y1[3], x1[0], y1[0]);
-        tangent2[0] = genTangentVector(x2[0], y2[0], x2[1], y2[1]);
-        tangent2[1] = genTangentVector(x2[1], y2[1], x2[2], y2[2]);
-        tangent2[2] = genTangentVector(x2[2], y2[2], x2[3], y2[3]);
-        tangent2[3] = genTangentVector(x2[3], y2[3], x2[0], y2[0]);
-        
-        normal1[0] = genNomalVector(x1[0], y1[0], x1[1], y1[1]);
-        normal1[1] = genNomalVector(x1[1], y1[1], x1[2], y1[2]);
-        normal1[2] = genNomalVector(x1[2], y1[2], x1[3], y1[3]);
-        normal1[3] = genNomalVector(x1[3], y1[3], x1[0], y1[0]);
-        normal2[0] = genNomalVector(x1[0], y1[0], x1[1], y1[1]);
-        normal2[1] = genNomalVector(x1[1], y1[1], x1[2], y1[2]);
-        normal2[2] = genNomalVector(x1[2], y1[2], x1[3], y1[3]);
-        normal2[3] = genNomalVector(x1[3], y1[3], x1[0], y1[0]);
-        
-        float dot1l[4];
-        float dot2l[4];
-        for(i = 0; i < 4; i ++)
-        {
-            dot1l[0] = genDot(tangent1[0] , normal1[i]);
-            dot1l[1] = genDot(tangent1[1] , normal1[i]);
-            dot1l[2] = genDot(tangent1[2] , normal1[i]);
-            dot1l[3] = genDot(tangent1[3] , normal1[i]);
-            dot2l[0] = genDot(tangent2[0] , normal1[i]);
-            dot2l[1] = genDot(tangent2[1] , normal1[i]);
-            dot2l[2] = genDot(tangent2[2] , normal1[i]);
-            dot2l[3] = genDot(tangent2[3] , normal1[i]);
-        }
-        
-        float dot1_max = dot1l[0];
-        float dot2_max = dot2l[0];
-        float dot1_min = dot1l[0];
-        float dot2_min = dot2l[0];
-        for(i = 1; i < 4; i ++)
-        {
-            if(dot1l[i] > dot1_max)
-            {
-                dot1_max = dot1l[i];
-            }
-            if(dot1l[i] < dot1_min)
-            {
-                dot1_min = dot1l[i];
-            }
-            if(dot2l[i] > dot2_max)
-            {
-                dot2_max = dot2l[i];
-            }
-            if(dot1l[i] < dot1_min)
-            {
-                dot2_min = dot2l[i];
-            }
-        }
-        ...
-    }
-    else  if(self.shape == BOX_TRI && box.shape == BOX_RECT)
-    {
-    
-    }
-    else  if(self.shape == BOX_RECT && box.shape == BOX_TRI)
-    {
-        
-    }
-    
-    //circle rectangle contact algorithm
-    if(self.shape == BOX_RECT && box.shape == BOX_CIRCLE)
-    {
-    
-    }
-    else if(self.shape == BOX_CIRCLE && box.shape == BOX_RECT)
-    {
-    
-    }
-    
-    //box triangle contact algorithm
-    if(self.shape == BOX_TRI && box.shape == BOX_CIRCLE)
-    {
-        
-    }
-    else if(self.shape == BOX_CIRCLE && box.shape == BOX_TRI)
-    {
-        
-    }
-    return false;
+    return YES;
 }
 
 + (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y
@@ -596,5 +544,11 @@
         }
     }
     return -1;
+}
+
+- (void)dealloc
+{
+    free(_vetex_x);
+    free(_vetex_y);
 }
 @end

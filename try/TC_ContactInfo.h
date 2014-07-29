@@ -20,6 +20,8 @@ typedef enum right_left{
 @property float p2_y;
 @property float normal_x;
 @property float normal_y;
+@property int edge1;
+@property int edge2;
 @property TC_SHRINK_DIRECTION left_right;
 @property id owner;
 @end

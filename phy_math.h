@@ -15,29 +15,39 @@ typedef struct vector2d
 } VECTOR2D;
 
 
-VECTOR2D* genNomalVector(float p1x,float p1y,float p2x,float p2y)
+void genNomalVector(VECTOR2D* result,float p1x,float p1y,float p2x,float p2y)
 {
-    VECTOR2D* result = malloc(sizeof(VECTOR2D));
     result->x = p1y - p2y;
     result->y = p2x - p1x;
-    return result;
+    float mol = result->x * result->x + result->y * result->y;
+    mol = sqrtf(mol);
+    result->x = result->x / mol;
+    result->y = result->y / mol;
 }
 
-VECTOR2D* genTangentVector(float p1x,float p1y,float p2x,float p2y)
+void genTangentVector(VECTOR2D* result, float p1x,float p1y,float p2x,float p2y)
 {
-    VECTOR2D* result = malloc(sizeof(VECTOR2D));
     result->x = p2x - p1x;
     result->y = p2y - p1y;
-    return result;
+    float mol = result->x * result->x + result->y * result->y;
+    mol = sqrtf(mol);
+    result->x = result->x / mol;
+    result->y = result->y / mol;
 }
 
-float genDot(VECTOR2D* tangent, VECTOR2D* normal)
+float genDot(VECTOR2D* v1, VECTOR2D* v2)
 {
-    float temp1 = normal->x * normal->x + normal->y * normal->y;
-    float temp2 = tangent->x * tangent->x + tangent->y * tangent->y;
-    float dotx = temp2 * normal->x / temp1;
-    float doty = temp2 * normal->y / temp1;
-    return dotx * normal->x + doty * normal->y;
+    return v1->x * v2->x + v1->y * v2->y;
 }
 
+float genCross(VECTOR2D* v1, VECTOR2D* v2)
+{
+    return v1->x * v2->y + v1->y * v2->x;
+}
+
+void genVector2(VECTOR2D* v, float x, float y)
+{
+    v->x = x;
+    v->y = y;
+}
 #endif
