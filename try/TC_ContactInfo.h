@@ -18,10 +18,14 @@ typedef enum right_left{
 @property float p1_y;
 @property float p2_x;
 @property float p2_y;
-@property float normal_x;
+
+@property float normal_x; // nomal direction
 @property float normal_y;
-@property int edge1;
-@property int edge2;
-@property TC_SHRINK_DIRECTION left_right;
+
+@property float depth; // impact intensity
+@property float folder; // net displacement;
+
+@property BOOL break_in; 
+
 @property id owner;
 @end

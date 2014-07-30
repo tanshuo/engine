@@ -25,6 +25,8 @@ typedef enum shape{
 @property unsigned int layer;// which layer is this body in;
 @property float position_x;
 @property float position_y;
+@property float ww;
+@property float wh;
 @property float rotation;
 @property float vx;
 @property float vy;
@@ -35,7 +37,8 @@ typedef enum shape{
 @property float r;
 @property float* vetex_x;
 @property float* vetex_y;
-@property int vetex_count;;
+@property VECTOR2D* normal;
+@property int vetex_count;
 
 @property unsigned int buffer_index_left;
 @property unsigned int buffer_index_right;
@@ -51,10 +54,11 @@ typedef enum shape{
 - (int)writeBufferWithWidth:(float) w WithHeight: (float) h;
 - (void)collideDetectWith: (TC_PhysicsBody*) box;
 - (BOOL)isPossibleCollideWith: (TC_PhysicsBody*) box;
-- (TC_ContactInfo*)genCollide;
+- (void)genCollide;
 
 - (float)maxSeperationDistanceBetween:(TC_PhysicsBody*)box1 And:(TC_PhysicsBody*)box2 From: (int*)edge To: (int*) vetex;
 - (float)seperationByEdgeNormal:(VECTOR2D*)normal ByEdge:(int)edge WithBox:(TC_PhysicsBody*)box1 WithBox:(TC_PhysicsBody*)box2 At:(int*) vetex;
+- (void) update;
 
 + (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y;
 + (int)searchBufferInfoIndexFrom:(NSMutableArray*)entry By:(TC_PhysicsBody*) target;
