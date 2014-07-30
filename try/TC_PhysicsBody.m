@@ -163,16 +163,32 @@
     _buffer_index_right = (int)((max_x + ww/2) / grid_w) + 1;
     _buffer_index_top = (int)((max_y + wh/2)/ grid_h) + 1;
     _buffer_index_bot = (int)((min_y + wh/2) / grid_w) + 1;
+    
+    NSMutableArray* entry;
+    int j;
+    for(i = _buffer_index_left; i <= _buffer_index_right;i ++)
+    {
+        for(j = _buffer_index_bot; j <= _buffer_index_top; j++)
+        {
+            entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry != nil)
+            {
+                TC_BufferInfo* temp = [TC_BufferInfo alloc];
+                temp.target = self;
+                [entry addObject:temp];
+            }
+        }
+    }
+    [objects addObject:self];//register to list
 }
 
 - (void)updateWithwidth:(float)w Height:(float)h
 {
-    if(abs(_vx) < THRESHOLD && abs(_vy) < THRESHOLD)
+    if(! _freeze)
     {
-        _freeze = YES;
+        [self writeBufferWithWidth:w WithHeight:h];
+        [self genCollide];
     }
-    _position_x += _vx;
-    _position_y += _vy;
 }
 
 
@@ -423,6 +439,7 @@
     _buffer_index_right = buffer_index_right;
     _buffer_index_left = buffer_index_left;
     
+   
     return 0;
 }
 
@@ -549,50 +566,113 @@
 {
     int i,j,index;
     NSMutableArray* entry;
+    TC_PhysicsBody* p;
     
-    j = _buffer_index_top;
-    for(i = _buffer_index_left; i <= _buffer_index_right; i++)
+    for(i = _buffer_index_left - 1; i <= _buffer_index_right + 1; i++)
     {
-        entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
-        for(index = 0; index < [entry count]; index++)
+        for(j = _buffer_index_bot - 1; j <= _buffer_index_bot + 1; j++)
         {
-            if([entry[index] alive] == NO)
+            entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
             {
-                [entry removeObjectAtIndex:index];
-                index --;
                 continue;
             }
-            [self collideDetectWith:entry[index]];
+            for(index = 0; index < [entry count]; index++)
+            {
+                p = [entry[index] target];
+                if([p alive] == NO)
+                {
+                    [entry removeObjectAtIndex:index];
+                    index --;
+                    continue;
+                }
+                if(p == self)
+                {
+                    continue;
+                }
+                [self collideDetectWith:p];
+            }
         }
     }
     
-    j = _buffer_index_bot;
     for(i = _buffer_index_left; i <= _buffer_index_right; i++)
     {
-        entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
-        for(index = 0; index < [entry count]; index++)
+        for(j = _buffer_index_top - 1; j <= _buffer_index_top + 1; j++)
         {
-            [self collideDetectWith:entry[index]];
+            entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+            {
+                continue;
+            }
+            for(index = 0; index < [entry count]; index++)
+            {
+                p = [entry[index] target];
+                if([p alive] == NO)
+                {
+                    [entry removeObjectAtIndex:index];
+                    index --;
+                    continue;
+                }
+                if(p == self)
+                {
+                    continue;
+                }
+                [self collideDetectWith:p];
+            }
         }
     }
     
-    i = _buffer_index_left;
     for(j = _buffer_index_bot + 1; j <= _buffer_index_top - 1; j++)
     {
-        entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
-        for(index = 0; index < [entry count]; index++)
+        for(i = _buffer_index_left - 1; i <= _buffer_index_left + 1; i++)
         {
-            [self collideDetectWith:entry[index]];
+            entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+            {
+                continue;
+            }
+            for(index = 0; index < [entry count]; index++)
+            {
+                p = [entry[index] target];
+                if([p alive] == NO)
+                {
+                    [entry removeObjectAtIndex:index];
+                    index --;
+                    continue;
+                }
+                if(p == self)
+                {
+                    continue;
+                }
+                [self collideDetectWith:p];
+            }
         }
     }
     
-    i = _buffer_index_right;
     for(j = _buffer_index_bot + 1; j <= _buffer_index_top - 1; j++)
     {
-        entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
-        for(index = 0; index < [entry count]; index++)
+        for(i = _buffer_index_right - 1; i <= _buffer_index_right + 1; i++)
         {
-            [self collideDetectWith:entry[index]];
+            entry = [TC_PhysicsBody searchBufferInfoAtX:i AtY:j];
+            if(entry == nil)
+            {
+                continue;
+            }
+            for(index = 0; index < [entry count]; index++)
+            {
+                p = [entry[index] target];
+                if([p alive] == NO)
+                {
+                    [entry removeObjectAtIndex:index];
+                    index --;
+                    continue;
+                }
+                if(p == self)
+                {
+                    continue;
+                }
+                [self collideDetectWith:p];
+            }
         }
     }
 }
@@ -942,6 +1022,10 @@
 
 + (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y
 {
+    if(x < 0 || y < 0 || x >= COLLIDE_DETECTOR_BUFFER_WIDTH || y >= COLLIDE_DETECTOR_BUFFER_HEIGHT)
+    {
+        return nil;
+    }
     int index = x * COLLIDE_DETECTOR_BUFFER_WIDTH + y;
     if(index >= COLLIDE_DETECTOR_BUFFER_WIDTH * COLLIDE_DETECTOR_BUFFER_HEIGHT)
         return nil;
@@ -961,15 +1045,6 @@
     return -1;
 }
 
-- (void) update
-{
-    if(! _freeze)
-    {
-        [self writeBufferWithWidth:_ww WithHeight:_wh];
-        [self genCollide];
-        [self updateWithwidth:_ww Height:_wh];
-    }
-}
 
 - (void)dealloc
 {

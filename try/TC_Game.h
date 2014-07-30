@@ -21,6 +21,7 @@
 #import "TC_Sprite.h"
 #import "TC_Interpretor.h"
 #import "TC_OBJ_VIRTUAL.h"
+#import "TC_PhysicsWorld.h"
 
 
 

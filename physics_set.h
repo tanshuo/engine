@@ -14,5 +14,6 @@
 
 
 NSMutableArray* collide_buffer;
+NSMutableArray* objects;
 
 #endif

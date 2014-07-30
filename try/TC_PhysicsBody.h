@@ -58,7 +58,7 @@ typedef enum shape{
 
 - (float)maxSeperationDistanceBetween:(TC_PhysicsBody*)box1 And:(TC_PhysicsBody*)box2 From: (int*)edge To: (int*) vetex;
 - (float)seperationByEdgeNormal:(VECTOR2D*)normal ByEdge:(int)edge WithBox:(TC_PhysicsBody*)box1 WithBox:(TC_PhysicsBody*)box2 At:(int*) vetex;
-- (void) update;
+
 
 + (NSMutableArray*)searchBufferInfoAtX:(int)x AtY:(int)y;
 + (int)searchBufferInfoIndexFrom:(NSMutableArray*)entry By:(TC_PhysicsBody*) target;

@@ -7,7 +7,8 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "physics_set.h"
+#import "TC_PhysicsBody.h"
+
 
 @interface TC_PhysicsWorld : NSObject
 @property unsigned int time;
@@ -16,4 +17,5 @@
 
 - (void) start;
 - (void) update;
+
 @end
