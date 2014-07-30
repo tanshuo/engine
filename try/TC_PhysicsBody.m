@@ -949,9 +949,54 @@
     }
     else
     {
-        *a_in = edge_b;
-        *a_out = edge_b;
+        v_start = support_vetex_a;
+        v_end = support_vetex_a;
+        int index = support_vetex_a;
+        while(true)
+        {
+            index = (index - 1 >= 0)? index - 1 : count2 - 1;
+            genVector2(&v, box_b.vetex_x[index], box_b.vetex_y[index]);
+            if(![self insideBox:box_a Pivot:v])
+            {
+                count_left ++;
+                if(index == support_vetex_a)
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                v_end = index;
+                break;
+            }
+        }
+        index = support_vetex_a;
+        while(true)
+        {
+            index = (index + 1 < count2)? index + 1 : 0;
+            genVector2(&v, box_b.vetex_x[index], box_b.vetex_y[index]);
+            if(![self insideBox:box_a Pivot:v])
+            {
+                count_right ++;
+                if(index == support_vetex_a)
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                v_start = index;
+                break;
+            }
+        }
+        if(count_left + count_right >= count2 - 1)
+        {
+            return -1;
+        }
+        *a_in = v_start - 1 >= 0 ? v_start - 1 : count2 - 1;
+        *a_out = v_end;
     }
+   
     ///
     count_left = 0;
     count_right = 0;
@@ -1003,8 +1048,52 @@
     }
     else
     {
-        *b_in = edge_a;
-        *b_out = edge_a;
+        v_start = support_vetex_b;
+        v_end = support_vetex_b;
+        int index = support_vetex_b;
+        while(true)
+        {
+            index = (index - 1 >= 0)? index - 1 : count1 - 1;
+            genVector2(&v, box_a.vetex_x[index], box_a.vetex_y[index]);
+            if(![self insideBox:box_b Pivot:v])
+            {
+                count_left ++;
+                if(index == support_vetex_b)
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                v_end = index;
+                break;
+            }
+        }
+        index = support_vetex_b;
+        while(true)
+        {
+            index = (index + 1 < count1)? index + 1 : 0;
+            genVector2(&v, box_a.vetex_x[index], box_a.vetex_y[index]);
+            if(![self insideBox:box_b Pivot:v])
+            {
+                count_right ++;
+                if(index == support_vetex_b)
+                {
+                    return -1;
+                }
+            }
+            else
+            {
+                v_start = index;
+                break;
+            }
+        }
+        if(count_left + count_right >= count1 - 1)
+        {
+            return -1;
+        }
+        *b_in = v_start - 1 >= 0 ? v_start - 1 : count1 - 1;
+        *b_out = v_end;
     }
     return 0;
 }
