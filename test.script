@@ -20,12 +20,15 @@ define update:
         temp set as result,
         calculate <"(sqrt(left * left + right * right))">,
         calculate <"temp / result">,
+
         say result,
     end;
     #get <"camera"> to temp;
     #temp move result;
     #say result of temp;
     move result;
+    calculate <"100 - sqrt((562.5+4050)*2)">;
+    say result;
 enddef;
 
 define round speed:

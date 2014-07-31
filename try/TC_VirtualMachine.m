@@ -144,7 +144,7 @@
             {
                 return nil;
             }
-            if(![[a objectAtIndex:i+1] isEqualToString:@"("] && ![[a objectAtIndex:i+1] isEqualToString:@"sin"] && ![[a objectAtIndex:i+1] isEqualToString:@"cos"])
+            if(![[a objectAtIndex:i+1] isEqualToString:@"("] && ![[a objectAtIndex:i+1] isEqualToString:@"sin"] && ![[a objectAtIndex:i+1] isEqualToString:@"cos"]&& ![[a objectAtIndex:i+1] isEqualToString:@"sqrt"])
             {
                 [stack_high addObject:[a objectAtIndex:i+1]];
                 [stack_low addObject:iter];
@@ -3752,11 +3752,12 @@
                     return;
                 }
                 iter2 = [postfix objectAtIndex:i - 1];
-                [postfix removeObjectAtIndex:i-1];
+                
                 if(![TC_VirtualMachine isNum: iter2])
                 {
                     continue;
                 }
+                [postfix removeObjectAtIndex:i-1];
                 arg = [self findVarByName: iter2];
                 [p addObject: arg];
                 [p addObject: arg];
@@ -3783,11 +3784,12 @@
                     return;
                 }
                 iter2 = [postfix objectAtIndex:i - 1];
-                [postfix removeObjectAtIndex:i - 1];
+                
                 if(![TC_VirtualMachine isNum: iter2])
                 {
                     continue;
                 }
+                [postfix removeObjectAtIndex:i - 1];
                 arg = [self findVarByName: iter2];
                 [p addObject: arg];
                 [p addObject: arg];
@@ -3814,11 +3816,12 @@
                     return;
                 }
                 iter2 = [postfix objectAtIndex:i - 1];
-                [postfix removeObjectAtIndex:i - 1];
+                
                 if(![TC_VirtualMachine isNum: iter2])
                 {
                     continue;
                 }
+                [postfix removeObjectAtIndex:i - 1];
                 arg = [self findVarByName: iter2];
                 [p addObject: arg];
                 [p addObject: arg];

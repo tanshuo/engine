@@ -993,6 +993,11 @@
         {
             return -1;
         }
+        else if(count_left + count_right == 0)
+        {
+            *a_in = edge_b;
+            *a_out = edge_b;
+        }
         *a_in = v_start - 1 >= 0 ? v_start - 1 : count2 - 1;
         *a_out = v_end;
     }
@@ -1060,7 +1065,9 @@
                 count_left ++;
                 if(index == support_vetex_b)
                 {
-                    return -1;
+                    *b_in = edge_a;
+                    *b_out = edge_a;
+                    return 0;
                 }
             }
             else
@@ -1089,6 +1096,10 @@
             }
         }
         if(count_left + count_right >= count1 - 1)
+        {
+            return -1;
+        }
+        else if(count_left + count_right == 0)
         {
             return -1;
         }

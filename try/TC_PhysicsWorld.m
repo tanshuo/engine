@@ -30,7 +30,7 @@
     TC_PhysicsBody* p1 = [TC_PhysicsBody alloc];
     [p1 initWithX:0 WithY:0 WithWidth:30 WithHeight:30 WithProperty:YES WithRotation:0 WithShape:BOX_RECT WithRadius:0 WithCoefficient:0 WithWorldWidth:_world_width WithWorldHeight:_world_height];
     TC_PhysicsBody* p2 = [TC_PhysicsBody alloc];
-    [p2 initWithX:29.5 WithY:29 WithWidth:30 WithHeight:30 WithProperty:YES WithRotation:0 WithShape:BOX_RECT WithRadius:0 WithCoefficient:0 WithWorldWidth:_world_width WithWorldHeight:_world_height];
+    [p2 initWithX:29.0 WithY:0 WithWidth:30 WithHeight:30 WithProperty:YES WithRotation:0 WithShape:BOX_RECT WithRadius:0 WithCoefficient:0 WithWorldWidth:_world_width WithWorldHeight:_world_height];
 }
 
 - (void)update

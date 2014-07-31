@@ -11,9 +11,9 @@
 @implementation TC_Game
 + (void) gameStart
 {
-    TC_PhysicsWorld* w = [TC_PhysicsWorld alloc];
-    [w start];
-    [w update];
+    //TC_PhysicsWorld* w = [TC_PhysicsWorld alloc];
+    //[w start];
+    //[w update];
     
     _timer = 0.0;
     _global = [NSMutableArray arrayWithCapacity:10];

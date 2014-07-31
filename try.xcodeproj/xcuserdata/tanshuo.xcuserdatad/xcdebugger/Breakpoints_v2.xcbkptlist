@@ -3798,11 +3798,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3842"
-            endingLineNumber = "3842"
+            startingLineNumber = "3845"
+            endingLineNumber = "3845"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3830,11 +3830,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3980"
-            endingLineNumber = "3980"
+            startingLineNumber = "3983"
+            endingLineNumber = "3983"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -3894,11 +3894,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3972"
-            endingLineNumber = "3972"
+            startingLineNumber = "3975"
+            endingLineNumber = "3975"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4246,11 +4246,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3866"
-            endingLineNumber = "3866"
+            startingLineNumber = "3869"
+            endingLineNumber = "3869"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4262,11 +4262,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3857"
-            endingLineNumber = "3857"
+            startingLineNumber = "3860"
+            endingLineNumber = "3860"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4518,11 +4518,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3979"
-            endingLineNumber = "3979"
+            startingLineNumber = "3982"
+            endingLineNumber = "3982"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4534,11 +4534,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3967"
-            endingLineNumber = "3967"
+            startingLineNumber = "3970"
+            endingLineNumber = "3970"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4550,11 +4550,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3962"
-            endingLineNumber = "3962"
+            startingLineNumber = "3965"
+            endingLineNumber = "3965"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4566,11 +4566,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3863"
-            endingLineNumber = "3863"
+            startingLineNumber = "3866"
+            endingLineNumber = "3866"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4582,11 +4582,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3865"
-            endingLineNumber = "3865"
+            startingLineNumber = "3868"
+            endingLineNumber = "3868"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -4598,27 +4598,27 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
+            timestampString = "428484076.427101"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3858"
+            endingLineNumber = "3858"
+            landmarkName = "-calculate:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_VirtualMachine.m"
+            timestampString = "428484076.427101"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "3855"
             endingLineNumber = "3855"
-            landmarkName = "-calculate:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "try/TC_VirtualMachine.m"
-            timestampString = "427934905.07592"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "3852"
-            endingLineNumber = "3852"
             landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5140,11 +5140,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_PhysicsBody.m"
-            timestampString = "428446371.962397"
+            timestampString = "428476931.495212"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1009"
-            endingLineNumber = "1009"
+            startingLineNumber = "1014"
+            endingLineNumber = "1014"
             landmarkName = "-findCrossEdges::::With:With:With:With:With:With:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5162,6 +5162,38 @@
             startingLineNumber = "952"
             endingLineNumber = "952"
             landmarkName = "-findCrossEdges::::With:With:With:With:With:With:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_VirtualMachine.m"
+            timestampString = "428484076.427101"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3813"
+            endingLineNumber = "3813"
+            landmarkName = "-calculate:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_VirtualMachine.m"
+            timestampString = "428483643.063924"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "3718"
+            endingLineNumber = "3718"
+            landmarkName = "-calculate:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
