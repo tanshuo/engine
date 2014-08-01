@@ -734,6 +734,11 @@
     }
     result.break_in = NO;
     
+    int pa1 = b_in;
+    int pa2 = b_out ;
+    int pb1 = a_out;
+    int pb2 = a_in;
+    
     int end;
     VECTOR2D vah;
     VECTOR2D vae;
@@ -753,10 +758,14 @@
     re = [self findIntersectionPoint:&v AtVectorA_Head:vah AtVectorA_End:vae AtVectorB_Head:vbh AtVectorB_End:vbe];
     if(re == -1)
     {
-        return;
+        result.p1_x = vae.x;
+        result.p1_y = vae.y;
     }
-    result.p1_x = v.x;
-    result.p1_y = v.y;
+    else
+    {
+        result.p1_x = v.x;
+        result.p1_y = v.y;
+    }
     
     vah.x = box.vetex_x[a_out];
     vah.y = box.vetex_y[a_out];
@@ -772,10 +781,14 @@
     re = [self findIntersectionPoint:&v AtVectorA_Head:vah AtVectorA_End:vae AtVectorB_Head:vbh AtVectorB_End:vbe];
     if(re == -1)
     {
-        return;
+        result.p2_x = vah.x;
+        result.p2_y = vah.y;
     }
-    result.p2_x = v.x;
-    result.p2_y = v.y;
+    else
+    {
+        result.p2_x = v.x;
+        result.p2_y = v.y;
+    }
     
     float d_self;
     float d_box;
@@ -785,21 +798,38 @@
     int box_end = a_out;
     
     d_self = [self calDepth:result Point:self_start Point:self_end Box:self];
-    d_box = [self calDepth:result Point:box_start Point:box_end Box:box];
-    genNomalVector(&v, result.p2_x, result.p2_y, result.p1_x, result.p1_y);
+    if(re == -1)
+        d_box = d_self;
+    else
+        d_box = [self calDepth:result Point:box_start Point:box_end Box:box];
+   
+    genNomalVector(&v, result.p1_x, result.p1_y, result.p2_x, result.p2_y);
     
-    float temp_p1_x = result.p1_x;
-    float temp_p1_y = result.p1_y;
-    float temp_p2_x = result.p2_x;
-    float temp_p2_y = result.p2_y;
+    
     
     result.normal_x = v.x;
     result.normal_y = v.y;
     result.depth = d_self;
     result.owner = box;
     result.folder = d_box + d_self;
+    result.p1_index = pa1;
+    result.p2_index = pa2;
+    [self findCollidePointWith:box To:self WithStartPoint:pb1 EndPoint:pb2 ContactInfo:result];
     [self.contact_points addObject: result];
     
+    float temp_p1_x = result.p1_x;
+    float temp_p1_y = result.p1_y;
+    float temp_p2_x = result.p2_x;
+    float temp_p2_y = result.p2_y;
+    float temp_impulse_x = result.impulse_x;
+    float temp_impulse_y = result.impulse_y;
+    float temp_impulse_position_x = result.impulse_position_x;
+    float temp_impulse_position_y = result.impulse_position_y;
+    
+    if([self searchContactWith:self In:box])
+    {
+        return;
+    }
     result = [TC_ContactInfo alloc];
     result.normal_x = -v.x;
     result.normal_y = -v.y;
@@ -809,26 +839,214 @@
     result.p1_y = temp_p2_y;
     result.p2_x = temp_p1_x;
     result.p2_y = temp_p1_y;
+    result.impulse_position_x = temp_impulse_position_x;
+    result.impulse_position_y = temp_impulse_position_y;
+    result.impulse_x = -temp_impulse_x;
+    result.impulse_y = -temp_impulse_y;
     result.folder = d_box + d_self;
     result.break_in = NO;
-    if([self searchContactWith:self In:box])
-    {
-        return;
-    }
+    result.p1_index = pb1;
+    result.p2_index = pb2;
     [box.contact_points addObject: result];
     box.freeze = NO;
+}
+
+-(void)findCollidePointWith:(TC_PhysicsBody*)box1 To: (TC_PhysicsBody*)box2 WithStartPoint:(int)pin EndPoint:(int)pout ContactInfo: (TC_ContactInfo*)info;
+{
+    int i;
+    int support_vetex;
+    VECTOR2D dir;
+    VECTOR2D v;
+    VECTOR2D w;
+    float dotmax;
+    float temp;
+    genVector2(&dir,box1.vx - box2.vx,box1.vy - box2.vy);
+    
+    if(pin == pout)
+    {
+        info.impulse_x = box1.normal[pin].x;
+        info.impulse_y  = box1.normal[pin].y;
+        
+        genVector2(&w,box2.vetex_x[0], box2.vetex_y[0]);
+        dotmax = genDot(&w, &dir);
+        support_vetex = pin;
+        for(i = 1; i < box2.vetex_count; i++)
+        {
+            genVector2(&w,box2.vetex_x[i], box2.vetex_y[i]);
+            temp = genDot(&w, &dir);
+            if(temp > dotmax)
+            {
+                dotmax = temp;
+                support_vetex = i;
+            }
+        }
+        
+        int sym = (support_vetex - 1 < box1.vetex_count) ? support_vetex - 1 : 0;
+        float nonparallel = genCross(&box1.normal[pin], &box2.normal[sym]);
+        if(!nonparallel)
+        {
+            info.impulse_position_x = (info.p1_x + info.p2_x) / 2;
+            info.impulse_position_y = (info.p1_y + info.p2_y) / 2;
+            info.contact_type = EDGE;
+            return;
+        }
+        nonparallel = genCross(&box1.normal[pin], &box2.normal[support_vetex]);
+        if(!nonparallel)
+        {
+            info.impulse_position_x = (info.p1_x + info.p2_x) / 2;
+            info.impulse_position_y = (info.p1_y + info.p2_y) / 2;
+            info.contact_type = EDGE;
+            return;
+        }
+        
+        info.impulse_position_x = box2.vetex_x[support_vetex];
+        info.impulse_position_y = box2.vetex_y[support_vetex];
+        info.contact_type = EDGE;
+        return;
+    }
+        
+    
+    genVector2(&w, box1.vetex_x[0], box1.vetex_y[0]);
+    dotmax = genDot(&w, &dir);
+    support_vetex = 0;
+    for(i = 1; i < box1.vetex_count; i++)
+    {
+        genVector2(&w, box1.vetex_x[i], box1.vetex_y[i]);
+        temp = genDot(&w, &dir);
+        if(temp > dotmax)
+        {
+            dotmax = temp;
+            support_vetex = i;
+        }
+    }
+    
+    genVector2(&w, info.p1_x, info.p1_y);
+    float temp1 = genDot(&w, &dir);
+    genVector2(&w, info.p2_x, info.p2_y);
+    float temp2 = genDot(&w, &dir);
+    if(temp1 >= dotmax)
+    {
+        dotmax = temp1;
+        support_vetex = -1;
+    }
+    if(temp2 > temp1)
+    {
+        dotmax = temp2;
+        support_vetex = -2;
+    }
+    
+    if(support_vetex < 0)
+    {
+        if(support_vetex == -1)
+        {
+            info.impulse_x = box1.normal[info.p1_index].x;
+            info.impulse_y = box1.normal[info.p1_index].y;
+            
+            float dot_min;
+            float temp;
+            int index = 0;
+            genVector2(&w,box2.vetex_x[0] - box2.position_x,box2.vetex_y[0] - box2.position_y);
+            genVector2(&v, info.impulse_x, info.impulse_y);
+            dot_min = genDot(&v, &w);
+            for(i = 1; i < box2.vetex_count; i++)
+            {
+                genVector2(&w,box2.vetex_x[i] - box2.position_x,box2.vetex_y[i] - box2.position_y);
+                temp = genDot(&v, &w);
+                if(temp < dot_min)
+                {
+                    index = i;
+                    dot_min = temp;
+                }
+            }
+            info.impulse_position_x = box2.vetex_x[index];
+            info.impulse_position_y = box2.vetex_y[index];
+            info.contact_type = VERTEX;
+            return;
+        }
+        else if(support_vetex == -2)
+        {
+            info.impulse_x = box1.normal[info.p2_index].x;
+            info.impulse_y = box1.normal[info.p2_index].y;
+            
+            float dot_min;
+            float temp;
+            int index = 0;
+            genVector2(&w,box2.vetex_x[0] - box2.position_x,box2.vetex_y[0] - box2.position_y);
+            genVector2(&v, info.impulse_x, info.impulse_y);
+            dot_min = genDot(&v, &w);
+            for(i = 1; i < box2.vetex_count; i++)
+            {
+                genVector2(&w,box2.vetex_x[i] - box2.position_x,box2.vetex_y[i] - box2.position_y);
+                temp = genDot(&v, &w);
+                if(temp < dot_min)
+                {
+                    index = i;
+                    dot_min = temp;
+                }
+            }
+            info.impulse_position_x = box2.vetex_x[index];
+            info.impulse_position_y = box2.vetex_y[index];
+            info.contact_type = VERTEX;
+            return;
+        }
+    }
+    
+    float dotmin;
+    dotmin = genDot(&dir, &box2.normal[0]);
+    int index = 0;
+    for(i = 1; i < box2.vetex_count; i ++)
+    {
+        temp = genDot(&dir, &box2.normal[i]);
+        if(temp < dotmin)
+        {
+            index = i;
+            dotmin = temp;
+        }
+    }
+    info.impulse_x = -box2.normal[index].x;
+    info.impulse_y = -box2.normal[index].y;
+    int end = (index + 1 < box2.vetex_count)? index + 1 : 0;
+    
+    int sym = (support_vetex - 1 < box1.vetex_count) ? support_vetex - 1 : 0;
+    float nonparallel = genCross(&box1.normal[sym], &box2.normal[index]);
+    if(!nonparallel)
+    {
+        info.impulse_position_x = (info.p1_x + info.p2_x) / 2;
+        info.impulse_position_y = (info.p1_y + info.p2_y) / 2;
+        info.contact_type = EDGE;
+        return;
+    }
+    nonparallel = genCross(&box1.normal[support_vetex], &box2.normal[index]);
+    if(!nonparallel)
+    {
+        info.impulse_position_x = (info.p1_x + info.p2_x) / 2;
+        info.impulse_position_y = (info.p1_y + info.p2_y) / 2;
+        info.contact_type = EDGE;
+        return;
+    }
+    
+    genVector2(&v, box2.vetex_x[end] - box1.vetex_x[support_vetex], box2.vetex_y[end] - box1.vetex_y[support_vetex]);
+    genTangentVector(&w, box2.vetex_x[index], box2.vetex_y[index], box2.vetex_x[end], box2.vetex_y[end]);
+    float l = genDot(&v, &w);
+    info.impulse_position_x = box2.vetex_x[end] - l * w.x;
+    info.impulse_position_y = box2.vetex_y[end] - l * w.y;
+    info.contact_type = VERTEX;
+    return;
 }
 
 -(float) calDepth:(TC_ContactInfo*)contact Point:(int)p_start Point:(int)p_end  Box:(TC_PhysicsBody*)box
 {
     float result;
     int index;
+    float temp;
+    float  min;
     VECTOR2D v;
     VECTOR2D w;
     genTangentVector(&v, contact.p2_x, contact.p2_y, contact.p1_x, contact.p1_y);
     index = p_start;
-    float max = -999999999.0;
-    float temp;
+    genVector2(&w, box.vetex_x[index] - contact.p1_x, box.vetex_y[index] - contact.p1_y);
+    temp = genCross(&v, &w);
+    min = temp;
     while(true)
     {
         index = index + 1 < box.vetex_count ? index + 1 : 0;
@@ -839,12 +1057,12 @@
         genVector2(&w, box.vetex_x[index] - contact.p1_x, box.vetex_y[index] - contact.p1_y);
         temp = genCross(&v, &w);
     
-        if(temp > max)
+        if(temp < min && temp >= 0)
         {
-            max = temp;
+            min = temp;
         }
     }
-    result = max;
+    result = min;
     return result;
 }
 

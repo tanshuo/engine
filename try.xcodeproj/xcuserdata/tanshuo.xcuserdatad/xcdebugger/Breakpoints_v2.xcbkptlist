@@ -5008,7 +5008,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_PhysicsBody.m"
@@ -5088,11 +5088,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_PhysicsBody.m"
-            timestampString = "428442408.978749"
+            timestampString = "428622699.109672"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "717"
@@ -5108,7 +5108,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_PhysicsBody.m"
-            timestampString = "428442408.978749"
+            timestampString = "428622699.109672"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "706"
@@ -5124,11 +5124,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_PhysicsBody.m"
-            timestampString = "428442467.253209"
+            timestampString = "428622699.109672"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "753"
-            endingLineNumber = "753"
+            startingLineNumber = "758"
+            endingLineNumber = "758"
             landmarkName = "-collideDetectWith:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5140,11 +5140,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_PhysicsBody.m"
-            timestampString = "428476931.495212"
+            timestampString = "428630295.844353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1014"
-            endingLineNumber = "1014"
+            startingLineNumber = "1232"
+            endingLineNumber = "1232"
             landmarkName = "-findCrossEdges::::With:With:With:With:With:With:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5156,11 +5156,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "try/TC_PhysicsBody.m"
-            timestampString = "428446141.495419"
+            timestampString = "428630295.844353"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "952"
-            endingLineNumber = "952"
+            startingLineNumber = "1170"
+            endingLineNumber = "1170"
             landmarkName = "-findCrossEdges::::With:With:With:With:With:With:"
             landmarkType = "5">
          </BreakpointContent>
@@ -5194,6 +5194,134 @@
             startingLineNumber = "3718"
             endingLineNumber = "3718"
             landmarkName = "-calculate:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_PhysicsBody.m"
+            timestampString = "428630261.153251"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "818"
+            endingLineNumber = "818"
+            landmarkName = "-collideDetectWith:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_PhysicsBody.m"
+            timestampString = "428630261.153251"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "814"
+            endingLineNumber = "814"
+            landmarkName = "-collideDetectWith:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_PhysicsBody.m"
+            timestampString = "428622699.109672"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "800"
+            endingLineNumber = "800"
+            landmarkName = "-collideDetectWith:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_PhysicsBody.m"
+            timestampString = "428630261.153251"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "817"
+            endingLineNumber = "817"
+            landmarkName = "-collideDetectWith:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_PhysicsBody.m"
+            timestampString = "428630295.844353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "942"
+            endingLineNumber = "942"
+            landmarkName = "-findCollidePointWith:To:WithStartPoint:EndPoint:ContactInfo:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_PhysicsBody.m"
+            timestampString = "428630295.844353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "915"
+            endingLineNumber = "915"
+            landmarkName = "-findCollidePointWith:To:WithStartPoint:EndPoint:ContactInfo:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_PhysicsBody.m"
+            timestampString = "428630295.844353"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1030"
+            endingLineNumber = "1030"
+            landmarkName = "-findCollidePointWith:To:WithStartPoint:EndPoint:ContactInfo:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "try/TC_PhysicsBody.m"
+            timestampString = "428630261.153251"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "850"
+            endingLineNumber = "850"
+            landmarkName = "-collideDetectWith:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

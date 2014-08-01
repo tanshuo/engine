@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-typedef enum right_left{
-    LEFT_SHRINK,
-    RIGHT_SHRINK,
-} TC_SHRINK_DIRECTION;
+typedef enum topologic{
+    EDGE,
+    VERTEX,
+} TOPOLOGIC;
 
 @interface TC_ContactInfo : NSObject
 @property float p1_x; //contact points
@@ -19,11 +19,21 @@ typedef enum right_left{
 @property float p2_x;
 @property float p2_y;
 
+@property int p1_index;
+@property int p2_index;
+
 @property float normal_x; // nomal direction
 @property float normal_y;
 
 @property float depth; // impact intensity
 @property float folder; // net displacement;
+
+@property float impulse_x;
+@property float impulse_y;
+@property float impulse_position_x;
+@property float impulse_position_y;
+
+@property TOPOLOGIC contact_type;
 
 @property BOOL break_in; 
 

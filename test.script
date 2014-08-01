@@ -27,7 +27,7 @@ define update:
     #temp move result;
     #say result of temp;
     move result;
-    calculate <"100 - sqrt((562.5+4050)*2)">;
+    calculate <"- ((5 - sqrt(2))/5*(5 - sqrt(2))/5)">;
     say result;
 enddef;
 
