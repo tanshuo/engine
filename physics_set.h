@@ -11,6 +11,7 @@
 #define COLLIDE_DETECTOR_BUFFER_HEIGHT 30
 #define COLLIDE_DETECTOR_BUFFER_WIDTH 30
 #define THRESHOLD 1.0
+#define TH_PARALLEL 0.01
 
 
 NSMutableArray* collide_buffer;

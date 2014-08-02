@@ -883,7 +883,7 @@
         
         int sym = (support_vetex - 1 < box1.vetex_count) ? support_vetex - 1 : 0;
         float nonparallel = genCross(&box1.normal[pin], &box2.normal[sym]);
-        if(!nonparallel)
+        if(nonparallel < TH_PARALLEL)
         {
             info.impulse_position_x = (info.p1_x + info.p2_x) / 2;
             info.impulse_position_y = (info.p1_y + info.p2_y) / 2;
@@ -891,7 +891,7 @@
             return;
         }
         nonparallel = genCross(&box1.normal[pin], &box2.normal[support_vetex]);
-        if(!nonparallel)
+        if(nonparallel < TH_PARALLEL)
         {
             info.impulse_position_x = (info.p1_x + info.p2_x) / 2;
             info.impulse_position_y = (info.p1_y + info.p2_y) / 2;
@@ -1009,7 +1009,7 @@
     
     int sym = (support_vetex - 1 < box1.vetex_count) ? support_vetex - 1 : 0;
     float nonparallel = genCross(&box1.normal[sym], &box2.normal[index]);
-    if(!nonparallel)
+    if(nonparallel < TH_PARALLEL)
     {
         info.impulse_position_x = (info.p1_x + info.p2_x) / 2;
         info.impulse_position_y = (info.p1_y + info.p2_y) / 2;
@@ -1017,7 +1017,7 @@
         return;
     }
     nonparallel = genCross(&box1.normal[support_vetex], &box2.normal[index]);
-    if(!nonparallel)
+    if(nonparallel < TH_PARALLEL)
     {
         info.impulse_position_x = (info.p1_x + info.p2_x) / 2;
         info.impulse_position_y = (info.p1_y + info.p2_y) / 2;
